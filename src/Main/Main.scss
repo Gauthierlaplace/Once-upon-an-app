@@ -1,0 +1,7 @@
+@use './../styles/vars';
+
+.Main {
+    width: 1200px;
+    height: 80%;
+    background-color: vars.$alt-light-color;
+}

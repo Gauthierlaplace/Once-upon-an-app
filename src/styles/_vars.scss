@@ -1,0 +1,17 @@
+// Generic
+$primary-color: #a39e9c;
+$alt-light-color: #dde0dd;
+$alt-dark-color: #504a49;
+$darkest-color: black;
+$lightest-color: #fff;
+$gutter: 2rem;
+
+// Global
+$global-font: 'Oswald', sans-serif;
+$global-font-weight: 300;
+
+// MEMO - Pour utiliser ces variables dans d'autres fichiers :
+// 1) En haut du fichier, importer :
+// @use 'vars';
+// 2) Pour appeler la primary-color, par exemple : 
+// vars.$primary-color
