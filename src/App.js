@@ -1,4 +1,7 @@
+import { Routes, Route } from 'react-router-dom';
+
 import './App.scss';
+
 import Header from './Header/Header';
 import Main from './Main/Main';
 import Footer from './Footer/Footer';
