@@ -8,6 +8,7 @@ function Header() {
       <NavLink className="Header-NavLink" to="/">
         Accueil
       </NavLink>
+      <div className="Header-logo">Logo</div>
       <NavLink className="Header-NavLink" to="/game">
         Jeu
       </NavLink>

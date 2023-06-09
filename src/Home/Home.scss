@@ -1,7 +1,8 @@
 @use './../styles/vars';
 
 .Home {
-    width: 1200px;
-    height: 80%;
-    background-color: vars.$alt-light-color;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
 }
