@@ -15,12 +15,14 @@
         margin: 150px;
     } 
 
-    &-logo {
+     img {
         position: absolute;
         z-index: 999;
-        top: 20px;
-        width: 200px;
-        height: 80px;
-        border : black solid 1px;
+        top: -20px;
+        text-align: center;
+        object-position: center top;
+        width: 170px;
+        height: 170px;
+        // border : black solid 1px;
     }
 }
