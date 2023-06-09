@@ -8,8 +8,8 @@ import Game from '../Game/Game';
 function Main() {
   return (
     <Routes>
-      <Route 
-        path="/" 
+      <Route
+        path="/"
         element={<Home />}
       />
     

@@ -1,0 +1,11 @@
+.Log {
+    width: 30%;
+    overflow-y: auto;
+    display: block;
+    margin: .5em;
+    margin-left: 2em;
+    
+    &-title {
+        margin-bottom: .5em;
+    }
+}
