@@ -1,8 +1,9 @@
 @use './../styles/vars';
 
 .Home {
+    width: 100%;
+    height: auto;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 100%;
 }
