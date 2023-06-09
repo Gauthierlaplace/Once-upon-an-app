@@ -1,9 +1,12 @@
+import HomeDescription from '../HomeDescription/HomeDescription';
+import HomeLogin from '../HomeLogin/HomeLogin';
 import './Home.scss';
 
 function Home() {
   return (
     <div className="Home">
-   Home
+      <HomeDescription />
+      <HomeLogin />
     </div>
   );
 }

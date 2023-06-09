@@ -1,10 +1,28 @@
 @use './../styles/vars';
 
 .Header {
+    position: absolute;
+    top: 0;
     width: 100%;
-    height: 10%;
-    background-color: vars.$primary-color;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(219, 216, 216);
+    box-shadow: rgb(187, 185, 185) 0px 0px 10px;
+
     &-NavLink {
-        margin: 10px;
+        margin: 150px;
     } 
+
+     img {
+        position: absolute;
+        z-index: 999;
+        top: -20px;
+        text-align: center;
+        object-position: center top;
+        width: 170px;
+        height: 170px;
+        // border : black solid 1px;
+    }
 }

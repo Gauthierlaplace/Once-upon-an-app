@@ -1,7 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import './Main.scss';
+
 import Home from '../Home/Home';
 import Game from '../Game/Game';
+
 //TODO fix la gestion des Routes
 function Main() {
   return (
@@ -11,6 +13,7 @@ function Main() {
           path="/"
           element={<Home />}
         />
+
         <Route
           path="/game"
           element={<Game />}
@@ -19,4 +22,5 @@ function Main() {
     </div>
   );
 }
+
 export default Main;
