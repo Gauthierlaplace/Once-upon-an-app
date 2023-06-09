@@ -8,6 +8,9 @@ function Header() {
       <NavLink className="Header-NavLink" to="/">
         Accueil
       </NavLink>
+      
+        <img src="https://imagizer.imageshack.com/img924/3691/6fB19e.png" alt="Logo de l'application web" />
+      
       <NavLink className="Header-NavLink" to="/game">
         Jeu
       </NavLink>

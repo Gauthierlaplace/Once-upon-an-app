@@ -1,7 +1,9 @@
 @use './../styles/vars';
 
 .Main {
+    position: absolute;
+    bottom: 50px;
     width: 1200px;
-    height: 80%;
-    background-color: vars.$alt-light-color;
+    margin: auto;
+    height: 78vh;
 }
