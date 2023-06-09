@@ -1,0 +1,11 @@
+.Scene {
+   margin: .5em;
+   width: 60%;
+   position: relative;
+    &-img {
+        width: 100%;
+    }
+    &-title {
+        margin-bottom: .5em;
+    }
+}

@@ -4,4 +4,6 @@
     width: 1200px;
     height: auto;
     background-color: vars.$alt-light-color;
+    display: flex;
+    flex-wrap: wrap;
 }
