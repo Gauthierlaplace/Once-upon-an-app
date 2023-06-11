@@ -1,11 +1,22 @@
 @use './../styles/vars';
 
 .Game {
-    width: 1200px;
+    width: 100%;
     height: 100%;
     background-color: vars.$alt-light-color;
-    display: flex;
-    flex-wrap: wrap;
-    position: absolute;
-    top: 0;
+
+
+    &-flexSB {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    &-left {
+        width: 65%;
+    }
+
+    &-right {
+        width: 30%;
+        overflow-y: auto;
+    }
 }
