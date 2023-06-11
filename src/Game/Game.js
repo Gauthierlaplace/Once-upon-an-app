@@ -4,7 +4,6 @@ import PlayerHealth from './PlayerHealth/PlayerHealth';
 import Scene from './Scene/Scene';
 import Log from './Log/Log';
 import Menus from './Menus/Menus';
-// import NPC from './NPC/NPC';
 
 
 function Game() {
@@ -17,7 +16,6 @@ function Game() {
 
         <h1 className="Game-Eventtitle">Event Title</h1>
           <Scene />
-          {/* <NPC /> */}
           <Menus />
         </div>
 

@@ -2,9 +2,10 @@
 
 .NPC {
     width: 40%;
-    margin-top: -45%;
     position: absolute;
-    left: 30%;
+    bottom: 0;
+    align-self: center;
+    margin-bottom: 5px;
     
     &-img {
         width: 100%;
@@ -13,13 +14,14 @@
     }
     &-title {
         color: vars.$primary-color;
-        padding: .2em;
+        width: fit-content;
+        height: auto;
         margin: auto;
         margin-bottom: 5px;
+        padding: 7px 20px;
         background-color: black;
         border-radius: 2em;
         box-shadow: 0px 0px 15px black;
-        width: fit-content;
         font-weight: 500;
     }
 }
