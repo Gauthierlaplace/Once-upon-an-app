@@ -2,8 +2,10 @@
 
 .Game {
     width: 1200px;
-    height: auto;
+    height: 100%;
     background-color: vars.$alt-light-color;
     display: flex;
     flex-wrap: wrap;
+    position: absolute;
+    top: 0;
 }
