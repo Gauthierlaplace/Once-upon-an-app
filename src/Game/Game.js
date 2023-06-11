@@ -14,13 +14,15 @@ function Game() {
 
       <div className="Game-flexSB">
         <div className="Game-left">
+
+        <h1 className="Game-Eventtitle">Event Title</h1>
           <Scene />
           {/* <NPC /> */}
           <Menus />
         </div>
 
         <div className="Game-right">
-        <h1 className="Log-title">Journal</h1>
+        <h1 className="Game-Logtitle">Journal</h1>
           <Log />
         </div>
       </div>
