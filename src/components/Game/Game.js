@@ -1,9 +1,9 @@
 import './Game.scss';
 
-import PlayerHealth from './PlayerHealth/PlayerHealth';
-import Scene from './Scene/Scene';
-import Log from './Log/Log';
-import Menus from './Menus/Menus';
+import PlayerHealth from './GamePlayerHealth/GamePlayerHealth';
+import Scene from './GameScene/GameScene';
+import Log from './GameLog/GameLog';
+import Menus from './GameMenus/GameMenus';
 
 
 function Game() {
