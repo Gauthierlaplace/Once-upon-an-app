@@ -1,0 +1,13 @@
+@use './../../styles/vars';
+
+.PlayerHealth {
+    color: vars.$lightest-color;
+    text-align: left;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+    background-color: vars.$alt-dark-color;
+}

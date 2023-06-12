@@ -7,17 +7,19 @@ import Game from '../Game/Game';
 //TODO fix la gestion des Routes
 function Main() {
   return (
-    <Routes>
-      <Route 
-        path="/" 
-        element={<Home />}
-      />
-    
-      <Route
-        path="/game"
-        element={<Game />}
-      />
-    </Routes>
+    <div className="Main">
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/game"
+          element={<Game />}
+        />
+      </Routes>
+    </div>
   );
 }
 
