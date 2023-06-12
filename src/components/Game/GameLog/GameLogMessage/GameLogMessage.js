@@ -1,16 +1,16 @@
-import './Message.scss';
+import './GameLogMessage.scss';
 
-function Message() {
+function GameLogMessage() {
   return (
-    <div className="Message">
-      <p className="Message-content">Message</p>
+    <div className="GameLogMessage">
+      <p className="GameLogMessage-content">GameLogMessage</p>
       <div>
-        <button className="Message-button">Choice 1<p>
+        <button className="GameLogMessage-button">Choice 1<p>
         Consectetur consequat ut esse id occaecat occaecat. Aliquip sint laborum aute duis velit
         ipsum velit voluptate cupidatat proident sint et. Adipisicing consectetur ullamco ad
         sit Lorem minim mollit.
         </p></button>
-        <button className="Message-button">Choice 2
+        <button className="GameLogMessage-button">Choice 2
         <p>
         Consectetur consequat ut esse id occaecat occaecat. Aliquip sint laborum aute duis velit
         ipsum velit voluptate cupidatat proident sint et. Adipisicing consectetur ullamco ad
@@ -21,4 +21,4 @@ function Message() {
   );
 }
 
-export default Message;
+export default GameLogMessage;

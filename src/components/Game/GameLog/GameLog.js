@@ -1,9 +1,9 @@
-import './Log.scss';
-import Message from './Message/Message';
+import './GameLog.scss';
+import Message from './GameLogMessage/GameLogMessage';
 
-function Log() {
+function GameLog() {
   return (
-    <div className="Log">
+    <div className="GameLog">
         <p>
         Qui magna sit consectetur ullamco officia. Sunt id consectetur enim tempor aliquip
         mollit et aute consequat id nostrud in. Cupidatat est consequat ad do ullamco magna
@@ -33,4 +33,4 @@ function Log() {
   );
 }
 
-export default Log;
+export default GameLog;
