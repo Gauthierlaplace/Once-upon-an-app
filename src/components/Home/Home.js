@@ -1,12 +1,12 @@
 import HomeDescription from './HomeDescription/HomeDescription';
-import HomeLogin from './HomeLogin/HomeLogin';
+import HomeForms from './HomeForms/HomeForms';
 import './Home.scss';
 
 function Home() {
   return (
     <div className="Home">
       <HomeDescription />
-      <HomeLogin />
+      <HomeForms />
     </div>
   );
 }
