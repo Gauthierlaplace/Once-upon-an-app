@@ -1,5 +1,5 @@
-import HomeDescription from '../HomeDescription/HomeDescription';
-import HomeLogin from '../HomeLogin/HomeLogin';
+import HomeDescription from './HomeDescription/HomeDescription';
+import HomeLogin from './HomeLogin/HomeLogin';
 import './Home.scss';
 
 function Home() {
