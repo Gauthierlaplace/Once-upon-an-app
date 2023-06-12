@@ -3,7 +3,7 @@ export const initialState = {
     password: '',
     pseudo: '',
     logged: false,
-    token: null,
+    token: '',
 };
   
 const reducer = (state = initialState, action = {}) => {
