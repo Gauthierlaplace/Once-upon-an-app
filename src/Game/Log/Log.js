@@ -4,7 +4,6 @@ import Message from './Message/Message';
 function Log() {
   return (
     <div className="Log">
-    <h1 className="Log-title">Log</h1>
         <p>
         Qui magna sit consectetur ullamco officia. Sunt id consectetur enim tempor aliquip
         mollit et aute consequat id nostrud in. Cupidatat est consequat ad do ullamco magna
