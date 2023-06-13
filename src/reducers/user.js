@@ -40,7 +40,8 @@ const reducer = (state = initialState, action = {}) => {
           token: action.payload.token,
   
           // pour la sécurité : on efface les identifiants dès qu'on a plus besoin
-          email: '',
+          // Todo dé-commenter la ligne suivante quand ce sera OK
+          // email: '',
           password: '',
         };
 
