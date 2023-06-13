@@ -10,12 +10,17 @@
     align-items: center;
     padding-left: 10px;
     background-color: vars.$alt-dark-color;
-    
+
+    h1 {
+        width: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     &-picture {
         width: 30px;
     }
-    
-    &-name {
-        
-    }
+
+    &-name {}
 }
