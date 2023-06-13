@@ -23,7 +23,6 @@ function HomeLogin() {
   const dispatch = useDispatch();
 
   // Fonction pour lancer une requete "test" sur la route api/test
-  // Todo modifier cette fonction pour lui faire prendre le token en paramètre
   function testApiAuthorization(jwt) {
     axios
       .get(
@@ -50,7 +49,7 @@ function HomeLogin() {
     // on valide les infos auprès du back-end
     axios
       .post("http://anthony-boutherin.vpnuser.lan:8000/api/login_check", {
-        // La documentation API (nos collègues back) nous précisent quelles données transmettre
+        // La documentation API (nos collègues back) nous précise quelles données transmettre
 
         // Todo quand les tests marcheront, remplacer par email et password
         username: email,
@@ -61,7 +60,7 @@ function HomeLogin() {
 
         // Ici j'enregistre le jeton dans le state
         dispatch(
-          saveLoginSuccessful(response.data.pseudo, response.data.token)
+          saveLoginSuccessful(response.data.nickname, response.data.token)
         );
       })
       .catch((error) => {
