@@ -1,6 +1,7 @@
 // action déclenchée quand l'un des deux inputs (email / password) change de valeur
 export const CHANGE_LOGIN_OR_REGISTER_FIELD = 'CHANGE_LOGIN_OR_REGISTER_FIELD';
 export const SAVE_LOGIN_SUCCESSFUL = 'SAVE_LOGIN_SUCCESSFUL';
+export const SAVE_REGISTER_SUCCESSFUL = 'SAVE_REGISTER_SUCCESSFUL';
 export const ERROR_WHILE_LOGIN = 'ERROR_WHILE_LOGIN';
 export const LOG_OUT = 'LOG_OUT';
 
@@ -20,6 +21,13 @@ export const saveLoginSuccessful = (nickname, token) => ({
   payload: {
     nickname: nickname,
     token: token,
+  },
+});
+
+export const saveRegisterSuccessful = (nickname) => ({
+  type: SAVE_REGISTER_SUCCESSFUL,
+  payload: {
+    nickname: nickname,
   },
 });
 
