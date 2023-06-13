@@ -23,7 +23,7 @@ function HomeLogin() {
   const dispatch = useDispatch();
 
   // Fonction pour lancer une requete "test" sur la route api/test
-  function testApiAuthorization(jwt) {
+  const testApiAuthorization = (jwt) => {
     axios
       .get(
         "http://anthony-boutherin.vpnuser.lan:8000/api/test",
@@ -44,28 +44,25 @@ function HomeLogin() {
   // Fonction pour envoyer username et password à la soumission du formulaire
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Todo retirer après les tests
-    console.log(email, password);
     // on valide les infos auprès du back-end
     axios
       .post("http://anthony-boutherin.vpnuser.lan:8000/api/login_check", {
         // La documentation API (nos collègues back) nous précise quelles données transmettre
-
-        // Todo quand les tests marcheront, remplacer par email et password
         username: email,
         password: password,
       })
       .then((response) => {
+        // Todo supprimer après les tests
         console.log("token :", response.data.token);
-
         // Ici j'enregistre le jeton dans le state
+        // Lorsque le couple email/password est bien reconnu par le back
         dispatch(
           saveLoginSuccessful(response.data.nickname, response.data.token)
         );
       })
       .catch((error) => {
         console.error(error);
-        // Todo modifier pour avoir une action "DealLoginErrors"
+        // Todo gérer les erreurs
         // Ici j'enregistre le jeton dans le state
         dispatch(
           saveLoginSuccessful("inconnu", "")
@@ -106,6 +103,7 @@ function HomeLogin() {
             onChange={(event) => {
               dispatch(changeLoginField(event.target.value, "password"));
             }}
+            value={password}
           />
 
           <button type="submit">Connexion</button>
