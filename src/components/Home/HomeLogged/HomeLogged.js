@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 import './HomeLogged.scss';
 
@@ -6,7 +6,9 @@ function HomeLogged() {
 
   return (
     <div className="HomeLogged">
-      Composant HomeLogged
+      <button><Link
+      className="HomeLogged-RunGame" 
+      to="/game"><h1>Jouer</h1></Link></button>
     </div>
   );
 }

@@ -22,25 +22,6 @@ function HomeLogin() {
 
   const dispatch = useDispatch();
 
-  // Fonction pour lancer une requete "test" sur la route api/test
-  const testApiAuthorization = (jwt) => {
-    axios
-      .get(
-        "http://anthony-boutherin.vpnuser.lan:8000/api/test",
-        // options, notamment les headers
-        // => on transmet le token JWT au serveur, pour qu'il nous reconnaisse
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data.message);
-      })
-      .catch((error) => console.error(error));
-  }
-
   // Fonction pour envoyer username et password à la soumission du formulaire
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -73,14 +54,6 @@ function HomeLogin() {
   return (
     <div className="HomeLogin">
       <div className="HomeLogin-left">
-        <button
-          // Todo retirer ce bouton qui sert uniquement aux tests API
-          className="testAPIButton"
-          type="button"
-          onClick={() => testApiAuthorization(token)}
-        >
-          Test API
-        </button>
 
         <h1>Connectez-vous</h1>
         <form className="HomeLogin-log" method="post" onSubmit={handleSubmit}>
