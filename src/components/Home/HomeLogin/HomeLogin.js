@@ -63,16 +63,16 @@ function HomeLogin() {
     event.preventDefault();
     // on valide les infos auprès du back-end
     axios
-    .post(
-      "http://anthony-boutherin.vpnuser.lan:8000/api/users",
-      {
+      .post(
+        "http://anthony-boutherin.vpnuser.lan:8000/api/users",
+        {
           email: emailRegister,
           roles: ["ROLE_PLAYER"],
           password: passwordRegister,
           pseudo: nickname,
           avatar: "",
-      }
-    )
+        }
+      )
       .then((response) => {
         console.log(response.data);
         dispatch(
@@ -89,76 +89,79 @@ function HomeLogin() {
     <div className="HomeLogin">
 
       {/* CONNEXION */}
+      <div className="HomeLogin-GlassLeft">
+        <div className="HomeLogin-left">
 
-      <div className="HomeLogin-left">
+          <h1>Connectez-vous</h1>
+          <form className="HomeLogin-log" onSubmit={handleSubmitLogin}>
+            <label htmlFor="mail">E-mail :</label>
+            <input
+              type="text"
+              name="email"
+              placeholder="Entrez votre adresse mail"
+              onChange={(event) => {
+                dispatch(changeLoginOrRegisterField(event.target.value, "email"));
+              }}
+              value={email}
+            />
 
-        <h1>Connectez-vous</h1>
-        <form className="HomeLogin-log" onSubmit={handleSubmitLogin}>
-          <label htmlFor="mail">E-mail :</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="Entrez votre adresse mail"
-            onChange={(event) => {
-              dispatch(changeLoginOrRegisterField(event.target.value, "email"));
-            }}
-            value={email}
-          />
+            <label htmlFor="password">Mot de passe :</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Entrez votre mot de passe"
+              onChange={(event) => {
+                dispatch(changeLoginOrRegisterField(event.target.value, "password"));
+              }}
+              value={password}
+            />
 
-          <label htmlFor="password">Mot de passe :</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Entrez votre mot de passe"
-            onChange={(event) => {
-              dispatch(changeLoginOrRegisterField(event.target.value, "password"));
-            }}
-            value={password}
-          />
-
-          <button type="submit">Connexion</button>
-        </form>
+            <button type="submit">Connexion</button>
+          </form>
+        </div>
       </div>
 
       {/* INSCRIPTION */}
 
-      <div className="HomeLogin-right">
-        <h1>Inscrivez-vous</h1>
-        <form className="HomeLogin-create" onSubmit={handleSubmitRegister}>
-          <label htmlFor="nickname">Pseudo</label>
-          <input
-            type="text"
-            name="nickname"
-            placeholder="Entrez votre pseudo"
-            onChange={(event) => {
-              dispatch(changeLoginOrRegisterField(event.target.value, "nickname"))
-            }}
-            value={nickname}
-          />
+      <div className="HomeLogin-GlassRight">
+        <div className="HomeLogin-right">
+          <h1>Inscrivez-vous</h1>
+          <form className="HomeLogin-create" onSubmit={handleSubmitRegister}>
+            <label htmlFor="nickname">Pseudo</label>
+            <input
+              type="text"
+              name="nickname"
+              placeholder="Entrez votre pseudo"
+              onChange={(event) => {
+                dispatch(changeLoginOrRegisterField(event.target.value, "nickname"))
+              }}
+              value={nickname}
+            />
 
-          <label htmlFor="mail">E-mail :</label>
-          <input
-            type="text"
-            name="emailRegister"
-            placeholder="Entrez votre adresse mail"
-            onChange={(event) => {
-              dispatch(changeLoginOrRegisterField(event.target.value, "emailRegister"))
-            }}
-            value={emailRegister}
-          />
+            <label htmlFor="mail">E-mail :</label>
+            <input
+              type="text"
+              name="emailRegister"
+              placeholder="Entrez votre adresse mail"
+              onChange={(event) => {
+                dispatch(changeLoginOrRegisterField(event.target.value, "emailRegister"))
+              }}
+              value={emailRegister}
+            />
 
-          <label htmlFor="password">Mot de passe :</label>
-          <input
-            type="password"
-            name="passwordRegister"
-            placeholder="Entrez votre mot de passe"
-            onChange={(event) => {
-              dispatch(changeLoginOrRegisterField(event.target.value, "passwordRegister"))
-            }}
-            value={passwordRegister}          />
+            <label htmlFor="password">Mot de passe :</label>
+            <input
+              type="password"
+              name="passwordRegister"
+              placeholder="Entrez votre mot de passe"
+              onChange={(event) => {
+                dispatch(changeLoginOrRegisterField(event.target.value, "passwordRegister"))
+              }}
+              value={passwordRegister} />
 
-          <button type="submit">Inscription</button>
-        </form>
+            <button type="submit">Inscription</button>
+          </form>
+        </div>
       </div>
     </div>
   );
