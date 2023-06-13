@@ -1,4 +1,4 @@
-import { CHANGE_LOGIN_FIELD, SAVE_LOGIN_SUCCESSFUL, ERROR_WHILE_LOGIN, LOG_OUT } from '../actions/user';
+import { CHANGE_LOGIN_OR_REGISTER_FIELD, SAVE_LOGIN_SUCCESSFUL, ERROR_WHILE_LOGIN, LOG_OUT } from '../actions/user';
 
 export const initialState = {
     email: '',
@@ -10,18 +10,28 @@ export const initialState = {
   
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-      case CHANGE_LOGIN_FIELD:
-        // deux traitements sur une seule action : soit changer email, soit changer password
+      case CHANGE_LOGIN_OR_REGISTER_FIELD:
+        // plusieurs traitements sur une seule action : changer les champs de la page d'accueil
+        // email
         if (action.payload.identifier === 'email') {
           return {
             ...state,
             email: action.payload.newValue,
           };
         }
-        // if (action.payload.identifier === 'password') {
+
+        // password
+        if (action.payload.identifier === 'password') {
+          return {
+            ...state,
+            password: action.payload.newValue,
+          };  
+        }
+
+        // nickname (pseudo de l'utilisateur connecté)
         return {
           ...state,
-          password: action.payload.newValue,
+          nickname: action.payload.newValue,
         };
   
         /* On pourrait meme l'écrire en une ligne, 

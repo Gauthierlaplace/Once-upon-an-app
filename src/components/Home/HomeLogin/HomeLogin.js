@@ -3,10 +3,9 @@ import axios from "axios";
 
 import "./HomeLogin.scss";
 
-// Pour rappel, la fonction changeLoginField marche à la fois
-// pour le champ "email" et pour le champ "password"
+// Pour rappel, la fonction suivante marche pour plusieurs champs à la fois
 // (voir son fonctionnement détaillé dans le dossier actions)
-import { changeLoginField, errorWhileLogin, saveLoginSuccessful } from "../../../actions/user";
+import { changeLoginOrRegisterField, errorWhileLogin, saveLoginSuccessful } from "../../../actions/user";
 
 function HomeLogin() {
   // Todo si l'on sépare en deux composants Login et Signin :
@@ -22,7 +21,7 @@ function HomeLogin() {
 
   const dispatch = useDispatch();
 
-  // Fonction pour envoyer username et password à la soumission du formulaire
+  // Fonction pour envoyer username (l'email) et password à la soumission du formulaire
   const handleSubmit = (event) => {
     event.preventDefault();
     // on valide les infos auprès du back-end
@@ -53,6 +52,9 @@ function HomeLogin() {
 
   return (
     <div className="HomeLogin">
+
+      {/* CONNEXION */}
+
       <div className="HomeLogin-left">
 
         <h1>Connectez-vous</h1>
@@ -63,7 +65,7 @@ function HomeLogin() {
             name="email"
             placeholder="Entrez votre adresse mail"
             onChange={(event) => {
-              dispatch(changeLoginField(event.target.value, "email"));
+              dispatch(changeLoginOrRegisterField(event.target.value, "email"));
             }}
             value={email}
           />
@@ -74,7 +76,7 @@ function HomeLogin() {
             name="password"
             placeholder="Entrez votre mot de passe"
             onChange={(event) => {
-              dispatch(changeLoginField(event.target.value, "password"));
+              dispatch(changeLoginOrRegisterField(event.target.value, "password"));
             }}
             value={password}
           />
@@ -83,14 +85,20 @@ function HomeLogin() {
         </form>
       </div>
 
+      {/* INSCRIPTION */}
+
       <div className="HomeLogin-right">
         <h1>Inscrivez-vous</h1>
         <form className="HomeLogin-create" method="post">
-          <label htmlFor="username">Pseudo</label>
+          <label htmlFor="nickname">Pseudo</label>
           <input
             type="text"
-            name="username"
+            name="nickname"
             placeholder="Entrez votre pseudo"
+            onChange={(event) => {
+              dispatch(changeLoginOrRegisterField(event.target.value, "nickname"))
+            }}
+            value={nickname}
           />
 
           <label htmlFor="mail">E-mail :</label>
