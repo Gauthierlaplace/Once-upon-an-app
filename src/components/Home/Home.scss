@@ -10,7 +10,8 @@
 
     &-testAPIButton {
         position: absolute;
-        top: 50px;
+        top: 0px;
+        left: 0;
         font-weight: bold;
         background-color: purple;
         color: white;
@@ -22,7 +23,7 @@
 
     &-testAPIButtonFindUser {
         position: absolute;
-        top: 50px;
+        top: 0px;
         left: 150px;
         font-weight: bold;
         background-color: purple;
