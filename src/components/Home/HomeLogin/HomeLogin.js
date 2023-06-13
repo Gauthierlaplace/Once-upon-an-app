@@ -3,10 +3,9 @@ import axios from "axios";
 
 import "./HomeLogin.scss";
 
-// Pour rappel, la fonction changeLoginField marche à la fois
-// pour le champ "email" et pour le champ "password"
+// Pour rappel, la fonction suivante marche pour plusieurs champs à la fois
 // (voir son fonctionnement détaillé dans le dossier actions)
-import { changeLoginField, errorWhileLogin, saveLoginSuccessful } from "../../../actions/user";
+import { changeLoginOrRegisterField, errorWhileLogin, saveLoginSuccessful, saveRegisterSuccessful } from "../../../actions/user";
 
 function HomeLogin() {
   // Todo si l'on sépare en deux composants Login et Signin :
@@ -16,14 +15,18 @@ function HomeLogin() {
   // Pour info, ce sont des reducers combinés (un state avec des tiroirs) => je précise state.user
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
-  const logged = useSelector((state) => state.user.logged);
   const nickname = useSelector((state) => state.user.nickname);
-  const token = useSelector((state) => state.user.token);
+  const emailRegister = useSelector((state) => state.user.emailRegister);
+  const passwordRegister = useSelector((state) => state.user.passwordRegister);
 
   const dispatch = useDispatch();
 
-  // Fonction pour envoyer username et password à la soumission du formulaire
-  const handleSubmit = (event) => {
+  // =========================================
+  // TRAITEMENT DU FORMULAIRE DE CONNEXION
+  // =========================================
+
+  // Fonction pour envoyer username (l'email) et password à la soumission du formulaire
+  const handleSubmitLogin = (event) => {
     event.preventDefault();
     // on valide les infos auprès du back-end
     axios
@@ -43,7 +46,7 @@ function HomeLogin() {
       })
       .catch((error) => {
         console.error(error);
-        // Todo gérer les erreurs
+        // Todo gérer les erreurs (solution provisoire ci-dessous)
         // Ici j'enregistre le jeton dans le state
         dispatch(
           errorWhileLogin("inconnu", "")
@@ -51,19 +54,53 @@ function HomeLogin() {
       });
   };
 
+  // =========================================
+  // TRAITEMENT DU FORMULAIRE D'INSCRIPTION
+  // =========================================
+
+  // Fonction d'inscription : envoyer en post email, password, nickname
+  const handleSubmitRegister = (event) => {
+    event.preventDefault();
+    // on valide les infos auprès du back-end
+    axios
+    .post(
+      "http://anthony-boutherin.vpnuser.lan:8000/api/users",
+      {
+          email: emailRegister,
+          roles: ["ROLE_PLAYER"],
+          password: passwordRegister,
+          pseudo: nickname,
+          avatar: "",
+      }
+    )
+      .then((response) => {
+        console.log(response.data);
+        dispatch(
+          saveRegisterSuccessful(response.data.pseudo)
+        );
+      })
+      .catch((error) => {
+        // Todo gérer les erreurs
+        console.error(error);
+      });
+  };
+
   return (
     <div className="HomeLogin">
+
+      {/* CONNEXION */}
+
       <div className="HomeLogin-left">
 
         <h1>Connectez-vous</h1>
-        <form className="HomeLogin-log" method="post" onSubmit={handleSubmit}>
+        <form className="HomeLogin-log" onSubmit={handleSubmitLogin}>
           <label htmlFor="mail">E-mail :</label>
           <input
             type="text"
             name="email"
             placeholder="Entrez votre adresse mail"
             onChange={(event) => {
-              dispatch(changeLoginField(event.target.value, "email"));
+              dispatch(changeLoginOrRegisterField(event.target.value, "email"));
             }}
             value={email}
           />
@@ -74,7 +111,7 @@ function HomeLogin() {
             name="password"
             placeholder="Entrez votre mot de passe"
             onChange={(event) => {
-              dispatch(changeLoginField(event.target.value, "password"));
+              dispatch(changeLoginOrRegisterField(event.target.value, "password"));
             }}
             value={password}
           />
@@ -83,29 +120,42 @@ function HomeLogin() {
         </form>
       </div>
 
+      {/* INSCRIPTION */}
+
       <div className="HomeLogin-right">
         <h1>Inscrivez-vous</h1>
-        <form className="HomeLogin-create" method="post">
-          <label htmlFor="username">Pseudo</label>
+        <form className="HomeLogin-create" onSubmit={handleSubmitRegister}>
+          <label htmlFor="nickname">Pseudo</label>
           <input
             type="text"
-            name="username"
+            name="nickname"
             placeholder="Entrez votre pseudo"
+            onChange={(event) => {
+              dispatch(changeLoginOrRegisterField(event.target.value, "nickname"))
+            }}
+            value={nickname}
           />
 
           <label htmlFor="mail">E-mail :</label>
           <input
             type="text"
-            name="email"
+            name="emailRegister"
             placeholder="Entrez votre adresse mail"
+            onChange={(event) => {
+              dispatch(changeLoginOrRegisterField(event.target.value, "emailRegister"))
+            }}
+            value={emailRegister}
           />
 
           <label htmlFor="password">Mot de passe :</label>
           <input
             type="password"
-            name="password"
+            name="passwordRegister"
             placeholder="Entrez votre mot de passe"
-          />
+            onChange={(event) => {
+              dispatch(changeLoginOrRegisterField(event.target.value, "passwordRegister"))
+            }}
+            value={passwordRegister}          />
 
           <button type="submit">Inscription</button>
         </form>

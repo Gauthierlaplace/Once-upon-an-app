@@ -18,4 +18,17 @@
         border-radius: 5px;
         border: transparent;
     }
+
+    &-testAPIButtonFindUser {
+        position: absolute;
+        top: 50px;
+        left: 150px;
+        font-weight: bold;
+        background-color: purple;
+        color: white;
+        width: 10%;
+        padding: 5px;
+        border-radius: 5px;
+        border: transparent;
+    }
 }
