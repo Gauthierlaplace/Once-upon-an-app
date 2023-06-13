@@ -1,4 +1,4 @@
-import { CHANGE_LOGIN_FIELD, SAVE_LOGIN_SUCCESSFUL } from '../actions/user';
+import { CHANGE_LOGIN_FIELD, SAVE_LOGIN_SUCCESSFUL, ERROR_WHILE_LOGIN, LOG_OUT } from '../actions/user';
 
 export const initialState = {
     email: '',
@@ -40,10 +40,31 @@ const reducer = (state = initialState, action = {}) => {
           token: action.payload.token,
   
           // pour la sécurité : on efface les identifiants dès qu'on a plus besoin
-          email: '',
+          // Todo dé-commenter la ligne suivante quand ce sera OK
+          // email: '',
           password: '',
         };
+
+        case ERROR_WHILE_LOGIN:
+          return {
+            ...state,
+            logged: false,
+            nickname: action.payload.nickname,
+            token: action.payload.token,
+            email: '',
+            password: '',
+          };
   
+        case LOG_OUT:
+          return {
+            ...state,
+            logged: false,
+            nickname: '',
+            token: '',
+            email: '',
+            password: '',
+          };
+
       default:
         return state;
     }

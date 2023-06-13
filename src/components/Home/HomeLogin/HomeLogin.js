@@ -6,7 +6,7 @@ import "./HomeLogin.scss";
 // Pour rappel, la fonction changeLoginField marche à la fois
 // pour le champ "email" et pour le champ "password"
 // (voir son fonctionnement détaillé dans le dossier actions)
-import { changeLoginField, saveLoginSuccessful } from "../../../actions/user";
+import { changeLoginField, errorWhileLogin, saveLoginSuccessful } from "../../../actions/user";
 
 function HomeLogin() {
   // Todo si l'on sépare en deux composants Login et Signin :
@@ -22,53 +22,31 @@ function HomeLogin() {
 
   const dispatch = useDispatch();
 
-  // Fonction pour lancer une requete "test" sur la route api/test
-  function testApiAuthorization(jwt) {
-    axios
-      .get(
-        "http://anthony-boutherin.vpnuser.lan:8000/api/test",
-        // options, notamment les headers
-        // => on transmet le token JWT au serveur, pour qu'il nous reconnaisse
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data.message);
-      })
-      .catch((error) => console.error(error));
-  }
-
   // Fonction pour envoyer username et password à la soumission du formulaire
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Todo retirer après les tests
-    console.log(email, password);
     // on valide les infos auprès du back-end
     axios
       .post("http://anthony-boutherin.vpnuser.lan:8000/api/login_check", {
         // La documentation API (nos collègues back) nous précise quelles données transmettre
-
-        // Todo quand les tests marcheront, remplacer par email et password
         username: email,
         password: password,
       })
       .then((response) => {
+        // Todo supprimer après les tests
         console.log("token :", response.data.token);
-
         // Ici j'enregistre le jeton dans le state
+        // Lorsque le couple email/password est bien reconnu par le back
         dispatch(
           saveLoginSuccessful(response.data.nickname, response.data.token)
         );
       })
       .catch((error) => {
         console.error(error);
-        // Todo modifier pour avoir une action "DealLoginErrors"
+        // Todo gérer les erreurs
         // Ici j'enregistre le jeton dans le state
         dispatch(
-          saveLoginSuccessful("inconnu", "")
+          errorWhileLogin("inconnu", "")
         );
       });
   };
@@ -76,14 +54,6 @@ function HomeLogin() {
   return (
     <div className="HomeLogin">
       <div className="HomeLogin-left">
-        <button
-          // Todo retirer ce bouton qui sert uniquement aux tests API
-          className="testAPIButton"
-          type="button"
-          onClick={() => testApiAuthorization(token)}
-        >
-          Test API
-        </button>
 
         <h1>Connectez-vous</h1>
         <form className="HomeLogin-log" method="post" onSubmit={handleSubmit}>
@@ -106,6 +76,7 @@ function HomeLogin() {
             onChange={(event) => {
               dispatch(changeLoginField(event.target.value, "password"));
             }}
+            value={password}
           />
 
           <button type="submit">Connexion</button>

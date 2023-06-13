@@ -6,4 +6,16 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+
+    &-testAPIButton {
+        position: absolute;
+        top: 50px;
+        font-weight: bold;
+        background-color: purple;
+        color: white;
+        width: 10%;
+        padding: 5px;
+        border-radius: 5px;
+        border: transparent;
+    }
 }
