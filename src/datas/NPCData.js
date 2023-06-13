@@ -88,8 +88,8 @@ export default [
   
     {
       code_npc: 9,
-      name: "La Sorcière des Mousses",
-      description: "Cette sorcière maléfique au visage couvert de mousses verdâtres utilise la magie noirepour ensorceler les aventuriers et les mener à leur perte.",
+      name: "La Sorcière de l'humus",
+      description: "Cette sorcière maléfique au visage inquiétant utilise la magie noire pour ensorceler les aventuriers et les mener à leur perte.",
       picture: 'https://cdn.midjourney.com/cff72ca6-251f-4baa-8b9b-032eca3abbba/0_0.png',
       is_boss: 1,
       hostility: 1,
