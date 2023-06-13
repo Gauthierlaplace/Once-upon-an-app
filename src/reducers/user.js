@@ -1,4 +1,4 @@
-import { CHANGE_LOGIN_FIELD, SAVE_LOGIN_SUCCESSFUL } from '../actions/user';
+import { CHANGE_LOGIN_FIELD, SAVE_LOGIN_SUCCESSFUL, ERROR_WHILE_LOGIN } from '../actions/user';
 
 export const initialState = {
     email: '',
@@ -43,6 +43,16 @@ const reducer = (state = initialState, action = {}) => {
           email: '',
           password: '',
         };
+
+        case ERROR_WHILE_LOGIN:
+          return {
+            ...state,
+            logged: false,
+            nickname: action.payload.nickname,
+            token: action.payload.token,
+            email: '',
+            password: '',
+          };
   
       default:
         return state;

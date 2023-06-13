@@ -6,7 +6,7 @@ import "./HomeLogin.scss";
 // Pour rappel, la fonction changeLoginField marche à la fois
 // pour le champ "email" et pour le champ "password"
 // (voir son fonctionnement détaillé dans le dossier actions)
-import { changeLoginField, saveLoginSuccessful } from "../../../actions/user";
+import { changeLoginField, errorWhileLogin, saveLoginSuccessful } from "../../../actions/user";
 
 function HomeLogin() {
   // Todo si l'on sépare en deux composants Login et Signin :
@@ -65,7 +65,7 @@ function HomeLogin() {
         // Todo gérer les erreurs
         // Ici j'enregistre le jeton dans le state
         dispatch(
-          saveLoginSuccessful("inconnu", "")
+          errorWhileLogin("inconnu", "")
         );
       });
   };
