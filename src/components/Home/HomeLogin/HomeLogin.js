@@ -1,11 +1,13 @@
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
-import "./HomeLogin.scss";
+import './HomeLogin.scss';
 
 // Pour rappel, la fonction suivante marche pour plusieurs champs à la fois
 // (voir son fonctionnement détaillé dans le dossier actions)
-import { changeLoginOrRegisterField, errorWhileLogin, saveLoginSuccessful, saveRegisterSuccessful } from "../../../actions/user";
+import {
+  changeLoginOrRegisterField, errorWhileLogin, saveLoginSuccessful, saveRegisterSuccessful
+} from '../../../actions/user';
 
 function HomeLogin() {
   // Todo si l'on sépare en deux composants Login et Signin :
@@ -30,14 +32,14 @@ function HomeLogin() {
     event.preventDefault();
     // on valide les infos auprès du back-end
     axios
-      .post("http://anthony-boutherin.vpnuser.lan:8000/api/login_check", {
+      .post('http://anthony-boutherin.vpnuser.lan:8000/api/login_check', {
         // La documentation API (nos collègues back) nous précise quelles données transmettre
         username: email,
         password: password,
       })
       .then((response) => {
         // Todo supprimer après les tests
-        console.log("token :", response.data.token);
+        console.log('token :', response.data.token);
         // Ici j'enregistre le jeton dans le state
         // Lorsque le couple email/password est bien reconnu par le back
         dispatch(
@@ -49,7 +51,7 @@ function HomeLogin() {
         // Todo gérer les erreurs (solution provisoire ci-dessous)
         // Ici j'enregistre le jeton dans le state
         dispatch(
-          errorWhileLogin("inconnu", "")
+          errorWhileLogin('inconnu', '')
         );
       });
   };
@@ -64,13 +66,13 @@ function HomeLogin() {
     // on valide les infos auprès du back-end
     axios
       .post(
-        "http://anthony-boutherin.vpnuser.lan:8000/api/users",
+        'http://anthony-boutherin.vpnuser.lan:8000/api/users',
         {
           email: emailRegister,
-          roles: ["ROLE_PLAYER"],
+          roles: ['ROLE_PLAYER'],
           password: passwordRegister,
           pseudo: nickname,
-          avatar: "",
+          avatar: '',
         }
       )
       .then((response) => {
@@ -100,7 +102,7 @@ function HomeLogin() {
               name="email"
               placeholder="Entrez votre adresse mail"
               onChange={(event) => {
-                dispatch(changeLoginOrRegisterField(event.target.value, "email"));
+                dispatch(changeLoginOrRegisterField(event.target.value, 'email'));
               }}
               value={email}
             />
@@ -111,7 +113,7 @@ function HomeLogin() {
               name="password"
               placeholder="Entrez votre mot de passe"
               onChange={(event) => {
-                dispatch(changeLoginOrRegisterField(event.target.value, "password"));
+                dispatch(changeLoginOrRegisterField(event.target.value, 'password'));
               }}
               value={password}
             />
@@ -133,7 +135,7 @@ function HomeLogin() {
               name="nickname"
               placeholder="Entrez votre pseudo"
               onChange={(event) => {
-                dispatch(changeLoginOrRegisterField(event.target.value, "nickname"))
+                dispatch(changeLoginOrRegisterField(event.target.value, 'nickname'));
               }}
               value={nickname}
             />
@@ -144,7 +146,7 @@ function HomeLogin() {
               name="emailRegister"
               placeholder="Entrez votre adresse mail"
               onChange={(event) => {
-                dispatch(changeLoginOrRegisterField(event.target.value, "emailRegister"))
+                dispatch(changeLoginOrRegisterField(event.target.value, 'emailRegister'));
               }}
               value={emailRegister}
             />
@@ -155,9 +157,10 @@ function HomeLogin() {
               name="passwordRegister"
               placeholder="Entrez votre mot de passe"
               onChange={(event) => {
-                dispatch(changeLoginOrRegisterField(event.target.value, "passwordRegister"))
+                dispatch(changeLoginOrRegisterField(event.target.value, 'passwordRegister'));
               }}
-              value={passwordRegister} />
+              value={passwordRegister}
+            />
 
             <button type="submit">Inscription</button>
           </form>
