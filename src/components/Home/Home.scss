@@ -5,11 +5,13 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-direction: column;
 
     &-testAPIButton {
         position: absolute;
-        top: 50px;
+        top: 0px;
+        left: 0;
         font-weight: bold;
         background-color: purple;
         color: white;
@@ -21,7 +23,7 @@
 
     &-testAPIButtonFindUser {
         position: absolute;
-        top: 50px;
+        top: 0px;
         left: 150px;
         font-weight: bold;
         background-color: purple;
