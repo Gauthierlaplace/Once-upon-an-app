@@ -1,13 +1,16 @@
 import './GameLog.scss';
-import Message from './GameLogMessage/GameLogMessage';
+
+import Choices from './GameLogChoices/GameLogChoices';
+import EventDescription from './GameLogEventDesciption/GameLogEventDescription';
+import NPC from './GameLogNPC/GameLogNPC';
+
 
 function GameLog({ eventDescription, npcName, npcDescription }) {
   return (
     <div className="GameLog">
-        <p>{eventDescription}</p>
-        <p>Vous rencontrez {npcName}</p>
-        <p>{npcDescription}</p>
-        <Message />
+        <EventDescription description={eventDescription} />
+        <NPC npcName={npcName} npcDescription={npcDescription} />
+        <Choices />
     </div>
   );
 }
