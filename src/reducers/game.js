@@ -39,7 +39,6 @@ export const initialState = {
         action: ""
       }
     ]
-    
   };
   
   const reducer = (state = initialState, action = {}) => {
