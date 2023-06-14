@@ -21,11 +21,24 @@ export const initialState = {
     {
       code_npc: 3,
       name: "Lysandre l'Érudite",
-      description: "Très instruite et mystérieuse, elle est connue pour sa sagesse et ses connaissances ésotériques sur les secrets de la forêt.",
+      description: "Très instruite et mystérieuse, elle est connue pour sa sagesse et ses connaissances ésotériques sur les secrets de la forêt. Lysandre ne fait pas attention à vous, bien trop absorbée par sa lecture.",
       picture: 'https://cdn.midjourney.com/1bde38ab-9964-4585-b910-6e744f8152fd/0_0.png',
       is_boss: 0,
       hostility: 0,
     },
+    choices: 
+    [
+      {
+        id: 1,
+        textButton: "Vous vous éloignez des champignons lumineux, avide de contrées très paisibles. Vous apercevez un rayon de soleil filtrant à travers les feuilles, attirant votre attention vers un immense arbre centenaire.",
+        action: ""
+      },
+      {
+        id: 2,
+        textButton: "Vous délaissez les champignons étranges, pour vous enfoncer dans les profondeurs de la forêt. Les pierres qui vous entourent ne sont pas placées au hasard. Vous avancez, curieux d'en savoir plus.",
+        action: ""
+      }
+    ]
   };
   
   const reducer = (state = initialState, action = {}) => {
