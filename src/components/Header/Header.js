@@ -6,7 +6,7 @@ import { logOut } from '../../actions/user';
 
 function Header() {
   const logged = useSelector((state) => state.user.logged);
-  const email = useSelector((state) => state.user.email);
+  const nickname = useSelector((state) => state.user.nickname);
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ function Header() {
       {/* La div suivante ne s'affiche que quand logged vaut true */}
       { logged && (
         <div className="Header-Account">
-          <h3>Hello {email}</h3>
+          <h3>Hello {nickname}</h3>
           {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
           <button
             type="button"

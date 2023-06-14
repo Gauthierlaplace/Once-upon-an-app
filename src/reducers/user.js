@@ -12,8 +12,10 @@ export const initialState = {
   nickname: '',
   logged: false,
   token: '',
+  currentUserId: null,
 
   // Probleme avec un champ unique email, il se remplit à droite quand tapé à gauche (et vice versa)
+  nicknameRegister: '',
   emailRegister: '',
   passwordRegister: '',
 };
@@ -49,11 +51,11 @@ const reducer = (state = initialState, action = {}) => {
       ...state,
       logged: true,
       nickname: action.payload.nickname,
+      currentUserId: action.payload.id,
       token: action.payload.token,
 
-      // pour la sécurité : on efface les identifiants dès qu'on a plus besoin
-      // Todo dé-commenter la ligne suivante quand ce sera OK
-      // email: '',
+      // pour la sécurité : on efface les identifiants dès qu'on n'en a plus besoin
+      email: '',
       password: '',
     };
 
@@ -61,11 +63,10 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       logged: true,
-      // Todo corriger ceci quand ça tournera
-      email: action.payload.nickname,
       nickname: action.payload.nickname,
       emailRegister: '',
       passwordRegister: '',
+      nicknameRegister: '',
     };
 
   case ERROR_WHILE_LOGIN:
