@@ -1,66 +1,102 @@
 .HomeLogin {
-    width: 100%;
-    height: auto;
+    width: 90%;
+    height: 80%;
+    margin: auto;
     display: flex;
-    justify-content: space-between;
-    background-color: beige;
-    padding-bottom: 50px;
+    justify-content: center;
+    align-items: flex-start;
+    background: url(../../../assets/images/openbook.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
     position: absolute;
     bottom: 0px;
 
+    &-GlassLeft {
+        width: 25%;
+        position: relative;
+        top: 125px;
+        left: -50px;
+        padding: 10px;
+        /* glass effect */
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+        border-radius: 5px;
+    }
+
     &-left {
-        width: 45%;
-        margin: auto;
+        width: 100%;
+    }
+
+    &-GlassRight {
+        width: 25%;
+        position: relative;
+        top: 125px;
+        right: -55px;
+        padding: 10px;
+        /* glass effect */
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+        border-radius: 5px;
     }
 
     &-right {
-        width: 45%;
-        margin: auto;
+        width: 100%;
     }
 
     &-log {
-        width: 300px;
+        width: 230px;
         margin: auto;
-        padding: 20px;
+        padding: 10px;
         display: flex;
         flex-direction: column;
         text-align: left;
     }
 
     &-create {
-        width: 300px;
+        width: 230px;
         margin: auto;
-        padding: 20px;
+        padding: 10px;
         display: flex;
         flex-direction: column;
         text-align: left;
     }
 
     h1 {
-        margin-top: 30px;
-        font-size: 1.5em;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        border: white;
     }
 
     label {
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     input {
-        height: 40px;
+        height: 35px;
         border-radius: 5px;
         border: transparent;
-        margin-bottom: 20px;
+        margin-bottom: 7px;
         padding-left: 10px;
     }
 
     button {
-        height: 40px;
+        height: 35px;
         margin-top: 10px;
-        font-size: 1.1em;
+        font-size: 1em;
         border-radius: 5px;
         border: solid 1px;
-        background-color: rgb(107, 68, 143);
+        background: linear-gradient( #9A6D51, #402A23);
+        font-weight: bold;
         color: white;
+    }
+
+    button:hover {
+        background: linear-gradient(#402A23, #9A6D51);
     }
 }

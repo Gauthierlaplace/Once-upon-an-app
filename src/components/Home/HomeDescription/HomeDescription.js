@@ -2,7 +2,7 @@ import './HomeDescription.scss';
 
 function HomeDescription() {
     return (
-        <div className="HomeDescrption">
+        <div className="HomeDescription">
             Lorem Ipsum is simply dummy text of
             the printing and typesetting industry. 
             Lorem Ipsum has been the industry's 
