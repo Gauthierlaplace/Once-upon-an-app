@@ -1,27 +1,28 @@
-import { useSelector } from "react-redux";
+/* eslint-disable no-console */
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-import HomeDescription from "./HomeDescription/HomeDescription";
-import HomeLogin from "./HomeLogin/HomeLogin";
-import HomeLogged from "./HomeLogged/HomeLogged";
-import "./Home.scss";
-import axios from "axios";
+import HomeDescription from './HomeDescription/HomeDescription';
+import HomeLogin from './HomeLogin/HomeLogin';
+import HomeLogged from './HomeLogged/HomeLogged';
+import './Home.scss';
 
 function Home() {
   const logged = useSelector((state) => state.user.logged);
   const token = useSelector((state) => state.user.token);
 
-  // Fonction pour lancer une requete "test" sur la route api/test
+  // Fonction pour lancer une requete 'test' sur la route api/test
   const testApiAuthorizationAccess = (jwt) => {
     axios
       .get(
-        "http://anthony-boutherin.vpnuser.lan:8000/api/test",
+        'http://anthony-boutherin.vpnuser.lan:8000/api/test',
         // options, notamment les headers
         // => on transmet le token JWT au serveur, pour qu'il nous reconnaisse
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
-        }
+        },
       )
       .then((response) => {
         console.log(response.data.message);
@@ -29,16 +30,16 @@ function Home() {
       .catch((error) => console.error(error));
   };
 
-  // Fonction pour lancer une requete "test" sur la route api/user/email
+  // Fonction pour lancer une requete 'test' sur la route api/user/email
   const testApiAuthorizationFindUser = (jwt) => {
     axios
       .get(
-        "http://anthony-boutherin.vpnuser.lan:8000/api/users/pierre@player",
+        'http://anthony-boutherin.vpnuser.lan:8000/api/users/pierre@player',
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
-        }
+        },
       )
       .then((response) => {
         console.log(response.data[0]);

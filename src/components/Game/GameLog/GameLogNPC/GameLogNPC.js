@@ -4,7 +4,11 @@ function GameLogNPC({ npcName, npcDescription }) {
   return (
     <div className="GameLogNPC">
       <p className="GameLogNPC-intro">
-        Vous rencontrez <span>{npcName}</span>.
+        <span>
+          Vous rencontrez
+          {npcName}
+          .
+        </span>
       </p>
       <p className="GameLogNPC-content">
         {npcDescription}
