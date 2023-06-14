@@ -7,13 +7,13 @@ function Footer() {
     <div className="Footer">
       <NavLink className="Footer-all Footer-about" to="/About">
         About
-        </NavLink>
+      </NavLink>
 
       <p className="Footer-all Footer-Copy">Copyright</p>
 
       <NavLink className="Footer-all Footer-mentions" to="/Mentions">
         Mentions légales
-        </NavLink>
+      </NavLink>
     </div>
   );
 }

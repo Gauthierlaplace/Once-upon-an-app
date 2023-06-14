@@ -16,18 +16,19 @@ export const changeLoginOrRegisterField = (newValue, identifier) => ({
   },
 });
 
-export const saveLoginSuccessful = (nickname, token) => ({
+export const saveLoginSuccessful = (userNickname, userId, userToken) => ({
   type: SAVE_LOGIN_SUCCESSFUL,
   payload: {
-    nickname: nickname,
-    token: token,
+    nickname: userNickname,
+    id: userId,
+    token: userToken,
   },
 });
 
-export const saveRegisterSuccessful = (nickname) => ({
+export const saveRegisterSuccessful = (userNickname) => ({
   type: SAVE_REGISTER_SUCCESSFUL,
   payload: {
-    nickname: nickname,
+    nickname: userNickname,
   },
 });
 

@@ -4,7 +4,8 @@ import './Main.scss';
 import Home from '../Home/Home';
 import Game from '../Game/Game';
 
-//TODO fix la gestion des Routes
+// TODO fix la gestion des Routes
+
 function Main() {
   return (
     <div className="Main">

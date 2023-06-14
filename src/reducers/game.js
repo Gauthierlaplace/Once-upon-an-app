@@ -8,7 +8,7 @@ export const initialState = {
   npcData: npcData,
   endingData: endingData,
   heroData: heroData,
-  currentEvent: 
+  currentEvent:
   {
     code_event: 4,
     title: "Le Cercle des Champignons",
@@ -43,8 +43,8 @@ export const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    default:
-      return state;
+  default:
+    return state;
   }
 };
 
