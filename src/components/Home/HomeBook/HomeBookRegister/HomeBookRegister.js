@@ -6,27 +6,23 @@ import './HomeBookRegister.scss';
 // Pour rappel, la fonction suivante marche pour plusieurs champs à la fois
 // (voir son fonctionnement détaillé dans le dossier actions)
 import {
-  changeLoginOrRegisterField,
   hasFailedAction,
   saveRegisterSuccessful
 } from '../../../../actions/user';
 
-function HomeBookRegister() {
-  // Todo si l'on sépare en deux composants Login et Signin :
-  // Gérer la transmission de ce qui suit en props (en les récupérant bien à hauteur du parent)
-
-  // Je récupère ce dont j'ai besoin dans le state
-  // Pour info, ce sont des reducers combinés (un state avec des tiroirs) => je précise state.user
-  const emailRegister = useSelector((state) => state.user.emailRegister);
-  const passwordRegister = useSelector((state) => state.user.passwordRegister);
-  const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
+function HomeBookRegister({
+  email,
+  password,
+  nickname,
+  changeField
+}) {
   const hasFailedRegister = useSelector((state) => state.user.hasFailedRegister);
 
   // L'utilisateur est en train de s'inscire - on affiche les conditions de validité de mdp
   const isRegistering = (
-    emailRegister.length > 0
-    || passwordRegister.length > 0
-    || nicknameRegister.length > 0
+    email.length > 0
+    || password.length > 0
+    || nickname.length > 0
   );
 
   const dispatch = useDispatch();
@@ -43,10 +39,10 @@ function HomeBookRegister() {
       .post(
         'http://anthony-boutherin.vpnuser.lan:8000/api/users',
         {
-          email: emailRegister,
+          email: email,
           roles: ['ROLE_PLAYER'],
-          password: passwordRegister,
-          pseudo: nicknameRegister,
+          password: password,
+          pseudo: nickname,
           avatar: '',
         }
       )
@@ -87,37 +83,37 @@ function HomeBookRegister() {
 
       <h1>Inscrivez-vous</h1>
       <form className="HomeBook-form" onSubmit={handleSubmitRegister}>
-        <label htmlFor="nicknameRegister">Pseudo</label>
+        <label htmlFor="nickname">Pseudo</label>
         <input
           type="text"
-          name="nicknameRegister"
+          name="nickname"
           placeholder="Entrez votre pseudo"
           onChange={(event) => {
-            dispatch(changeLoginOrRegisterField(event.target.value, 'nicknameRegister'));
+            dispatch(changeField(event.target.value, 'nickname'));
           }}
-          value={nicknameRegister}
+          value={nickname}
         />
 
         <label htmlFor="mail">E-mail :</label>
         <input
           type="text"
-          name="emailRegister"
+          name="email"
           placeholder="Entrez votre adresse mail"
           onChange={(event) => {
-            dispatch(changeLoginOrRegisterField(event.target.value, 'emailRegister'));
+            dispatch(changeField(event.target.value, 'email'));
           }}
-          value={emailRegister}
+          value={email}
         />
 
         <label htmlFor="password">Mot de passe :</label>
         <input
           type="password"
-          name="passwordRegister"
+          name="password"
           placeholder="Entrez votre mot de passe"
           onChange={(event) => {
-            dispatch(changeLoginOrRegisterField(event.target.value, 'passwordRegister'));
+            dispatch(changeField(event.target.value, 'password'));
           }}
-          value={passwordRegister}
+          value={password}
         />
 
         <button type="submit">Inscription</button>
