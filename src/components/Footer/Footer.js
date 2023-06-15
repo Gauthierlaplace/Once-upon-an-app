@@ -15,7 +15,6 @@ function Footer() {
       <NavLink className="Footer-all Footer-mentions" to="/Mentions">
         Mentions légales
       </NavLink>
-
     </div>
   );
 }

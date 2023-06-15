@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -11,7 +9,7 @@ import {
   changeLoginOrRegisterField,
   errorWhileLogin,
   saveLoginSuccessful,
-  saveRegisterSuccessful,
+  saveRegisterSuccessful
 } from '../../../actions/user';
 
 function HomeLogin() {
@@ -20,11 +18,11 @@ function HomeLogin() {
 
   // Je récupère ce dont j'ai besoin dans le state
   // Pour info, ce sont des reducers combinés (un state avec des tiroirs) => je précise state.user
-  const { email } = useSelector((state) => state.user.email);
-  const { password } = useSelector((state) => state.user.password);
-  const { nickname } = useSelector((state) => state.user.nickname);
-  const { emailRegister } = useSelector((state) => state.user.emailRegister);
-  const { passwordRegister } = useSelector((state) => state.user.passwordRegister);
+  const email = useSelector((state) => state.user.email);
+  const password = useSelector((state) => state.user.password);
+  const emailRegister = useSelector((state) => state.user.emailRegister);
+  const passwordRegister = useSelector((state) => state.user.passwordRegister);
+  const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
 
   const dispatch = useDispatch();
 
@@ -39,16 +37,13 @@ function HomeLogin() {
     axios
       .post('http://anthony-boutherin.vpnuser.lan:8000/api/login_check', {
         // La documentation API (nos collègues back) nous précise quelles données transmettre
-        username: { email },
-        password: { password },
+        username: email,
+        password: password,
       })
       .then((response) => {
-        // Todo supprimer après les tests
-        console.log('token :', response.data.token);
-        // Ici j'enregistre le jeton dans le state
-        // Lorsque le couple email/password est bien reconnu par le back
+        // Quand le couple email/mdp est valide, j'envoie plusieurs infos dans le state :
         dispatch(
-          saveLoginSuccessful(response.data.nickname, response.data.token),
+          saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)
         );
       })
       .catch((error) => {
@@ -56,7 +51,7 @@ function HomeLogin() {
         // Todo gérer les erreurs (solution provisoire ci-dessous)
         // Ici j'enregistre le jeton dans le state
         dispatch(
-          errorWhileLogin('inconnu', ''),
+          errorWhileLogin('inconnu', '')
         );
       });
   };
@@ -73,16 +68,17 @@ function HomeLogin() {
       .post(
         'http://anthony-boutherin.vpnuser.lan:8000/api/users',
         {
-          email: { emailRegister },
+          email: emailRegister,
           roles: ['ROLE_PLAYER'],
-          password: { passwordRegister },
-          pseudo: { nickname },
+          password: passwordRegister,
+          pseudo: nicknameRegister,
           avatar: '',
-        },
+        }
       )
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         dispatch(
+          // Todo au final ici j'aurai juste besoin de saveLoginSuccessful ?
           saveRegisterSuccessful(response.data.pseudo),
         );
       })
@@ -101,7 +97,7 @@ function HomeLogin() {
 
           <h1>Connectez-vous</h1>
           <form className="HomeLogin-log" onSubmit={handleSubmitLogin}>
-            <label htmlFor="email">E-mail :</label>
+            <label htmlFor="mail">E-mail :</label>
             <input
               type="text"
               name="email"
@@ -134,15 +130,15 @@ function HomeLogin() {
         <div className="HomeLogin-right">
           <h1>Inscrivez-vous</h1>
           <form className="HomeLogin-create" onSubmit={handleSubmitRegister}>
-            <label htmlFor="nickname">Pseudo</label>
+            <label htmlFor="nicknameRegister">Pseudo</label>
             <input
               type="text"
-              name="nickname"
+              name="nicknameRegister"
               placeholder="Entrez votre pseudo"
               onChange={(event) => {
-                dispatch(changeLoginOrRegisterField(event.target.value, 'nickname'));
+                dispatch(changeLoginOrRegisterField(event.target.value, 'nicknameRegister'));
               }}
-              value={nickname}
+              value={nicknameRegister}
             />
 
             <label htmlFor="mail">E-mail :</label>

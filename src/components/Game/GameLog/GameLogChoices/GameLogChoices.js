@@ -12,7 +12,7 @@ function GameLogChoices() {
             type="button"
             className="GameLogChoices-button"
             key={choice.id}
-          // onClick={choice.action}
+            // onClick={choice.action}
           >
             <p>
               {choice.textButton}
