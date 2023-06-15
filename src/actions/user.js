@@ -33,10 +33,10 @@ export const saveRegisterSuccessful = (userNickname, userEmail) => ({
   },
 });
 
-export const hasFailedAction = (action) => ({
+export const hasFailedAction = (loginOrRegister) => ({
   type: HAS_FAILED_ACTION,
   payload: {
-    actionFailed: action,
+    actionType: loginOrRegister,
   },
 });
 

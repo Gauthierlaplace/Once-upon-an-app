@@ -80,7 +80,8 @@ const reducer = (state = initialState, action = {}) => {
     };
 
   case HAS_FAILED_ACTION:
-    if (action.payload.actionFailed === 'login') {
+    // Si c'est la connexion qui a échoué
+    if (action.payload.actionType === 'login') {
       return {
         ...state,
         logged: false,
@@ -90,6 +91,7 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
 
+    // Sinon (si c'est l'inscription qui a échoué)
     return {
       ...state,
       logged: false,
