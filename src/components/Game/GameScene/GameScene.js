@@ -18,7 +18,7 @@ function GameScene({ npcName, picture }) {
 }
 
 GameScene.propTypes = {
-  npcName: PropTypes.bool.isRequired,
+  npcName: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
 };
 
