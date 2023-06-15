@@ -7,9 +7,9 @@ function HomeBookLogin({
   email,
   password,
   handleSubmit,
-  hasRegisteredSuccessfully,
-  hasFailedLogin,
+  hasFailed,
   changeField,
+  hasRegisteredSuccessfully,
 }) {
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ function HomeBookLogin({
         )}
 
         {/* Message qui s'affiche uniquement quand la connexion vient d'échouer */}
-        {hasFailedLogin && (
+        {hasFailed && (
           <div className="HomeBookLogin-Message-LoginError message errorMessage">
             <p>La connexion a échoué</p>
             <p>Mauvais couple email / mot de passe</p>

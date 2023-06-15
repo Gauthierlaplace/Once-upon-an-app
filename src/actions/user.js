@@ -25,10 +25,9 @@ export const saveLoginSuccessful = (userNickname, userId, userToken) => ({
   },
 });
 
-export const saveRegisterSuccessful = (userNickname, userEmail) => ({
+export const saveRegisterSuccessful = (userEmail) => ({
   type: SAVE_REGISTER_SUCCESSFUL,
   payload: {
-    nickname: userNickname,
     email: userEmail,
   },
 });

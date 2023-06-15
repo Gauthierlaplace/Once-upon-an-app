@@ -23,8 +23,6 @@ export const initialState = {
   hasRegisteredSuccessfully: false,
   hasFailedLogin: false,
   hasFailedRegister: false,
-
-
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -44,7 +42,6 @@ const reducer = (state = initialState, action = {}) => {
       nickname: action.payload.nickname,
       currentUserId: action.payload.id,
       token: action.payload.token,
-
       // pour la sécurité : on efface les identifiants dès qu'on n'en a plus besoin
       email: '',
       password: '',
@@ -55,7 +52,6 @@ const reducer = (state = initialState, action = {}) => {
   case SAVE_REGISTER_SUCCESSFUL:
     return {
       ...state,
-      nickname: action.payload.nickname,
       email: action.payload.email,
       emailRegister: '',
       passwordRegister: '',

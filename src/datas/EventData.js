@@ -28,7 +28,7 @@ export default [
     picture:
       "https://cdn.discordapp.com/attachments/1114521519893254195/1117497319902937128/rahkart_generate_an_image_that_depicts_a_captivating_scene_insp_17594541-24d6-4700-966a-63fb701f4155.png",
     opening:
-      "Votre oeil est attiré au loin par l'éclat argenté d'une cascade impétueuse, dévalant des falaises rocheuses",
+      "Votre oeil est attiré au loin par l'éclat argenté d'une cascade impétueuse, dévalant des falaises rocheuses.",
     event_type_code: 1,
   },
 

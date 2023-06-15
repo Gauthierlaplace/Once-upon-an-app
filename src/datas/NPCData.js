@@ -24,7 +24,7 @@ export default [
     name: "Eloi le Protecteur des Animaux",
     description:
       "Ce druide dévoué donnerait sa vie pour protéger les créatures de la forêt. Il vous aidera si vous partagez sa passion pour la nature.",
-    picture: "http://imagizer.imageshack.com/v2/642x642q70/924/8kXdnt.png",
+    picture: "https://imagizer.imageshack.com/v2/789x789q90/r/922/X6YrXf.png",
     is_boss: 0,
     hostility: 0,
   },

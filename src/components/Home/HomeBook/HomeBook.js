@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-
 import axios from 'axios';
 
-// Import des actions nécessaires
+// Import des actions et fonctions nécessaires
 import {
-  hasFailedAction,
-  saveLoginSuccessful,
   changeField,
+  saveLoginSuccessful,
+  saveRegisterSuccessful,
+  hasFailedAction
 } from '../../../actions/user';
 
 import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
@@ -15,16 +15,17 @@ import HomeBookRegister from './HomeBookRegister/HomeBookRegister';
 import './HomeBook.scss';
 
 function HomeBook() {
-  // Pour la partie login
+  // A transmettre en props à la partie login
   const emailLogin = useSelector((state) => state.user.email);
   const passwordLogin = useSelector((state) => state.user.password);
   const hasRegisteredSuccessfully = useSelector((state) => state.user.hasRegisteredSuccessfully);
   const hasFailedLogin = useSelector((state) => state.user.hasFailedLogin);
 
-  // Pour la partie register
+  // A transmettre en props à la partie register
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
+  const hasFailedRegister = useSelector((state) => state.user.hasFailedRegister);
 
   const dispatch = useDispatch();
 
@@ -52,20 +53,50 @@ function HomeBook() {
       });
   };
 
+  // Fonction pour demander l'inscription d'un nouvel utilisateur
+  const handleSubmitRegister = (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        'http://anthony-boutherin.vpnuser.lan:8000/api/users',
+        {
+          email: emailRegister,
+          roles: ['ROLE_PLAYER'],
+          password: passwordRegister,
+          pseudo: nicknameRegister,
+          avatar: '',
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        dispatch(
+          saveRegisterSuccessful(response.data.email),
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch(
+          hasFailedAction('register')
+        );
+      });
+  };
+
   return (
     <div className="HomeBook">
       <HomeBookLogin
         email={emailLogin}
         password={passwordLogin}
         handleSubmit={handleSubmitLogin}
-        hasRegisteredSuccessfully={hasRegisteredSuccessfully}
-        hasFailedLogin={hasFailedLogin}
+        hasFailed={hasFailedLogin}
         changeField={changeField}
+        hasRegisteredSuccessfully={hasRegisteredSuccessfully}
       />
       <HomeBookRegister
         email={emailRegister}
         password={passwordRegister}
         nickname={nicknameRegister}
+        handleSubmit={handleSubmitRegister}
+        hasFailed={hasFailedRegister}
         changeField={changeField}
       />
     </div>
