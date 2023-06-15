@@ -7,7 +7,7 @@ import './HomeLogin.scss';
 // (voir son fonctionnement détaillé dans le dossier actions)
 import {
   changeLoginOrRegisterField,
-  errorWhileLogin,
+  hasFailedAction,
   saveLoginSuccessful,
   saveRegisterSuccessful
 } from '../../../actions/user';
@@ -23,6 +23,16 @@ function HomeLogin() {
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
+  const hasRegisteredSuccessfully = useSelector((state) => state.user.hasRegisteredSuccessfully);
+  const hasFailedLogin = useSelector((state) => state.user.hasFailedLogin);
+  const hasFailedRegister = useSelector((state) => state.user.hasFailedRegister);
+
+  // L'utilisateur est en train de s'inscire - on affiche les conditions de validité de mdp
+  const isRegistering = (
+    emailRegister.length > 0
+    || passwordRegister.length > 0
+    || nicknameRegister.length > 0
+  );
 
   const dispatch = useDispatch();
 
@@ -48,10 +58,8 @@ function HomeLogin() {
       })
       .catch((error) => {
         console.error(error);
-        // Todo gérer les erreurs (solution provisoire ci-dessous)
-        // Ici j'enregistre le jeton dans le state
         dispatch(
-          errorWhileLogin('inconnu', '')
+          hasFailedAction('login')
         );
       });
   };
@@ -79,12 +87,14 @@ function HomeLogin() {
         console.log(response);
         dispatch(
           // Todo au final ici j'aurai juste besoin de saveLoginSuccessful ?
-          saveRegisterSuccessful(response.data.pseudo),
+          saveRegisterSuccessful(response.data.pseudo, response.data.email),
         );
       })
       .catch((error) => {
-        // Todo gérer les erreurs
         console.error(error);
+        dispatch(
+          hasFailedAction('register')
+        );
       });
   };
 
@@ -94,6 +104,22 @@ function HomeLogin() {
       {/* CONNEXION */}
       <div className="HomeLogin-GlassLeft">
         <div className="HomeLogin-left">
+
+          {/* Message qui s'affiche uniquement quand le user vient de s'inscrire */}
+          {hasRegisteredSuccessfully && (
+            <div className="HomeLogin-Message-RegisterOK message successMessage">
+              <p>Votre inscription est validée !</p>
+              <p>Vous pouvez vous connecter</p>
+            </div>
+          )}
+
+          {/* Message qui s'affiche uniquement quand la connexion vient d'échouer */}
+          {hasFailedLogin && (
+            <div className="HomeLogin-Message-LoginError message errorMessage">
+              <p>La connexion a échoué</p>
+              <p>Mauvais couple email / mot de passe</p>
+            </div>
+          )}
 
           <h1>Connectez-vous</h1>
           <form className="HomeLogin-log" onSubmit={handleSubmitLogin}>
@@ -128,6 +154,24 @@ function HomeLogin() {
 
       <div className="HomeLogin-GlassRight">
         <div className="HomeLogin-right">
+
+          {/* Message qui s'affiche uniquement quand le user commence à taper */}
+          {isRegistering && (
+            <div className="HomeLogin-Message-password message infoMessage">
+              <p>
+                Le mot-de-passe doit contenir au moins 4 caractères,
+                dont 1 majuscule, 1 minuscule et 1 caractère spécial.
+              </p>
+            </div>
+          )}
+
+          {/* Message qui s'affiche uniquement quand l'inscription vient d'échouer */}
+          {(hasFailedRegister && !isRegistering) && (
+            <div className="HomeLogin-Message-RegisterError message errorMessage">
+              <p>L'inscription a échoué</p>
+            </div>
+          )}
+
           <h1>Inscrivez-vous</h1>
           <form className="HomeLogin-create" onSubmit={handleSubmitRegister}>
             <label htmlFor="nicknameRegister">Pseudo</label>

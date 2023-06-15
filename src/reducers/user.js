@@ -2,7 +2,7 @@ import {
   CHANGE_LOGIN_OR_REGISTER_FIELD,
   SAVE_LOGIN_SUCCESSFUL,
   SAVE_REGISTER_SUCCESSFUL,
-  ERROR_WHILE_LOGIN,
+  HAS_FAILED_ACTION,
   LOG_OUT,
 } from '../actions/user';
 
@@ -18,6 +18,13 @@ export const initialState = {
   nicknameRegister: '',
   emailRegister: '',
   passwordRegister: '',
+
+  // Pour afficher les messages "inscription réussie" ou "erreur email/mdp"
+  hasRegisteredSuccessfully: false,
+  hasFailedLogin: false,
+  hasFailedRegister: false,
+
+
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -57,26 +64,39 @@ const reducer = (state = initialState, action = {}) => {
       // pour la sécurité : on efface les identifiants dès qu'on n'en a plus besoin
       email: '',
       password: '',
+      hasRegisteredSuccessfully: false,
+      hasFailedLogin: false,
     };
 
   case SAVE_REGISTER_SUCCESSFUL:
     return {
       ...state,
-      logged: true,
       nickname: action.payload.nickname,
+      email: action.payload.email,
       emailRegister: '',
       passwordRegister: '',
       nicknameRegister: '',
+      hasRegisteredSuccessfully: true,
     };
 
-  case ERROR_WHILE_LOGIN:
+  case HAS_FAILED_ACTION:
+    if (action.payload.actionFailed === 'login') {
+      return {
+        ...state,
+        logged: false,
+        email: '',
+        password: '',
+        hasFailedLogin: true,
+      };
+    }
+
     return {
       ...state,
       logged: false,
-      nickname: action.payload.nickname,
-      token: action.payload.token,
-      email: '',
-      password: '',
+      emailRegister: '',
+      passwordRegister: '',
+      nicknameRegister: '',
+      hasFailedRegister: true,
     };
 
   case LOG_OUT:
