@@ -11,6 +11,8 @@ import {
   hasFailedAction
 } from '../../../actions/user';
 
+import { checkInfoBeforeRegister } from '../../../functions/user';
+
 import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
 import HomeBookRegister from './HomeBookRegister/HomeBookRegister';
 
@@ -45,16 +47,6 @@ function HomeBook() {
         dispatch(
           saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)
         );
-        // toast.success('Connexion validée', {
-        //   position: 'top-right',
-        //   autoClose: 3000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: 'colored',
-        // });
       })
       .catch((error) => {
         console.error(error);
@@ -74,9 +66,7 @@ function HomeBook() {
       });
   };
 
-  // Fonction pour demander l'inscription d'un nouvel utilisateur
-  const handleSubmitRegister = (event) => {
-    event.preventDefault();
+  const sendRegisterToApi = async () => {
     axios
       .post(
         'http://anthony-boutherin.vpnuser.lan:8000/api/users',
@@ -121,6 +111,14 @@ function HomeBook() {
           theme: 'colored',
         });
       });
+  };
+
+  // Fonction pour demander l'inscription d'un nouvel utilisateur
+  const handleSubmitRegister = (event) => {
+    event.preventDefault();
+    if (checkInfoBeforeRegister(emailRegister, passwordRegister, nicknameRegister) === true) {
+      sendRegisterToApi();
+    }
   };
 
   return (
