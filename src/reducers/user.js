@@ -23,14 +23,14 @@ export const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_LOGIN_OR_REGISTER_FIELD:
-      // plusieurs traitements sur une seule action : changer les champs de la page d'accueil
-      // // email
-      // if (action.payload.identifier === 'email') {
-      //   return {
-      //     ...state,
-      //     email: action.payload.newValue,
-      //   };
+  case CHANGE_LOGIN_OR_REGISTER_FIELD:
+    // plusieurs traitements sur une seule action : changer les champs de la page d'accueil
+    // // email
+    // if (action.payload.identifier === 'email') {
+    //   return {
+    //     ...state,
+    //     email: action.payload.newValue,
+    //   };
       // }
 
       // // password
