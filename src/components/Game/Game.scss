@@ -1,0 +1,31 @@
+@use './../../styles/vars';
+
+.Game {
+    width: 100%;
+    height: 100%;
+    background-color: vars.$alt-light-color;
+
+
+    &-flexSB {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    &-left {
+        width: 65%;
+    }
+
+    &-right {
+        width: 30%;
+    }
+
+    &-Eventtitle {
+        margin-top: .5em;
+        margin-bottom: .5em;
+    }
+
+    &-Logtitle {
+        margin-top: .5em;
+        margin-bottom: .5em;
+    }
+}
