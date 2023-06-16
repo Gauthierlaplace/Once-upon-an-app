@@ -9,17 +9,18 @@ function HomeBookRegister({
   nickname,
   handleSubmit,
   changeField,
-  isPasswordToastVisible
+  isPasswordToastVisible,
+  setPasswordToastVisible,
 }) {
   const dispatch = useDispatch();
 
   // Je conditionne l'affichage du toast "password info"
   // Afin d'éviter que 10 toasts se lancent en meme temps
-  const infoToast = () => {
+  const infoPasswordToast = () => {
     if (!isPasswordToastVisible) {
-      toast.info('Infos mdp', {
+      toast.info('Le mot-de-passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule et 1 caractère spécial', {
         position: 'top-right',
-        autoClose: false,
+        autoClose: 9000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -27,6 +28,7 @@ function HomeBookRegister({
         progress: undefined,
         theme: 'colored',
       });
+      setPasswordToastVisible(true);
     }
   };
 
@@ -44,7 +46,7 @@ function HomeBookRegister({
           placeholder="Entrez votre pseudo"
           onChange={(event) => {
             dispatch(changeField(event.target.value, 'nicknameRegister'));
-            infoToast();
+            infoPasswordToast();
           }}
           value={nickname}
         />
@@ -56,7 +58,7 @@ function HomeBookRegister({
           placeholder="Entrez votre adresse mail"
           onChange={(event) => {
             dispatch(changeField(event.target.value, 'emailRegister'));
-            infoToast();
+            infoPasswordToast();
           }}
           value={email}
         />
@@ -68,7 +70,7 @@ function HomeBookRegister({
           placeholder="Entrez votre mot de passe"
           onChange={(event) => {
             dispatch(changeField(event.target.value, 'passwordRegister'));
-            infoToast();
+            infoPasswordToast();
           }}
           value={password}
         />

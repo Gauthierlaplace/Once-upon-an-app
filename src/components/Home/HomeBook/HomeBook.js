@@ -45,16 +45,16 @@ function HomeBook() {
         dispatch(
           saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)
         );
-        toast.success('Connexion validée', {
-          position: 'top-right',
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-        });
+        // toast.success('Connexion validée', {
+        //   position: 'top-right',
+        //   autoClose: 3000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'colored',
+        // });
       })
       .catch((error) => {
         console.error(error);
@@ -89,6 +89,7 @@ function HomeBook() {
         }
       )
       .then((response) => {
+        setPasswordToastVisible(false);
         console.log(response);
         dispatch(
           saveRegisterSuccessful(response.data.email),
@@ -119,9 +120,6 @@ function HomeBook() {
           progress: undefined,
           theme: 'colored',
         });
-      })
-      .finally(() => {
-        setPasswordToastVisible(false);
       });
   };
 
@@ -140,6 +138,7 @@ function HomeBook() {
         handleSubmit={handleSubmitRegister}
         changeField={changeField}
         isPasswordToastVisible={isPasswordToastVisible}
+        setPasswordToastVisible={setPasswordToastVisible}
       />
     </div>
   );
