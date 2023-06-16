@@ -7,33 +7,13 @@ function HomeBookLogin({
   email,
   password,
   handleSubmit,
-  hasFailed,
   changeField,
-  hasRegisteredSuccessfully,
 }) {
   const dispatch = useDispatch();
 
   return (
     <div className="HomeBookLogin">
-
-      {/* CONNEXION */}
       <div className="HomeBookLogin-glass">
-
-        {/* Message qui s'affiche uniquement quand le user vient de s'inscrire */}
-        {hasRegisteredSuccessfully && (
-          <div className="HomeBookLogin-Message-RegisterOK message successMessage">
-            <p>Votre inscription est validée !</p>
-            <p>Vous pouvez vous connecter</p>
-          </div>
-        )}
-
-        {/* Message qui s'affiche uniquement quand la connexion vient d'échouer */}
-        {hasFailed && (
-          <div className="HomeBookLogin-Message-LoginError message errorMessage">
-            <p>La connexion a échoué</p>
-            <p>Mauvais couple email / mot de passe</p>
-          </div>
-        )}
 
         <h1>Connectez-vous</h1>
         <form className="HomeBook-form" onSubmit={handleSubmit}>

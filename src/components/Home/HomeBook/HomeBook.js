@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 // Import des actions et fonctions nécessaires
 import {
@@ -18,14 +20,13 @@ function HomeBook() {
   // A transmettre en props à la partie login
   const emailLogin = useSelector((state) => state.user.email);
   const passwordLogin = useSelector((state) => state.user.password);
-  const hasRegisteredSuccessfully = useSelector((state) => state.user.hasRegisteredSuccessfully);
-  const hasFailedLogin = useSelector((state) => state.user.hasFailedLogin);
 
   // A transmettre en props à la partie register
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
-  const hasFailedRegister = useSelector((state) => state.user.hasFailedRegister);
+
+  const [isPasswordToastVisible, setPasswordToastVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -44,12 +45,32 @@ function HomeBook() {
         dispatch(
           saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)
         );
+        toast.success('Connexion validée', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       })
       .catch((error) => {
         console.error(error);
         dispatch(
           hasFailedAction('login')
         );
+        toast.error('La connexion a échoué', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       });
   };
 
@@ -72,12 +93,35 @@ function HomeBook() {
         dispatch(
           saveRegisterSuccessful(response.data.email),
         );
+        toast.success('Inscription validée', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       })
       .catch((error) => {
         console.error(error);
         dispatch(
           hasFailedAction('register')
         );
+        toast.error('L\'inscription a échoué', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+      })
+      .finally(() => {
+        setPasswordToastVisible(false);
       });
   };
 
@@ -87,17 +131,15 @@ function HomeBook() {
         email={emailLogin}
         password={passwordLogin}
         handleSubmit={handleSubmitLogin}
-        hasFailed={hasFailedLogin}
         changeField={changeField}
-        hasRegisteredSuccessfully={hasRegisteredSuccessfully}
       />
       <HomeBookRegister
         email={emailRegister}
         password={passwordRegister}
         nickname={nicknameRegister}
         handleSubmit={handleSubmitRegister}
-        hasFailed={hasFailedRegister}
         changeField={changeField}
+        isPasswordToastVisible={isPasswordToastVisible}
       />
     </div>
   );
