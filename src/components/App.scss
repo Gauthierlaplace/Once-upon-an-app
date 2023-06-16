@@ -14,3 +14,31 @@
   // background-color: vars.$darkest-color;
   margin: auto;
 }
+
+.message {
+  font-style: italic;
+  font-size: .8em;
+  padding: .3em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+}
+
+.infoMessage {
+  background-color: vars.$info-background-color;
+  color: vars.$info-color;
+}
+
+.successMessage {
+  background-color: vars.$success-background-color;
+  color: vars.$success-color;
+}
+
+.warningMessage {
+  background-color: vars.$warning-background-color;
+  color: vars.$warning-color;
+}
+
+.errorMessage {
+  background-color: vars.$error-background-color;
+  color: vars.$error-color;
+}

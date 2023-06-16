@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import HomeDescription from './HomeDescription/HomeDescription';
-import HomeLogin from './HomeLogin/HomeLogin';
+import HomeBook from './HomeBook/HomeBook';
 import HomeLogged from './HomeLogged/HomeLogged';
 import './Home.scss';
 
@@ -11,7 +11,7 @@ function Home() {
   return (
     <div className="Home">
       <HomeDescription />
-      { logged ? <HomeLogged /> : <HomeLogin />}
+      { logged ? <HomeLogged /> : <HomeBook />}
     </div>
   );
 }

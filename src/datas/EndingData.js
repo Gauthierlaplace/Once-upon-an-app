@@ -113,7 +113,7 @@ export default [
   {
     code_ending: 44,
     content:
-      "Vous vous détournez de cet oasis féerique, animé par une détermination inébranlable",
+      "Vous vous détournez de cet oasis féerique, animé par une détermination inébranlable.",
     event_code: 4,
     event_type_code: 4,
   },

@@ -1,8 +1,8 @@
 import {
-  CHANGE_LOGIN_OR_REGISTER_FIELD,
+  CHANGE_FIELD,
   SAVE_LOGIN_SUCCESSFUL,
   SAVE_REGISTER_SUCCESSFUL,
-  ERROR_WHILE_LOGIN,
+  HAS_FAILED_ACTION,
   LOG_OUT,
 } from '../actions/user';
 
@@ -18,29 +18,18 @@ export const initialState = {
   nicknameRegister: '',
   emailRegister: '',
   passwordRegister: '',
+
+  // Pour afficher les messages "inscription réussie" ou "erreur email/mdp"
+  hasRegisteredSuccessfully: false,
+  hasFailedLogin: false,
+  hasFailedRegister: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-  case CHANGE_LOGIN_OR_REGISTER_FIELD:
+  case CHANGE_FIELD:
     // plusieurs traitements sur une seule action : changer les champs de la page d'accueil
-    // // email
-    // if (action.payload.identifier === 'email') {
-    //   return {
-    //     ...state,
-    //     email: action.payload.newValue,
-    //   };
-    // }
-
-    // // password
-    // if (action.payload.identifier === 'password') {
-    //   return {
-    //     ...state,
-    //     password: action.payload.newValue,
-    //   };
-    // }
-
-    // Pour factoriser en une ligne :
+    // "identifier" indique si on change le champ "email", "password", "nickname", etc
     return {
       ...state,
       [action.payload.identifier]: action.payload.newValue,
@@ -53,30 +42,43 @@ const reducer = (state = initialState, action = {}) => {
       nickname: action.payload.nickname,
       currentUserId: action.payload.id,
       token: action.payload.token,
-
       // pour la sécurité : on efface les identifiants dès qu'on n'en a plus besoin
       email: '',
       password: '',
+      hasRegisteredSuccessfully: false,
+      hasFailedLogin: false,
     };
 
   case SAVE_REGISTER_SUCCESSFUL:
     return {
       ...state,
-      logged: true,
-      nickname: action.payload.nickname,
+      email: action.payload.email,
       emailRegister: '',
       passwordRegister: '',
       nicknameRegister: '',
+      hasRegisteredSuccessfully: true,
     };
 
-  case ERROR_WHILE_LOGIN:
+  case HAS_FAILED_ACTION:
+    // Si c'est la connexion qui a échoué
+    if (action.payload.actionType === 'login') {
+      return {
+        ...state,
+        logged: false,
+        email: '',
+        password: '',
+        hasFailedLogin: true,
+      };
+    }
+
+    // Sinon (si c'est l'inscription qui a échoué)
     return {
       ...state,
       logged: false,
-      nickname: action.payload.nickname,
-      token: action.payload.token,
-      email: '',
-      password: '',
+      emailRegister: '',
+      passwordRegister: '',
+      nicknameRegister: '',
+      hasFailedRegister: true,
     };
 
   case LOG_OUT:
