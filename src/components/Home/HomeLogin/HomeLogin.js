@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -41,6 +42,7 @@ function HomeLogin() {
         password: password,
       })
       .then((response) => {
+        console.log(response);
         // Quand le couple email/mdp est valide, j'envoie plusieurs infos dans le state :
         dispatch(
           saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)

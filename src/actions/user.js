@@ -4,6 +4,7 @@ export const SAVE_LOGIN_SUCCESSFUL = 'SAVE_LOGIN_SUCCESSFUL';
 export const SAVE_REGISTER_SUCCESSFUL = 'SAVE_REGISTER_SUCCESSFUL';
 export const ERROR_WHILE_LOGIN = 'ERROR_WHILE_LOGIN';
 export const LOG_OUT = 'LOG_OUT';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 
 /* on ne sait pas s'il y a besoin d'infos en payload : on ne met pas de payload,
 on verra si on est bloqué au niveau du case du reducer parce qu'il manque une/des infos */
@@ -42,4 +43,8 @@ export const errorWhileLogin = (nickname, token) => ({
 
 export const logOut = () => ({
   type: LOG_OUT,
-})
+});
+
+export const deleteAccount = () => ({
+  type: DELETE_ACCOUNT,
+});
