@@ -81,7 +81,6 @@ function HomeBook() {
       )
       .then((response) => {
         setPasswordToastVisible(false);
-        console.log(response);
         dispatch(
           saveRegisterSuccessful(response.data.email),
         );

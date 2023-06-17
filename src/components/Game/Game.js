@@ -44,13 +44,8 @@ function Game() {
           nextEventId: response.data.choices[1].nextEventId,
           content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
         };
-        // console.log('CHOIX API', response.data.choices);
-        // console.log('CONCATENATION 1', firstChoice);
-        // console.log('CONCATENATION 2', secondChoice);
 
-        dispatch(setChoices(
-          [firstChoice, secondChoice]
-        ));
+        dispatch(setChoices(firstChoice, secondChoice));
       })
       .catch((error) => console.log(error));
   }, []);

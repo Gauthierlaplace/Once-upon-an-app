@@ -55,8 +55,7 @@ const reducer = (state = initialState, action = {}) => {
   case SET_CHOICES:
     return {
       ...state,
-      // Todo : pourquoi a-t-on besoin de passer par choices[0] ici ?
-      choices: action.payload.choices[0]
+      choices: action.payload.choices
     };
 
   default:
