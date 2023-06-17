@@ -3,6 +3,7 @@ import './GameLogChoices.scss';
 
 function GameLogChoices() {
   const choices = useSelector((state) => state.game.choices);
+  console.log(choices);
   return (
     <div className="GameLogChoices">
       <p className="GameLogChoices-content">A vous de jouer :</p>
@@ -11,11 +12,11 @@ function GameLogChoices() {
           <button
             type="button"
             className="GameLogChoices-button"
-            key={choice.id}
+            key={choice.nextEventId}
             // onClick={choice.action}
           >
             <p>
-              {choice.textButton}
+              {choice.content}
             </p>
           </button>
         ))}

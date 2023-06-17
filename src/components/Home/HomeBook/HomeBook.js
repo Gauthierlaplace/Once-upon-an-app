@@ -27,6 +27,7 @@ function HomeBook() {
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
+  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
   const [isPasswordToastVisible, setPasswordToastVisible] = useState(false);
 
@@ -37,7 +38,7 @@ function HomeBook() {
     event.preventDefault();
     // on valide les infos auprès du back-end
     axios
-      .post('http://anthony-boutherin.vpnuser.lan:8000/api/login_check', {
+      .post(`${REACT_APP_API_BASE}login_check`, {
         // La documentation API (nos collègues back) nous précise quelles données transmettre
         username: emailLogin,
         password: passwordLogin,
@@ -69,7 +70,7 @@ function HomeBook() {
   const sendRegisterToApi = async () => {
     axios
       .post(
-        'http://anthony-boutherin.vpnuser.lan:8000/api/users',
+        `${REACT_APP_API_BASE}users`,
         {
           email: emailRegister,
           roles: ['ROLE_PLAYER'],

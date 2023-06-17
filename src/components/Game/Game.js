@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import {
   setCurrentEvent,
+  setChoices,
 } from '../../actions/game';
 
 import './Game.scss';
@@ -16,7 +17,7 @@ import Menus from './GameMenus/GameMenus';
 function Game() {
   // TODO quand ça marchera, aller chercher le token dans le state
   // const token = useSelector((state) => state.user.token);
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2ODY5MjEwMzksImV4cCI6MTY4Njk4NTgzOSwicm9sZXMiOlsiUk9MRV9HQU1FTUFTVEVSIiwiUk9MRV9QTEFZRVIiLCJST0xFX0FETUlOIl0sInVzZXJuYW1lIjoibWFyaW5lQGdhbWVNYXN0ZXIuY29tIn0.ypFhfWnOI4TQQcSidXj9nccVVMGyysYCY7vhTMrYRd52tbwACn5R_qWBE8pm7EwRkbIlLbHEuFQJg09E26aVwJmt2XTyPVF0eptP8EayDlzXRusPzsNBfODnTu9XC_U9Ntigi9ugEr-w0CKy4ZHlnm4d0wjiLCpA26d6ih8oOg2ZyWfhhn3i7l2gjRdgZt0_uqJh-mi35e0gXXbRv5m-YTBjN3_xgXS4zn0mBpJX0V-4HM5oKwQ6cwqNzxFMM8vsZaosfKxxZsEWU3la7pHmqGE_fQIXsu5BW9LE5N2WECKgODnL5-aWAwZi3_DbSrwYE6g36i727HZUR_nW08Fpcg';
+  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2ODY5ODYyOTgsImV4cCI6MTY4NzA1MTA5OCwicm9sZXMiOlsiUk9MRV9HQU1FTUFTVEVSIiwiUk9MRV9QTEFZRVIiXSwidXNlcm5hbWUiOiJtYXJpbmVAZ2FtZU1hc3Rlci5jb20ifQ.Y83ISzTjEByNQ2FIQlYHR5OraJCSNH8mdelSVw28_9uctTTsz9xuEg_MTZSxLHLuONefbdjqokDUQGTvZJnCKVrKDRTbe8sg9Jv_juH66NvcqRwae9hj-JRScZKMcEWTTJr_zjB061TWvnIe3ydVBRAVjItbMR7luhjp7PHb6OK4DEYA-3coTm4u9Efoi6MyP3IWSoI-V2Qy5sarcf7Us1gvWubqQcip9YFhFn_mwo5DfJZ-WUvi8khgjQgMrHOFEQeKErPhrZvjeEj5ii7zc0nmFgRQK2i0rDm2nG-Y43jb3_RTGstuyib2fZXVi9FvxVHxoOHo5jr7REN3UcGp8g';
   const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
   const dispatch = useDispatch();
 
@@ -27,14 +28,28 @@ function Game() {
       },
     })
       .then((response) => {
-        console.log('choices', response.data.choices);
         const eventAPI = response.data.currentEvent;
-        console.log(eventAPI);
         dispatch(setCurrentEvent(
           eventAPI.id,
           eventAPI.title,
           eventAPI.description,
           eventAPI.picture,
+        ));
+
+        const firstChoice = {
+          nextEventId: response.data.choices[0].nextEventId,
+          content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,
+        };
+        const secondChoice = {
+          nextEventId: response.data.choices[1].nextEventId,
+          content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
+        };
+        // console.log('CHOIX API', response.data.choices);
+        // console.log('CONCATENATION 1', firstChoice);
+        // console.log('CONCATENATION 2', secondChoice);
+
+        dispatch(setChoices(
+          [firstChoice, secondChoice]
         ));
       })
       .catch((error) => console.log(error));

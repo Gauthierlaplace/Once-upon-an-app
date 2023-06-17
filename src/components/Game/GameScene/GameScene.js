@@ -12,7 +12,7 @@ function GameScene({ npcName, picture }) {
         src={picture}
         alt={npcName}
       />
-      <NPC />
+      {/* <NPC /> */}
     </div>
   );
 }

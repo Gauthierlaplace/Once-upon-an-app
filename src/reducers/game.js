@@ -2,6 +2,7 @@ import heroData from './../datas/HeroData';
 
 import {
   SET_CURRENT_EVENT,
+  SET_CHOICES,
 } from '../actions/game';
 
 export const initialState = {
@@ -12,14 +13,14 @@ export const initialState = {
     title: '',
     description: '',
     picture: '',
-    // opening: "Un peu plus loin, d'immenses champignons colorés aux formes étranges attirent votre curiosité.",
+    // opening: '',
     event_type_code: '',
   },
   currentNpc:
   {
     code_npc: '3',
-    name: "Lysandre l'Érudite",
-    description: "Très instruite et mystérieuse, elle est connue pour sa sagesse et ses connaissances ésotériques sur les secrets de la forêt. Lysandre ne fait pas attention à vous, bien trop absorbée par sa lecture.",
+    name: 'Lysandre l\'Érudite',
+    description: 'Très instruite et mystérieuse, elle est connue pour sa sagesse et ses connaissances ésotériques sur les secrets de la forêt. Lysandre ne fait pas attention à vous, bien trop absorbée par sa lecture.',
     picture: 'https://cdn.midjourney.com/1bde38ab-9964-4585-b910-6e744f8152fd/0_0.png',
     is_boss: 0,
     hostility: 0,
@@ -27,14 +28,12 @@ export const initialState = {
   choices:
   [
     {
-      id: 0,
-      textButton: '',
-      action: '',
+      nextEventId: 0,
+      content: 'Choix 0',
     },
     {
-      id: 1,
-      textButton: '',
-      action: '',
+      nextEventId: 1,
+      content: 'Choix 1',
     },
   ],
 };
@@ -51,6 +50,13 @@ const reducer = (state = initialState, action = {}) => {
         description: action.payload.description,
         picture: action.payload.picture,
       }
+    };
+
+  case SET_CHOICES:
+    return {
+      ...state,
+      // Todo : pourquoi a-t-on besoin de passer par choices[0] ici ?
+      choices: action.payload.choices[0]
     };
 
   default:
