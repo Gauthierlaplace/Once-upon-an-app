@@ -9,6 +9,12 @@ function Header() {
   const nickname = useSelector((state) => state.user.nickname);
 
   const dispatch = useDispatch();
+  const handleLogOut = () => {
+    localStorage.setItem('token', '');
+    localStorage.setItem('nickname', '');
+    localStorage.setItem('id', '');
+    dispatch(logOut());
+  };
 
   return (
     // Todo retirer les NavLinks quand nous n'en aurons plus besoin
@@ -30,7 +36,7 @@ function Header() {
           {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
           <button
             type="button"
-            onClick={() => dispatch(logOut())}
+            onClick={() => handleLogOut()}
           >
             Déconnexion
           </button>

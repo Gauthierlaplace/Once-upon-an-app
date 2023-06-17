@@ -1,4 +1,9 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+
+import { saveLoginSuccessful } from '../actions/user';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.scss';
@@ -9,6 +14,22 @@ import Footer from './Footer/Footer';
 
 function App() {
   const notify = () => toast('Wow so easy !');
+  const dispatch = useDispatch();
+
+  const checkUserInfoInLocalStorage = () => {
+    const tokenFromLocalStorage = localStorage.getItem('token');
+    if (tokenFromLocalStorage) {
+      dispatch(saveLoginSuccessful(
+        localStorage.getItem('nickname'),
+        localStorage.getItem('id'),
+        localStorage.getItem('token'),
+      ));
+    }
+  };
+
+  useEffect(() => {
+    checkUserInfoInLocalStorage();
+  }, []);
 
   return (
     <div className="App">

@@ -41,4 +41,4 @@ export const hasFailedAction = (loginOrRegister) => ({
 
 export const logOut = () => ({
   type: LOG_OUT,
-})
+});

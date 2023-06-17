@@ -8,7 +8,7 @@ import {
   changeField,
   saveLoginSuccessful,
   saveRegisterSuccessful,
-  hasFailedAction
+  hasFailedAction,
 } from '../../../actions/user';
 
 import { checkInfoBeforeRegister } from '../../../functions/user';
@@ -46,8 +46,15 @@ function HomeBook() {
       .then((response) => {
         // Quand le couple email/mdp est valide, j'envoie plusieurs infos dans le state :
         dispatch(
-          saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)
+          saveLoginSuccessful(
+            response.data.data.pseudo,
+            response.data.data.id,
+            response.data.token
+          ),
         );
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('nickname', response.data.data.pseudo);
+        localStorage.setItem('id', response.data.data.id);
       })
       .catch((error) => {
         console.error(error);
