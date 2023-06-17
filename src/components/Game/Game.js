@@ -19,6 +19,9 @@ function Game() {
   const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
   const dispatch = useDispatch();
 
+  // Au lancement de cette page, on lance l'API sur la route "play"
+  // Cela va nous permettre de récupérer l'événement (événement de DEPART)
+  // avec toutes ses données et ses choix
   useEffect(() => {
     axios.get(`${REACT_APP_API_BASE}play`, {
       headers: {
@@ -48,6 +51,8 @@ function Game() {
       .catch((error) => console.log(error));
   }, []);
 
+  // Une fois que les données de l'événement sont bien récupérées dans le state,
+  // Je gère leur affichage ici :
   const eventTitle = useSelector((state) => state.game.currentEvent.title);
   const eventPicture = useSelector((state) => state.game.currentEvent.picture);
   const eventDescription = useSelector((state) => state.game.currentEvent.description);

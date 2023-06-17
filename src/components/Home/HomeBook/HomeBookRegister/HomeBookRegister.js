@@ -15,7 +15,7 @@ function HomeBookRegister({
   const dispatch = useDispatch();
 
   // Je conditionne l'affichage du toast "password info"
-  // Afin d'éviter que 10 toasts se lancent en meme temps
+  // Afin d'éviter que 10 toasts ne se lancent en meme temps
   const infoPasswordToast = () => {
     if (!isPasswordToastVisible) {
       toast.info('Le mot-de-passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule et 1 caractère spécial', {

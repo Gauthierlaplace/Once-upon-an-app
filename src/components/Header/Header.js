@@ -8,6 +8,10 @@ function Header() {
   const logged = useSelector((state) => state.user.logged);
   const nickname = useSelector((state) => state.user.nickname);
 
+  // La fonctionnalité logout (déconnexion) est accessible en header
+  // Quand le joueur se déconnecte, ses données (token, nickname et id)
+  // sont effacées à la fois dans le localStorage (instructions ci-dessous)
+  // Et également dans le state (dispatch(logOut))
   const dispatch = useDispatch();
   const handleLogOut = () => {
     localStorage.setItem('token', '');

@@ -12,6 +12,7 @@ export const initialState = {
   nickname: '',
   logged: false,
   currentUserId: null,
+  // Je récupère le token dans le localStorage
   token: localStorage.getItem('token'),
 
   // Probleme avec un champ unique email, il se remplit à droite quand tapé à gauche (et vice versa)

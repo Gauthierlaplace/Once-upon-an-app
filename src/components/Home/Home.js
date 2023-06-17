@@ -10,6 +10,8 @@ function Home() {
   const logged = useSelector((state) => state.user.logged);
 
   return (
+    // Si personne n'est connecté : affichage de la page d'inscription/connexion
+    // Si utilisateur connecté : affichage du bouton Play
     <div className="Home">
       <HomeDescription />
       { logged ? <HomeLogged /> : <HomeBook />}

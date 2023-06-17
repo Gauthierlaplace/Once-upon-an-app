@@ -9,11 +9,15 @@ import {
 
 function GameLogChoices() {
   const token = useSelector((state) => state.user.token);
-  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
   const choices = useSelector((state) => state.game.choices);
+
+  // Je vais chercher la base de l'API dans le fichier .env
+  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
   const dispatch = useDispatch();
 
+  // Le clic sur un des deux choix proposés renvoie vers l'événement suivant
+  // (route api/event/roll/id-du-prochain-event)
   const handleClickOnNextEvent = (nextEventId) => {
     axios.get(`${REACT_APP_API_BASE}event/roll/${nextEventId}`, {
       headers: {
@@ -29,6 +33,7 @@ function GameLogChoices() {
           eventAPI.picture,
         ));
 
+        // La concaténation du current-ending + next-opening est gérée ici :
         const firstChoice = {
           nextEventId: response.data.choices[0].nextEventId,
           content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,

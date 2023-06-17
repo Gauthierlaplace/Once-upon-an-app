@@ -52,6 +52,7 @@ function HomeBook() {
             response.data.token
           ),
         );
+        // Je les stocke aussi dans le local storage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('nickname', response.data.data.pseudo);
         localStorage.setItem('id', response.data.data.id);
@@ -123,6 +124,10 @@ function HomeBook() {
   // Fonction pour demander l'inscription d'un nouvel utilisateur
   const handleSubmitRegister = (event) => {
     event.preventDefault();
+    // Avant d'envoyer à l'API, je vérifie les inputs en front
+    // Pas d'email, nickname ou password invalide !
+    // Todo ajouter ici le 2e champ mot-de-passe et la vérification du mot-de-passe
+    // Todo ajouter l'icone oeil pour montrer son mdp si l'utilisateur le souhaite
     if (checkInfoBeforeRegister(emailRegister, passwordRegister, nicknameRegister) === true) {
       sendRegisterToApi();
     }
