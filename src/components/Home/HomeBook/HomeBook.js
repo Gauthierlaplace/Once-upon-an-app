@@ -26,6 +26,7 @@ function HomeBook() {
   // A transmettre en props à la partie register
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
+  const passwordBisRegister = useSelector((state) => state.user.passwordBisRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
   const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
@@ -36,6 +37,7 @@ function HomeBook() {
   // Fonction pour envoyer username (l'email) et password à la soumission du formulaire
   const handleSubmitLogin = (event) => {
     event.preventDefault();
+    toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
     axios
       .post(`${REACT_APP_API_BASE}login_check`, {
@@ -124,11 +126,15 @@ function HomeBook() {
   // Fonction pour demander l'inscription d'un nouvel utilisateur
   const handleSubmitRegister = (event) => {
     event.preventDefault();
+    toast.dismiss(); // masque tous les toasts actuellement visibles
     // Avant d'envoyer à l'API, je vérifie les inputs en front
     // Pas d'email, nickname ou password invalide !
-    // Todo ajouter ici le 2e champ mot-de-passe et la vérification du mot-de-passe
-    // Todo ajouter l'icone oeil pour montrer son mdp si l'utilisateur le souhaite
-    if (checkInfoBeforeRegister(emailRegister, passwordRegister, nicknameRegister) === true) {
+    if (checkInfoBeforeRegister(
+      nicknameRegister,
+      emailRegister,
+      passwordRegister,
+      passwordBisRegister
+    ) === true) {
       sendRegisterToApi();
     }
   };
@@ -142,9 +148,10 @@ function HomeBook() {
         changeField={changeField}
       />
       <HomeBookRegister
+        nickname={nicknameRegister}
         email={emailRegister}
         password={passwordRegister}
-        nickname={nicknameRegister}
+        passwordBis={passwordBisRegister}
         handleSubmit={handleSubmitRegister}
         changeField={changeField}
         isPasswordToastVisible={isPasswordToastVisible}

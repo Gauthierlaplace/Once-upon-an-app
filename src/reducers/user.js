@@ -19,6 +19,7 @@ export const initialState = {
   nicknameRegister: '',
   emailRegister: '',
   passwordRegister: '',
+  passwordBisRegister: '',
 
   // Pour afficher les messages "inscription réussie" ou "erreur email/mdp"
   hasRegisteredSuccessfully: false,
