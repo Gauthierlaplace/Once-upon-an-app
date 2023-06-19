@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import HomeDescription from './HomeDescription/HomeDescription';
 import HomeBook from './HomeBook/HomeBook';
 import HomeLogged from './HomeLogged/HomeLogged';
-
 import './Home.scss';
 
 function Home() {

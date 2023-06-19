@@ -8,6 +8,7 @@ import Game from '../Game/Game';
 
 function Main() {
   return (
+    // TODO fix la gestion des Routes
     <div className="Main">
       <Routes>
         <Route

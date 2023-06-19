@@ -6,7 +6,7 @@
 export default [
   {
     code_hero: 1,
-    name: "Sandra Cookie",
+    name: 'Sandra Cookie',
     health: 95,
     maxHealth: 100,
     strength: 80,
@@ -16,7 +16,7 @@ export default [
     karma: 50,
     xp: 0,
     picture:
-      "https://static.vecteezy.com/system/resources/previews/018/931/604/original/cartoon-cookie-icon-png.png",
+      'https://static.vecteezy.com/system/resources/previews/018/931/604/original/cartoon-cookie-icon-png.png',
     progress: 0,
     user_code: 0,
     hero_class_code: 1,
