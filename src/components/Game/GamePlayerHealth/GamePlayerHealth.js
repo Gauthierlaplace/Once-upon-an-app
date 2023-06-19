@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import './GamePlayerHealth.scss';
+import GamePlayerHealthBar from './GamePlayerHealthBar/GamePlayerHealthBar';
 
 function GamePlayerHealth() {
   const heroName = useSelector((state) => state.game.heroData[0].name);
@@ -18,10 +19,10 @@ function GamePlayerHealth() {
         <em className="GamePlayerHealth-name">
           {heroName} :
         </em>
-        <em>
-          {health} / {maxHealth}
-        </em>
       </h1>
+      <em>
+        <GamePlayerHealthBar playerHealth={health} playerMaxHealth={maxHealth} />
+      </em>
     </div>
   );
 }

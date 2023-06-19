@@ -7,7 +7,7 @@ export default [
   {
     code_hero: 1,
     name: "Sandra Cookie",
-    health: 100,
+    health: 95,
     maxHealth: 100,
     strength: 80,
     intelligence: 70,
