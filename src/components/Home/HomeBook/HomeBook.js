@@ -8,7 +8,7 @@ import {
   changeField,
   saveLoginSuccessful,
   saveRegisterSuccessful,
-  hasFailedAction
+  hasFailedAction,
 } from '../../../actions/user';
 
 import { checkInfoBeforeRegister } from '../../../functions/user';
@@ -26,7 +26,9 @@ function HomeBook() {
   // A transmettre en props à la partie register
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
+  const passwordBisRegister = useSelector((state) => state.user.passwordBisRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
+  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
   const [isPasswordToastVisible, setPasswordToastVisible] = useState(false);
 
@@ -35,9 +37,10 @@ function HomeBook() {
   // Fonction pour envoyer username (l'email) et password à la soumission du formulaire
   const handleSubmitLogin = (event) => {
     event.preventDefault();
+    toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
     axios
-      .post('http://anthony-boutherin.vpnuser.lan:8000/api/login_check', {
+      .post(`${REACT_APP_API_BASE}login_check`, {
         // La documentation API (nos collègues back) nous précise quelles données transmettre
         username: emailLogin,
         password: passwordLogin,
@@ -45,8 +48,16 @@ function HomeBook() {
       .then((response) => {
         // Quand le couple email/mdp est valide, j'envoie plusieurs infos dans le state :
         dispatch(
-          saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)
+          saveLoginSuccessful(
+            response.data.data.pseudo,
+            response.data.data.id,
+            response.data.token
+          ),
         );
+        // Je les stocke aussi dans le local storage
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('nickname', response.data.data.pseudo);
+        localStorage.setItem('id', response.data.data.id);
       })
       .catch((error) => {
         console.error(error);
@@ -69,7 +80,7 @@ function HomeBook() {
   const sendRegisterToApi = async () => {
     axios
       .post(
-        'http://anthony-boutherin.vpnuser.lan:8000/api/users',
+        `${REACT_APP_API_BASE}users`,
         {
           email: emailRegister,
           roles: ['ROLE_PLAYER'],
@@ -80,7 +91,6 @@ function HomeBook() {
       )
       .then((response) => {
         setPasswordToastVisible(false);
-        console.log(response);
         dispatch(
           saveRegisterSuccessful(response.data.email),
         );
@@ -116,7 +126,15 @@ function HomeBook() {
   // Fonction pour demander l'inscription d'un nouvel utilisateur
   const handleSubmitRegister = (event) => {
     event.preventDefault();
-    if (checkInfoBeforeRegister(emailRegister, passwordRegister, nicknameRegister) === true) {
+    toast.dismiss(); // masque tous les toasts actuellement visibles
+    // Avant d'envoyer à l'API, je vérifie les inputs en front
+    // Pas d'email, nickname ou password invalide !
+    if (checkInfoBeforeRegister(
+      nicknameRegister,
+      emailRegister,
+      passwordRegister,
+      passwordBisRegister
+    ) === true) {
       sendRegisterToApi();
     }
   };
@@ -130,9 +148,10 @@ function HomeBook() {
         changeField={changeField}
       />
       <HomeBookRegister
+        nickname={nicknameRegister}
         email={emailRegister}
         password={passwordRegister}
-        nickname={nicknameRegister}
+        passwordBis={passwordBisRegister}
         handleSubmit={handleSubmitRegister}
         changeField={changeField}
         isPasswordToastVisible={isPasswordToastVisible}

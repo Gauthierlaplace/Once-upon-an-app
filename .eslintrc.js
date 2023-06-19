@@ -24,7 +24,7 @@ module.exports = {
     'comma-dangle': ['off', 'never'],
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
     'react/react-in-jsx-scope': 'off',
-    'object-shorthand': 'warn',
+    'object-shorthand': 'off',
     'react/jsx-indent': 'warn',
     'eol-last': 'warn',
     'jsx-a11y/no-static-element-interactions': 'off',
@@ -60,6 +60,7 @@ module.exports = {
     'object-curly-spacing': 'warn',
     'object-curly-newline': 'warn',
     'react/jsx-closing-bracket-location': 'warn',
-    'max-len': 'warn'
+    'max-len': 'warn',
+    'no-unused-vars': 'warn'
   }
 };
