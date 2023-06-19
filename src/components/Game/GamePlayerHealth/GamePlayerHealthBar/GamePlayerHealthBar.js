@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './GamePlayerHealthBar.scss';
 
 function GamePlayerHealthBar({ playerHealth, playerMaxHealth }) {
@@ -11,5 +13,10 @@ function GamePlayerHealthBar({ playerHealth, playerMaxHealth }) {
     </div>
   );
 }
+
+GamePlayerHealthBar.propTypes = {
+  playerHealth: PropTypes.number.isRequired,
+  playerMaxHealth: PropTypes.number.isRequired,
+};
 
 export default GamePlayerHealthBar;

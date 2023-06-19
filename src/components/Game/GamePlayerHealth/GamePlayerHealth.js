@@ -8,6 +8,7 @@ function GamePlayerHealth() {
   const heroPicture = useSelector((state) => state.game.heroData[0].picture);
   const health = useSelector((state) => state.game.heroData[0].health);
   const maxHealth = useSelector((state) => state.game.heroData[0].maxHealth);
+
   return (
     <div className="GamePlayerHealth">
       <h1>
