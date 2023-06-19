@@ -55,9 +55,10 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       email: action.payload.email,
+      nicknameRegister: '',
       emailRegister: '',
       passwordRegister: '',
-      nicknameRegister: '',
+      passwordBisRegister: '',
       hasRegisteredSuccessfully: true,
     };
 

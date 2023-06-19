@@ -17,7 +17,7 @@ export const checkPasswordBeforeRegister = (passwordToCheck) => {
 };
 
 export const checkEmailBeforeRegister = (emailToCheck) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+(\s|[\w-])+@[^\s@]+(\s|[\w-])+\.[^\s@]+$/;
   return emailRegex.test(emailToCheck);
 };
 
