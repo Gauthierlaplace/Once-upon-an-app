@@ -13,4 +13,21 @@
     p {
         margin-bottom: 10px;
     }
+
+    &-next-step-button {
+        height: 30px;
+        width: 180px;
+        margin-top: 10px;
+        font-size: 1em;
+        border-radius: 5px;
+        border: solid 1px;
+        background: linear-gradient( #9A6D51, #402A23);
+        font-weight: bold;
+        color: white;
+        margin-bottom: 20px;
+    }
+  
+    &-next-step-button:hover {
+        background: linear-gradient(#402A23, #9A6D51);
+    }
 }

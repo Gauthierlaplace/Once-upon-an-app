@@ -1,5 +1,7 @@
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
 export const SET_CHOICES = 'SET_CHOICES';
+export const SET_VISIBLE_NPC = 'SET_VISIBLE_NPC';
+export const SET_VISIBLE_CHOICES = 'SET_VISIBLE_CHOICES';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
 export const setCurrentEvent = (codeEvent, title, description, picture) => ({
@@ -18,4 +20,14 @@ export const setChoices = (firstChoice, secondChoice) => ({
   payload: {
     choices: [firstChoice, secondChoice],
   },
+});
+
+export const setVisibleNPC = (boolean) => ({
+  type: SET_VISIBLE_NPC,
+  payload: boolean,
+});
+
+export const setVisibleChoices = (boolean) => ({
+  type: SET_VISIBLE_CHOICES,
+  payload: boolean,
 });

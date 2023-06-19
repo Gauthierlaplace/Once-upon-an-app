@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import axios from 'axios';
+import api from '../../api/api';
 
 import {
   setCurrentEvent,
@@ -15,19 +15,13 @@ import Log from './GameLog/GameLog';
 import Menus from './GameMenus/GameMenus';
 
 function Game() {
-  const token = useSelector((state) => state.user.token);
-  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
   const dispatch = useDispatch();
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
   // avec toutes ses données et ses choix
   useEffect(() => {
-    axios.get(`${REACT_APP_API_BASE}play`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      },
-    })
+    api.get('play')
       .then((response) => {
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import api from '../../../api/api';
 import { toast } from 'react-toastify';
 
 // Import des actions et fonctions nécessaires
@@ -39,9 +39,8 @@ function HomeBook() {
     event.preventDefault();
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
-    axios
-      .post(`${REACT_APP_API_BASE}login_check`, {
-        // La documentation API (nos collègues back) nous précise quelles données transmettre
+    api
+      .post('login_check', {
         username: emailLogin,
         password: passwordLogin,
       })
@@ -78,9 +77,9 @@ function HomeBook() {
   };
 
   const sendRegisterToApi = async () => {
-    axios
+    api
       .post(
-        `${REACT_APP_API_BASE}users`,
+        'users',
         {
           email: emailRegister,
           roles: ['ROLE_PLAYER'],
