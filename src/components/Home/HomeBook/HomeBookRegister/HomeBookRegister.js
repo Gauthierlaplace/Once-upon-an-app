@@ -6,6 +6,8 @@ import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/feather/eye';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 
+import PropTypes from 'prop-types';
+
 import './HomeBookRegister.scss';
 
 function HomeBookRegister({
@@ -112,5 +114,16 @@ function HomeBookRegister({
     </div>
   );
 }
+
+HomeBookRegister.propTypes = {
+  nickname: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  passwordBis: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  changeField: PropTypes.func.isRequired,
+  isPasswordToastVisible: PropTypes.bool.isRequired,
+  setPasswordToastVisible: PropTypes.func.isRequired,
+};
 
 export default HomeBookRegister;
