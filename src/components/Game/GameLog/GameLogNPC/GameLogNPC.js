@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './GameLogNPC.scss';
 
 function GameLogNPC({ npcName, npcDescription }) {
@@ -13,5 +15,10 @@ function GameLogNPC({ npcName, npcDescription }) {
     </div>
   );
 }
+
+GameLogNPC.propTypes = {
+  npcName: PropTypes.string.isRequired,
+  npcDescription: PropTypes.string.isRequired,
+};
 
 export default GameLogNPC;

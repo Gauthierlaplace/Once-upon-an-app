@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './GameLogEventDescription.scss';
 
 function GameLogEventDescription({ description }) {
@@ -9,5 +11,9 @@ function GameLogEventDescription({ description }) {
     </div>
   );
 }
+
+GameLogEventDescription.propTypes = {
+  description: PropTypes.string.isRequired,
+};
 
 export default GameLogEventDescription;
