@@ -1,4 +1,8 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { Icon } from 'react-icons-kit';
+import { eye } from 'react-icons-kit/feather/eye';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 
 import './HomeBookLogin.scss';
 
@@ -10,6 +14,7 @@ function HomeBookLogin({
   changeField,
 }) {
   const dispatch = useDispatch();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
     <div className="HomeBookLogin">
@@ -29,15 +34,22 @@ function HomeBookLogin({
           />
 
           <label htmlFor="password">Mot de passe :</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Entrez votre mot de passe"
-            onChange={(event) => {
-              dispatch(changeField(event.target.value, 'password'));
-            }}
-            value={password}
-          />
+          <div className="password-input">
+            <input
+              type={passwordVisible ? 'text' : 'password'}
+              name="password"
+              placeholder="Entrez votre mot de passe"
+              onChange={(event) => {
+                dispatch(changeField(event.target.value, 'password'));
+              }}
+              value={password}
+            />
+            <Icon
+              icon={passwordVisible ? eyeOff : eye}
+              className="password-input-icon"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            />
+          </div>
 
           <button type="submit">Connexion</button>
         </form>

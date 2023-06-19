@@ -1,26 +1,34 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
+
+import { Icon } from 'react-icons-kit';
+import { eye } from 'react-icons-kit/feather/eye';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 
 import './HomeBookRegister.scss';
 
 function HomeBookRegister({
+  nickname,
   email,
   password,
-  nickname,
+  passwordBis,
   handleSubmit,
   changeField,
   isPasswordToastVisible,
   setPasswordToastVisible,
 }) {
   const dispatch = useDispatch();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordBisVisible, setPasswordBisVisible] = useState(false);
 
   // Je conditionne l'affichage du toast "password info"
-  // Afin d'éviter que 10 toasts se lancent en meme temps
+  // Afin d'éviter que 10 toasts ne se lancent en meme temps
   const infoPasswordToast = () => {
     if (!isPasswordToastVisible) {
       toast.info('Le mot-de-passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule et 1 caractère spécial', {
         position: 'top-right',
-        autoClose: 9000,
+        autoClose: false,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -64,16 +72,40 @@ function HomeBookRegister({
         />
 
         <label htmlFor="password">Mot de passe :</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Entrez votre mot de passe"
-          onChange={(event) => {
-            dispatch(changeField(event.target.value, 'passwordRegister'));
-            infoPasswordToast();
-          }}
-          value={password}
-        />
+        <div className="password-input">
+          <input
+            type={passwordVisible ? 'text' : 'password'}
+            name="passwordRegister"
+            placeholder="Entrez votre mot de passe"
+            onChange={(event) => {
+              dispatch(changeField(event.target.value, 'passwordRegister'));
+            }}
+            value={password}
+          />
+          <Icon
+            icon={passwordVisible ? eyeOff : eye}
+            className="password-input-icon"
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          />
+        </div>
+
+        <label htmlFor="passwordBis">Confirmation :</label>
+        <div className="passwordBis-input">
+          <input
+            type={passwordBisVisible ? 'text' : 'password'}
+            name="passwordBisRegister"
+            placeholder="Confirmez le mot de passe"
+            onChange={(event) => {
+              dispatch(changeField(event.target.value, 'passwordBisRegister'));
+            }}
+            value={passwordBis}
+          />
+          <Icon
+            icon={passwordBisVisible ? eyeOff : eye}
+            className="password-input-icon"
+            onClick={() => setPasswordBisVisible(!passwordBisVisible)}
+          />
+        </div>
 
         <button type="submit">Inscription</button>
       </form>
