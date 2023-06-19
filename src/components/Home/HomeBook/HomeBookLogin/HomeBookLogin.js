@@ -45,7 +45,7 @@ function HomeBookLogin({
               value={password}
             />
             <Icon
-              icon={passwordVisible ? eyeOff : eye}
+              icon={passwordVisible ? eye : eyeOff}
               className="password-input-icon"
               onClick={() => setPasswordVisible(!passwordVisible)}
             />
