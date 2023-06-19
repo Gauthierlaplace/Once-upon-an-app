@@ -85,7 +85,7 @@ function HomeBookRegister({
             value={password}
           />
           <Icon
-            icon={passwordVisible ? eyeOff : eye}
+            icon={passwordVisible ? eye : eyeOff}
             className="password-input-icon"
             onClick={() => setPasswordVisible(!passwordVisible)}
           />
@@ -103,7 +103,7 @@ function HomeBookRegister({
             value={passwordBis}
           />
           <Icon
-            icon={passwordBisVisible ? eyeOff : eye}
+            icon={passwordBisVisible ? eye : eyeOff}
             className="password-input-icon"
             onClick={() => setPasswordBisVisible(!passwordBisVisible)}
           />
