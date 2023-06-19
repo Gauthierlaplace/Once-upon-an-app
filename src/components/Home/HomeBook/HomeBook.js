@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { NavLink } from 'react-router-dom';
 
 // Import des actions et fonctions nécessaires
 import {
@@ -139,26 +140,71 @@ function HomeBook() {
     }
   };
 
+  const displayLoginRegister = true;
+
   return (
     <div className="HomeBook">
-      <HomeBookLogin
-        email={emailLogin}
-        password={passwordLogin}
-        handleSubmit={handleSubmitLogin}
-        changeField={changeField}
-      />
-      <HomeBookRegister
-        nickname={nicknameRegister}
-        email={emailRegister}
-        password={passwordRegister}
-        passwordBis={passwordBisRegister}
-        handleSubmit={handleSubmitRegister}
-        changeField={changeField}
-        isPasswordToastVisible={isPasswordToastVisible}
-        setPasswordToastVisible={setPasswordToastVisible}
-      />
+      {/* PARTIE GAUCHE SOMMAIRE */}
+      <div className="HomeBook-GlassLeft">
+        <div className="HomeBook-left">
+          <h1 className="HomeBook-sommaire">Sommaire</h1>
+          <NavLink className="HomeBook-menu" to="/" onClick={displayLoginRegister}><h3>Accueil</h3> . . . . . . . . . . . . . . . . . . . . . . P.0</NavLink>
+          <NavLink className="HomeBook-menu" to="/register" onClick={displayLoginRegister}><h3>Inscription</h3> . . . . . . . . . . . . . . . . . . . P.1</NavLink>
+          <NavLink className="HomeBook-menu" to="/login" onClick={displayLoginRegister}><h3>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</NavLink>
+          <NavLink className="HomeBook-menu" to=""><h3>About</h3> . . . . . . . . . . . . . . . . . . . . . . . . P.3</NavLink>
+          <NavLink className="HomeBook-menu" to=""><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . . P.4</NavLink>
+          <NavLink className="HomeBook-menu" to=""><h3>Mentions légales</h3> . . . . . . . . . . . . . P.5</NavLink>
+
+        </div>
+      </div>
+      {/* PARTIE DROITE DESCRIPTION */}
+      <div className="HomeBook-GlassRight">
+        <div className="HomeBook-right">
+          <h1 className="HomeBook-description">Description du site</h1>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the
+            1500s, when an unknown printer took a galley of type and scrambled it to
+            make a type specimen book. It has survived not only five centuries, but
+            also the leap into electronic typesetting, remaining essentially
+            unchanged. It was popularised in the 1960s with the release of Letraset
+            sheets containing Lorem Ipsum passages, and more recently with desktop
+            publishing software like Aldus PageMaker including versions of Lorem
+            Ipsum.
+          </p>
+
+        </div>
+      </div>
+      {/* AFFICHE LE COMPONENT D INSCRIPTION SUR LA PARTIE DROITE */}
+      {/* <Route
+          path="/Register"
+          element={<HomeBookRegister
+            nickname={nicknameRegister}
+            email={emailRegister}
+            password={passwordRegister}
+            passwordBis={passwordBisRegister}
+            handleSubmit={handleSubmitRegister}
+            changeField={changeField}
+            isPasswordToastVisible={isPasswordToastVisible}
+            setPasswordToastVisible={setPasswordToastVisible}
+          />}
+        /> */}
+      {/* AFFICHE LE COMPONENT DE CONNEXION SUR LA PARTIE DROITE */}
+      {/* <Route
+          path="/login"
+          element={<HomeBookLogin
+            email={emailLogin}
+            password={passwordLogin}
+            handleSubmit={handleSubmitLogin}
+            changeField={changeField}
+          />}
+        /> */}
     </div>
   );
 }
+//    AFFICHE LA CONNEXION 
+
+// AFFICHE L INSCRIPTION 
+
 
 export default HomeBook;
