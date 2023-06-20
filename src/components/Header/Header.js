@@ -27,7 +27,7 @@ function Header() {
         Accueil
       </NavLink>
 
-      <img src="https://imagizer.imageshack.com/img924/3691/6fB19e.png" alt="Logo de l'application web" />
+      <img src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
 
       <NavLink className="Header-Jeu" to="/game">
         Jeu
