@@ -19,6 +19,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
   // Si on n'a pas de NPC, on envoie directement vers les choix
   return (
     <div className="GameLog">
+      <div className="GameLog-Log">
       <EventDescription description={eventDescription} />
       <button
         type="button"
@@ -41,7 +42,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
           Suite
         </button>
       )}
-
+  </div>
       {visibleChoices && (
         <Choices />
       )}

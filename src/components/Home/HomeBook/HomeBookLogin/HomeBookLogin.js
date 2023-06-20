@@ -19,43 +19,41 @@ function HomeBookLogin({
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
-    <div className="HomeBookLogin">
-      <div className="HomeBookLogin-glass">
+    <div className="HomeBookLogin-glass">
 
-        <h1>Connectez-vous</h1>
-        <form className="HomeBook-form" onSubmit={handleSubmit}>
-          <label htmlFor="mail">E-mail :</label>
+      <h1 className="HomeBook-title">Connectez-vous</h1>
+      <form className="HomeBook-form" onSubmit={handleSubmit}>
+        <label htmlFor="mail">E-mail :</label>
+        <input
+          type="text"
+          name="email"
+          placeholder="Entrez votre adresse mail"
+          onChange={(event) => {
+            dispatch(changeField(event.target.value, 'email'));
+          }}
+          value={email}
+        />
+
+        <label htmlFor="password">Mot de passe :</label>
+        <div className="password-input">
           <input
-            type="text"
-            name="email"
-            placeholder="Entrez votre adresse mail"
+            type={passwordVisible ? 'text' : 'password'}
+            name="password"
+            placeholder="Entrez votre mot de passe"
             onChange={(event) => {
-              dispatch(changeField(event.target.value, 'email'));
+              dispatch(changeField(event.target.value, 'password'));
             }}
-            value={email}
+            value={password}
           />
+          <Icon
+            icon={passwordVisible ? eye : eyeOff}
+            className="password-input-icon"
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          />
+        </div>
 
-          <label htmlFor="password">Mot de passe :</label>
-          <div className="password-input">
-            <input
-              type={passwordVisible ? 'text' : 'password'}
-              name="password"
-              placeholder="Entrez votre mot de passe"
-              onChange={(event) => {
-                dispatch(changeField(event.target.value, 'password'));
-              }}
-              value={password}
-            />
-            <Icon
-              icon={passwordVisible ? eye : eyeOff}
-              className="password-input-icon"
-              onClick={() => setPasswordVisible(!passwordVisible)}
-            />
-          </div>
-
-          <button type="submit">Connexion</button>
-        </form>
-      </div>
+        <button type="submit">Connexion</button>
+      </form>
     </div>
   );
 }
