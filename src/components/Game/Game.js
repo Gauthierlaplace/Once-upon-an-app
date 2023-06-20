@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import api from '../../api/api';
 
 import {
   setCurrentEvent,
@@ -9,25 +9,21 @@ import {
 
 import './Game.scss';
 
+import Loading from '../Loading/Loading';
 import PlayerHealth from './GamePlayerHealth/GamePlayerHealth';
 import Scene from './GameScene/GameScene';
 import Log from './GameLog/GameLog';
 import Menus from './GameMenus/GameMenus';
 
 function Game() {
-  const token = useSelector((state) => state.user.token);
-  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
   // avec toutes ses données et ses choix
   useEffect(() => {
-    axios.get(`${REACT_APP_API_BASE}play`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      },
-    })
+    api.get('play')
       .then((response) => {
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
@@ -47,6 +43,7 @@ function Game() {
         };
 
         dispatch(setChoices(firstChoice, secondChoice));
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -58,6 +55,10 @@ function Game() {
   const eventDescription = useSelector((state) => state.game.currentEvent.description);
   const npcName = useSelector((state) => state.game.currentNpc.name);
   const npcDescription = useSelector((state) => state.game.currentNpc.description);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="Game">
       <PlayerHealth />

@@ -1,30 +1,28 @@
-/* eslint-disable no-console */
+
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './GameLogChoices.scss';
-import axios from 'axios';
+import api from '../../../../api/api';
 
+import Loading from '../../../Loading/Loading';
 import {
   setCurrentEvent,
   setChoices,
+  setVisibleNPC,
+  setVisibleChoices,
 } from '../../../../actions/game';
 
 function GameLogChoices() {
-  const token = useSelector((state) => state.user.token);
+  const [loading, setLoading] = useState(false);
   const choices = useSelector((state) => state.game.choices);
-
-  // Je vais chercher la base de l'API dans le fichier .env
-  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
   const dispatch = useDispatch();
 
   // Le clic sur un des deux choix proposés renvoie vers l'événement suivant
   // (route api/event/roll/id-du-prochain-event)
   const handleClickOnNextEvent = (nextEventId) => {
-    axios.get(`${REACT_APP_API_BASE}event/roll/${nextEventId}`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      },
-    })
+    setLoading(true);
+    api.get(`event/roll/${nextEventId}`)
       .then((response) => {
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
@@ -45,9 +43,16 @@ function GameLogChoices() {
         };
 
         dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setVisibleNPC(false));
+        dispatch(setVisibleChoices(false));
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="GameLogChoices">
