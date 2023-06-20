@@ -1,7 +1,14 @@
+import './HomeBook.scss';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import api from '../../../api/api';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { checkInfoBeforeRegister } from '../../../functions/user';
+
+import HomeDescription from '../HomeDescription/HomeDescription';
+import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
+import HomeBookRegister from './HomeBookRegister/HomeBookRegister';
 
 // Import des actions et fonctions nécessaires
 import {
@@ -10,13 +17,6 @@ import {
   saveRegisterSuccessful,
   hasFailedAction,
 } from '../../../actions/user';
-
-import { checkInfoBeforeRegister } from '../../../functions/user';
-
-import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
-import HomeBookRegister from './HomeBookRegister/HomeBookRegister';
-
-import './HomeBook.scss';
 
 function HomeBook() {
   // A transmettre en props à la partie login
@@ -138,24 +138,77 @@ function HomeBook() {
     }
   };
 
+  //  VARIABLE POUR PERMETTRE D AFFICHER OU NON LA DESCRIPTION / LA CONNEXION OU L INSCRIPTION
+  // const displayLoginRegister = true; onClick ?
+  // Elle reçoit en paramètre ce qu'on veut afficher
+  // Elle passe ceci en true et tout le reste en false
+  const [displayDescription, setDisplayDescription] = useState(true);
+  const [displayRegister, setDisplayRegister] = useState(false);
+  const [displayLogin, setDisplayLogin] = useState(false);
+
+  const displayDescriptionFunction = () => {
+    setDisplayDescription(true);
+    setDisplayRegister(false);
+    setDisplayLogin(false);
+  };
+
+  const displayRegisterFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(true);
+    setDisplayLogin(false);
+  };
+
+  const displayLoginFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(false);
+    setDisplayLogin(true);
+  };
+
   return (
     <div className="HomeBook">
-      <HomeBookLogin
-        email={emailLogin}
-        password={passwordLogin}
-        handleSubmit={handleSubmitLogin}
-        changeField={changeField}
-      />
-      <HomeBookRegister
-        nickname={nicknameRegister}
-        email={emailRegister}
-        password={passwordRegister}
-        passwordBis={passwordBisRegister}
-        handleSubmit={handleSubmitRegister}
-        changeField={changeField}
-        isPasswordToastVisible={isPasswordToastVisible}
-        setPasswordToastVisible={setPasswordToastVisible}
-      />
+      {/* PARTIE GAUCHE SOMMAIRE */}
+      <div className="HomeBook-GlassLeft">
+        <div className="HomeBook-left">
+          <h1 className="HomeBook-sommaire">Sommaire</h1>
+          <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3> . . . . . . . . . . . . . . . . . . . P.0</div>
+          <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3> . . . . . . . . . . . . . . . . . . . P.1</div>
+          <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
+          <div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div>
+          <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
+          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . . . . . P.5</div>
+
+        </div>
+      </div>
+      {/* PARTIE DROITE DESCRIPTION */}
+      <div className="HomeBook-GlassRight">
+        <div className="HomeBook-right">
+          {displayDescription && (
+            <HomeDescription />
+          )}
+
+          {displayRegister && (
+            <HomeBookRegister
+              nickname={nicknameRegister}
+              email={emailRegister}
+              password={passwordRegister}
+              passwordBis={passwordBisRegister}
+              handleSubmit={handleSubmitRegister}
+              changeField={changeField}
+              isPasswordToastVisible={isPasswordToastVisible}
+              setPasswordToastVisible={setPasswordToastVisible}
+            />
+          )}
+
+          {displayLogin && (
+            <HomeBookLogin
+              email={emailLogin}
+              password={passwordLogin}
+              handleSubmit={handleSubmitLogin}
+              changeField={changeField}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

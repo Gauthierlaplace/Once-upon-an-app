@@ -1,24 +1,32 @@
 .HomeLogged {
   width: 100%;
-  height: 65%;
-  padding: 100px 0;
+  height: 110%;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: beige;
-  padding-bottom: 50px;
+  background: url(../../../assets/images/openbook.png);
+  background-repeat: no-repeat;
+  background-size: 120%;
+  background-position: center;
   position: absolute;
-  bottom: 0px;
+  top: 0px;
 
-button {
-  width: 300px;
-  height: 100px;
-  font-size: 2.5em;
-  border-radius: 10px;
-  border: transparent;
-  background-color: purple;
-  color: white;
-  box-shadow: 0 0 10px rgb(175, 174, 174);
+  button {
+    height: 80px;
+    width: 300px;
+    margin-top: 10px;
+    font-size: 2em;
+    border-radius: 5px;
+    border: solid 1px;
+    background: linear-gradient(#9A6D51, #402A23);
+    font-weight: bold;
+    color: white;
   }
-  
+
+
+  button:hover {
+    background: linear-gradient(#402A23, #9A6D51);
+  }
+
 }
