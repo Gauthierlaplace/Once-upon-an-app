@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useSelector, useDispatch } from 'react-redux';
 import './GameLogChoices.scss';
 import axios from 'axios';
