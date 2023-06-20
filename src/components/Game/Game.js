@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../../api/api';
 
 import {
@@ -9,6 +9,7 @@ import {
 
 import './Game.scss';
 
+import Loading from '../Loading/Loading';
 import PlayerHealth from './GamePlayerHealth/GamePlayerHealth';
 import Scene from './GameScene/GameScene';
 import Log from './GameLog/GameLog';
@@ -16,6 +17,7 @@ import Menus from './GameMenus/GameMenus';
 
 function Game() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
@@ -41,6 +43,7 @@ function Game() {
         };
 
         dispatch(setChoices(firstChoice, secondChoice));
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -52,6 +55,10 @@ function Game() {
   const eventDescription = useSelector((state) => state.game.currentEvent.description);
   const npcName = useSelector((state) => state.game.currentNpc.name);
   const npcDescription = useSelector((state) => state.game.currentNpc.description);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="Game">
       <PlayerHealth />
