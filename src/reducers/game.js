@@ -3,6 +3,7 @@ import heroData from './../datas/HeroData';
 import {
   SET_CURRENT_EVENT,
   SET_CHOICES,
+  SET_HAS_NPC,
   SET_VISIBLE_NPC,
   SET_VISIBLE_CHOICES,
   SET_CURRENT_NPC,
@@ -16,7 +17,6 @@ export const initialState = {
     title: '',
     description: '',
     picture: '',
-    // opening: '',
     event_type_code: '',
   },
   currentNPC:
@@ -37,6 +37,7 @@ export const initialState = {
     },
   ],
 
+  hasNPC: false,
   visibleNPC: false,
   visibleChoices: false,
 };
@@ -70,6 +71,12 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       choices: action.payload.choices
+    };
+
+  case SET_HAS_NPC:
+    return {
+      ...state,
+      hasNPC: action.payload,
     };
 
   case SET_VISIBLE_NPC:

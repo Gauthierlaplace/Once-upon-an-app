@@ -6,27 +6,28 @@ import {
   setCurrentEvent,
   setCurrentNPC,
   setChoices,
+  setHasNPC,
 } from '../../actions/game';
 
 import './Game.scss';
 
 import Loading from '../Loading/Loading';
-import PlayerHealth from './GamePlayerHealth/GamePlayerHealth';
-import Scene from './GameScene/GameScene';
-import Log from './GameLog/GameLog';
-import Menus from './GameMenus/GameMenus';
+import GamePlayerHealth from './GamePlayerHealth/GamePlayerHealth';
+import GameScene from './GameScene/GameScene';
+import GameLog from './GameLog/GameLog';
+import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const currentEventCode = useSelector((state) => state.game.currentEvent.code_event);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
   // avec toutes ses données et ses choix
   useEffect(() => {
-    api.get('/event/last/8')
+    api.get('/play')
       .then((response) => {
-        console.log(response);
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
           eventAPI.id,
@@ -35,27 +36,50 @@ function Game() {
           eventAPI.picture
         ));
 
-        const npcAPI = response.data.npcCurrentEvent;
-        dispatch(setCurrentNPC(
-          npcAPI.npcName,
-          npcAPI.npcDescription,
-          npcAPI.picture
-        ));
+        const firstChoice = {
+          nextEventId: response.data.choices[0].nextEventId,
+          content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,
+        };
+        const secondChoice = {
+          nextEventId: response.data.choices[1].nextEventId,
+          content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
+        };
 
-        // const firstChoice = {
-        //   nextEventId: response.data.choices[0].nextEventId,
-        //   content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,
-        // };
-        // const secondChoice = {
-        //   nextEventId: response.data.choices[1].nextEventId,
-        //   content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
-        // };
-
-        // // dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setHasNPC(false));
+        dispatch(setChoices(firstChoice, secondChoice));
         setLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
+
+  // On surveille le code du currentEvent, et on check les infos dès qu'il change
+  // Cela va nous permettre notamment de savoir si currentEvent a un NPC ou non
+  useEffect(() => {
+    if (currentEventCode) {
+      api.get(`/event/roll/${currentEventCode}`)
+        .then((response) => {
+          // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
+          // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
+          // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
+          const npcAPI = response.data.npcCurrentEvent;
+          const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
+          dispatch(setHasNPC(hasNPC));
+
+          // S'il y a un NPC, on dispatche ses infos
+          if (hasNPC) {
+            dispatch(setCurrentNPC(
+              npcAPI.npcName,
+              npcAPI.npcDescription,
+              npcAPI.picture
+            ));
+          // S'il y a un NPC, on remet à zéro les infos NPC
+          } else {
+            dispatch(setCurrentNPC('', '', ''));
+          }
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [currentEventCode]);
 
   // Une fois que les données de l'événement sont bien récupérées dans le state,
   // Je gère leur affichage ici :
@@ -70,19 +94,19 @@ function Game() {
   }
   return (
     <div className="Game">
-      <PlayerHealth />
+      <GamePlayerHealth />
 
       <div className="Game-flexSB">
         <div className="Game-left">
 
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
-          <Scene picture={eventPicture} npcName={npcName} />
-          <Menus />
+          <GameScene picture={eventPicture} npcName={npcName} />
+          <GameMenus />
         </div>
 
         <div className="Game-right">
           <h1 className="Game-Logtitle">Journal</h1>
-          <Log
+          <GameLog
             eventDescription={eventDescription}
             npcName={npcName}
             npcDescription={npcDescription}

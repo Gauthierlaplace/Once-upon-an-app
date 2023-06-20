@@ -6,11 +6,12 @@ import {
   setVisibleChoices,
 } from '../../../actions/game';
 
-import Choices from './GameLogChoices/GameLogChoices';
-import EventDescription from './GameLogEventDesciption/GameLogEventDescription';
-import NPC from './GameLogNPC/GameLogNPC';
+import GameLogChoices from './GameLogChoices/GameLogChoices';
+import GameLogEventDescription from './GameLogEventDesciption/GameLogEventDescription';
+import GameLogNPC from './GameLogNPC/GameLogNPC';
 
 function GameLog({ eventDescription, npcName, npcDescription }) {
+  const hasNPC = useSelector((state) => state.game.hasNPC);
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
   const visibleChoices = useSelector((state) => state.game.visibleChoices);
   const dispatch = useDispatch();
@@ -19,31 +20,32 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
   // Si on n'a pas de NPC, on envoie directement vers les choix
   return (
     <div className="GameLog">
-      <EventDescription description={eventDescription} />
-      <button
-        type="button"
-        className="GameLog-next-step-button"
-        onClick={() => dispatch(setVisibleNPC(true))}
-      >
-        Suite
-      </button>
-
-      {visibleNPC && (
-        <NPC npcName={npcName} npcDescription={npcDescription} />
-      )}
-
-      {visibleNPC && (
+      <GameLogEventDescription description={eventDescription} />
+      {(hasNPC) && (
         <button
           type="button"
           className="GameLog-next-step-button"
-          onClick={() => dispatch(setVisibleChoices(true))}
+          onClick={() => dispatch(setVisibleNPC(true))}
         >
           Suite
         </button>
       )}
 
+      {(hasNPC && visibleNPC) && (
+        <GameLogNPC npcName={npcName} npcDescription={npcDescription} />
+      )}
+
+      {/* TODO conditionner ce bouton au moment d'apparition des choix */}
+      <button
+        type="button"
+        className="GameLog-next-step-button"
+        onClick={() => dispatch(setVisibleChoices(true))}
+      >
+        Suite
+      </button>
+
       {visibleChoices && (
-        <Choices />
+        <GameLogChoices />
       )}
     </div>
   );
