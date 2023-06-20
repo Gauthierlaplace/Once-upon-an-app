@@ -21,7 +21,7 @@ function GameLogChoices() {
   // (route api/event/roll/id-du-prochain-event)
   const handleClickOnNextEvent = (nextEventId) => {
     setLoading(true);
-    api.get(`event/roll/${nextEventId}`)
+    api.get(`/event/roll/${nextEventId}`)
       .then((response) => {
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(

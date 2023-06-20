@@ -40,7 +40,7 @@ function HomeBook() {
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
     api
-      .post('login_check', {
+      .post('/login_check', {
         username: emailLogin,
         password: passwordLogin,
       })
@@ -79,7 +79,7 @@ function HomeBook() {
   const sendRegisterToApi = async () => {
     api
       .post(
-        'users',
+        '/users',
         {
           email: emailRegister,
           roles: ['ROLE_PLAYER'],

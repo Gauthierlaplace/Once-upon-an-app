@@ -4,6 +4,7 @@ import api from '../../api/api';
 
 import {
   setCurrentEvent,
+  setCurrentNPC,
   setChoices,
 } from '../../actions/game';
 
@@ -23,26 +24,34 @@ function Game() {
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
   // avec toutes ses données et ses choix
   useEffect(() => {
-    api.get('play')
+    api.get('/event/last/8')
       .then((response) => {
+        console.log(response);
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
           eventAPI.id,
           eventAPI.title,
           eventAPI.description,
-          eventAPI.picture,
+          eventAPI.picture
         ));
 
-        const firstChoice = {
-          nextEventId: response.data.choices[0].nextEventId,
-          content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,
-        };
-        const secondChoice = {
-          nextEventId: response.data.choices[1].nextEventId,
-          content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
-        };
+        const npcAPI = response.data.npcCurrentEvent;
+        dispatch(setCurrentNPC(
+          npcAPI.npcName,
+          npcAPI.npcDescription,
+          npcAPI.picture
+        ));
 
-        dispatch(setChoices(firstChoice, secondChoice));
+        // const firstChoice = {
+        //   nextEventId: response.data.choices[0].nextEventId,
+        //   content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,
+        // };
+        // const secondChoice = {
+        //   nextEventId: response.data.choices[1].nextEventId,
+        //   content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
+        // };
+
+        // // dispatch(setChoices(firstChoice, secondChoice));
         setLoading(false);
       })
       .catch((error) => console.log(error));
@@ -53,8 +62,8 @@ function Game() {
   const eventTitle = useSelector((state) => state.game.currentEvent.title);
   const eventPicture = useSelector((state) => state.game.currentEvent.picture);
   const eventDescription = useSelector((state) => state.game.currentEvent.description);
-  const npcName = useSelector((state) => state.game.currentNpc.name);
-  const npcDescription = useSelector((state) => state.game.currentNpc.description);
+  const npcName = useSelector((state) => state.game.currentNPC.name);
+  const npcDescription = useSelector((state) => state.game.currentNPC.description);
 
   if (loading) {
     return <Loading />;

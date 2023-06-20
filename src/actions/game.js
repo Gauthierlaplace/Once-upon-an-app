@@ -1,4 +1,5 @@
 export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
+export const SET_CURRENT_NPC = 'SET_CURRENT_NPC';
 export const SET_CHOICES = 'SET_CHOICES';
 export const SET_VISIBLE_NPC = 'SET_VISIBLE_NPC';
 export const SET_VISIBLE_CHOICES = 'SET_VISIBLE_CHOICES';
@@ -11,6 +12,15 @@ export const setCurrentEvent = (codeEvent, title, description, picture) => ({
     title: title,
     description: description,
     picture: picture,
+  },
+});
+
+export const setCurrentNPC = (nameNPC, descriptionNPC, pictureNPC) => ({
+  type: SET_CURRENT_NPC,
+  payload: {
+    name: nameNPC,
+    description: descriptionNPC,
+    picture: pictureNPC,
   },
 });
 
