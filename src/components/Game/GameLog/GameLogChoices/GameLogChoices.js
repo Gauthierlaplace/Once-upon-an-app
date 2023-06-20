@@ -50,7 +50,7 @@ function GameLogChoices() {
 
   return (
     <div className="GameLogChoices">
-      <p className="GameLogChoices-content">A vous de jouer :</p>
+      <h2 className="GameLogChoices-content">A vous de jouer :</h2>
       <div>
         {choices.map((choice) => (
           <button

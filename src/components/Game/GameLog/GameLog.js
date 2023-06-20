@@ -7,8 +7,10 @@ import NPC from './GameLogNPC/GameLogNPC';
 function GameLog({ eventDescription, npcName, npcDescription }) {
   return (
     <div className="GameLog">
-      <EventDescription description={eventDescription} />
-      <NPC npcName={npcName} npcDescription={npcDescription} />
+      <div className="GameLog-Log">
+        <EventDescription description={eventDescription} />
+        <NPC npcName={npcName} npcDescription={npcDescription} />
+      </div>
       <Choices />
     </div>
   );

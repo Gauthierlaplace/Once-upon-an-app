@@ -62,7 +62,7 @@ function Game() {
     <div className="Game">
       <PlayerHealth />
 
-      <div className="Game-flexSB">
+      <div className="Game-flexSA">
         <div className="Game-left">
 
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
