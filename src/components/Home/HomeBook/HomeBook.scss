@@ -56,12 +56,13 @@
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
   border-radius: 5px;
+  overflow-y: auto;
 }
 
 &-right {
   width: 100%;
   text-align: justify;
-  line-height: 1.3em;
+  line-height: 1.5em;
 }
 
 &-description {
@@ -73,7 +74,11 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  font-size: 1.2em;
+  font-size: 1em;
+}
+
+&-menu:hover {
+  cursor: grab;
 }
 
   h1 {
