@@ -42,7 +42,7 @@ function HomeBookRegister({
 
   return (
     <div className="HomeBookRegister-glass">
-      <h1>Inscrivez-vous</h1>
+      <h1 className="HomeBook-title">Inscrivez-vous</h1>
       <form
         className="HomeBook-form"
         onSubmit={handleSubmit}

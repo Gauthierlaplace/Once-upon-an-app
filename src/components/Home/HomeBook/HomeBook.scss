@@ -16,9 +16,9 @@
 
   &-GlassLeft {
     width: 30%;
-    height: 380px;
+    height: 430px;
     position: relative;
-    top: 220px;
+    top: 200px;
     left: -62px;
     padding: 20px;
     /* glass effect */
@@ -45,11 +45,11 @@
 
 &-GlassRight {
   width: 30%;
-  height: 380px;
+  height: 430px;
   position: relative;
-  top: 220px;
+  top: 200px;
   right: -70px;
-  padding: 20px;
+  padding: 15px;
   /* glass effect */
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -65,7 +65,7 @@
   line-height: 1.5em;
 }
 
-&-description {
+&-title {
   text-align: center;
   padding-bottom: 10px;
 }
@@ -81,6 +81,10 @@
   cursor: grab;
 }
 
+p {
+  padding: 10px;
+}
+
   h1 {
     font-size: 1.5em;
     margin-bottom: 10px;
@@ -93,7 +97,7 @@
 
   input {
     height: 30px;
-    width: 180px;
+    width: 200px;
     border-radius: 5px;
     border: transparent;
     margin-bottom: 7px;
@@ -117,9 +121,10 @@
   }
 
   &-form {
-    width: 230px;
+    width: 100%;
     margin: auto;
     padding: 10px;
+    padding-left: 50px;
     display: flex;
     flex-direction: column;
     text-align: left;

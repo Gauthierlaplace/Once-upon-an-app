@@ -19,7 +19,7 @@ function HomeBookLogin({
   return (
     <div className="HomeBookLogin-glass">
 
-      <h1>Connectez-vous</h1>
+      <h1 className="HomeBook-title">Connectez-vous</h1>
       <form className="HomeBook-form" onSubmit={handleSubmit}>
         <label htmlFor="mail">E-mail :</label>
         <input
