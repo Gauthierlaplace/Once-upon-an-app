@@ -9,11 +9,17 @@ import {
   SET_CURRENT_NPC,
   INCREMENT_PROGRESS,
   RESET_PROGRESS,
+  SET_EVENT_PROGRESS_STATUS,
 } from '../actions/game';
 
 export const initialState = {
   heroData: heroData,
   progress: 0,
+
+  // Peut prendre les valeurs 'normal', 'beforeLast',
+  // 'beforeBoss', 'beforeBiomeEnd', 'beforeGameEnd'
+  eventProgressStatus: 'normal',
+
   currentEvent:
   {
     code_event: '',
@@ -104,6 +110,12 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       progress: 0,
+    };
+
+  case SET_EVENT_PROGRESS_STATUS:
+    return {
+      ...state,
+      eventProgressStatus: action.payload,
     };
 
   default:

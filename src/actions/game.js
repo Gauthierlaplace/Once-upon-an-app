@@ -6,6 +6,7 @@ export const SET_VISIBLE_NPC = 'SET_VISIBLE_NPC';
 export const SET_VISIBLE_CHOICES = 'SET_VISIBLE_CHOICES';
 export const INCREMENT_PROGRESS = 'INCREMENT_PROGRESS';
 export const RESET_PROGRESS = 'RESET_PROGRESS';
+export const SET_EVENT_PROGRESS_STATUS = 'SET_EVENT_PROGRESS_STATUS';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
 export const setCurrentEvent = (codeEvent, title, description, picture) => ({
@@ -56,4 +57,9 @@ export const incrementProgress = () => ({
 
 export const resetProgress = () => ({
   type: RESET_PROGRESS,
+});
+
+export const setEventProgressStatus = (newStatus) => ({
+  type: SET_EVENT_PROGRESS_STATUS,
+  payload: newStatus,
 });
