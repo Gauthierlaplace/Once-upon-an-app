@@ -56,7 +56,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
           Suite
         </button>
       )}
-
+  </div>
       {visibleChoices && (
         <GameLogChoices />
       )}

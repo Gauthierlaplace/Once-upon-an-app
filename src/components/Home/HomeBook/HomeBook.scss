@@ -1,69 +1,26 @@
 @use './../../../styles/vars';
 
 .HomeBook {
-  width: 90%;
-  height: 80%;
+  width: 100%;
+  height: 110%;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   background: url(../../../assets/images/openbook.png);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 120%;
   background-position: center;
   position: absolute;
-  bottom: 0px;
+  top: 0px;
 
-  h1 {
-      font-size: 1.3em;
-      margin-bottom: 10px;
-      border: white;
-  }
-
-  label {
-      margin-top: 5px;
-      margin-bottom: 5px;
-  }
-
-  input {
-      height: 30px;
-      width: 180px;
-      border-radius: 5px;
-      border: transparent;
-      margin-bottom: 7px;
-      padding-left: 10px;
-  }
-
-  button {
-      height: 30px;
-      width: 180px;
-      margin-top: 10px;
-      font-size: 1em;
-      border-radius: 5px;
-      border: solid 1px;
-      background: linear-gradient( #9A6D51, #402A23);
-      font-weight: bold;
-      color: white;
-  }
-
-  button:hover {
-      background: linear-gradient(#402A23, #9A6D51);
-  }
-
-  &-form {
-    width: 230px;
-    margin: auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-  }
-
-  &-glass {
-    width: 260px;
+  &-GlassLeft {
+    width: 30%;
+    height: 430px;
     position: relative;
-    top: 125px;
-    padding: 10px;
+    top: 200px;
+    left: -62px;
+    padding: 20px;
     /* glass effect */
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -71,9 +28,109 @@
     -webkit-backdrop-filter: blur(1px);
     border-radius: 5px;
   }
+
+  &-left {
+    width: 100%;
+    text-align: start;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+  }
+
+  &-sommaire {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+&-GlassRight {
+  width: 30%;
+  height: 430px;
+  position: relative;
+  top: 200px;
+  right: -70px;
+  padding: 15px;
+  /* glass effect */
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+&-right {
+  width: 100%;
+  text-align: justify;
+  line-height: 1.5em;
+}
+
+&-title {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+&-menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 1em;
+}
+
+&-menu:hover {
+  cursor: grab;
+}
+
+p {
+  padding: 10px;
+}
+
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  label {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  input {
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border: transparent;
+    margin-bottom: 7px;
+    padding-left: 10px;
+  }
+
+  button {
+    height: 30px;
+    width: 180px;
+    margin-top: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: solid 1px;
+    background: linear-gradient(#9A6D51, #402A23);
+    font-weight: bold;
+    color: white;
+  }
+
+  button:hover {
+    background: linear-gradient(#402A23, #9A6D51);
+  }
+
+  &-form {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
 }
 
 .password-input-icon {
   margin-left: 10px;
 }
-
