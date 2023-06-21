@@ -12,7 +12,7 @@
   background-size: 115%;
   background-position: center;
   position: absolute;
-  top: 0px;
+  top: -10px;
 
   &-GlassLeft {
     width: 28%;
@@ -40,7 +40,7 @@
 
   &-sommaire {
     text-align: center;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
   }
 
   &-GlassRight {
@@ -67,7 +67,7 @@
 
   &-title {
     text-align: center;
-    padding-bottom: 10px;
+    // padding-bottom: 0;
   }
 
   &-menu {

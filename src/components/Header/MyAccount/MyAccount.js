@@ -43,9 +43,17 @@ function MyAccount() {
           <div className="MyAccount-left">
             <nav>
               <ul>
-                <li onClick={displayAccountFunction}>Mon compte</li>
-                <li onClick={displayEditFunction}>Modifier mon compte</li>
-                <li onClick={displayDeleteFunction}>Supprimer mon compte</li>
+                <li onClick={displayAccountFunction}>
+                  Mon compte
+                </li>
+
+                <li onClick={displayEditFunction}>
+                  Modifier mon compte
+                </li>
+
+                <li onClick={displayDeleteFunction}>
+                  Supprimer mon compte
+                </li>
               </ul>
             </nav>
           </div>
