@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 import './HomeBook.scss';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import api from '../../../api/api';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import api from '../../../api/api';
 import { checkInfoBeforeRegister } from '../../../functions/user';
 
 import HomeDescription from '../HomeDescription/HomeDescription';
@@ -28,7 +28,7 @@ function HomeBook() {
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
   const passwordBisRegister = useSelector((state) => state.user.passwordBisRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
-  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
+  // const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
   const [isPasswordToastVisible, setPasswordToastVisible] = useState(false);
 
@@ -40,7 +40,7 @@ function HomeBook() {
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
     api
-      .post('login_check', {
+      .post('/login_check', {
         username: emailLogin,
         password: passwordLogin,
       })
@@ -79,7 +79,7 @@ function HomeBook() {
   const sendRegisterToApi = async () => {
     api
       .post(
-        'users',
+        '/users',
         {
           email: emailRegister,
           roles: ['ROLE_PLAYER'],
