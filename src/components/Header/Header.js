@@ -27,23 +27,33 @@ function Header() {
         Accueil
       </NavLink>
 
-      <img src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
+      <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
 
       <NavLink className="Header-Jeu" to="/game">
         Jeu
       </NavLink>
 
       {/* La div suivante ne s'affiche que quand logged vaut true */}
-      { logged && (
+      {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
+
+      {logged && (
         <div className="Header-Account">
-          <h3>Hello {nickname}</h3>
-          {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
-          <button
-            type="button"
-            onClick={() => handleLogOut()}
-          >
-            Déconnexion
-          </button>
+          <nav>
+            <ul>
+              <li>
+                Hello {nickname}
+                <ul>
+                  <li>
+                    <NavLink to="/MyAccount">Mon Compte</NavLink>
+                  </li>
+
+                  <li onClick={() => handleLogOut()}>
+                    Déconnexion
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
         </div>
       )}
 

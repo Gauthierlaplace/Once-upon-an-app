@@ -14,41 +14,14 @@
         margin-right: 30px;
         position: absolute;
         left: 150px;
-    } 
+    }
 
     &-Jeu {
         position: absolute;
         left: 250px;
     }
 
-    &-Account {
-        display: flex;
-        position: absolute;
-        right: 150px;
-    }
-
-    &-Account button {
-        margin-left: 10px;
-        height: 40px;
-        padding: 10px;
-        background: linear-gradient( #9A6D51, #402A23);
-        color: white;
-        font-size: 0.8em;
-        font-weight: bold;
-        border: transparent;
-    }
-    button:hover {
-        background: linear-gradient(#402A23, #9A6D51);
-    }
-
-    &-Account h3 {
-        margin-left: 30px;
-        height: auto;
-        padding: 10px 15px;
-        font-size: 1em;
-    }
-
-     img {
+    &-logo {
         position: absolute;
         z-index: 999;
         top: 0;
@@ -57,4 +30,70 @@
         width: 130px;
         height: 100px;
     }
+
+    &-Account {
+        height: 40px;
+        width: 230px;;
+        position: absolute;
+        top: 0;
+        right: 250px;
+        z-index: 999;
+    }
+
 }
+
+// ========================
+// MENU MON COMPTE EN HOVER
+// ========================
+nav {
+    width: 100%;
+    height: 100%;
+}
+nav ul {
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(#9A6D51, #402A23);
+    cursor: grab;
+  }
+
+  nav ul li:hover {
+    background: linear-gradient(#402A23, #9A6D51);
+  } 
+
+  nav ul li:hover > ul {
+    display: block;
+    cursor: grab;
+  }
+  
+  nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+  
+  nav ul ul li {
+    width: 230px;
+    float: none;
+    display: list-item;
+    position: relative;
+    background: #9A6D51;
+  }
+
+  nav ul ul li:hover {
+    background: #402A23;
+  }
