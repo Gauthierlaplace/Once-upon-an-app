@@ -20,29 +20,29 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
   return (
     <div className="GameLog">
       <div className="GameLog-Log">
-      <EventDescription description={eventDescription} />
-      <button
-        type="button"
-        className="GameLog-next-step-button"
-        onClick={() => dispatch(setVisibleNPC(true))}
-      >
-        Suite
-      </button>
-
-      {visibleNPC && (
-        <NPC npcName={npcName} npcDescription={npcDescription} />
-      )}
-
-      {visibleNPC && (
+        <EventDescription description={eventDescription} />
         <button
           type="button"
           className="GameLog-next-step-button"
-          onClick={() => dispatch(setVisibleChoices(true))}
+          onClick={() => dispatch(setVisibleNPC(true))}
         >
           Suite
         </button>
-      )}
-  </div>
+
+        {visibleNPC && (
+          <NPC npcName={npcName} npcDescription={npcDescription} />
+        )}
+
+        {visibleNPC && (
+          <button
+            type="button"
+            className="GameLog-next-step-button"
+            onClick={() => dispatch(setVisibleChoices(true))}
+          >
+            Suite
+          </button>
+        )}
+      </div>
       {visibleChoices && (
         <Choices />
       )}
