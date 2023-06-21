@@ -40,60 +40,59 @@
         z-index: 999;
     }
 
-}
-
-// ========================
+    // ========================
 // MENU MON COMPTE EN HOVER
 // ========================
 nav {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 nav ul {
-    width: 100%;
-    height: 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav ul li {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: block;
-    margin: 0;
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    background: linear-gradient(#9A6D51, #402A23);
-    cursor: grab;
-  }
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-  nav ul li:hover {
-    background: linear-gradient(#402A23, #9A6D51);
-  } 
+nav ul li {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(#9A6D51, #402A23);
+  cursor: grab;
+}
 
-  nav ul li:hover > ul {
-    display: block;
-    cursor: grab;
-  }
-  
-  nav ul ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
-  
-  nav ul ul li {
-    width: 230px;
-    float: none;
-    display: list-item;
-    position: relative;
-    background: #9A6D51;
-  }
+nav ul li:hover {
+  background: linear-gradient(#402A23, #9A6D51);
+} 
 
-  nav ul ul li:hover {
-    background: #402A23;
-  }
+nav ul li:hover > ul {
+  display: block;
+  cursor: grab;
+}
+
+nav ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+nav ul ul li {
+  width: 230px;
+  float: none;
+  display: list-item;
+  position: relative;
+  background: #9A6D51;
+}
+
+nav ul ul li:hover {
+  background: #402A23;
+}
+}
