@@ -3,8 +3,10 @@ import heroData from './../datas/HeroData';
 import {
   SET_CURRENT_EVENT,
   SET_CHOICES,
+  SET_HAS_NPC,
   SET_VISIBLE_NPC,
   SET_VISIBLE_CHOICES,
+  SET_CURRENT_NPC,
 } from '../actions/game';
 
 export const initialState = {
@@ -15,17 +17,13 @@ export const initialState = {
     title: '',
     description: '',
     picture: '',
-    // opening: '',
     event_type_code: '',
   },
-  currentNpc:
+  currentNPC:
   {
-    code_npc: '3',
-    name: 'Lysandre l\'Érudite',
-    description: 'Très instruite et mystérieuse, elle est connue pour sa sagesse et ses connaissances ésotériques sur les secrets de la forêt. Lysandre ne fait pas attention à vous, bien trop absorbée par sa lecture.',
-    picture: 'https://cdn.midjourney.com/1bde38ab-9964-4585-b910-6e744f8152fd/0_0.png',
-    is_boss: 0,
-    hostility: 0,
+    name: '',
+    description: '',
+    picture: '',
   },
   choices:
   [
@@ -39,6 +37,7 @@ export const initialState = {
     },
   ],
 
+  hasNPC: false,
   visibleNPC: false,
   visibleChoices: false,
 };
@@ -57,10 +56,27 @@ const reducer = (state = initialState, action = {}) => {
       }
     };
 
+  case SET_CURRENT_NPC:
+    return {
+      ...state,
+      currentNPC: {
+        ...state.currentNPC,
+        name: action.payload.name,
+        description: action.payload.description,
+        picture: action.payload.picture,
+      }
+    };
+
   case SET_CHOICES:
     return {
       ...state,
       choices: action.payload.choices
+    };
+
+  case SET_HAS_NPC:
+    return {
+      ...state,
+      hasNPC: action.payload,
     };
 
   case SET_VISIBLE_NPC:
