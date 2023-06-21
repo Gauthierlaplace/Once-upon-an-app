@@ -59,6 +59,7 @@ function Game() {
     if (currentEventCode) {
       api.get(`/event/roll/${currentEventCode}`)
         .then((response) => {
+          // console.log(response.data.npcCurrentEvent);
           // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
           // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
           // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
@@ -77,6 +78,9 @@ function Game() {
           } else {
             dispatch(setCurrentNPC('', '', ''));
           }
+
+          const npcDialogue = response.data.npcCurrentEvent.dialogue[0];
+          npcDialogue.map((element) => console.log(element));
         })
         .catch((error) => console.log(error));
     }

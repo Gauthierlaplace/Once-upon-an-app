@@ -7,10 +7,19 @@ import {
   SET_VISIBLE_NPC,
   SET_VISIBLE_CHOICES,
   SET_CURRENT_NPC,
+  INCREMENT_PROGRESS,
+  RESET_PROGRESS,
+  SET_EVENT_PROGRESS_STATUS,
 } from '../actions/game';
 
 export const initialState = {
   heroData: heroData,
+  progress: 0,
+
+  // Peut prendre les valeurs 'normal', 'beforeLast',
+  // 'beforeBoss', 'beforeBiomeEnd', 'beforeGameEnd'
+  eventProgressStatus: 'normal',
+
   currentEvent:
   {
     code_event: '',
@@ -89,6 +98,24 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       visibleChoices: action.payload,
+    };
+
+  case INCREMENT_PROGRESS:
+    return {
+      ...state,
+      progress: state.progress + 1,
+    };
+
+  case RESET_PROGRESS:
+    return {
+      ...state,
+      progress: 0,
+    };
+
+  case SET_EVENT_PROGRESS_STATUS:
+    return {
+      ...state,
+      eventProgressStatus: action.payload,
     };
 
   default:
