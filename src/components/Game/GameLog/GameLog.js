@@ -6,11 +6,12 @@ import {
   setVisibleChoices,
 } from '../../../actions/game';
 
-import Choices from './GameLogChoices/GameLogChoices';
-import EventDescription from './GameLogEventDesciption/GameLogEventDescription';
-import NPC from './GameLogNPC/GameLogNPC';
+import GameLogChoices from './GameLogChoices/GameLogChoices';
+import GameLogEventDescription from './GameLogEventDesciption/GameLogEventDescription';
+import GameLogNPC from './GameLogNPC/GameLogNPC';
 
 function GameLog({ eventDescription, npcName, npcDescription }) {
+  const hasNPC = useSelector((state) => state.game.hasNPC);
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
   const visibleChoices = useSelector((state) => state.game.visibleChoices);
   const dispatch = useDispatch();
@@ -19,8 +20,11 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
   // Si on n'a pas de NPC, on envoie directement vers les choix
   return (
     <div className="GameLog">
-      <div className="GameLog-Log">
-        <EventDescription description={eventDescription} />
+      {/* La description est toujours affichée, quoi qu'il arrive */}
+      <GameLogEventDescription description={eventDescription} />
+
+      {/* Le 1er bouton "Suite" s'affiche uniquement s'il y a un NPC dans la scène */}
+      {(hasNPC) && (
         <button
           type="button"
           className="GameLog-next-step-button"
@@ -28,23 +32,33 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
         >
           Suite
         </button>
+      )}
 
-        {visibleNPC && (
-          <NPC npcName={npcName} npcDescription={npcDescription} />
-        )}
+      {/* Le NPC s'affiche s'il y a un NPC et s'il est visible (clic sur le bouton précédent) */}
+      {(hasNPC && visibleNPC) && (
+        <GameLogNPC npcName={npcName} npcDescription={npcDescription} />
+      )}
 
-        {visibleNPC && (
-          <button
-            type="button"
-            className="GameLog-next-step-button"
-            onClick={() => dispatch(setVisibleChoices(true))}
-          >
-            Suite
-          </button>
-        )}
-      </div>
+      {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
+      {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
+      {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
+      {(!hasNPC || (hasNPC && visibleNPC)) && (
+        <button
+          type="button"
+          className="GameLog-next-step-button"
+          onClick={() => {
+            dispatch(setVisibleChoices(true));
+            // TODO proposition pour que le NPC disparaisse après son intervention
+            // Pour l'instant, nous le retirons car sinon ça fait aussi disparaitre sa description
+            // dispatch(setVisibleNPC(false));
+          }}
+        >
+          Suite
+        </button>
+      )}
+
       {visibleChoices && (
-        <Choices />
+        <GameLogChoices />
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './GameScene.scss';
 
-import NPC from '../GameNPC/GameNPC';
+import GameNPC from '../GameNPC/GameNPC';
 
 function GameScene({ npcName, picture }) {
   // Todo : conditionner apparition NPC selon le type d'événement (rencontre ou combat)
@@ -15,7 +15,7 @@ function GameScene({ npcName, picture }) {
         src={picture}
         alt={npcName}
       />
-      {visibleNPC && (<NPC />)}
+      {visibleNPC && (<GameNPC />)}
     </div>
   );
 }
