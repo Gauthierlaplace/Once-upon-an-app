@@ -53,39 +53,6 @@ function Game() {
       .catch((error) => console.log(error));
   }, []);
 
-  // On surveille le code du currentEvent, et on check les infos dès qu'il change
-  // Cela va nous permettre notamment de savoir si currentEvent a un NPC ou non
-  useEffect(() => {
-    if (currentEventCode) {
-      api.get(`/event/roll/${currentEventCode}`)
-        .then((response) => {
-          // console.log(response.data.npcCurrentEvent);
-          // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
-          // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
-          // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
-          const npcAPI = response.data.npcCurrentEvent;
-          const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
-          dispatch(setHasNPC(hasNPC));
-
-          // S'il y a un NPC, on dispatche ses infos
-          if (hasNPC) {
-            dispatch(setCurrentNPC(
-              npcAPI.npcName,
-              npcAPI.npcDescription,
-              npcAPI.picture
-            ));
-          // S'il y a un NPC, on remet à zéro les infos NPC
-          } else {
-            dispatch(setCurrentNPC('', '', ''));
-          }
-
-          const npcDialogue = response.data.npcCurrentEvent.dialogue[0];
-          npcDialogue.map((element) => console.log(element));
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [currentEventCode]);
-
   // Une fois que les données de l'événement sont bien récupérées dans le state,
   // Je gère leur affichage ici :
   const eventTitle = useSelector((state) => state.game.currentEvent.title);

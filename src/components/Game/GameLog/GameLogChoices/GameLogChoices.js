@@ -9,6 +9,8 @@ import Loading from '../../../Loading/Loading';
 import {
   setCurrentEvent,
   setChoices,
+  setHasNPC,
+  setCurrentNPC,
   setVisibleNPC,
   setVisibleChoices,
   incrementProgress,
@@ -36,6 +38,28 @@ function GameLogChoices() {
           eventAPI.description,
           eventAPI.picture,
         ));
+
+        // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
+        // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
+        // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
+        const npcAPI = response.data.npcCurrentEvent;
+        const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
+        dispatch(setHasNPC(hasNPC));
+
+        // S'il y a un NPC, on dispatche ses infos
+        if (hasNPC) {
+          dispatch(setCurrentNPC(
+            npcAPI.npcName,
+            npcAPI.npcDescription,
+            npcAPI.picture
+          ));
+        // S'il n'y a pas de NPC, on remet à zéro les infos NPC
+        } else {
+          dispatch(setCurrentNPC('', '', ''));
+        }
+
+        const npcDialogues = response.data.npcCurrentEvent.dialogues;
+        console.log(npcDialogues);
 
         // La concaténation du current-ending + next-opening est gérée ici :
         const firstChoice = {
@@ -68,6 +92,28 @@ function GameLogChoices() {
           eventAPI.picture,
         ));
 
+        // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
+        // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
+        // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
+        const npcAPI = response.data.npcCurrentEvent;
+        const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
+        dispatch(setHasNPC(hasNPC));
+
+        // S'il y a un NPC, on dispatche ses infos
+        if (hasNPC) {
+          dispatch(setCurrentNPC(
+            npcAPI.npcName,
+            npcAPI.npcDescription,
+            npcAPI.picture
+          ));
+        // S'il n'y a pas de NPC, on remet à zéro les infos NPC
+        } else {
+          dispatch(setCurrentNPC('', '', ''));
+        }
+
+        const npcDialogues = response.data.npcCurrentEvent.dialogues;
+        console.log(npcDialogues);
+
         console.log(response.data);
         const eventEnding = response.data.currentEventEnding;
 
@@ -88,6 +134,133 @@ function GameLogChoices() {
       .catch((error) => console.log(error));
   };
 
+  const getBossFromAPI = (nextEventId) => {
+    console.log('fonction getBossFromAPI lancée');
+
+    api.get(`/event/boss/${nextEventId}`)
+      .then((response) => {
+        const eventAPI = response.data.currentEvent;
+        dispatch(setCurrentEvent(
+          eventAPI.id,
+          eventAPI.title,
+          eventAPI.description,
+          eventAPI.picture,
+        ));
+
+        // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
+        // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
+        // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
+        const npcAPI = response.data.npcCurrentEvent;
+        const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
+        dispatch(setHasNPC(hasNPC));
+
+        // S'il y a un NPC, on dispatche ses infos
+        if (hasNPC) {
+          dispatch(setCurrentNPC(
+            npcAPI.npcName,
+            npcAPI.npcDescription,
+            npcAPI.picture
+          ));
+        // S'il n'y a pas de NPC, on remet à zéro les infos NPC
+        } else {
+          dispatch(setCurrentNPC('', '', ''));
+        }
+
+        const npcDialogues = response.data.npcCurrentEvent.dialogues;
+        console.log(npcDialogues);
+
+        const eventEnding = response.data.currentEventEnding;
+
+        // La concaténation du current-ending + next-opening est gérée ici :
+        const firstChoice = {
+          nextEventId: response.data.EndBiome.Id,
+          content: `${eventEnding} ${response.data.EndBiome.Opening}`,
+        };
+        const secondChoice = {
+          nextEventId: 0,
+          content: 'HaraKiri',
+        };
+
+        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setVisibleNPC(false));
+        dispatch(setVisibleChoices(false));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getBiomeEndFromAPI = (nextEventId) => {
+    console.log('fonction biomeEndFromAPI lancée');
+
+    api.get(`/event/end/${nextEventId}`)
+      .then((response) => {
+        console.log(response.data);
+        const eventAPI = response.data.currentEvent;
+        dispatch(setCurrentEvent(
+          eventAPI.id,
+          eventAPI.title,
+          eventAPI.description,
+          eventAPI.picture,
+        ));
+
+        dispatch(setHasNPC(false));
+        dispatch(setCurrentNPC('', '', ''));
+
+        const eventEnding = response.data.currentEventEnding;
+
+        // La concaténation du current-ending + next-opening est gérée ici :
+        const firstChoice = {
+          // Todo check ce nextEventId
+          nextEventId: response.data.EndGame.Id,
+          content: `${eventEnding} ${response.data.EndGame.Opening}`,
+        };
+        const secondChoice = {
+          nextEventId: 0,
+          content: 'HaraKiri',
+        };
+
+        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setVisibleNPC(false));
+        dispatch(setVisibleChoices(false));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getGameEndFromAPI = (nextEventId) => {
+    console.log('fonction gameEndFromAPI lancée');
+
+    api.get(`/event/victory/${nextEventId}`)
+      .then((response) => {
+        console.log(response.data);
+        const eventAPI = response.data.currentEvent;
+        dispatch(setCurrentEvent(
+          eventAPI.id,
+          eventAPI.title,
+          eventAPI.description,
+          eventAPI.picture,
+        ));
+
+        dispatch(setHasNPC(false));
+        dispatch(setCurrentNPC('', '', ''));
+
+        const eventEnding = response.data.currentEventEnding;
+
+        // La concaténation du current-ending + next-opening est gérée ici :
+        const firstChoice = {
+          nextEventId: 0,
+          content: 'Harakiri 1',
+        };
+        const secondChoice = {
+          nextEventId: 1,
+          content: 'HaraKiri 2',
+        };
+
+        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setVisibleNPC(false));
+        dispatch(setVisibleChoices(false));
+      })
+      .catch((error) => console.log(error));
+  };
+
   const manageEventProgressStatus = () => {
     // le progressMax est l'étape ultime (fin du jeu)
     // Dans notre exemple (max=6), si progress vaut 6 c'est gagné
@@ -96,7 +269,7 @@ function GameLogChoices() {
     // S'il vaut 2, c'est juste avant last
     // S'il vaut <2 (0 ou 1) c'est normal.
 
-    const progressMax = 6;
+    const progressMax = 4;
 
     if (progress === progressMax - 1) {
       dispatch(setEventProgressStatus('beforeGameEnd'));
@@ -137,7 +310,17 @@ function GameLogChoices() {
       getLastEventFromAPI(nextEventId);
     }
 
-    // Todo continuer...
+    if (eventProgressStatus === 'beforeBoss') {
+      getBossFromAPI(nextEventId);
+    }
+
+    if (eventProgressStatus === 'beforeBiomeEnd') {
+      getBiomeEndFromAPI(nextEventId);
+    }
+
+    if (eventProgressStatus === 'beforeGameEnd') {
+      getGameEndFromAPI(nextEventId);
+    }
 
     setLoading(false);
   };
