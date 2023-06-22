@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './GameLog.scss';
 
-import hide from '../../../functions/hide';
+import { hide, showNPCFollowButton } from '../../../functions/game';
 
 import {
   setVisibleNPC,
@@ -19,6 +19,8 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
 
   const dispatch = useDispatch();
 
+  showNPCFollowButton();
+
   return (
     <div className="GameLog">
       {/* La description est toujours affichée, quoi qu'il arrive */}
@@ -28,7 +30,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
       {(hasNPC) && (
         <button
           type="button"
-          className="GameLog-next-step-button"
+          className="GameLog-next-step-npc-button"
           onClick={(event) => {
             hide(event.target);
             dispatch(setVisibleNPC(true));

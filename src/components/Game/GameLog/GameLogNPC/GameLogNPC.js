@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import './GameLogNPC.scss';
 import GameLogNPCDialogue from './GameLogNPCDialogue/GameLogNPCDialogue';
-import hide from '../../../../functions/hide';
+import { hide } from '../../../../functions/game';
 
 function GameLogNPC({ npcName, npcDescription }) {
   const [visibleDialogue, setVisibleDialogue] = useState(false);
