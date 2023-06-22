@@ -2,14 +2,15 @@
 
 .Game {
     position: absolute;
-    top: 90px;
+    top: 0;
     width: 100%;
-    height: 93%;
+    height: 100%;
     background-color: #EED5AF;
 
 
     &-flexSA {
         width: 100%;
+        height: 93%;
         display: flex;
         justify-content: space-around;
     }
