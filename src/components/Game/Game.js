@@ -46,7 +46,6 @@ function Game() {
           content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
         };
 
-        dispatch(setHasNPC(false));
         dispatch(setChoices([firstChoice, secondChoice]));
         setLoading(false);
       })

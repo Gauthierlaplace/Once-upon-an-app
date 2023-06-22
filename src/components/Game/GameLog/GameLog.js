@@ -19,8 +19,6 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
 
   const dispatch = useDispatch();
 
-  // Todo rajouter une condition pour vérifier si la scène fait intervenir un NPC ou non
-  // Si on n'a pas de NPC, on envoie directement vers les choix
   return (
     <div className="GameLog">
       {/* La description est toujours affichée, quoi qu'il arrive */}
@@ -36,7 +34,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
             dispatch(setVisibleNPC(true));
           }}
         >
-          Suite (NPC)
+          Suite
         </button>
       )}
 
@@ -60,7 +58,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
             // dispatch(setVisibleNPC(false));
           }}
         >
-          Suite (Choices)
+          Suite
         </button>
       )}
 

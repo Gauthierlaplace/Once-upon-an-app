@@ -201,6 +201,7 @@ function GameLogChoices() {
         dispatch(setChoices([onlyChoice]));
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
+        dispatch(setLastEventEnding(''));
       })
       .catch((error) => console.log(error));
   };
