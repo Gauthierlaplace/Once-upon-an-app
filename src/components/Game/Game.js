@@ -47,7 +47,7 @@ function Game() {
         };
 
         dispatch(setHasNPC(false));
-        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setChoices([firstChoice, secondChoice]));
         setLoading(false);
       })
       .catch((error) => console.log(error));

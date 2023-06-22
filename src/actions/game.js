@@ -47,10 +47,10 @@ export const setEffect = (effectId, effectDescription) => ({
 });
 
 // TODO faire évoluer cette action pour qu'elle gère le cas où l'on a plus de 2 choix
-export const setChoices = (firstChoice, secondChoice) => ({
+export const setChoices = (choicesArray) => ({
   type: SET_CHOICES,
   payload: {
-    choices: [firstChoice, secondChoice],
+    choices: choicesArray,
   },
 });
 

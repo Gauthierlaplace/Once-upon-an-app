@@ -47,7 +47,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
       {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
       {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
       {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
-      {(!hasNPC || (hasNPC && visibleNPC)) && (
+      {!hasNPC && (
         <button
           type="button"
           className="GameLog-next-step-button"

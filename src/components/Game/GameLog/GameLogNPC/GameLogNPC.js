@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import './GameLogNPC.scss';
 import GameLogNPCDialogue from './GameLogNPCDialogue/GameLogNPCDialogue';
+import hide from '../../../../functions/hide';
 
 function GameLogNPC({ npcName, npcDescription }) {
-  // Todo : décommenter ce composant lorsque l'on aura géré les NPC
+  const [visibleDialogue, setVisibleDialogue] = useState(false);
+
   return (
     <div className="GameLogNPC">
       <p className="GameLogNPC-intro">
@@ -13,7 +16,21 @@ function GameLogNPC({ npcName, npcDescription }) {
       <p className="GameLogNPC-content">
         {npcDescription}
       </p>
-      <GameLogNPCDialogue />
+
+      {/* Le bouton "Dialogue" s'affiche toujours, quand le NPC est visible */}
+      <button
+        type="button"
+        className="GameLog-next-step-button"
+        onClick={(event) => {
+          hide(event.target);
+          setVisibleDialogue(true);
+        }}
+      >
+        Dialogue
+      </button>
+
+      {visibleDialogue && (<GameLogNPCDialogue />)}
+
     </div>
   );
 }

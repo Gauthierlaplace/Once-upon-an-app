@@ -46,16 +46,7 @@ export const initialState = {
   },
 
   choices:
-  [
-    {
-      nextEventId: 0,
-      content: 'Choix 0',
-    },
-    {
-      nextEventId: 1,
-      content: 'Choix 1',
-    },
-  ],
+  ['Choix 0', 'Choix 1'],
 
   hasNPC: false,
   visibleNPC: false,
