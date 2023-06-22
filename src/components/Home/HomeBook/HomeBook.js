@@ -175,7 +175,7 @@ function HomeBook() {
           <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
           <div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div>
           <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
-          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . . . . . P.5</div>
+          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . P.5</div>
 
         </div>
       </div>
