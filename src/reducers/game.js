@@ -5,6 +5,8 @@ import {
   SET_CHOICES,
   SET_HAS_NPC,
   SET_VISIBLE_NPC,
+  SET_DIALOGUE,
+  SET_EFFECT,
   SET_VISIBLE_CHOICES,
   SET_CURRENT_NPC,
   INCREMENT_PROGRESS,
@@ -28,12 +30,21 @@ export const initialState = {
     picture: '',
     event_type_code: '',
   },
+
   currentNPC:
   {
     name: '',
     description: '',
     picture: '',
   },
+
+  dialogue:
+  {
+    sentence: '',
+    answers:
+    ['Answer 0', 'Answer 1']
+  },
+
   choices:
   [
     {
@@ -116,6 +127,26 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       eventProgressStatus: action.payload,
+    };
+
+  case SET_DIALOGUE:
+    return {
+      ...state,
+      dialogue: {
+        ...state.dialogue,
+        sentence: action.payload.sentence,
+        answers: action.payload.answers
+      }
+    };
+
+  case SET_EFFECT:
+    return {
+      ...state,
+      effect: {
+        ...state.dialogue,
+        id: action.payload.id,
+        description: action.payload.description,
+      }
     };
 
   default:

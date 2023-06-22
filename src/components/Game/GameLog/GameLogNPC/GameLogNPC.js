@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 import './GameLogNPC.scss';
+import GameLogNPCDialogue from './GameLogNPCDialogue/GameLogNPCDialogue';
 
 function GameLogNPC({ npcName, npcDescription }) {
   // Todo : décommenter ce composant lorsque l'on aura géré les NPC
@@ -11,6 +12,7 @@ function GameLogNPC({ npcName, npcDescription }) {
       </p>
       <p className="GameLogNPC-content">
         {npcDescription}
+        <GameLogNPCDialogue />
       </p>
     </div>
   );
