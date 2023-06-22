@@ -11,6 +11,8 @@ import {
   setChoices,
   setHasNPC,
   setCurrentNPC,
+  setDialogue,
+  setEffect,
   setVisibleNPC,
   setVisibleChoices,
   incrementProgress,
@@ -53,13 +55,20 @@ function GameLogChoices() {
             npcAPI.npcDescription,
             npcAPI.picture
           ));
+
+          // Gestion des dialogues
+          const npcDialogueAPI = npcAPI.dialogues.dialogue1;
+          dispatch(setDialogue(
+            npcDialogueAPI.dialogue,
+            npcDialogueAPI.answer1,
+            npcDialogueAPI.answer2
+          ));
+
         // S'il n'y a pas de NPC, on remet à zéro les infos NPC
         } else {
           dispatch(setCurrentNPC('', '', ''));
+          dispatch(setDialogue('', '', ''));
         }
-
-        const npcDialogues = response.data.npcCurrentEvent.dialogues;
-        console.log(npcDialogues);
 
         // La concaténation du current-ending + next-opening est gérée ici :
         const firstChoice = {
@@ -106,13 +115,20 @@ function GameLogChoices() {
             npcAPI.npcDescription,
             npcAPI.picture
           ));
+
+          // Gestion des dialogues
+          const npcDialogueAPI = npcAPI.dialogues.dialogue1;
+          dispatch(setDialogue(
+            npcDialogueAPI.dialogue,
+            npcDialogueAPI.answer1,
+            npcDialogueAPI.answer2
+          ));
+
         // S'il n'y a pas de NPC, on remet à zéro les infos NPC
         } else {
           dispatch(setCurrentNPC('', '', ''));
+          dispatch(setDialogue('', '', ''));
         }
-
-        const npcDialogues = response.data.npcCurrentEvent.dialogues;
-        console.log(npcDialogues);
 
         console.log(response.data);
         const eventEnding = response.data.currentEventEnding;
@@ -161,13 +177,19 @@ function GameLogChoices() {
             npcAPI.npcDescription,
             npcAPI.picture
           ));
+          // Gestion des dialogues
+          const npcDialogueAPI = npcAPI.dialogues.dialogue1;
+          dispatch(setDialogue(
+            npcDialogueAPI.dialogue,
+            npcDialogueAPI.answer1,
+            npcDialogueAPI.answer2
+          ));
+
         // S'il n'y a pas de NPC, on remet à zéro les infos NPC
         } else {
           dispatch(setCurrentNPC('', '', ''));
+          dispatch(setDialogue('', '', ''));
         }
-
-        const npcDialogues = response.data.npcCurrentEvent.dialogues;
-        console.log(npcDialogues);
 
         const eventEnding = response.data.currentEventEnding;
 

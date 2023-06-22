@@ -61,6 +61,7 @@ module.exports = {
     'object-curly-newline': 'warn',
     'react/jsx-closing-bracket-location': 'warn',
     'max-len': 'warn',
-    'no-unused-vars': 'warn'
+    'no-unused-vars': 'warn',
+    'react/no-array-index-key': 'warn'
   }
 };
