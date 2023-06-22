@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './GameLog.scss';
 
+import hide from '../../../functions/hide';
+
 import {
   setVisibleNPC,
   setVisibleChoices,
@@ -28,7 +30,10 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
         <button
           type="button"
           className="GameLog-next-step-button"
-          onClick={() => dispatch(setVisibleNPC(true))}
+          onClick={(event) => {
+            hide(event.target);
+            dispatch(setVisibleNPC(true));
+          }}
         >
           Suite
         </button>
@@ -46,7 +51,8 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
         <button
           type="button"
           className="GameLog-next-step-button"
-          onClick={() => {
+          onClick={(event) => {
+            hide(event.target);
             dispatch(setVisibleChoices(true));
             // TODO proposition pour que le NPC disparaisse après son intervention
             // Pour l'instant, nous le retirons car sinon ça fait aussi disparaitre sa description

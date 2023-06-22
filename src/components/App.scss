@@ -43,3 +43,9 @@
   color: vars.$error-color;
 }
 
+// Pour cacher les boutons ou parties dont nous n'avons plus besoins
+// Ex : bouton "SUITE"
+.hidden {
+  display: none;
+}
+
