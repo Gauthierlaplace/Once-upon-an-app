@@ -12,8 +12,8 @@ function GameLogNPC({ npcName, npcDescription }) {
       </p>
       <p className="GameLogNPC-content">
         {npcDescription}
-        <GameLogNPCDialogue />
       </p>
+      <GameLogNPCDialogue />
     </div>
   );
 }

@@ -2,13 +2,15 @@ export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
 export const SET_CURRENT_NPC = 'SET_CURRENT_NPC';
 export const SET_CHOICES = 'SET_CHOICES';
 export const SET_HAS_NPC = 'SET_HAS_NPC';
-export const SET_DIALOGUE = 'SET_DIALOGUE';
+export const SET_DIALOGUE_AND_EFFECTS = 'SET_DIALOGUE_AND_EFFECTS';
 export const SET_EFFECT = 'SET_EFFECT';
 export const SET_VISIBLE_NPC = 'SET_VISIBLE_NPC';
 export const SET_VISIBLE_CHOICES = 'SET_VISIBLE_CHOICES';
 export const INCREMENT_PROGRESS = 'INCREMENT_PROGRESS';
 export const RESET_PROGRESS = 'RESET_PROGRESS';
 export const SET_EVENT_PROGRESS_STATUS = 'SET_EVENT_PROGRESS_STATUS';
+export const SET_HERO_STATUS = 'SET_HERO_STATUS';
+export const SET_PLAYER = 'SET_PLAYER';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
 export const setCurrentEvent = (codeEvent, title, description, picture) => ({
@@ -30,19 +32,14 @@ export const setCurrentNPC = (nameNPC, descriptionNPC, pictureNPC) => ({
   },
 });
 
-export const setDialogue = (dialogueSentence, dialogueFirstAnswer, dialogueSecondAnswer) => ({
-  type: SET_DIALOGUE,
+export const setDialogueAndEffects = (
+  dialogueSentence,
+  [firstAnswer, secondAnswer]
+) => ({
+  type: SET_DIALOGUE_AND_EFFECTS,
   payload: {
     sentence: dialogueSentence,
-    answers: [dialogueFirstAnswer, dialogueSecondAnswer]
-  },
-});
-
-export const setEffect = (effectId, effectDescription) => ({
-  type: SET_EFFECT,
-  payload: {
-    id: effectId,
-    description: effectDescription,
+    answers: [firstAnswer, secondAnswer]
   },
 });
 
@@ -80,4 +77,24 @@ export const resetProgress = () => ({
 export const setEventProgressStatus = (newStatus) => ({
   type: SET_EVENT_PROGRESS_STATUS,
   payload: newStatus,
+});
+
+export const setHeroStatus = (newhealth) => ({
+  type: SET_HERO_STATUS,
+  payload:
+  {
+    health: newhealth,
+  },
+});
+
+export const setPlayer = (id, name, picture, health, maxHealth) => ({
+  type: SET_PLAYER,
+  payload:
+  {
+    id: id,
+    name: name,
+    picture: picture,
+    health: health,
+    maxHealth: maxHealth,
+  },
 });
