@@ -16,6 +16,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
   const hasNPC = useSelector((state) => state.game.hasNPC);
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
   const visibleChoices = useSelector((state) => state.game.visibleChoices);
+
   const dispatch = useDispatch();
 
   // Todo rajouter une condition pour vérifier si la scène fait intervenir un NPC ou non
@@ -35,7 +36,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
             dispatch(setVisibleNPC(true));
           }}
         >
-          Suite
+          Suite (NPC)
         </button>
       )}
 
@@ -59,7 +60,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
             // dispatch(setVisibleNPC(false));
           }}
         >
-          Suite
+          Suite (Choices)
         </button>
       )}
 

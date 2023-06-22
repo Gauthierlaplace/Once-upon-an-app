@@ -3,6 +3,7 @@ import heroData from './../datas/HeroData';
 import {
   SET_CURRENT_EVENT,
   SET_CHOICES,
+  SET_LAST_EVENT_ENDING,
   SET_HAS_NPC,
   SET_VISIBLE_NPC,
   SET_DIALOGUE,
@@ -30,6 +31,8 @@ export const initialState = {
     picture: '',
     event_type_code: '',
   },
+
+  lastEventEnding: '',
 
   currentNPC:
   {
@@ -82,6 +85,12 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       choices: action.payload.choices
+    };
+
+  case SET_LAST_EVENT_ENDING:
+    return {
+      ...state,
+      lastEventEnding: action.payload
     };
 
   case SET_HAS_NPC:

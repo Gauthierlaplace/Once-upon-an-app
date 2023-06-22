@@ -9,10 +9,10 @@ import Loading from '../../../Loading/Loading';
 import {
   setCurrentEvent,
   setChoices,
+  setLastEventEnding,
   setHasNPC,
   setCurrentNPC,
   setDialogue,
-  setEffect,
   setVisibleNPC,
   setVisibleChoices,
   incrementProgress,
@@ -24,6 +24,7 @@ function GameLogChoices() {
   const choices = useSelector((state) => state.game.choices);
   const progress = useSelector((state) => state.game.progress);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
+  const lastEventEnding = useSelector((state) => state.game.lastEventEnding);
 
   const dispatch = useDispatch();
 
@@ -130,19 +131,19 @@ function GameLogChoices() {
           dispatch(setDialogue('', '', ''));
         }
 
-        console.log(response.data);
         const eventEnding = response.data.currentEventEnding;
 
         // La concaténation du current-ending + next-opening est gérée ici :
         const firstChoice = {
           nextEventId: response.data.BossA.Id,
-          content: `${eventEnding} ${response.data.BossA.Opening}`,
+          content: response.data.BossA.Opening,
         };
         const secondChoice = {
           nextEventId: response.data.BossB.Id,
-          content: `${eventEnding} ${response.data.BossB.Opening}`,
+          content: response.data.BossB.Opening,
         };
 
+        dispatch(setLastEventEnding(eventEnding));
         dispatch(setChoices([firstChoice, secondChoice]));
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
@@ -209,7 +210,6 @@ function GameLogChoices() {
 
     api.get(`/event/end/${nextEventId}`)
       .then((response) => {
-        console.log(response.data);
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
           eventAPI.id,
@@ -239,7 +239,6 @@ function GameLogChoices() {
 
     api.get(`/event/victory/${nextEventId}`)
       .then((response) => {
-        console.log(response.data);
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
           eventAPI.id,
@@ -324,7 +323,15 @@ function GameLogChoices() {
 
   return (
     <div className="GameLogChoices">
-      <h2 className="GameLogChoices-content">A vous de jouer :</h2>
+      <h2 className="GameLogChoices-last-event-ending">
+        {(lastEventEnding.length > 0)
+          ? lastEventEnding : ''}
+      </h2>
+
+      <h2 className="GameLogChoices-content">
+        À vous de jouer :
+      </h2>
+
       <div>
         {choices.map((choice) => (
           <button
