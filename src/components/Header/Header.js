@@ -23,45 +23,48 @@ function Header() {
   return (
     // Todo retirer les NavLinks quand nous n'en aurons plus besoin
     <div className="Header">
-      <NavLink to="/">
-        <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
-      </NavLink>
-      {/* La div suivante ne s'affiche que quand logged vaut true */}
-      {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
+      {/* Logo cliquable qui renvoi sur la page d'accueil */}
+      <div className="Header-width">
 
-      {logged && (
-        <div className="Header-Account">
-          <nav>
-            <ul>
-              <li>
-                Hello {nickname}
-                <ul>
-                  <li>
-                    <NavLink to="/">
-                      Accueil
-                    </NavLink>
-                  </li>
+        <NavLink to="/">
+          <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
+        </NavLink>
 
-                  <li>
-                    <NavLink to="/MyAccount">Mon Compte</NavLink>
-                  </li>
+        {/* La div suivante ne s'affiche que quand logged vaut true */}
+        {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
+        {logged && (
+          <div className="Header-Account">
+            <nav>
+              <ul>
+                <li>
+                  Hello {nickname}
+                  <ul>
+                    <li>
+                      <NavLink to="/">
+                        Accueil
+                      </NavLink>
+                    </li>
 
-                  <li>
-                    <NavLink to="/game">
-                      Jouer
-                    </NavLink>
-                  </li>
+                    <li>
+                      <NavLink to="/MyAccount">Mon Compte</NavLink>
+                    </li>
 
-                  <li onClick={() => handleLogOut()}>
-                    Déconnexion
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      )}
+                    <li>
+                      <NavLink to="/game">
+                        Jouer
+                      </NavLink>
+                    </li>
 
+                    <li onClick={() => handleLogOut()}>
+                      Déconnexion
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
