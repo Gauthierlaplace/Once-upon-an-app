@@ -27,7 +27,7 @@ function Header() {
       <div className="Header-width">
 
         <NavLink to="/">
-          <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
+          <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/4/1687449010-illustration-sans-titre-4.png" alt="Logo de l'application web : Once upon an app" />
         </NavLink>
 
         {/* La div suivante ne s'affiche que quand logged vaut true */}
