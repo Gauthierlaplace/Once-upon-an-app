@@ -11,10 +11,15 @@ import GameLogChoices from './GameLogChoices/GameLogChoices';
 import GameLogEventDescription from './GameLogEventDesciption/GameLogEventDescription';
 import GameLogNPC from './GameLogNPC/GameLogNPC';
 
-function GameLog({ eventDescription, npcName, npcDescription }) {
+function GameLog({
+  eventDescription,
+  npcName,
+  npcDescription,
+}) {
   const hasNPC = useSelector((state) => state.game.hasNPC);
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
   const visibleChoices = useSelector((state) => state.game.visibleChoices);
+  const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
 
   const [visibleButtonFollowToShowNPC, setVisibleButtonFollowToShowNPC] = useState(true);
   const [visibleButtonFollowToShowChoices, setVisibleButtonFollowToShowChoices] = useState(true);
@@ -42,7 +47,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
       )}
 
       {/* Le NPC s'affiche s'il y a un NPC et s'il est visible (clic sur le bouton précédent) */}
-      {(hasNPC && visibleNPC) && (
+      {(hasNPC && visibleNPC && (eventProgressStatus !== 'gameEnd')) && (
         <GameLogNPC
           npcName={npcName}
           npcDescription={npcDescription}
@@ -54,7 +59,7 @@ function GameLog({ eventDescription, npcName, npcDescription }) {
       {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
       {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
       {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
-      {(!hasNPC && visibleButtonFollowToShowChoices) && (
+      {(!hasNPC && visibleButtonFollowToShowChoices && (eventProgressStatus !== 'gameEnd')) && (
         <button
           type="button"
           className="GameLog-next-step-button"

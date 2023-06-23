@@ -13,7 +13,8 @@ import {
   RESET_PROGRESS,
   SET_EVENT_PROGRESS_STATUS,
   SET_PLAYER,
-  SET_HERO_STATUS
+  SET_HERO_STATUS,
+  SET_LOADING,
 } from '../actions/game';
 
 export const initialState = {
@@ -30,6 +31,7 @@ export const initialState = {
 
   // Peut prendre les valeurs 'normal', 'beforeLast',
   // 'beforeBoss', 'beforeBiomeEnd', 'beforeGameEnd'
+  // 'gameEnd"
   eventProgressStatus: 'normal',
 
   currentEvent:
@@ -62,6 +64,8 @@ export const initialState = {
   hasNPC: false,
   visibleNPC: false,
   visibleChoices: false,
+
+  loading: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -167,6 +171,12 @@ const reducer = (state = initialState, action = {}) => {
         health: action.payload.health,
         maxHealth: action.payload.maxHealth
       }
+    };
+
+  case SET_LOADING:
+    return {
+      ...state,
+      loading: action.payload,
     };
 
   default:

@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './GameLogChoices.scss';
 import api from '../../../../api/api';
 
 import Loading from '../../../Loading/Loading';
+
 import {
   setCurrentEvent,
   setChoices,
@@ -17,6 +17,7 @@ import {
   setVisibleChoices,
   incrementProgress,
   setEventProgressStatus,
+  setLoading,
 } from '../../../../actions/game';
 
 function GameLogChoices({
@@ -24,11 +25,11 @@ function GameLogChoices({
   setVisibleButtonFollowToShowDialogue,
   setVisibleButtonFollowToShowChoices,
 }) {
-  const [loading, setLoading] = useState(false);
   const choices = useSelector((state) => state.game.choices);
   const progress = useSelector((state) => state.game.progress);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
   const lastEventEnding = useSelector((state) => state.game.lastEventEnding);
+  const loading = useSelector((state) => state.game.loading);
 
   const dispatch = useDispatch();
 
@@ -96,7 +97,8 @@ function GameLogChoices({
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
   };
 
   // Cette route sera appelée si le compteur progress est supérieur ou égal à notre limite
@@ -166,7 +168,8 @@ function GameLogChoices({
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
   };
 
   const getBossFromAPI = (nextEventId) => {
@@ -229,7 +232,8 @@ function GameLogChoices({
         dispatch(setVisibleChoices(false));
         dispatch(setLastEventEnding(''));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
   };
 
   const getBiomeEndFromAPI = (nextEventId) => {
@@ -258,7 +262,8 @@ function GameLogChoices({
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
   };
 
   const getGameEndFromAPI = (nextEventId) => {
@@ -281,7 +286,8 @@ function GameLogChoices({
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
   };
 
   const manageEventProgressStatus = () => {
@@ -294,6 +300,9 @@ function GameLogChoices({
 
     const progressMax = 4;
 
+    if (progress === progressMax) {
+      dispatch(setEventProgressStatus('gameEnd'));
+    }
     if (progress === progressMax - 1) {
       dispatch(setEventProgressStatus('beforeGameEnd'));
     }
@@ -315,12 +324,11 @@ function GameLogChoices({
   // (route api/event/roll/id-du-prochain-event)
   const handleClickOnNextEvent = (nextEventId) => {
     // Todo réfléchir à déplacer l'incrémentation du progrès pour éviter le fast click (triche)
+    dispatch(setLoading(true));
+
     dispatch(incrementProgress());
 
     manageEventProgressStatus();
-
-    setLoading(true);
-
     if (eventProgressStatus === 'normal') {
       getEventRollFromAPI(nextEventId);
     }
@@ -344,8 +352,6 @@ function GameLogChoices({
     setVisibleButtonFollowToShowNPC(true);
     setVisibleButtonFollowToShowChoices(true);
     setVisibleButtonFollowToShowDialogue(true);
-
-    setLoading(false);
   };
 
   if (loading) {

@@ -12,6 +12,7 @@ export const RESET_PROGRESS = 'RESET_PROGRESS';
 export const SET_EVENT_PROGRESS_STATUS = 'SET_EVENT_PROGRESS_STATUS';
 export const SET_HERO_STATUS = 'SET_HERO_STATUS';
 export const SET_PLAYER = 'SET_PLAYER';
+export const SET_LOADING = 'SET_LOADING';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
 export const setCurrentEvent = (codeEvent, title, description, picture) => ({
@@ -102,4 +103,9 @@ export const setPlayer = (id, name, picture, health, maxHealth) => ({
     health: health,
     maxHealth: maxHealth,
   },
+});
+
+export const setLoading = (boolean) => ({
+  type: SET_LOADING,
+  payload: boolean,
 });
