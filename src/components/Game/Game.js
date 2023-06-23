@@ -5,7 +5,7 @@ import api from '../../api/api';
 
 import {
   setCurrentEvent,
-  setCurrentNPC,
+  setPlayer,
   setChoices,
   setHasNPC,
 } from '../../actions/game';
@@ -30,11 +30,19 @@ function Game() {
     api.get('/play')
       .then((response) => {
         const eventAPI = response.data.currentEvent;
+        const playerAPI = response.data.player;
         dispatch(setCurrentEvent(
           eventAPI.id,
           eventAPI.title,
           eventAPI.description,
           eventAPI.picture
+        ));
+        dispatch(setPlayer(
+          playerAPI.id,
+          playerAPI.name,
+          playerAPI.picture,
+          playerAPI.health,
+          playerAPI.maxHealth
         ));
 
         const firstChoice = {

@@ -35,7 +35,6 @@ function GameLogNPC({
         </button>
       )}
 
-
       {visibleDialogue && (<GameLogNPCDialogue />)}
 
     </div>

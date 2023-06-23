@@ -1,4 +1,4 @@
-import heroData from './../datas/HeroData';
+// import heroData from './../datas/HeroData';
 
 import {
   SET_CURRENT_EVENT,
@@ -6,17 +6,26 @@ import {
   SET_LAST_EVENT_ENDING,
   SET_HAS_NPC,
   SET_VISIBLE_NPC,
-  SET_DIALOGUE,
-  SET_EFFECT,
+  SET_DIALOGUE_AND_EFFECTS,
   SET_VISIBLE_CHOICES,
   SET_CURRENT_NPC,
   INCREMENT_PROGRESS,
   RESET_PROGRESS,
   SET_EVENT_PROGRESS_STATUS,
+  SET_PLAYER,
+  SET_HERO_STATUS
 } from '../actions/game';
 
 export const initialState = {
-  heroData: heroData,
+  player:
+  {
+    id: 0,
+    name: '',
+    picture: '',
+    health: '',
+    maxHealth: '',
+  },
+
   progress: 0,
 
   // Peut prendre les valeurs 'normal', 'beforeLast',
@@ -44,8 +53,7 @@ export const initialState = {
   dialogue:
   {
     sentence: '',
-    answers:
-    ['Answer 0', 'Answer 1']
+    answers: ['Answer 0', 'Answer 1'],
   },
 
   choices:
@@ -129,7 +137,7 @@ const reducer = (state = initialState, action = {}) => {
       eventProgressStatus: action.payload,
     };
 
-  case SET_DIALOGUE:
+  case SET_DIALOGUE_AND_EFFECTS:
     return {
       ...state,
       dialogue: {
@@ -139,13 +147,25 @@ const reducer = (state = initialState, action = {}) => {
       }
     };
 
-  case SET_EFFECT:
+  case SET_HERO_STATUS:
     return {
       ...state,
-      effect: {
-        ...state.dialogue,
+      player: {
+        ...state.player,
+        health: action.payload.health,
+      }
+    };
+
+  case SET_PLAYER:
+    return {
+      ...state,
+      player: {
+        ...state.player,
         id: action.payload.id,
-        description: action.payload.description,
+        name: action.payload.name,
+        picture: action.payload.picture,
+        health: action.payload.health,
+        maxHealth: action.payload.maxHealth
       }
     };
 

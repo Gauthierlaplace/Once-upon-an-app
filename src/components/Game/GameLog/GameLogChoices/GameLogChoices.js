@@ -12,7 +12,7 @@ import {
   setLastEventEnding,
   setHasNPC,
   setCurrentNPC,
-  setDialogue,
+  setDialogueAndEffects,
   setVisibleNPC,
   setVisibleChoices,
   incrementProgress,
@@ -63,16 +63,23 @@ function GameLogChoices({
 
           // Gestion des dialogues
           const npcDialogueAPI = npcAPI.dialogues.dialogue1;
-          dispatch(setDialogue(
-            npcDialogueAPI.dialogue,
-            npcDialogueAPI.answer1,
-            npcDialogueAPI.answer2
-          ));
+          const firstAnswer = {
+            answer: npcDialogueAPI.answer1,
+            effectId: npcDialogueAPI.effect1.id,
+            effectDescription: npcDialogueAPI.effect1.description,
+          };
+          const secondAnswer = {
+            answer: npcDialogueAPI.answer2,
+            effectId: npcDialogueAPI.effect2.id,
+            effectDescription: npcDialogueAPI.effect2.description,
+          };
+
+          dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
 
         // S'il n'y a pas de NPC, on remet à zéro les infos NPC
         } else {
           dispatch(setCurrentNPC('', '', ''));
-          dispatch(setDialogue('', '', ''));
+          dispatch(setDialogueAndEffects('', ['', '']));
         }
 
         // La concaténation du current-ending + next-opening est gérée ici :
@@ -123,16 +130,23 @@ function GameLogChoices({
 
           // Gestion des dialogues
           const npcDialogueAPI = npcAPI.dialogues.dialogue1;
-          dispatch(setDialogue(
-            npcDialogueAPI.dialogue,
-            npcDialogueAPI.answer1,
-            npcDialogueAPI.answer2
-          ));
+          const firstAnswer = {
+            answer: npcDialogueAPI.answer1,
+            effectId: npcDialogueAPI.effect1.id,
+            effectDescription: npcDialogueAPI.effect1.description,
+          };
+          const secondAnswer = {
+            answer: npcDialogueAPI.answer2,
+            effectId: npcDialogueAPI.effect2.id,
+            effectDescription: npcDialogueAPI.effect2.description,
+          };
+
+          dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
 
         // S'il n'y a pas de NPC, on remet à zéro les infos NPC
         } else {
           dispatch(setCurrentNPC('', '', ''));
-          dispatch(setDialogue('', '', ''));
+          dispatch(setDialogueAndEffects('', ['', '']));
         }
 
         const eventEnding = response.data.currentEventEnding;
@@ -182,18 +196,26 @@ function GameLogChoices({
             npcAPI.npcDescription,
             npcAPI.picture
           ));
+
           // Gestion des dialogues
           const npcDialogueAPI = npcAPI.dialogues.dialogue1;
-          dispatch(setDialogue(
-            npcDialogueAPI.dialogue,
-            npcDialogueAPI.answer1,
-            npcDialogueAPI.answer2
-          ));
+          const firstAnswer = {
+            answer: npcDialogueAPI.answer1,
+            effectId: npcDialogueAPI.effect1.id,
+            effectDescription: npcDialogueAPI.effect1.description,
+          };
+          const secondAnswer = {
+            answer: npcDialogueAPI.answer2,
+            effectId: npcDialogueAPI.effect2.id,
+            effectDescription: npcDialogueAPI.effect2.description,
+          };
+
+          dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
 
         // S'il n'y a pas de NPC, on remet à zéro les infos NPC
         } else {
           dispatch(setCurrentNPC('', '', ''));
-          dispatch(setDialogue('', '', ''));
+          dispatch(setDialogueAndEffects('', ['', '']));
         }
 
         const eventEnding = response.data.currentEventEnding;
