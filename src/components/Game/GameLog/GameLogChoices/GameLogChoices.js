@@ -30,6 +30,7 @@ function GameLogChoices({
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
   const lastEventEnding = useSelector((state) => state.game.lastEventEnding);
   const loading = useSelector((state) => state.game.loading);
+  const playerHealth = useSelector((state) => state.game.player.health);
 
   const dispatch = useDispatch();
 
@@ -290,6 +291,30 @@ function GameLogChoices({
       .finally(() => dispatch(setLoading(false)));
   };
 
+  const getGameOverFromAPI = (nextEventId) => {
+    console.log('fonction gameOverFromAPI lancée');
+
+    api.get(`/event/roll/${nextEventId}`)
+      .then((response) => {
+        const eventAPI = response.data.currentEvent;
+        dispatch(setCurrentEvent(
+          eventAPI.id,
+          eventAPI.title,
+          eventAPI.description,
+          eventAPI.picture,
+        ));
+
+        dispatch(setHasNPC(false));
+        dispatch(setCurrentNPC('', '', ''));
+
+        dispatch(setChoices([]));
+        dispatch(setVisibleNPC(false));
+        dispatch(setVisibleChoices(false));
+      })
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
+  };
+
   const manageEventProgressStatus = () => {
     // le progressMax est l'étape ultime (fin du jeu)
     // Dans notre exemple (max=6), si progress vaut 6 c'est gagné
@@ -300,23 +325,27 @@ function GameLogChoices({
 
     const progressMax = 4;
 
-    if (progress === progressMax) {
-      dispatch(setEventProgressStatus('gameEnd'));
-    }
-    if (progress === progressMax - 1) {
-      dispatch(setEventProgressStatus('beforeGameEnd'));
-    }
-    if (progress === progressMax - 2) {
-      dispatch(setEventProgressStatus('beforeBiomeEnd'));
-    }
-    if (progress === progressMax - 3) {
-      dispatch(setEventProgressStatus('beforeBoss'));
-    }
-    if (progress === progressMax - 4) {
-      dispatch(setEventProgressStatus('beforeLast'));
-    }
-    if (progress < progressMax - 4) {
-      dispatch(setEventProgressStatus('normal'));
+    if (playerHealth <= 0) {
+      dispatch(setEventProgressStatus('gameOver'));
+    } else {
+      if (progress === progressMax) {
+        dispatch(setEventProgressStatus('gameEnd'));
+      }
+      if (progress === progressMax - 1) {
+        dispatch(setEventProgressStatus('beforeGameEnd'));
+      }
+      if (progress === progressMax - 2) {
+        dispatch(setEventProgressStatus('beforeBiomeEnd'));
+      }
+      if (progress === progressMax - 3) {
+        dispatch(setEventProgressStatus('beforeBoss'));
+      }
+      if (progress === progressMax - 4) {
+        dispatch(setEventProgressStatus('beforeLast'));
+      }
+      if (progress < progressMax - 4) {
+        dispatch(setEventProgressStatus('normal'));
+      }
     }
   };
 
@@ -329,6 +358,11 @@ function GameLogChoices({
     dispatch(incrementProgress());
 
     manageEventProgressStatus();
+
+    if (eventProgressStatus === 'gameOver') {
+      getEventRollFromAPI(nextEventId);
+    }
+
     if (eventProgressStatus === 'normal') {
       getEventRollFromAPI(nextEventId);
     }
