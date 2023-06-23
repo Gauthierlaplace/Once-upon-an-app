@@ -1,14 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+
 import api from '../../../../../api/api';
 
 import './GameLogNPCDialogue.scss';
 
-import { setHeroStatus } from '../../../../../actions/game';
+import {
+  setVisibleChoices,
+  setHeroStatus
+} from '../../../../../actions/game';
 
 function GameLogNPCDialogue() {
   const dispatch = useDispatch();
   const sentence = useSelector((state) => state.game.dialogue.sentence);
   const answers = useSelector((state) => state.game.dialogue.answers);
+  const [visibleDialogue, setVisibleDialogue] = useState(true);
 
   const handleClickOnEffect = (effectId) => {
     // console.log('fonction handleClickOnEffect lancée');
@@ -25,21 +31,29 @@ function GameLogNPCDialogue() {
 
   return (
     <div className="GameLogNPCDialogue">
-      <h2 className="GameLogNPCDialogue-content">{sentence}</h2>
-      <div>
-        {answers.map((answer) => (
-          <button
-            type="button"
-            className="GameLogNPCDialogue-button"
-            key={answer.effectId}
-            onClick={() => handleClickOnEffect(answer.effectId)}
-          >
-            <p>
-              {answer.answer}
-            </p>
-          </button>
-        ))}
-      </div>
+
+      {visibleDialogue && (<h2 className="GameLogNPCDialogue-content">{sentence}</h2>)}
+
+      {visibleDialogue && (
+        <div>
+          {answers.map((answer) => (
+            <button
+              type="button"
+              className="GameLogNPCDialogue-button"
+              key={answer.effectId}
+              onClick={() => {
+                handleClickOnEffect(answer.effectId);
+                dispatch(setVisibleChoices(true));
+                setVisibleDialogue(false);
+              }}
+            >
+              <p>
+                {answer.answer}
+              </p>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
