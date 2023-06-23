@@ -9,21 +9,26 @@ import Loading from '../../../Loading/Loading';
 import {
   setCurrentEvent,
   setChoices,
+  setLastEventEnding,
   setHasNPC,
   setCurrentNPC,
   setDialogue,
-  setEffect,
   setVisibleNPC,
   setVisibleChoices,
   incrementProgress,
   setEventProgressStatus,
 } from '../../../../actions/game';
 
-function GameLogChoices() {
+function GameLogChoices({
+  setVisibleButtonFollowToShowNPC,
+  setVisibleButtonFollowToShowDialogue,
+  setVisibleButtonFollowToShowChoices,
+}) {
   const [loading, setLoading] = useState(false);
   const choices = useSelector((state) => state.game.choices);
   const progress = useSelector((state) => state.game.progress);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
+  const lastEventEnding = useSelector((state) => state.game.lastEventEnding);
 
   const dispatch = useDispatch();
 
@@ -80,7 +85,7 @@ function GameLogChoices() {
           content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
         };
 
-        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setChoices([firstChoice, secondChoice]));
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
@@ -130,20 +135,20 @@ function GameLogChoices() {
           dispatch(setDialogue('', '', ''));
         }
 
-        console.log(response.data);
         const eventEnding = response.data.currentEventEnding;
 
         // La concaténation du current-ending + next-opening est gérée ici :
         const firstChoice = {
           nextEventId: response.data.BossA.Id,
-          content: `${eventEnding} ${response.data.BossA.Opening}`,
+          content: response.data.BossA.Opening,
         };
         const secondChoice = {
           nextEventId: response.data.BossB.Id,
-          content: `${eventEnding} ${response.data.BossB.Opening}`,
+          content: response.data.BossB.Opening,
         };
 
-        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setLastEventEnding(eventEnding));
+        dispatch(setChoices([firstChoice, secondChoice]));
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
@@ -192,20 +197,15 @@ function GameLogChoices() {
         }
 
         const eventEnding = response.data.currentEventEnding;
-
-        // La concaténation du current-ending + next-opening est gérée ici :
-        const firstChoice = {
+        const onlyChoice = {
           nextEventId: response.data.EndBiome.Id,
           content: `${eventEnding} ${response.data.EndBiome.Opening}`,
         };
-        const secondChoice = {
-          nextEventId: 0,
-          content: 'HaraKiri',
-        };
 
-        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setChoices([onlyChoice]));
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
+        dispatch(setLastEventEnding(''));
       })
       .catch((error) => console.log(error));
   };
@@ -215,7 +215,6 @@ function GameLogChoices() {
 
     api.get(`/event/end/${nextEventId}`)
       .then((response) => {
-        console.log(response.data);
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
           eventAPI.id,
@@ -228,19 +227,12 @@ function GameLogChoices() {
         dispatch(setCurrentNPC('', '', ''));
 
         const eventEnding = response.data.currentEventEnding;
-
-        // La concaténation du current-ending + next-opening est gérée ici :
-        const firstChoice = {
-          // Todo check ce nextEventId
+        const onlyChoice = {
           nextEventId: response.data.EndGame.Id,
           content: `${eventEnding} ${response.data.EndGame.Opening}`,
         };
-        const secondChoice = {
-          nextEventId: 0,
-          content: 'HaraKiri',
-        };
 
-        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setChoices([onlyChoice]));
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
@@ -252,7 +244,6 @@ function GameLogChoices() {
 
     api.get(`/event/victory/${nextEventId}`)
       .then((response) => {
-        console.log(response.data);
         const eventAPI = response.data.currentEvent;
         dispatch(setCurrentEvent(
           eventAPI.id,
@@ -264,19 +255,7 @@ function GameLogChoices() {
         dispatch(setHasNPC(false));
         dispatch(setCurrentNPC('', '', ''));
 
-        const eventEnding = response.data.currentEventEnding;
-
-        // La concaténation du current-ending + next-opening est gérée ici :
-        const firstChoice = {
-          nextEventId: 0,
-          content: 'Harakiri 1',
-        };
-        const secondChoice = {
-          nextEventId: 1,
-          content: 'HaraKiri 2',
-        };
-
-        dispatch(setChoices(firstChoice, secondChoice));
+        dispatch(setChoices([]));
         dispatch(setVisibleNPC(false));
         dispatch(setVisibleChoices(false));
       })
@@ -320,10 +299,6 @@ function GameLogChoices() {
 
     setLoading(true);
 
-    // Todo appeler une route différente selon le eventProgressStatus
-    // L'eventProgressStatus peut prendre les valeurs :
-    // 'normal', 'beforeLast', 'beforeBoss', 'beforeBiomeEnd', 'beforeGameEnd'
-
     if (eventProgressStatus === 'normal') {
       getEventRollFromAPI(nextEventId);
     }
@@ -344,6 +319,10 @@ function GameLogChoices() {
       getGameEndFromAPI(nextEventId);
     }
 
+    setVisibleButtonFollowToShowNPC(true);
+    setVisibleButtonFollowToShowChoices(true);
+    setVisibleButtonFollowToShowDialogue(true);
+
     setLoading(false);
   };
 
@@ -353,7 +332,15 @@ function GameLogChoices() {
 
   return (
     <div className="GameLogChoices">
-      <h2 className="GameLogChoices-content">A vous de jouer :</h2>
+      <h2 className="GameLogChoices-last-event-ending">
+        {(lastEventEnding.length > 0)
+          ? lastEventEnding : ''}
+      </h2>
+
+      <h2 className="GameLogChoices-content">
+        À vous de jouer :
+      </h2>
+
       <div>
         {choices.map((choice) => (
           <button
