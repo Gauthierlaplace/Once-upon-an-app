@@ -59,20 +59,20 @@ function MyAccount() {
           </div>
 
           <div className="MyAccount-right">
+            <div className="MyAccount-glasseffect">
+              {displayAccount && (
+                <ShowAccount />
+              )}
 
-            {displayAccount && (
-              <ShowAccount />
-            )}
+              {displayEdit && (
+                <EditAccount />
+              )}
 
-            {displayEdit && (
-              <EditAccount />
-            )}
-
-            {displayDelete && (
-              <DeleteAccount />
-            )}
+              {displayDelete && (
+                <DeleteAccount />
+              )}
+            </div>
           </div>
-
         </div>
 
       </div>
