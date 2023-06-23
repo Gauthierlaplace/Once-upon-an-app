@@ -3,8 +3,7 @@ import './Main.scss';
 
 import Home from '../Home/Home';
 import Game from '../Game/Game';
-import HomeBookRegister from '../Home/HomeBook/HomeBookRegister/HomeBookRegister';
-import HomeBookLogin from '../Home/HomeBook/HomeBookLogin/HomeBookLogin';
+import MyAccount from '../Header/MyAccount/MyAccount';
 
 // TODO fix la gestion des Routes
 
@@ -23,16 +22,10 @@ function Main() {
           element={<Game />}
         />
 
-        {/* AFFICHE LE COMPONENT D INSCRIPTION SUR LA PARTIE DROITE */}
+        {/* AFFICHE LE COMPONENT DE MON COMPTE */}
         <Route
-          path="/Register"
-          element={<HomeBookRegister />}
-        />
-
-        {/* AFFICHE LE COMPONENT DE CONNEXION SUR LA PARTIE DROITE */}
-        <Route
-          path="/login"
-          element={<HomeBookLogin />}
+          path="/MyAccount"
+          element={<MyAccount />}
         />
       </Routes>
     </div>

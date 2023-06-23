@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 export const checkPasswordBeforeRegister = (passwordToCheck) => {
   const lowercaseRegex = /[a-z]/;
   const uppercaseRegex = /[A-Z]/;
-  const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+  const specialCharRegex = /[!@#$%^&*(),.?":{}|<>-_+]/;
 
   if (
     passwordToCheck.length >= 4

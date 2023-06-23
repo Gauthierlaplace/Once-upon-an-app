@@ -8,6 +8,7 @@ function Loading() {
       <div className="Loading-spinner">
         <img src={loading} alt="spinner" />
       </div>
+      <h1>Chargement en cours...</h1>
     </div>
   );
 }

@@ -23,30 +23,48 @@ function Header() {
   return (
     // Todo retirer les NavLinks quand nous n'en aurons plus besoin
     <div className="Header">
-      <NavLink className="Header-Accueil" to="/">
-        Accueil
-      </NavLink>
+      {/* Logo cliquable qui renvoi sur la page d'accueil */}
+      <div className="Header-width">
 
-      <img src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
+        <NavLink to="/">
+          <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
+        </NavLink>
 
-      <NavLink className="Header-Jeu" to="/game">
-        Jeu
-      </NavLink>
+        {/* La div suivante ne s'affiche que quand logged vaut true */}
+        {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
+        {logged && (
+          <div className="Header-Account">
+            <nav>
+              <ul>
+                <li>
+                  Hello {nickname}
+                  <ul>
+                    <li>
+                      <NavLink to="/">
+                        Accueil
+                      </NavLink>
+                    </li>
 
-      {/* La div suivante ne s'affiche que quand logged vaut true */}
-      { logged && (
-        <div className="Header-Account">
-          <h3>Hello {nickname}</h3>
-          {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
-          <button
-            type="button"
-            onClick={() => handleLogOut()}
-          >
-            Déconnexion
-          </button>
-        </div>
-      )}
+                    <li>
+                      <NavLink to="/MyAccount">Mon Compte</NavLink>
+                    </li>
 
+                    <li>
+                      <NavLink to="/game">
+                        Jouer
+                      </NavLink>
+                    </li>
+
+                    <li onClick={() => handleLogOut()}>
+                      Déconnexion
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

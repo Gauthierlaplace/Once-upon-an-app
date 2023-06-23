@@ -1,21 +1,20 @@
 .HomeLogged {
   width: 100%;
-  height: 110%;
+  height: 100%;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   background: url(../../../assets/images/openbook.png);
   background-repeat: no-repeat;
-  background-size: 120%;
+  background-size: 115%;
   background-position: center;
   position: absolute;
-  top: 0px;
+  top: -10px;
 
   button {
     height: 80px;
     width: 300px;
-    margin-top: 10px;
     font-size: 2em;
     border-radius: 5px;
     border: solid 1px;
