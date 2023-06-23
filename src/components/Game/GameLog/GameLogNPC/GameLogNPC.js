@@ -3,9 +3,13 @@ import { useState } from 'react';
 
 import './GameLogNPC.scss';
 import GameLogNPCDialogue from './GameLogNPCDialogue/GameLogNPCDialogue';
-import { hide } from '../../../../functions/game';
 
-function GameLogNPC({ npcName, npcDescription }) {
+function GameLogNPC({
+  npcName,
+  npcDescription,
+  visibleButtonFollowToShowDialogue,
+  setVisibleButtonFollowToShowDialogue,
+}) {
   const [visibleDialogue, setVisibleDialogue] = useState(false);
 
   return (
@@ -18,16 +22,19 @@ function GameLogNPC({ npcName, npcDescription }) {
       </p>
 
       {/* Le bouton "Dialogue" s'affiche toujours, quand le NPC est visible */}
-      <button
-        type="button"
-        className="GameLog-next-step-button"
-        onClick={(event) => {
-          hide(event.target);
-          setVisibleDialogue(true);
-        }}
-      >
-        Dialogue
-      </button>
+      {visibleButtonFollowToShowDialogue && (
+        <button
+          type="button"
+          className="GameLog-next-step-button"
+          onClick={() => {
+            setVisibleDialogue(true);
+            setVisibleButtonFollowToShowDialogue(false);
+          }}
+        >
+          Dialogue
+        </button>
+      )}
+
 
       {visibleDialogue && (<GameLogNPCDialogue />)}
 

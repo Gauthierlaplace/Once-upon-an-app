@@ -19,7 +19,11 @@ import {
   setEventProgressStatus,
 } from '../../../../actions/game';
 
-function GameLogChoices() {
+function GameLogChoices({
+  setVisibleButtonFollowToShowNPC,
+  setVisibleButtonFollowToShowDialogue,
+  setVisibleButtonFollowToShowChoices,
+}) {
   const [loading, setLoading] = useState(false);
   const choices = useSelector((state) => state.game.choices);
   const progress = useSelector((state) => state.game.progress);
@@ -314,6 +318,10 @@ function GameLogChoices() {
     if (eventProgressStatus === 'beforeGameEnd') {
       getGameEndFromAPI(nextEventId);
     }
+
+    setVisibleButtonFollowToShowNPC(true);
+    setVisibleButtonFollowToShowChoices(true);
+    setVisibleButtonFollowToShowDialogue(true);
 
     setLoading(false);
   };
