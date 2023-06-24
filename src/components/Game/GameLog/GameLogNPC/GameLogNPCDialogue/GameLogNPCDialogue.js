@@ -7,7 +7,9 @@ import './GameLogNPCDialogue.scss';
 
 import {
   setVisibleChoices,
-  setHeroStatus
+  setHeroStatus,
+  setAnswerAndDescriptionInLog,
+  setVisibleLogDialogue
 } from '../../../../../actions/game';
 
 function GameLogNPCDialogue() {
@@ -15,6 +17,7 @@ function GameLogNPCDialogue() {
   const sentence = useSelector((state) => state.game.dialogue.sentence);
   const answers = useSelector((state) => state.game.dialogue.answers);
   const [visibleDialogue, setVisibleDialogue] = useState(true);
+  console.log(answers);
 
   const handleClickOnEffect = (effectId) => {
     // console.log('fonction handleClickOnEffect lancée');
@@ -44,7 +47,13 @@ function GameLogNPCDialogue() {
               onClick={() => {
                 handleClickOnEffect(answer.effectId);
                 dispatch(setVisibleChoices(true));
+                dispatch(setAnswerAndDescriptionInLog(
+                  sentence,
+                  answer.answer,
+                  answer.effectDescription
+                ));
                 setVisibleDialogue(false);
+                dispatch(setVisibleLogDialogue(true));
               }}
             >
               <p>

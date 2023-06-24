@@ -12,6 +12,8 @@ export const RESET_PROGRESS = 'RESET_PROGRESS';
 export const SET_EVENT_PROGRESS_STATUS = 'SET_EVENT_PROGRESS_STATUS';
 export const SET_HERO_STATUS = 'SET_HERO_STATUS';
 export const SET_PLAYER = 'SET_PLAYER';
+export const SET_ANSWER_AND_DESCRIPTION_IN_LOG = 'SET_ANSWER_AND_DESCRIPTION_IN_LOG';
+export const SET_VISIBLE_LOG_DIALOGUE = 'SET_VISIBLE_LOG_DIALOGUE';
 export const SET_LOADING = 'SET_LOADING';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
@@ -103,6 +105,21 @@ export const setPlayer = (id, name, picture, health, maxHealth) => ({
     health: health,
     maxHealth: maxHealth,
   },
+});
+
+export const setAnswerAndDescriptionInLog = (sentence, answer, effectDescription) => ({
+  type: SET_ANSWER_AND_DESCRIPTION_IN_LOG,
+  payload:
+  {
+    sentence: sentence,
+    answer: answer,
+    effectDescription: effectDescription
+  },
+});
+
+export const setVisibleLogDialogue = (boolean) => ({
+  type: SET_VISIBLE_LOG_DIALOGUE,
+  payload: boolean,
 });
 
 export const setLoading = (boolean) => ({
