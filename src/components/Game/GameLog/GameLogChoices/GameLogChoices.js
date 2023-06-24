@@ -17,6 +17,8 @@ import {
   setVisibleChoices,
   incrementProgress,
   setEventProgressStatus,
+  setVisibleLogDialogue,
+  setAnswerAndDescriptionInLog
 } from '../../../../actions/game';
 
 function GameLogChoices({
@@ -80,6 +82,8 @@ function GameLogChoices({
         } else {
           dispatch(setCurrentNPC('', '', ''));
           dispatch(setDialogueAndEffects('', ['', '']));
+          dispatch(setAnswerAndDescriptionInLog('', '', ''));
+          dispatch(setVisibleLogDialogue(false));
         }
 
         // La concaténation du current-ending + next-opening est gérée ici :
@@ -147,6 +151,8 @@ function GameLogChoices({
         } else {
           dispatch(setCurrentNPC('', '', ''));
           dispatch(setDialogueAndEffects('', ['', '']));
+          dispatch(setAnswerAndDescriptionInLog('', '', ''));
+          dispatch(setVisibleLogDialogue(false));
         }
 
         const eventEnding = response.data.currentEventEnding;
@@ -216,6 +222,8 @@ function GameLogChoices({
         } else {
           dispatch(setCurrentNPC('', '', ''));
           dispatch(setDialogueAndEffects('', ['', '']));
+          dispatch(setAnswerAndDescriptionInLog('', '', ''));
+          dispatch(setVisibleLogDialogue(false));
         }
 
         const eventEnding = response.data.currentEventEnding;

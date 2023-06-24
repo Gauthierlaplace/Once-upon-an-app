@@ -13,7 +13,9 @@ import {
   RESET_PROGRESS,
   SET_EVENT_PROGRESS_STATUS,
   SET_PLAYER,
-  SET_HERO_STATUS
+  SET_HERO_STATUS,
+  SET_ANSWER_AND_DESCRIPTION_IN_LOG,
+  SET_VISIBLE_LOG_DIALOGUE
 } from '../actions/game';
 
 export const initialState = {
@@ -56,12 +58,20 @@ export const initialState = {
     answers: ['Answer 0', 'Answer 1'],
   },
 
+  eventDialogueToDisplay:
+  {
+    sentence: '',
+    answer: '',
+    effectDescription: ''
+  },
+
   choices:
   ['Choix 0', 'Choix 1'],
 
   hasNPC: false,
   visibleNPC: false,
   visibleChoices: false,
+  visibleLogDialogue: false
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -167,6 +177,23 @@ const reducer = (state = initialState, action = {}) => {
         health: action.payload.health,
         maxHealth: action.payload.maxHealth
       }
+    };
+
+  case SET_ANSWER_AND_DESCRIPTION_IN_LOG:
+    return {
+      ...state,
+      eventDialogueToDisplay: {
+        ...state.eventDialogueToDisplay,
+        sentence: action.payload.sentence,
+        answer: action.payload.answer,
+        effectDescription: action.payload.effectDescription
+      }
+    };
+
+  case SET_VISIBLE_LOG_DIALOGUE:
+    return {
+      ...state,
+      visibleLogDialogue: action.payload,
     };
 
   default:
