@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import api from '../../api/api';
 
 import {
   setCurrentEvent,
   setPlayer,
   setChoices,
-  setHasNPC,
+  setLoading,
 } from '../../actions/game';
 
 import './Game.scss';
@@ -20,13 +20,13 @@ import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
-  const currentEventCode = useSelector((state) => state.game.currentEvent.code_event);
+  const loading = useSelector((state) => state.game.loading);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
   // avec toutes ses données et ses choix
   useEffect(() => {
+    dispatch(setLoading(true));
     api.get('/play')
       .then((response) => {
         const eventAPI = response.data.currentEvent;
@@ -55,7 +55,7 @@ function Game() {
         };
 
         dispatch(setChoices([firstChoice, secondChoice]));
-        setLoading(false);
+        dispatch(setLoading(false));
       })
       .catch((error) => console.log(error));
   }, []);

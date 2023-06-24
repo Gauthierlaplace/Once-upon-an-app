@@ -14,6 +14,7 @@ export const SET_HERO_STATUS = 'SET_HERO_STATUS';
 export const SET_PLAYER = 'SET_PLAYER';
 export const SET_ANSWER_AND_DESCRIPTION_IN_LOG = 'SET_ANSWER_AND_DESCRIPTION_IN_LOG';
 export const SET_VISIBLE_LOG_DIALOGUE = 'SET_VISIBLE_LOG_DIALOGUE';
+export const SET_LOADING = 'SET_LOADING';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
 export const setCurrentEvent = (codeEvent, title, description, picture) => ({
@@ -118,5 +119,10 @@ export const setAnswerAndDescriptionInLog = (sentence, answer, effectDescription
 
 export const setVisibleLogDialogue = (boolean) => ({
   type: SET_VISIBLE_LOG_DIALOGUE,
+  payload: boolean,
+});
+
+export const setLoading = (boolean) => ({
+  type: SET_LOADING,
   payload: boolean,
 });

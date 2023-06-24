@@ -15,7 +15,8 @@ import {
   SET_PLAYER,
   SET_HERO_STATUS,
   SET_ANSWER_AND_DESCRIPTION_IN_LOG,
-  SET_VISIBLE_LOG_DIALOGUE
+  SET_VISIBLE_LOG_DIALOGUE,
+  SET_LOADING
 } from '../actions/game';
 
 export const initialState = {
@@ -24,14 +25,15 @@ export const initialState = {
     id: 0,
     name: '',
     picture: '',
-    health: '',
-    maxHealth: '',
+    health: 0,
+    maxHealth: 0,
   },
 
   progress: 0,
 
   // Peut prendre les valeurs 'normal', 'beforeLast',
   // 'beforeBoss', 'beforeBiomeEnd', 'beforeGameEnd'
+  // 'gameEnd"
   eventProgressStatus: 'normal',
 
   currentEvent:
@@ -71,7 +73,9 @@ export const initialState = {
   hasNPC: false,
   visibleNPC: false,
   visibleChoices: false,
-  visibleLogDialogue: false
+  visibleLogDialogue: false,
+
+  loading: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -194,6 +198,12 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       visibleLogDialogue: action.payload,
+    };
+
+  case SET_LOADING:
+    return {
+      ...state,
+      loading: action.payload,
     };
 
   default:
