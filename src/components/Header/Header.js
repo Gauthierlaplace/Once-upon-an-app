@@ -7,7 +7,7 @@ import { logOut } from '../../actions/user';
 function Header() {
   const logged = useSelector((state) => state.user.logged);
   const nickname = useSelector((state) => state.user.nickname);
-
+  const heroPicture = useSelector((state) => state.game.heroData[0].picture);
   // La fonctionnalité logout (déconnexion) est accessible en header
   // Quand le joueur se déconnecte, ses données (token, nickname et id)
   // sont effacées à la fois dans le localStorage (instructions ci-dessous)
@@ -37,7 +37,16 @@ function Header() {
             <nav>
               <ul>
                 <li>
-                  Hello {nickname}
+                  <div className="Header-flexLi">
+                    <img
+                      className="Header-picture"
+                      src={heroPicture}
+                      alt="image du héro"
+                    />
+                    <h1 className="Header-nickname">
+                      Hello {nickname}
+                    </h1>
+                  </div>
                   <ul>
                     <li>
                       <NavLink to="/">
