@@ -77,6 +77,9 @@
 
   &-menu:hover {
     cursor: grab;
+    background-color: #EEDABF;
+    text-decoration: underline ;
+    text-underline-offset: .5em;
   }
 
   p {
