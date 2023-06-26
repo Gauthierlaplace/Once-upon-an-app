@@ -15,6 +15,7 @@ function GameLogNPC({
 }) {
   const [visibleDialogue, setVisibleDialogue] = useState(false);
   const typewriting = useSelector((state) => state.game.typewriting.npcDescription);
+  const visibleChoices = useSelector((state) => state.game.visibleChoices);
   const dispatch = useDispatch();
   const identifier = 'npcDescription';
 
@@ -41,7 +42,7 @@ function GameLogNPC({
       )}
 
       {/* Le bouton "Dialogue" s'affiche toujours, quand le NPC est visible */}
-      {(visibleButtonFollowToShowDialogue && !typewriting) && (
+      {(visibleButtonFollowToShowDialogue && !typewriting && !visibleChoices) && (
         <button
           type="button"
           className="GameLog-next-step-button"

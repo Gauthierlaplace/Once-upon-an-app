@@ -49,7 +49,7 @@ function GameLog({
       )}
 
       {/* Le 1er bouton "Suite" s'affiche uniquement s'il y a un NPC dans la scène */}
-      {(hasNPC && visibleButtonFollowToShowNPC && !typewriting) && (
+      {(hasNPC && visibleButtonFollowToShowNPC && !visibleChoices && !typewriting) && (
         <button
           type="button"
           className="GameLog-next-step-npc-button"

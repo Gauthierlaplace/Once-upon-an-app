@@ -5,6 +5,7 @@ import { setTypewriting } from '../../../../actions/game';
 function GameLogTypewriter({ text, identifier }) {
   const dispatch = useDispatch();
   const typewriting = useSelector((state) => state.game.typewriting[identifier]);
+  const visibleChoices = useSelector((state) => state.game.visibleChoices);
   const index = useRef(0);
   const [currentText, setCurrentText] = useState('');
 
@@ -23,7 +24,7 @@ function GameLogTypewriter({ text, identifier }) {
       if (index.current === text.length) {
         dispatch(setTypewriting(identifier, false));
       }
-    }, typewriting ? 35 : 0);
+    }, (typewriting && !visibleChoices) ? 35 : 0);
 
     return () => {
       clearTimeout(timeoutId);
