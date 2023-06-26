@@ -41,7 +41,8 @@
         border-radius: 10px;
     }
 
-    &-left, &-right {
+    &-left,
+    &-right {
         padding-top: 10px;
     }
 
@@ -73,7 +74,7 @@
         cursor: grab;
     }
 
-   &-right {
+    &-right {
         width: 80%;
         height: 100%;
         padding-top: 20px;

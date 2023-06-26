@@ -3,33 +3,32 @@ import './MyAccount.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteAccount } from '../../../actions/user';
 import api from '../../../api/api';
-// ======================================
-// FONCTION POUR LA SUPPRESSION DU COMPTE
-// ======================================
 
-function deleteUserAccount() {
-  // const : token et userId utilisé pour la fonction delete account
-  const token = useSelector((state) => state.user.token);
+function DeleteAccount() {
+  // const : tuserId utilisé pour la fonction delete account
   const userId = useSelector((state) => state.user.currentUserId);
   const dispatch = useDispatch();
 
-  api
-    .delete(`/users/${userId}`)
-    .then((response) => {
-      console.log(response);
-      // dispatch(
-      //   deleteAccount()
-      // );
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
+  // ======================================
+  // FONCTION POUR LA SUPPRESSION DU COMPTE
+  // ======================================
 
-// ======================================
-// FIN DE LA FONCTION DE DELETE
-// ======================================
-function DeleteAccount() {
+  // La fonction va à l'intérieur du composant, avant le return
+  const deleteUserAccount = () => {
+    api
+      .delete(`/users/${userId}`)
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem('token', '');
+        localStorage.setItem('nickname', '');
+        localStorage.setItem('id', '');
+        dispatch(deleteAccount());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="DeleteAccount">
       <h1>Supprimer mon compte</h1>
@@ -44,7 +43,7 @@ function DeleteAccount() {
       <h1>Souhaitez-vous supprimer votre compte ?</h1>
       <button
         type="button"
-        onClick={deleteUserAccount}
+        onClick={() => deleteUserAccount()}
       >
         Oui je souhaite supprimer mon compte
       </button>

@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import api from '../../api/api';
 
 import {
   setCurrentEvent,
-  setCurrentNPC,
+  setPlayer,
   setChoices,
-  setHasNPC,
+  setLoading,
 } from '../../actions/game';
 
 import './Game.scss';
@@ -20,21 +20,29 @@ import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
-  const currentEventCode = useSelector((state) => state.game.currentEvent.code_event);
+  const loading = useSelector((state) => state.game.loading);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
   // avec toutes ses données et ses choix
   useEffect(() => {
+    dispatch(setLoading(true));
     api.get('/play')
       .then((response) => {
         const eventAPI = response.data.currentEvent;
+        const playerAPI = response.data.player;
         dispatch(setCurrentEvent(
           eventAPI.id,
           eventAPI.title,
           eventAPI.description,
           eventAPI.picture
+        ));
+        dispatch(setPlayer(
+          playerAPI.id,
+          playerAPI.name,
+          playerAPI.picture,
+          playerAPI.health,
+          playerAPI.maxHealth
         ));
 
         const firstChoice = {
@@ -46,41 +54,11 @@ function Game() {
           content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
         };
 
-        dispatch(setHasNPC(false));
-        dispatch(setChoices(firstChoice, secondChoice));
-        setLoading(false);
+        dispatch(setChoices([firstChoice, secondChoice]));
+        dispatch(setLoading(false));
       })
       .catch((error) => console.log(error));
   }, []);
-
-  // On surveille le code du currentEvent, et on check les infos dès qu'il change
-  // Cela va nous permettre notamment de savoir si currentEvent a un NPC ou non
-  useEffect(() => {
-    if (currentEventCode) {
-      api.get(`/event/roll/${currentEventCode}`)
-        .then((response) => {
-          // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
-          // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
-          // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
-          const npcAPI = response.data.npcCurrentEvent;
-          const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
-          dispatch(setHasNPC(hasNPC));
-
-          // S'il y a un NPC, on dispatche ses infos
-          if (hasNPC) {
-            dispatch(setCurrentNPC(
-              npcAPI.npcName,
-              npcAPI.npcDescription,
-              npcAPI.picture
-            ));
-          // S'il y a un NPC, on remet à zéro les infos NPC
-          } else {
-            dispatch(setCurrentNPC('', '', ''));
-          }
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [currentEventCode]);
 
   // Une fois que les données de l'événement sont bien récupérées dans le state,
   // Je gère leur affichage ici :

@@ -7,17 +7,21 @@ import { logOut } from '../../actions/user';
 function Header() {
   const logged = useSelector((state) => state.user.logged);
   const nickname = useSelector((state) => state.user.nickname);
-  const heroPicture = useSelector((state) => state.game.heroData[0].picture);
+  const heroPicture = useSelector((state) => state.game.player.picture);
   // La fonctionnalité logout (déconnexion) est accessible en header
   // Quand le joueur se déconnecte, ses données (token, nickname et id)
   // sont effacées à la fois dans le localStorage (instructions ci-dessous)
   // Et également dans le state (dispatch(logOut))
   const dispatch = useDispatch();
   const handleLogOut = () => {
-    localStorage.setItem('token', '');
-    localStorage.setItem('nickname', '');
-    localStorage.setItem('id', '');
-    dispatch(logOut());
+    const confirmation = window.confirm('Votre progression dans le jeu sera perdue, êtes-vous sûr de vouloir vous déconnecter ?');
+    if (confirmation) {
+      localStorage.setItem('token', '');
+      localStorage.setItem('nickname', '');
+      localStorage.setItem('id', '');
+      dispatch(logOut());
+      window.location.href = '/';
+    }
   };
 
   return (

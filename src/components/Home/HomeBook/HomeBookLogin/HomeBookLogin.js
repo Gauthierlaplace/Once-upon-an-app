@@ -58,11 +58,11 @@ function HomeBookLogin({
   );
 }
 
-HomeBookLogin.propTypes = {
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  changeField: PropTypes.func.isRequired,
-};
+// HomeBookLogin.propTypes = {
+//   email: PropTypes.string.isRequired,
+//   password: PropTypes.string.isRequired,
+//   handleSubmit: PropTypes.func.isRequired,
+//   changeField: PropTypes.func.isRequired,
+// };
 
 export default HomeBookLogin;
