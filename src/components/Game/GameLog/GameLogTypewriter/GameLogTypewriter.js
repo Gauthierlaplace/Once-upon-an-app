@@ -23,7 +23,7 @@ function GameLogTypewriter({ text, identifier }) {
       if (index.current === text.length) {
         dispatch(setTypewriting(identifier, false));
       }
-    }, typewriting ? 40 : 0);
+    }, typewriting ? 35 : 0);
 
     return () => {
       clearTimeout(timeoutId);

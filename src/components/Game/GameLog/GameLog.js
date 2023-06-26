@@ -9,7 +9,7 @@ import {
 } from '../../../actions/game';
 
 import GameLogChoices from './GameLogChoices/GameLogChoices';
-import GameLogEventDescription from './GameLogEventDesciption/GameLogEventDescription';
+import GameLogEventDescription from './GameLogEventDescription/GameLogEventDescription';
 import GameLogNPC from './GameLogNPC/GameLogNPC';
 import GameLogDialogue from './GameLogDialogue/GameLogDialogue';
 
@@ -38,9 +38,10 @@ function GameLog({
       {/* La description est toujours affichée, quoi qu'il arrive */}
       <GameLogEventDescription description={eventDescription} />
 
-      {(typewriting) && (
+      {typewriting && (
         <button
           type="button"
+          className="skipButton"
           onClick={() => dispatch(setTypewriting(identifier, false))}
         >
           Accélérer
@@ -48,7 +49,7 @@ function GameLog({
       )}
 
       {/* Le 1er bouton "Suite" s'affiche uniquement s'il y a un NPC dans la scène */}
-      {(hasNPC && visibleButtonFollowToShowNPC) && (
+      {(hasNPC && visibleButtonFollowToShowNPC && !typewriting) && (
         <button
           type="button"
           className="GameLog-next-step-npc-button"
@@ -62,7 +63,7 @@ function GameLog({
       )}
 
       {/* Le NPC s'affiche s'il y a un NPC et s'il est visible (clic sur le bouton précédent) */}
-      {(hasNPC && visibleNPC && (eventProgressStatus !== 'gameEnd')) && (
+      {(hasNPC && visibleNPC && !typewriting && (eventProgressStatus !== 'gameEnd')) && (
         <GameLogNPC
           npcName={npcName}
           npcDescription={npcDescription}
@@ -82,7 +83,7 @@ function GameLog({
       {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
       {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
       {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
-      {(!hasNPC && visibleButtonFollowToShowChoices && !typewriting && (eventProgressStatus !== 'gameEnd')) && (
+      {(!hasNPC && visibleButtonFollowToShowChoices && (typewriting === false) && (eventProgressStatus !== 'gameEnd')) && (
         <button
           type="button"
           className="GameLog-next-step-button"

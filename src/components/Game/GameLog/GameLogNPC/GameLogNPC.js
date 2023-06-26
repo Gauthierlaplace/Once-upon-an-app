@@ -33,6 +33,7 @@ function GameLogNPC({
       {typewriting && (
         <button
           type="button"
+          className="skipButton"
           onClick={() => dispatch(setTypewriting(identifier, false))}
         >
           Accélérer
