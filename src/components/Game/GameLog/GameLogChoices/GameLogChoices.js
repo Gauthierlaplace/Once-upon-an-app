@@ -35,6 +35,50 @@ function GameLogChoices({
 
   const dispatch = useDispatch();
 
+  // Afin d'éviter les doublons, création de la fonction de gestion des éventuels NPC
+  const npcManagement = (npcAPI) => {
+    // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
+    // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
+    // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
+    const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
+    dispatch(setHasNPC(hasNPC));
+
+    // S'il y a un NPC, on dispatche ses infos
+    if (hasNPC) {
+      dispatch(setCurrentNPC(
+        npcAPI.npcName,
+        npcAPI.npcDescription,
+        npcAPI.picture
+      ));
+
+      // Gestion des dialogues
+      const npcDialogueAPI = npcAPI.dialogues.dialogue1;
+      const firstAnswer = {
+        answer: npcDialogueAPI.answer1,
+        effectId: npcDialogueAPI.effect1.id,
+        effectDescription: npcDialogueAPI.effect1.description,
+      };
+      const secondAnswer = {
+        answer: npcDialogueAPI.answer2,
+        effectId: npcDialogueAPI.effect2.id,
+        effectDescription: npcDialogueAPI.effect2.description,
+      };
+
+      dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
+
+    // S'il n'y a pas de NPC, on remet à zéro les infos NPC
+    } else {
+      dispatch(setCurrentNPC('', '', ''));
+      dispatch(setDialogueAndEffects('', ['', '']));
+      // dispatch(setAnswerAndDescriptionInLog('', '', ''));
+      // dispatch(setVisibleLogDialogue(false));
+    }
+
+    // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
+    dispatch(setAnswerAndDescriptionInLog('', '', ''));
+    dispatch(setVisibleLogDialogue(false));
+  };
+
   // Cette route sera appelée si le compteur progress est en-dessous de notre limite
   const getEventRollFromAPI = (nextEventId) => {
     console.log('fonction getEventRollFromAPI lancée');
@@ -48,47 +92,9 @@ function GameLogChoices({
           eventAPI.description,
           eventAPI.picture,
         ));
-        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
-        dispatch(setAnswerAndDescriptionInLog('', '', ''));
-        dispatch(setVisibleLogDialogue(false));
 
-        // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
-        // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
-        // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
         const npcAPI = response.data.npcCurrentEvent;
-        const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
-        dispatch(setHasNPC(hasNPC));
-
-        // S'il y a un NPC, on dispatche ses infos
-        if (hasNPC) {
-          dispatch(setCurrentNPC(
-            npcAPI.npcName,
-            npcAPI.npcDescription,
-            npcAPI.picture
-          ));
-
-          // Gestion des dialogues
-          const npcDialogueAPI = npcAPI.dialogues.dialogue1;
-          const firstAnswer = {
-            answer: npcDialogueAPI.answer1,
-            effectId: npcDialogueAPI.effect1.id,
-            effectDescription: npcDialogueAPI.effect1.description,
-          };
-          const secondAnswer = {
-            answer: npcDialogueAPI.answer2,
-            effectId: npcDialogueAPI.effect2.id,
-            effectDescription: npcDialogueAPI.effect2.description,
-          };
-
-          dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
-
-        // S'il n'y a pas de NPC, on remet à zéro les infos NPC
-        } else {
-          dispatch(setCurrentNPC('', '', ''));
-          dispatch(setDialogueAndEffects('', ['', '']));
-          // dispatch(setAnswerAndDescriptionInLog('', '', ''));
-          // dispatch(setVisibleLogDialogue(false));
-        }
+        npcManagement(npcAPI);
 
         // La concaténation du current-ending + next-opening est gérée ici :
         const firstChoice = {
@@ -129,39 +135,7 @@ function GameLogChoices({
         // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
         // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
         const npcAPI = response.data.npcCurrentEvent;
-        const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
-        dispatch(setHasNPC(hasNPC));
-
-        // S'il y a un NPC, on dispatche ses infos
-        if (hasNPC) {
-          dispatch(setCurrentNPC(
-            npcAPI.npcName,
-            npcAPI.npcDescription,
-            npcAPI.picture
-          ));
-
-          // Gestion des dialogues
-          const npcDialogueAPI = npcAPI.dialogues.dialogue1;
-          const firstAnswer = {
-            answer: npcDialogueAPI.answer1,
-            effectId: npcDialogueAPI.effect1.id,
-            effectDescription: npcDialogueAPI.effect1.description,
-          };
-          const secondAnswer = {
-            answer: npcDialogueAPI.answer2,
-            effectId: npcDialogueAPI.effect2.id,
-            effectDescription: npcDialogueAPI.effect2.description,
-          };
-
-          dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
-
-        // S'il n'y a pas de NPC, on remet à zéro les infos NPC
-        } else {
-          dispatch(setCurrentNPC('', '', ''));
-          dispatch(setDialogueAndEffects('', ['', '']));
-          // dispatch(setAnswerAndDescriptionInLog('', '', ''));
-          // dispatch(setVisibleLogDialogue(false));
-        }
+        npcManagement(npcAPI);
 
         const eventEnding = response.data.currentEventEnding;
 
@@ -204,39 +178,7 @@ function GameLogChoices({
         // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
         // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
         const npcAPI = response.data.npcCurrentEvent;
-        const hasNPC = npcAPI.length !== 0; // booléen qui dit si NPC ou non
-        dispatch(setHasNPC(hasNPC));
-
-        // S'il y a un NPC, on dispatche ses infos
-        if (hasNPC) {
-          dispatch(setCurrentNPC(
-            npcAPI.npcName,
-            npcAPI.npcDescription,
-            npcAPI.picture
-          ));
-
-          // Gestion des dialogues
-          const npcDialogueAPI = npcAPI.dialogues.dialogue1;
-          const firstAnswer = {
-            answer: npcDialogueAPI.answer1,
-            effectId: npcDialogueAPI.effect1.id,
-            effectDescription: npcDialogueAPI.effect1.description,
-          };
-          const secondAnswer = {
-            answer: npcDialogueAPI.answer2,
-            effectId: npcDialogueAPI.effect2.id,
-            effectDescription: npcDialogueAPI.effect2.description,
-          };
-
-          dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
-
-        // S'il n'y a pas de NPC, on remet à zéro les infos NPC
-        } else {
-          dispatch(setCurrentNPC('', '', ''));
-          dispatch(setDialogueAndEffects('', ['', '']));
-          // dispatch(setAnswerAndDescriptionInLog('', '', ''));
-          // dispatch(setVisibleLogDialogue(false));
-        }
+        npcManagement(npcAPI);
 
         const eventEnding = response.data.currentEventEnding;
         const onlyChoice = {
@@ -266,12 +208,8 @@ function GameLogChoices({
           eventAPI.picture,
         ));
 
-        dispatch(setHasNPC(false));
-        dispatch(setCurrentNPC('', '', ''));
-
-        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
-        dispatch(setAnswerAndDescriptionInLog('', '', ''));
-        dispatch(setVisibleLogDialogue(false));
+        const npcAPI = response.data.npcCurrentEvent;
+        npcManagement(npcAPI);
 
         const eventEnding = response.data.currentEventEnding;
         const onlyChoice = {
@@ -300,12 +238,8 @@ function GameLogChoices({
           eventAPI.picture,
         ));
 
-        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
-        dispatch(setAnswerAndDescriptionInLog('', '', ''));
-        dispatch(setVisibleLogDialogue(false));
-
-        dispatch(setHasNPC(false));
-        dispatch(setCurrentNPC('', '', ''));
+        const npcAPI = response.data.npcCurrentEvent;
+        npcManagement(npcAPI);
 
         dispatch(setChoices([]));
         dispatch(setVisibleNPC(false));
