@@ -4,6 +4,7 @@ import {
   SAVE_REGISTER_SUCCESSFUL,
   HAS_FAILED_ACTION,
   LOG_OUT,
+  DELETE_ACCOUNT,
 } from '../actions/user';
 
 export const initialState = {
@@ -87,6 +88,17 @@ const reducer = (state = initialState, action = {}) => {
   case LOG_OUT:
     return {
       ...state,
+      logged: false,
+      nickname: '',
+      token: '',
+      email: '',
+      password: '',
+    };
+
+  case DELETE_ACCOUNT:
+    return {
+      ...state,
+      currentUserId: null,
       logged: false,
       nickname: '',
       token: '',
