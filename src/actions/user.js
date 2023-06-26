@@ -7,6 +7,7 @@ export const SAVE_REGISTER_SUCCESSFUL = 'SAVE_REGISTER_SUCCESSFUL';
 // action commune pour login ou register
 export const HAS_FAILED_ACTION = 'HAS_FAILED_ACTION';
 export const LOG_OUT = 'LOG_OUT';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 
 /* MEMO : quand on ne sait pas s'il y a besoin d'infos en payload, on ne met pas de payload.
 On verra si on est bloqué au niveau du case du reducer parce qu'il manque une/des infos */
@@ -44,4 +45,8 @@ export const hasFailedAction = (loginOrRegister) => ({
 
 export const logOut = () => ({
   type: LOG_OUT,
+});
+
+export const deleteAccount = () => ({
+  type: DELETE_ACCOUNT,
 });
