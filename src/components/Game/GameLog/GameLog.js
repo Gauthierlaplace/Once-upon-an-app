@@ -10,6 +10,7 @@ import {
 import GameLogChoices from './GameLogChoices/GameLogChoices';
 import GameLogEventDescription from './GameLogEventDesciption/GameLogEventDescription';
 import GameLogNPC from './GameLogNPC/GameLogNPC';
+import GameLogDialogue from './GameLogDialogue/GameLogDialogue';
 
 function GameLog({
   eventDescription,
@@ -59,11 +60,11 @@ function GameLog({
       )}
 
       {(hasNPC && visibleLogDialogue) && (
-        <div>
-          <p>{answerAndDescriptionInLog.sentence}</p>
-          <p>{answerAndDescriptionInLog.answer}</p>
-          <p>{answerAndDescriptionInLog.effectDescription}</p>
-        </div>
+        <GameLogDialogue
+          sentence={answerAndDescriptionInLog.sentence}
+          answer={answerAndDescriptionInLog.answer}
+          effectDescription={answerAndDescriptionInLog.effectDescription}
+        />
       )}
 
       {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
