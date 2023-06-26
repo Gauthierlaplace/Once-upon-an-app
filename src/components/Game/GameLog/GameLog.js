@@ -23,6 +23,7 @@ function GameLog({
   const visibleLogDialogue = useSelector((state) => state.game.visibleLogDialogue);
   const answerAndDescriptionInLog = useSelector((state) => state.game.eventDialogueToDisplay);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
+  const typewriting = useSelector((state) => state.game.typewriting.eventDescription);
 
   const [visibleButtonFollowToShowNPC, setVisibleButtonFollowToShowNPC] = useState(true);
   const [visibleButtonFollowToShowChoices, setVisibleButtonFollowToShowChoices] = useState(true);
@@ -70,7 +71,7 @@ function GameLog({
       {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
       {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
       {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
-      {(!hasNPC && visibleButtonFollowToShowChoices && (eventProgressStatus !== 'gameEnd')) && (
+      {(!hasNPC && visibleButtonFollowToShowChoices && !typewriting && (eventProgressStatus !== 'gameEnd')) && (
         <button
           type="button"
           className="GameLog-next-step-button"
