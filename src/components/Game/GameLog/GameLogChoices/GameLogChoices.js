@@ -38,8 +38,16 @@ function GameLogChoices({
 
   const dispatch = useDispatch();
 
-  // Afin d'éviter les doublons, création de la fonction de gestion des éventuels NPC
-  const npcManagement = (npcAPI) => {
+  // Afin d'éviter les doublons
+  // Fonction de gestion du currentEvent
+  const currentEventManagement = (response) => {
+    const eventAPI = response.data.currentEvent;
+    dispatch(setCurrentEvent(eventAPI));
+  };
+
+  // Fonction de gestion des éventuels NPC
+  const npcManagement = (response) => {
+    const npcAPI = response.data.npcCurrentEvent;
     // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
     // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
     // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
@@ -80,7 +88,7 @@ function GameLogChoices({
     dispatch(setVisibleLogDialogue(false));
   };
 
-  // Afin d'éviter les doublons, fonctions de gestion des choix
+  // Fonctions de gestion des choix
   const choicesManagementRoll = (response) => {
     // La concaténation du current-ending + next-opening est gérée ici :
     const firstChoice = {
@@ -122,16 +130,8 @@ function GameLogChoices({
 
     api.get(`/event/roll/${nextEventId}`)
       .then((response) => {
-        const eventAPI = response.data.currentEvent;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture,
-        ));
-
-        const npcAPI = response.data.npcCurrentEvent;
-        npcManagement(npcAPI);
+        currentEventManagement(response);
+        npcManagement(response);
         choicesManagementRoll(response);
       })
       .catch((error) => console.log(error))
@@ -144,16 +144,8 @@ function GameLogChoices({
 
     api.get(`/event/last/${nextEventId}`)
       .then((response) => {
-        const eventAPI = response.data.currentEvent;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture,
-        ));
-
-        const npcAPI = response.data.npcCurrentEvent;
-        npcManagement(npcAPI);
+        currentEventManagement(response);
+        npcManagement(response);
         choicesManagementLast(response);
       })
       .catch((error) => console.log(error))
@@ -165,16 +157,8 @@ function GameLogChoices({
 
     api.get(`/event/boss/${nextEventId}`)
       .then((response) => {
-        const eventAPI = response.data.currentEvent;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture,
-        ));
-
-        const npcAPI = response.data.npcCurrentEvent;
-        npcManagement(npcAPI);
+        currentEventManagement(response);
+        npcManagement(response);
 
         const eventEnding = response.data.currentEventEnding;
         const onlyChoice = {
@@ -196,16 +180,8 @@ function GameLogChoices({
 
     api.get(`/event/end/${nextEventId}`)
       .then((response) => {
-        const eventAPI = response.data.currentEvent;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture,
-        ));
-
-        const npcAPI = response.data.npcCurrentEvent;
-        npcManagement(npcAPI);
+        currentEventManagement(response);
+        npcManagement(response);
 
         const eventEnding = response.data.currentEventEnding;
         const onlyChoice = {
@@ -224,16 +200,8 @@ function GameLogChoices({
   const getGameOverFromAPI = (nextEventId) => {
     api.get(`/event/death/${nextEventId}`)
       .then((response) => {
-        const eventAPI = response.data.currentEvent;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture,
-        ));
-
-        const npcAPI = response.data.npcCurrentEvent;
-        npcManagement(npcAPI);
+        currentEventManagement(response);
+        npcManagement(response);
 
         dispatch(setChoices([]));
         dispatch(setVisibleNPC(false));
@@ -248,16 +216,8 @@ function GameLogChoices({
 
     api.get(`/event/victory/${nextEventId}`)
       .then((response) => {
-        const eventAPI = response.data.currentEvent;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture,
-        ));
-
-        const npcAPI = response.data.npcCurrentEvent;
-        npcManagement(npcAPI);
+        currentEventManagement(response);
+        npcManagement(response);
 
         dispatch(setChoices([]));
         dispatch(setVisibleNPC(false));
