@@ -8,6 +8,7 @@ import GameNPC from '../GameNPC/GameNPC';
 function GameScene({ npcName, picture }) {
   // Todo : conditionner apparition NPC selon le type d'événement (rencontre ou combat)
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
+  const visibleChoices = useSelector((state) => state.game.visibleChoices);
   return (
     <div className="GameScene">
       <img
@@ -15,7 +16,7 @@ function GameScene({ npcName, picture }) {
         src={picture}
         alt={npcName}
       />
-      {visibleNPC && (<GameNPC />)}
+      {visibleNPC && !visibleChoices && (<GameNPC />)}
     </div>
   );
 }
