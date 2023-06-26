@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import './Header.scss';
 
 import { useSelector, useDispatch } from 'react-redux';

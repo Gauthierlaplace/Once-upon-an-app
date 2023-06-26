@@ -1,20 +1,19 @@
 /* eslint-disable no-console */
 import './MyAccount.scss';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import api from '../../../api/api';
 
 function ShowAccount() {
-  // const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.currentUserId);
   const token = useSelector((state) => state.user.token);
   const emailLogin = useSelector((state) => state.user.email);
   const nickname = useSelector((state) => state.user.nickname);
-  const heroName = useSelector((state) => state.game.heroData[0].name);
-  // const heroPicture = useSelector((state) => state.game.heroData[0].picture);
+  // const heroPicture = useSelector((state) => state.game.player.picture);
+  const heroName = useSelector((state) => state.game.player.name);
 
   api
     .get(
-      `/api/users/${userId}`,
+      `/users/${userId}`,
       {
         headers: {
           Authorization: `bearer ${token}`

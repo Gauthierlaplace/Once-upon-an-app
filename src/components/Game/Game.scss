@@ -21,13 +21,10 @@
         width: 30%;
     }
 
-    &-Eventtitle {
-        margin-top: .5em;
-        margin-bottom: .5em;
-    }
-
-    &-Logtitle {
-        margin-top: .5em;
-        margin-bottom: .5em;
+    &-Eventtitle, &-Logtitle {
+        padding-top: .8em;
+        padding-bottom: .5em;
+        font-size: 1.3em;
+        font-family: 'Quiska';
     }
 }
