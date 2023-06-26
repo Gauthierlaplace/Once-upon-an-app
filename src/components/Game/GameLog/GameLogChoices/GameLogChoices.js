@@ -276,7 +276,7 @@ function GameLogChoices({
       // S'il vaut 2, c'est juste avant last
       // S'il vaut <2 (0 ou 1) c'est normal.
 
-      const progressMax = 7;
+      const progressMax = 4;
 
       if (progress === progressMax) {
         dispatch(setEventProgressStatus('gameEnd'));

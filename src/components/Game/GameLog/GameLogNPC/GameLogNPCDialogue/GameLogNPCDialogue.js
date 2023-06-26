@@ -10,13 +10,9 @@ import {
   setHeroStatus,
   setAnswerAndDescriptionInLog,
   setVisibleLogDialogue,
-  setHasNPC,
-  setCurrentNPC,
-  setDialogueAndEffects,
   setChoices,
-  setVisibleNPC,
-  setCurrentEvent,
-  setLoading
+  setLoading,
+  setEventProgressStatus
 } from '../../../../../actions/game';
 
 function GameLogNPCDialogue() {
@@ -28,7 +24,6 @@ function GameLogNPCDialogue() {
   const handleClickOnEffect = (effectId) => {
     api.get(`/event/effect/${effectId}`)
       .then((response) => {
-        console.log(response.data);
         // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
         const playerAPI = response.data.player;
         dispatch(setHeroStatus(playerAPI.health));
@@ -36,11 +31,7 @@ function GameLogNPCDialogue() {
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent
         if (response.data.GameOver) {
-          dispatch(setHasNPC(false));
-          dispatch(setCurrentNPC('', '', ''));
-          dispatch(setDialogueAndEffects('', ['', '']));
-          dispatch(setAnswerAndDescriptionInLog('', '', ''));
-          dispatch(setVisibleLogDialogue(false));
+          dispatch(setEventProgressStatus('death'));
 
           const eventOpening = response.data.GameOver.opening;
           const onlyChoice = {
@@ -49,8 +40,6 @@ function GameLogNPCDialogue() {
           };
 
           dispatch(setChoices([onlyChoice]));
-          dispatch(setVisibleNPC(false));
-          dispatch(setVisibleChoices(false));
         }
       })
       .catch((error) => console.log(error))
