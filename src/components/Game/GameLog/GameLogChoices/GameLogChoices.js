@@ -79,6 +79,42 @@ function GameLogChoices({
     dispatch(setVisibleLogDialogue(false));
   };
 
+  // Afin d'éviter les doublons, fonctions de gestion des choix
+  const choicesManagementRoll = (response) => {
+    // La concaténation du current-ending + next-opening est gérée ici :
+    const firstChoice = {
+      nextEventId: response.data.choices[0].nextEventId,
+      content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,
+    };
+    const secondChoice = {
+      nextEventId: response.data.choices[1].nextEventId,
+      content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
+    };
+
+    dispatch(setChoices([firstChoice, secondChoice]));
+    dispatch(setVisibleNPC(false));
+    dispatch(setVisibleChoices(false));
+  };
+
+  const choicesManagementLast = (response) => {
+    const eventEnding = response.data.currentEventEnding;
+
+    // La concaténation du current-ending + next-opening est gérée ici :
+    const firstChoice = {
+      nextEventId: response.data.BossA.Id,
+      content: response.data.BossA.Opening,
+    };
+    const secondChoice = {
+      nextEventId: response.data.BossB.Id,
+      content: response.data.BossB.Opening,
+    };
+
+    dispatch(setLastEventEnding(eventEnding));
+    dispatch(setChoices([firstChoice, secondChoice]));
+    dispatch(setVisibleNPC(false));
+    dispatch(setVisibleChoices(false));
+  };
+
   // Cette route sera appelée si le compteur progress est en-dessous de notre limite
   const getEventRollFromAPI = (nextEventId) => {
     console.log('fonction getEventRollFromAPI lancée');
@@ -95,20 +131,7 @@ function GameLogChoices({
 
         const npcAPI = response.data.npcCurrentEvent;
         npcManagement(npcAPI);
-
-        // La concaténation du current-ending + next-opening est gérée ici :
-        const firstChoice = {
-          nextEventId: response.data.choices[0].nextEventId,
-          content: `${response.data.choices[0].ending} ${response.data.choices[0].nextEventOpening}`,
-        };
-        const secondChoice = {
-          nextEventId: response.data.choices[1].nextEventId,
-          content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
-        };
-
-        dispatch(setChoices([firstChoice, secondChoice]));
-        dispatch(setVisibleNPC(false));
-        dispatch(setVisibleChoices(false));
+        choicesManagementRoll(response);
       })
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));
@@ -127,32 +150,10 @@ function GameLogChoices({
           eventAPI.description,
           eventAPI.picture,
         ));
-        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
-        dispatch(setAnswerAndDescriptionInLog('', '', ''));
-        dispatch(setVisibleLogDialogue(false));
 
-        // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
-        // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
-        // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
         const npcAPI = response.data.npcCurrentEvent;
         npcManagement(npcAPI);
-
-        const eventEnding = response.data.currentEventEnding;
-
-        // La concaténation du current-ending + next-opening est gérée ici :
-        const firstChoice = {
-          nextEventId: response.data.BossA.Id,
-          content: response.data.BossA.Opening,
-        };
-        const secondChoice = {
-          nextEventId: response.data.BossB.Id,
-          content: response.data.BossB.Opening,
-        };
-
-        dispatch(setLastEventEnding(eventEnding));
-        dispatch(setChoices([firstChoice, secondChoice]));
-        dispatch(setVisibleNPC(false));
-        dispatch(setVisibleChoices(false));
+        choicesManagementLast(response);
       })
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));
@@ -170,13 +171,7 @@ function GameLogChoices({
           eventAPI.description,
           eventAPI.picture,
         ));
-        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
-        dispatch(setAnswerAndDescriptionInLog('', '', ''));
-        dispatch(setVisibleLogDialogue(false));
 
-        // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
-        // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
-        // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
         const npcAPI = response.data.npcCurrentEvent;
         npcManagement(npcAPI);
 
@@ -257,7 +252,7 @@ function GameLogChoices({
     // S'il vaut 2, c'est juste avant last
     // S'il vaut <2 (0 ou 1) c'est normal.
 
-    const progressMax = 4;
+    const progressMax = 7;
 
     if (progress === progressMax) {
       dispatch(setEventProgressStatus('gameEnd'));
