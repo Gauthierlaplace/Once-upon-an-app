@@ -5,6 +5,7 @@ import './GameLog.scss';
 import {
   setVisibleNPC,
   setVisibleChoices,
+  setTypewriting,
 } from '../../../actions/game';
 
 import GameLogChoices from './GameLogChoices/GameLogChoices';
@@ -23,6 +24,8 @@ function GameLog({
   const visibleLogDialogue = useSelector((state) => state.game.visibleLogDialogue);
   const answerAndDescriptionInLog = useSelector((state) => state.game.eventDialogueToDisplay);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
+  const typewriting = useSelector((state) => state.game.typewriting.eventDescription);
+  const identifier = 'eventDescription';
 
   const [visibleButtonFollowToShowNPC, setVisibleButtonFollowToShowNPC] = useState(true);
   const [visibleButtonFollowToShowChoices, setVisibleButtonFollowToShowChoices] = useState(true);
@@ -34,6 +37,15 @@ function GameLog({
     <div className="GameLog">
       {/* La description est toujours affichée, quoi qu'il arrive */}
       <GameLogEventDescription description={eventDescription} />
+
+      {(typewriting) && (
+        <button
+          type="button"
+          onClick={() => dispatch(setTypewriting(identifier, false))}
+        >
+          Accélérer
+        </button>
+      )}
 
       {/* Le 1er bouton "Suite" s'affiche uniquement s'il y a un NPC dans la scène */}
       {(hasNPC && visibleButtonFollowToShowNPC) && (
@@ -70,7 +82,7 @@ function GameLog({
       {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
       {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
       {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
-      {(!hasNPC && visibleButtonFollowToShowChoices && (eventProgressStatus !== 'gameEnd')) && (
+      {(!hasNPC && visibleButtonFollowToShowChoices && !typewriting && (eventProgressStatus !== 'gameEnd')) && (
         <button
           type="button"
           className="GameLog-next-step-button"

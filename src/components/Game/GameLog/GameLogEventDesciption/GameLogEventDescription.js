@@ -4,10 +4,15 @@ import './GameLogEventDescription.scss';
 import GameLogTypewriter from '../GameLogTypewriter/GameLogTypewriter';
 
 function GameLogEventDescription({ description }) {
+  const identifier = 'eventDescription';
+
   return (
     <div className="GameLogEventDescription">
       <p className="GameLogEventDescription-content">
-        <GameLogTypewriter text={description} />
+        <GameLogTypewriter
+          text={description}
+          identifier={identifier}
+        />
       </p>
     </div>
   );

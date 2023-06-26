@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './GameLogNPC.scss';
 import GameLogNPCDialogue from './GameLogNPCDialogue/GameLogNPCDialogue';
 import GameLogTypewriter from '../GameLogTypewriter/GameLogTypewriter';
+import { setTypewriting } from '../../../../actions/game';
 
 function GameLogNPC({
   npcName,
@@ -12,6 +14,9 @@ function GameLogNPC({
   setVisibleButtonFollowToShowDialogue,
 }) {
   const [visibleDialogue, setVisibleDialogue] = useState(false);
+  const typewriting = useSelector((state) => state.game.typewriting.npcDescription);
+  const dispatch = useDispatch();
+  const identifier = 'npcDescription';
 
   return (
     <div className="GameLogNPC">
@@ -19,11 +24,23 @@ function GameLogNPC({
         Vous rencontrez <span>{npcName}</span>.
       </p>
       <p className="GameLogNPC-content">
-        <GameLogTypewriter text={npcDescription} />
+        <GameLogTypewriter
+          text={npcDescription}
+          identifier={identifier}
+        />
       </p>
 
+      {typewriting && (
+        <button
+          type="button"
+          onClick={() => dispatch(setTypewriting(identifier, false))}
+        >
+          Accélérer
+        </button>
+      )}
+
       {/* Le bouton "Dialogue" s'affiche toujours, quand le NPC est visible */}
-      {visibleButtonFollowToShowDialogue && (
+      {(visibleButtonFollowToShowDialogue && !typewriting) && (
         <button
           type="button"
           className="GameLog-next-step-button"
