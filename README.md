@@ -2,14 +2,12 @@
 
 ## Sommaire
 
-  - [Cloner le repository](#cloner-le-repository)
-  - [Aller dans le dossier du projet](#aller-dans-le-dossier-du-projet)
-  - [Installer les dépendances](#installer-les-dépendances)
-  - [Créer la BDD](#créer-la-bdd)
-    - [Dans Adminer](#dans-adminer)
-  - [Paramètrage de la connexion serveur Adminer pour accès BDD en local](#paramètrage-de-la-connexion-serveur-adminer-pour-accès-bdd-en-local)
-  - [Ajout du token JWT](#ajout-du-token-jwt)
-    - [Pour accèder a votre App, lancer votre server](#pour-accèder-a-votre-app-lancer-votre-server)
+- [Cloner le repository](#cloner-le-repository)
+- [Aller dans le dossier du projet](#aller-dans-le-dossier-du-projet)
+- [Installer les dépendances](#installer-les-dépendances)
+- [Paramètrage de la connexion à l'API](#paramètrage-de-la-connexion-à-lapi)
+- [Informations supplémentaires sur Create React App](#informations-supplémentaires-sur-create-react-app)
+- [Pour la mise en production](#pour-la-mise-en-production)
 
 ### Cloner le repository
 
@@ -40,13 +38,17 @@ Dans le fichier .env
 Attention, REACT_APP_API_BASE ne se termine pas par un "/".
 Le slash sera au début de chaque route.
 
-#### Pour accèder a votre App, lancer votre server
+### Pour accèder a votre App, lancer votre server
 
 ```bash
 npm start
 ```
 
-#### Informations supplémentaires sur Create React App
+### Informations supplémentaires sur Create React App
 [Create React App](https://github.com/facebook/create-react-app).
 
-#### Pour la mise en production - `npm run build`
+### Pour la mise en production
+
+```bash
+npm run build
+```
