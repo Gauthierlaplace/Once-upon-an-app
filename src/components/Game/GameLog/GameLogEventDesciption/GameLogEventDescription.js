@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 
 import './GameLogEventDescription.scss';
+import GameLogTypewriter from '../GameLogTypewriter/GameLogTypewriter';
 
 function GameLogEventDescription({ description }) {
   return (
     <div className="GameLogEventDescription">
       <p className="GameLogEventDescription-content">
-        {description}
+        <GameLogTypewriter text={description} />
       </p>
     </div>
   );

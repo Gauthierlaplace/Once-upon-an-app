@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import './GameLogNPC.scss';
 import GameLogNPCDialogue from './GameLogNPCDialogue/GameLogNPCDialogue';
+import GameLogTypewriter from '../GameLogTypewriter/GameLogTypewriter';
 
 function GameLogNPC({
   npcName,
@@ -18,7 +19,7 @@ function GameLogNPC({
         Vous rencontrez <span>{npcName}</span>.
       </p>
       <p className="GameLogNPC-content">
-        {npcDescription}
+        <GameLogTypewriter text={npcDescription} />
       </p>
 
       {/* Le bouton "Dialogue" s'affiche toujours, quand le NPC est visible */}
