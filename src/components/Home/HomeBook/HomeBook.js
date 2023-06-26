@@ -1,22 +1,22 @@
+import './HomeBook.scss';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import api from '../../../api/api';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { checkInfoBeforeRegister } from '../../../functions/user';
+
+import HomeDescription from '../HomeDescription/HomeDescription';
+import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
+import HomeBookRegister from './HomeBookRegister/HomeBookRegister';
 
 // Import des actions et fonctions nécessaires
 import {
   changeField,
   saveLoginSuccessful,
   saveRegisterSuccessful,
-  hasFailedAction
+  hasFailedAction,
 } from '../../../actions/user';
-
-import { checkInfoBeforeRegister } from '../../../functions/user';
-
-import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
-import HomeBookRegister from './HomeBookRegister/HomeBookRegister';
-
-import './HomeBook.scss';
 
 function HomeBook() {
   // A transmettre en props à la partie login
@@ -26,7 +26,9 @@ function HomeBook() {
   // A transmettre en props à la partie register
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
+  const passwordBisRegister = useSelector((state) => state.user.passwordBisRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
+  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
   const [isPasswordToastVisible, setPasswordToastVisible] = useState(false);
 
@@ -35,18 +37,26 @@ function HomeBook() {
   // Fonction pour envoyer username (l'email) et password à la soumission du formulaire
   const handleSubmitLogin = (event) => {
     event.preventDefault();
+    toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
-    axios
-      .post('http://anthony-boutherin.vpnuser.lan:8000/api/login_check', {
-        // La documentation API (nos collègues back) nous précise quelles données transmettre
+    api
+      .post('login_check', {
         username: emailLogin,
         password: passwordLogin,
       })
       .then((response) => {
         // Quand le couple email/mdp est valide, j'envoie plusieurs infos dans le state :
         dispatch(
-          saveLoginSuccessful(response.data.data.pseudo, response.data.data.id, response.data.token)
+          saveLoginSuccessful(
+            response.data.data.pseudo,
+            response.data.data.id,
+            response.data.token
+          ),
         );
+        // Je les stocke aussi dans le local storage
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('nickname', response.data.data.pseudo);
+        localStorage.setItem('id', response.data.data.id);
       })
       .catch((error) => {
         console.error(error);
@@ -67,9 +77,9 @@ function HomeBook() {
   };
 
   const sendRegisterToApi = async () => {
-    axios
+    api
       .post(
-        'http://anthony-boutherin.vpnuser.lan:8000/api/users',
+        'users',
         {
           email: emailRegister,
           roles: ['ROLE_PLAYER'],
@@ -80,7 +90,6 @@ function HomeBook() {
       )
       .then((response) => {
         setPasswordToastVisible(false);
-        console.log(response);
         dispatch(
           saveRegisterSuccessful(response.data.email),
         );
@@ -116,28 +125,90 @@ function HomeBook() {
   // Fonction pour demander l'inscription d'un nouvel utilisateur
   const handleSubmitRegister = (event) => {
     event.preventDefault();
-    if (checkInfoBeforeRegister(emailRegister, passwordRegister, nicknameRegister) === true) {
+    toast.dismiss(); // masque tous les toasts actuellement visibles
+    // Avant d'envoyer à l'API, je vérifie les inputs en front
+    // Pas d'email, nickname ou password invalide !
+    if (checkInfoBeforeRegister(
+      nicknameRegister,
+      emailRegister,
+      passwordRegister,
+      passwordBisRegister
+    ) === true) {
       sendRegisterToApi();
     }
   };
 
+  //  VARIABLE POUR PERMETTRE D AFFICHER OU NON LA DESCRIPTION / LA CONNEXION OU L INSCRIPTION
+  // const displayLoginRegister = true; onClick ?
+  // Elle reçoit en paramètre ce qu'on veut afficher
+  // Elle passe ceci en true et tout le reste en false
+  const [displayDescription, setDisplayDescription] = useState(true);
+  const [displayRegister, setDisplayRegister] = useState(false);
+  const [displayLogin, setDisplayLogin] = useState(false);
+
+  const displayDescriptionFunction = () => {
+    setDisplayDescription(true);
+    setDisplayRegister(false);
+    setDisplayLogin(false);
+  };
+
+  const displayRegisterFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(true);
+    setDisplayLogin(false);
+  };
+
+  const displayLoginFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(false);
+    setDisplayLogin(true);
+  };
+
   return (
     <div className="HomeBook">
-      <HomeBookLogin
-        email={emailLogin}
-        password={passwordLogin}
-        handleSubmit={handleSubmitLogin}
-        changeField={changeField}
-      />
-      <HomeBookRegister
-        email={emailRegister}
-        password={passwordRegister}
-        nickname={nicknameRegister}
-        handleSubmit={handleSubmitRegister}
-        changeField={changeField}
-        isPasswordToastVisible={isPasswordToastVisible}
-        setPasswordToastVisible={setPasswordToastVisible}
-      />
+      {/* PARTIE GAUCHE SOMMAIRE */}
+      <div className="HomeBook-GlassLeft">
+        <div className="HomeBook-left">
+          <h1 className="HomeBook-sommaire">Sommaire</h1>
+          <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3> . . . . . . . . . . . . . . . . . . . P.0</div>
+          <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3> . . . . . . . . . . . . . . . . . . . P.1</div>
+          <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
+          <div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div>
+          <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
+          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . . . . . P.5</div>
+
+        </div>
+      </div>
+      {/* PARTIE DROITE DESCRIPTION */}
+      <div className="HomeBook-GlassRight">
+        <div className="HomeBook-right">
+          {displayDescription && (
+            <HomeDescription />
+          )}
+
+          {displayRegister && (
+            <HomeBookRegister
+              nickname={nicknameRegister}
+              email={emailRegister}
+              password={passwordRegister}
+              passwordBis={passwordBisRegister}
+              handleSubmit={handleSubmitRegister}
+              changeField={changeField}
+              isPasswordToastVisible={isPasswordToastVisible}
+              setPasswordToastVisible={setPasswordToastVisible}
+            />
+          )}
+
+          {displayLogin && (
+            <HomeBookLogin
+              email={emailLogin}
+              password={passwordLogin}
+              handleSubmit={handleSubmitLogin}
+              changeField={changeField}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

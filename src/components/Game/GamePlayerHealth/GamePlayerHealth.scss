@@ -12,17 +12,13 @@
     background-color: vars.$alt-dark-color;
 
     h1 {
-        width: 20%;
+        width: 15%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
     }
 
     &-picture {
         width: 30px;
     }
-
-
-    &-name {}
-
 }

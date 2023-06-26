@@ -4,10 +4,9 @@
     position: absolute;
     top: 0;
     width: 100%;
-    height: 50px;
+    height: 40px;
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: rgb(219, 216, 216);
     box-shadow: rgb(187, 185, 185) 0px 0px 10px;
 
@@ -29,15 +28,17 @@
     }
 
     &-Account button {
-        margin-left: 30px;
-        height: auto;
-        padding: 10px 15px;
-        background-color: purple;
+        margin-left: 10px;
+        height: 40px;
+        padding: 10px;
+        background: linear-gradient( #9A6D51, #402A23);
         color: white;
-        font-size: 1em;
+        font-size: 0.8em;
         font-weight: bold;
-        border-radius: 5px;
         border: transparent;
+    }
+    button:hover {
+        background: linear-gradient(#402A23, #9A6D51);
     }
 
     &-Account h3 {
@@ -53,7 +54,7 @@
         top: 0;
         text-align: center;
         object-position: center top;
-        width: 110px;
-        height: 110px;
+        width: 130px;
+        height: 100px;
     }
 }

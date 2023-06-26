@@ -17,13 +17,15 @@ export const checkPasswordBeforeRegister = (passwordToCheck) => {
 };
 
 export const checkEmailBeforeRegister = (emailToCheck) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+(\s|[\w-])+@[^\s@]+(\s|[\w-])+\.[^\s@]+$/;
   return emailRegex.test(emailToCheck);
 };
 
 export const checkNicknameBeforeRegister = (nicknameToCheck) => (nicknameToCheck !== '');
 
-export const checkInfoBeforeRegister = (email, password, nickname) => {
+export const checkPasswordBisBeforeRegister = (password, passwordBis) => (password === passwordBis);
+
+export const checkInfoBeforeRegister = (nickname, email, password, passwordBis) => {
   if (checkNicknameBeforeRegister(nickname) === false) {
     toast.error('Pseudo invalide', {
       position: 'top-right',
@@ -53,7 +55,21 @@ export const checkInfoBeforeRegister = (email, password, nickname) => {
   }
 
   if (checkPasswordBeforeRegister(password) === false) {
-    toast.error('Mot-de-passe invalide', {
+    toast.error('Le mot-de-passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule et 1 caractère spécial', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+    return false;
+  }
+
+  if (checkPasswordBisBeforeRegister(password, passwordBis) === false) {
+    toast.error('La confirmation est différente du mot-de-passe', {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,

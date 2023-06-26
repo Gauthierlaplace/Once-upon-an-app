@@ -8,7 +8,17 @@ function Header() {
   const logged = useSelector((state) => state.user.logged);
   const nickname = useSelector((state) => state.user.nickname);
 
+  // La fonctionnalité logout (déconnexion) est accessible en header
+  // Quand le joueur se déconnecte, ses données (token, nickname et id)
+  // sont effacées à la fois dans le localStorage (instructions ci-dessous)
+  // Et également dans le state (dispatch(logOut))
   const dispatch = useDispatch();
+  const handleLogOut = () => {
+    localStorage.setItem('token', '');
+    localStorage.setItem('nickname', '');
+    localStorage.setItem('id', '');
+    dispatch(logOut());
+  };
 
   return (
     // Todo retirer les NavLinks quand nous n'en aurons plus besoin
@@ -17,7 +27,7 @@ function Header() {
         Accueil
       </NavLink>
 
-      <img src="https://imagizer.imageshack.com/img924/3691/6fB19e.png" alt="Logo de l'application web" />
+      <img src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
 
       <NavLink className="Header-Jeu" to="/game">
         Jeu
@@ -30,7 +40,7 @@ function Header() {
           {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
           <button
             type="button"
-            onClick={() => dispatch(logOut())}
+            onClick={() => handleLogOut()}
           >
             Déconnexion
           </button>
