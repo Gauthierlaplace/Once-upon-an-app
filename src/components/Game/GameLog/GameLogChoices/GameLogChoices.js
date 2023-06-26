@@ -17,7 +17,9 @@ import {
   setVisibleChoices,
   incrementProgress,
   setEventProgressStatus,
-  setLoading,
+  setVisibleLogDialogue,
+  setAnswerAndDescriptionInLog,
+  setLoading
 } from '../../../../actions/game';
 
 function GameLogChoices({
@@ -46,6 +48,9 @@ function GameLogChoices({
           eventAPI.description,
           eventAPI.picture,
         ));
+        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
+        dispatch(setAnswerAndDescriptionInLog('', '', ''));
+        dispatch(setVisibleLogDialogue(false));
 
         // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
         // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
@@ -81,6 +86,8 @@ function GameLogChoices({
         } else {
           dispatch(setCurrentNPC('', '', ''));
           dispatch(setDialogueAndEffects('', ['', '']));
+          // dispatch(setAnswerAndDescriptionInLog('', '', ''));
+          // dispatch(setVisibleLogDialogue(false));
         }
 
         // La concaténation du current-ending + next-opening est gérée ici :
@@ -114,6 +121,9 @@ function GameLogChoices({
           eventAPI.description,
           eventAPI.picture,
         ));
+        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
+        dispatch(setAnswerAndDescriptionInLog('', '', ''));
+        dispatch(setVisibleLogDialogue(false));
 
         // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
         // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
@@ -149,6 +159,8 @@ function GameLogChoices({
         } else {
           dispatch(setCurrentNPC('', '', ''));
           dispatch(setDialogueAndEffects('', ['', '']));
+          // dispatch(setAnswerAndDescriptionInLog('', '', ''));
+          // dispatch(setVisibleLogDialogue(false));
         }
 
         const eventEnding = response.data.currentEventEnding;
@@ -184,6 +196,9 @@ function GameLogChoices({
           eventAPI.description,
           eventAPI.picture,
         ));
+        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
+        dispatch(setAnswerAndDescriptionInLog('', '', ''));
+        dispatch(setVisibleLogDialogue(false));
 
         // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
         // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
@@ -219,6 +234,8 @@ function GameLogChoices({
         } else {
           dispatch(setCurrentNPC('', '', ''));
           dispatch(setDialogueAndEffects('', ['', '']));
+          // dispatch(setAnswerAndDescriptionInLog('', '', ''));
+          // dispatch(setVisibleLogDialogue(false));
         }
 
         const eventEnding = response.data.currentEventEnding;
@@ -252,6 +269,10 @@ function GameLogChoices({
         dispatch(setHasNPC(false));
         dispatch(setCurrentNPC('', '', ''));
 
+        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
+        dispatch(setAnswerAndDescriptionInLog('', '', ''));
+        dispatch(setVisibleLogDialogue(false));
+
         const eventEnding = response.data.currentEventEnding;
         const onlyChoice = {
           nextEventId: response.data.EndGame.Id,
@@ -278,6 +299,10 @@ function GameLogChoices({
           eventAPI.description,
           eventAPI.picture,
         ));
+
+        // Je remet à zéro le dialogue, les réponses et les effets des éventuels précédents Events
+        dispatch(setAnswerAndDescriptionInLog('', '', ''));
+        dispatch(setVisibleLogDialogue(false));
 
         dispatch(setHasNPC(false));
         dispatch(setCurrentNPC('', '', ''));

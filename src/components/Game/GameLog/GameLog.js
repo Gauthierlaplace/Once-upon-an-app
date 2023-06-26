@@ -10,6 +10,7 @@ import {
 import GameLogChoices from './GameLogChoices/GameLogChoices';
 import GameLogEventDescription from './GameLogEventDesciption/GameLogEventDescription';
 import GameLogNPC from './GameLogNPC/GameLogNPC';
+import GameLogDialogue from './GameLogDialogue/GameLogDialogue';
 
 function GameLog({
   eventDescription,
@@ -19,6 +20,8 @@ function GameLog({
   const hasNPC = useSelector((state) => state.game.hasNPC);
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
   const visibleChoices = useSelector((state) => state.game.visibleChoices);
+  const visibleLogDialogue = useSelector((state) => state.game.visibleLogDialogue);
+  const answerAndDescriptionInLog = useSelector((state) => state.game.eventDialogueToDisplay);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
 
   const [visibleButtonFollowToShowNPC, setVisibleButtonFollowToShowNPC] = useState(true);
@@ -53,6 +56,14 @@ function GameLog({
           npcDescription={npcDescription}
           visibleButtonFollowToShowDialogue={visibleButtonFollowToShowDialogue}
           setVisibleButtonFollowToShowDialogue={setVisibleButtonFollowToShowDialogue}
+        />
+      )}
+
+      {(hasNPC && visibleLogDialogue) && (
+        <GameLogDialogue
+          sentence={answerAndDescriptionInLog.sentence}
+          answer={answerAndDescriptionInLog.answer}
+          effectDescription={answerAndDescriptionInLog.effectDescription}
         />
       )}
 
