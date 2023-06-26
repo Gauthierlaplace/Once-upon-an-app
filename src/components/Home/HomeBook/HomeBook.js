@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 import './HomeBook.scss';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import api from '../../../api/api';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import api from '../../../api/api';
 import { checkInfoBeforeRegister } from '../../../functions/user';
 
 import HomeDescription from '../HomeDescription/HomeDescription';
@@ -28,11 +28,37 @@ function HomeBook() {
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
   const passwordBisRegister = useSelector((state) => state.user.passwordBisRegister);
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
-  const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
+  // const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
   const [isPasswordToastVisible, setPasswordToastVisible] = useState(false);
 
   const dispatch = useDispatch();
+
+  //  VARIABLE POUR PERMETTRE D AFFICHER OU NON LA DESCRIPTION / LA CONNEXION OU L INSCRIPTION
+  // const displayLoginRegister = true; onClick ?
+  // Elle reçoit en paramètre ce qu'on veut afficher
+  // Elle passe ceci en true et tout le reste en false
+  const [displayDescription, setDisplayDescription] = useState(true);
+  const [displayRegister, setDisplayRegister] = useState(false);
+  const [displayLogin, setDisplayLogin] = useState(false);
+
+  const displayDescriptionFunction = () => {
+    setDisplayDescription(true);
+    setDisplayRegister(false);
+    setDisplayLogin(false);
+  };
+
+  const displayRegisterFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(true);
+    setDisplayLogin(false);
+  };
+
+  const displayLoginFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(false);
+    setDisplayLogin(true);
+  };
 
   // Fonction pour envoyer username (l'email) et password à la soumission du formulaire
   const handleSubmitLogin = (event) => {
@@ -40,7 +66,7 @@ function HomeBook() {
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
     api
-      .post('login_check', {
+      .post('/login_check', {
         username: emailLogin,
         password: passwordLogin,
       })
@@ -79,7 +105,7 @@ function HomeBook() {
   const sendRegisterToApi = async () => {
     api
       .post(
-        'users',
+        '/users',
         {
           email: emailRegister,
           roles: ['ROLE_PLAYER'],
@@ -135,33 +161,8 @@ function HomeBook() {
       passwordBisRegister
     ) === true) {
       sendRegisterToApi();
+      displayLoginFunction();
     }
-  };
-
-  //  VARIABLE POUR PERMETTRE D AFFICHER OU NON LA DESCRIPTION / LA CONNEXION OU L INSCRIPTION
-  // const displayLoginRegister = true; onClick ?
-  // Elle reçoit en paramètre ce qu'on veut afficher
-  // Elle passe ceci en true et tout le reste en false
-  const [displayDescription, setDisplayDescription] = useState(true);
-  const [displayRegister, setDisplayRegister] = useState(false);
-  const [displayLogin, setDisplayLogin] = useState(false);
-
-  const displayDescriptionFunction = () => {
-    setDisplayDescription(true);
-    setDisplayRegister(false);
-    setDisplayLogin(false);
-  };
-
-  const displayRegisterFunction = () => {
-    setDisplayDescription(false);
-    setDisplayRegister(true);
-    setDisplayLogin(false);
-  };
-
-  const displayLoginFunction = () => {
-    setDisplayDescription(false);
-    setDisplayRegister(false);
-    setDisplayLogin(true);
   };
 
   return (
@@ -175,7 +176,7 @@ function HomeBook() {
           <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
           <div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div>
           <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
-          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . . . . . P.5</div>
+          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . P.5</div>
 
         </div>
       </div>

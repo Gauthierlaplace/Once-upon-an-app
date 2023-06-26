@@ -1,36 +1,43 @@
+/* eslint-disable no-console */
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import api from '../../api/api';
 
 import {
   setCurrentEvent,
+  setPlayer,
   setChoices,
+  setLoading,
 } from '../../actions/game';
 
 import './Game.scss';
 
 import Loading from '../Loading/Loading';
-import PlayerHealth from './GamePlayerHealth/GamePlayerHealth';
-import Scene from './GameScene/GameScene';
-import Log from './GameLog/GameLog';
-import Menus from './GameMenus/GameMenus';
+import GamePlayerHealth from './GamePlayerHealth/GamePlayerHealth';
+import GameScene from './GameScene/GameScene';
+import GameLog from './GameLog/GameLog';
+import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const loading = useSelector((state) => state.game.loading);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
   // avec toutes ses données et ses choix
   useEffect(() => {
-    api.get('play')
+    dispatch(setLoading(true));
+    api.get('/play')
       .then((response) => {
         const eventAPI = response.data.currentEvent;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture,
+        const playerAPI = response.data.player;
+        dispatch(setCurrentEvent(eventAPI));
+        dispatch(setPlayer(
+          playerAPI.id,
+          playerAPI.name,
+          playerAPI.picture,
+          playerAPI.health,
+          playerAPI.maxHealth
         ));
 
         const firstChoice = {
@@ -42,8 +49,8 @@ function Game() {
           content: `${response.data.choices[1].ending} ${response.data.choices[1].nextEventOpening}`,
         };
 
-        dispatch(setChoices(firstChoice, secondChoice));
-        setLoading(false);
+        dispatch(setChoices([firstChoice, secondChoice]));
+        dispatch(setLoading(false));
       })
       .catch((error) => console.log(error));
   }, []);
@@ -53,27 +60,27 @@ function Game() {
   const eventTitle = useSelector((state) => state.game.currentEvent.title);
   const eventPicture = useSelector((state) => state.game.currentEvent.picture);
   const eventDescription = useSelector((state) => state.game.currentEvent.description);
-  const npcName = useSelector((state) => state.game.currentNpc.name);
-  const npcDescription = useSelector((state) => state.game.currentNpc.description);
+  const npcName = useSelector((state) => state.game.currentNPC.name);
+  const npcDescription = useSelector((state) => state.game.currentNPC.description);
 
   if (loading) {
     return <Loading />;
   }
   return (
     <div className="Game">
-      <PlayerHealth />
+      <GamePlayerHealth />
 
       <div className="Game-flexSA">
         <div className="Game-left">
 
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
-          <Scene picture={eventPicture} npcName={npcName} />
-          <Menus />
+          <GameScene picture={eventPicture} npcName={npcName} />
+          <GameMenus />
         </div>
 
         <div className="Game-right">
           <h1 className="Game-Logtitle">Journal</h1>
-          <Log
+          <GameLog
             eventDescription={eventDescription}
             npcName={npcName}
             npcDescription={npcDescription}

@@ -5,10 +5,10 @@ function Loading() {
   const loading = spinner;
   return (
     <div className="Loading">
-      Veuillez Patienter...
       <div className="Loading-spinner">
         <img src={loading} alt="spinner" />
       </div>
+      <h1>Chargement en cours...</h1>
     </div>
   );
 }
