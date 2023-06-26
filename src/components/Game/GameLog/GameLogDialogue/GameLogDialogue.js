@@ -5,8 +5,8 @@ import './GameLogDialogue.scss';
 function GameLogDialogue({ sentence, answer, effectDescription }) {
   return (
     <div className="GameLogDialogue">
-      <p className="GameLogDialogue-sentence">- "{sentence}"</p>
-      <p className="GameLogDialogue-answer">- "{answer}"</p>
+      <p className="GameLogDialogue-sentence">"{sentence}</p>
+      <p className="GameLogDialogue-answer">- {answer}"</p>
       <p className="GameLogDialogue-effectDescription">{effectDescription}</p>
     </div>
   );
