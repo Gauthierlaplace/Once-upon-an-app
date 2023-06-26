@@ -89,13 +89,7 @@ const reducer = (state = initialState, action = {}) => {
   case SET_CURRENT_EVENT:
     return {
       ...state,
-      currentEvent: {
-        ...state.currentEvent,
-        code_event: action.payload.code_event,
-        title: action.payload.title,
-        description: action.payload.description,
-        picture: action.payload.picture,
-      }
+      currentEvent: action.payload,
     };
 
   case SET_CURRENT_NPC:

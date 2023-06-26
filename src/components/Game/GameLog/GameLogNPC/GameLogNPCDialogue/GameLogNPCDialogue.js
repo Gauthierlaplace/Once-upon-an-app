@@ -9,7 +9,10 @@ import {
   setVisibleChoices,
   setHeroStatus,
   setAnswerAndDescriptionInLog,
-  setVisibleLogDialogue
+  setVisibleLogDialogue,
+  setChoices,
+  setLoading,
+  setEventProgressStatus
 } from '../../../../../actions/game';
 
 function GameLogNPCDialogue() {
@@ -17,19 +20,30 @@ function GameLogNPCDialogue() {
   const sentence = useSelector((state) => state.game.dialogue.sentence);
   const answers = useSelector((state) => state.game.dialogue.answers);
   const [visibleDialogue, setVisibleDialogue] = useState(true);
-  console.log(answers);
 
   const handleClickOnEffect = (effectId) => {
-    // console.log('fonction handleClickOnEffect lancée');
-
     api.get(`/event/effect/${effectId}`)
       .then((response) => {
-        // console.log(response.data);
+        // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
         const playerAPI = response.data.player;
         dispatch(setHeroStatus(playerAPI.health));
-        // TODO gérer la disparition des answers et afficher la réponse du pnj
+
+        // Si l'effet a tué le joueur
+        // On affiche un unique bouton de choix vers le deathEvent
+        if (response.data.GameOver) {
+          dispatch(setEventProgressStatus('death'));
+
+          const eventOpening = response.data.GameOver.opening;
+          const onlyChoice = {
+            nextEventId: 18,
+            content: `${eventOpening}`,
+          };
+
+          dispatch(setChoices([onlyChoice]));
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
   };
 
   return (
