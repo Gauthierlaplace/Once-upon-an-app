@@ -14,10 +14,14 @@ function Header() {
   // Et également dans le state (dispatch(logOut))
   const dispatch = useDispatch();
   const handleLogOut = () => {
-    localStorage.setItem('token', '');
-    localStorage.setItem('nickname', '');
-    localStorage.setItem('id', '');
-    dispatch(logOut());
+    const confirmation = window.confirm('Votre progression dans le jeu sera perdue, êtes-vous sûr de vouloir vous déconnecter ?');
+    if (confirmation) {
+      localStorage.setItem('token', '');
+      localStorage.setItem('nickname', '');
+      localStorage.setItem('id', '');
+      dispatch(logOut());
+      window.location.href = '/';
+    }
   };
 
   return (
