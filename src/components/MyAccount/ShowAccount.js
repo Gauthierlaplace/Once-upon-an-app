@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import './MyAccount.scss';
 import { useSelector } from 'react-redux';
-import api from '../../../api/api';
+import api from '../../api/api';
 
 function ShowAccount() {
   const userId = useSelector((state) => state.user.currentUserId);

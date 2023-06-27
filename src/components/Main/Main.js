@@ -3,7 +3,7 @@ import './Main.scss';
 
 import Home from '../Home/Home';
 import Game from '../Game/Game';
-import MyAccount from '../Header/MyAccount/MyAccount';
+import MyAccount from '../MyAccount/MyAccount';
 
 // TODO fix la gestion des Routes
 
