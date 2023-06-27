@@ -3,10 +3,7 @@ import './GameNPC.scss';
 
 function GameNPC() {
   const npcName = useSelector((state) => state.game.currentNPC.name);
-  const npcPictureSrc = useSelector((state) => state.game.currentNPC.picture);
-
-  const path = `${process.env.REACT_APP_ASSETS_BASE}`;
-  const npcPicture = `${path}${npcPictureSrc}`;
+  const npcPicture = useSelector((state) => state.game.currentNPC.picture);
 
   return (
     <div className="GameNPC">
