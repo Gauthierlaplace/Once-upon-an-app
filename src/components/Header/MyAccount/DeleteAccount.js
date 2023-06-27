@@ -1,11 +1,8 @@
+/* eslint-disable no-console */
 import './MyAccount.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteAccount } from '../../../actions/user';
 import api from '../../../api/api';
-
-// ==========================================
-// COMPOSANT (je définis tout à l'intérieur)
-// ==========================================
 
 function DeleteAccount() {
   // const : tuserId utilisé pour la fonction delete account
