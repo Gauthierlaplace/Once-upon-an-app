@@ -5,7 +5,12 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #EED5AF;
+    background-image: 
+    linear-gradient(
+        rgba(236, 192, 130, 0.5), 
+        rgba(238, 213, 175, 0.5)
+      ),
+    url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fimg.freepik.com%2Fpremium-photo%2Frecycled-white-paper-texture-background-vintage-wallpaper_118047-9300.jpg%3Fw%3D2000');
 
     &-flexSA {
         width: 100%;
