@@ -10,7 +10,7 @@ function HomeLogged() {
           className="HomeLogged-RunGame"
           to="/game"
         >
-          <h1>Jouer</h1>
+          Jouer
         </Link>
       </button>
     </div>
