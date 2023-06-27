@@ -9,29 +9,52 @@ import PlayerStats from '../../Player/PlayerStats';
 import PlayerProgress from '../../Player/PlayerProgress';
 
 function GameMenus() {
+  const [displayInventory, setDisplayInventory] = useState(true);
+  const [displayStats, setDisplayStats] = useState(false);
+  const [displayProgress, setDisplayProgress] = useState(false);
+
+  const displayInventoryFunction = () => {
+    setDisplayInventory(true);
+    setDisplayStats(false);
+    setDisplayProgress(false);
+  };
+
+  const displayStatsFunction = () => {
+    setDisplayInventory(false);
+    setDisplayStats(true);
+    setDisplayProgress(false);
+  };
+
+  const displayProgressFunction = () => {
+    setDisplayInventory(false);
+    setDisplayStats(false);
+    setDisplayInventory(true);
+  };
   return (
     <div className="GameMenus">
       <div className="GameMenus-menus">
         <ul>
           <li>
             {/* Icon pour inventaire */}
-            <Icon size={30} icon={ic_shopping_bag} />
+            <Icon size={30} icon={ic_shopping_bag} onClick={displayInventoryFunction} />
           </li>
 
           <li>
             {/* Icon pour statistique */}
-            <Icon size={30} icon={accessibility} />
+            <Icon size={30} icon={accessibility} onClick={displayStatsFunction} />
           </li>
 
           <li>
             {/* Icon pour la progression */}
-            <Icon size={30} icon={flag} />
+            <Icon size={30} icon={flag} onClick={displayProgressFunction} />
           </li>
         </ul>
       </div>
 
       <div className="GameMenus-showComponent">
-        <PlayerInventory />
+        {displayDescription && (
+          <PlayerInventory />
+        )}
         <PlayerStats />
         <PlayerProgress />
       </div>
