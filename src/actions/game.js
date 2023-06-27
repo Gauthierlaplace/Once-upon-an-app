@@ -17,14 +17,9 @@ export const SET_VISIBLE_LOG_DIALOGUE = 'SET_VISIBLE_LOG_DIALOGUE';
 export const SET_LOADING = 'SET_LOADING';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
-export const setCurrentEvent = (codeEvent, title, description, picture) => ({
+export const setCurrentEvent = (currentEvent) => ({
   type: SET_CURRENT_EVENT,
-  payload: {
-    code_event: codeEvent,
-    title: title,
-    description: description,
-    picture: picture,
-  },
+  payload: currentEvent,
 });
 
 export const setCurrentNPC = (nameNPC, descriptionNPC, pictureNPC) => ({
