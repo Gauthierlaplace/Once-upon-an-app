@@ -306,7 +306,7 @@ function GameLogChoices({
   return (
     <div className="GameLogChoices">
       <h2 className="GameLogChoices-last-event-ending">
-        {(lastEventEnding.length > 0)
+        {(eventProgressStatus !== 'death' && lastEventEnding.length > 0)
           ? lastEventEnding : ''}
       </h2>
 
