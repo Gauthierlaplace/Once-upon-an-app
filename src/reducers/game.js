@@ -16,7 +16,8 @@ import {
   SET_HERO_STATUS,
   SET_ANSWER_AND_DESCRIPTION_IN_LOG,
   SET_VISIBLE_LOG_DIALOGUE,
-  SET_LOADING
+  SET_LOADING,
+  SET_TYPEWRITING,
 } from '../actions/game';
 
 export const initialState = {
@@ -76,6 +77,11 @@ export const initialState = {
   visibleLogDialogue: false,
 
   loading: false,
+  typewriting:
+  {
+    eventDescription: false,
+    npcDescription: false,
+  }
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -83,13 +89,7 @@ const reducer = (state = initialState, action = {}) => {
   case SET_CURRENT_EVENT:
     return {
       ...state,
-      currentEvent: {
-        ...state.currentEvent,
-        code_event: action.payload.code_event,
-        title: action.payload.title,
-        description: action.payload.description,
-        picture: action.payload.picture,
-      }
+      currentEvent: action.payload,
     };
 
   case SET_CURRENT_NPC:
@@ -204,6 +204,15 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       loading: action.payload,
+    };
+
+  case SET_TYPEWRITING:
+    return {
+      ...state,
+      typewriting: {
+        ...state.typewriting,
+        [action.payload.identifier]: action.payload.bool,
+      }
     };
 
   default:

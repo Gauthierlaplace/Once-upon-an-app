@@ -31,12 +31,7 @@ function Game() {
       .then((response) => {
         const eventAPI = response.data.currentEvent;
         const playerAPI = response.data.player;
-        dispatch(setCurrentEvent(
-          eventAPI.id,
-          eventAPI.title,
-          eventAPI.description,
-          eventAPI.picture
-        ));
+        dispatch(setCurrentEvent(eventAPI));
         dispatch(setPlayer(
           playerAPI.id,
           playerAPI.name,

@@ -34,6 +34,32 @@ function HomeBook() {
 
   const dispatch = useDispatch();
 
+  //  VARIABLE POUR PERMETTRE D AFFICHER OU NON LA DESCRIPTION / LA CONNEXION OU L INSCRIPTION
+  // const displayLoginRegister = true; onClick ?
+  // Elle reçoit en paramètre ce qu'on veut afficher
+  // Elle passe ceci en true et tout le reste en false
+  const [displayDescription, setDisplayDescription] = useState(true);
+  const [displayRegister, setDisplayRegister] = useState(false);
+  const [displayLogin, setDisplayLogin] = useState(false);
+
+  const displayDescriptionFunction = () => {
+    setDisplayDescription(true);
+    setDisplayRegister(false);
+    setDisplayLogin(false);
+  };
+
+  const displayRegisterFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(true);
+    setDisplayLogin(false);
+  };
+
+  const displayLoginFunction = () => {
+    setDisplayDescription(false);
+    setDisplayRegister(false);
+    setDisplayLogin(true);
+  };
+
   // Fonction pour envoyer username (l'email) et password à la soumission du formulaire
   const handleSubmitLogin = (event) => {
     event.preventDefault();
@@ -135,33 +161,8 @@ function HomeBook() {
       passwordBisRegister
     ) === true) {
       sendRegisterToApi();
+      displayLoginFunction();
     }
-  };
-
-  //  VARIABLE POUR PERMETTRE D AFFICHER OU NON LA DESCRIPTION / LA CONNEXION OU L INSCRIPTION
-  // const displayLoginRegister = true; onClick ?
-  // Elle reçoit en paramètre ce qu'on veut afficher
-  // Elle passe ceci en true et tout le reste en false
-  const [displayDescription, setDisplayDescription] = useState(true);
-  const [displayRegister, setDisplayRegister] = useState(false);
-  const [displayLogin, setDisplayLogin] = useState(false);
-
-  const displayDescriptionFunction = () => {
-    setDisplayDescription(true);
-    setDisplayRegister(false);
-    setDisplayLogin(false);
-  };
-
-  const displayRegisterFunction = () => {
-    setDisplayDescription(false);
-    setDisplayRegister(true);
-    setDisplayLogin(false);
-  };
-
-  const displayLoginFunction = () => {
-    setDisplayDescription(false);
-    setDisplayRegister(false);
-    setDisplayLogin(true);
   };
 
   return (
