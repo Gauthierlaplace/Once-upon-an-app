@@ -12,6 +12,7 @@ import GameLogChoices from './GameLogChoices/GameLogChoices';
 import GameLogEventDescription from './GameLogEventDescription/GameLogEventDescription';
 import GameLogNPC from './GameLogNPC/GameLogNPC';
 import GameLogDialogue from './GameLogDialogue/GameLogDialogue';
+import GameLogRestart from './GameLogRestart/GameLogRestart';
 
 function GameLog({
   eventDescription,
@@ -24,6 +25,8 @@ function GameLog({
   const visibleLogDialogue = useSelector((state) => state.game.visibleLogDialogue);
   const answerAndDescriptionInLog = useSelector((state) => state.game.eventDialogueToDisplay);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
+  const currentEventId = useSelector((state) => state.game.currentEvent.id);
+
   const typewriting = useSelector((state) => state.game.typewriting.eventDescription);
   const identifier = 'eventDescription';
 
@@ -107,6 +110,10 @@ function GameLog({
           setVisibleButtonFollowToShowDialogue={setVisibleButtonFollowToShowDialogue}
           setVisibleButtonFollowToShowChoices={setVisibleButtonFollowToShowChoices}
         />
+      )}
+
+      {!typewriting && (currentEventId === 14 || currentEventId === 18) && (
+        <GameLogRestart />
       )}
     </div>
   );

@@ -39,7 +39,7 @@ export const initialState = {
 
   currentEvent:
   {
-    code_event: '',
+    id: '',
     title: '',
     description: '',
     picture: '',
