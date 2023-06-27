@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import './GameMenus.scss';
+import { useState } from 'react';
 import { Icon } from 'react-icons-kit';
 import { ic_shopping_bag } from 'react-icons-kit/md/ic_shopping_bag';
 import { accessibility } from 'react-icons-kit/icomoon/accessibility';
@@ -28,35 +29,49 @@ function GameMenus() {
   const displayProgressFunction = () => {
     setDisplayInventory(false);
     setDisplayStats(false);
-    setDisplayInventory(true);
+    setDisplayProgress(true);
   };
   return (
     <div className="GameMenus">
       <div className="GameMenus-menus">
-        <ul>
-          <li>
-            {/* Icon pour inventaire */}
-            <Icon size={30} icon={ic_shopping_bag} onClick={displayInventoryFunction} />
-          </li>
 
-          <li>
-            {/* Icon pour statistique */}
-            <Icon size={30} icon={accessibility} onClick={displayStatsFunction} />
-          </li>
+        {/* Icon pour inventaire */}
+        <button
+          type="button"
+          onClick={displayInventoryFunction}
+        >
+          <Icon size={30} icon={ic_shopping_bag} />
+        </button>
 
-          <li>
-            {/* Icon pour la progression */}
-            <Icon size={30} icon={flag} onClick={displayProgressFunction} />
-          </li>
-        </ul>
+        {/* Icon pour statistique */}
+        <button
+          type="button"
+          onClick={displayStatsFunction}
+        >
+          <Icon size={30} icon={accessibility} />
+        </button>
+
+        {/* Icon pour la progression */}
+        <button
+          type="button"
+          onClick={displayProgressFunction}
+        >
+          <Icon size={30} icon={flag} />
+        </button>
       </div>
 
       <div className="GameMenus-showComponent">
-        {displayDescription && (
+        {displayInventory && (
           <PlayerInventory />
         )}
-        <PlayerStats />
-        <PlayerProgress />
+
+        {displayStats && (
+          <PlayerStats />
+        )}
+        {displayProgress && (
+          <PlayerProgress />
+        )}
+
       </div>
     </div>
   );
