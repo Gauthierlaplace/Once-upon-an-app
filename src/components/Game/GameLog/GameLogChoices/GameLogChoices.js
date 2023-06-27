@@ -80,7 +80,7 @@ function GameLogChoices({
 
       dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
 
-    // S'il n'y a pas de NPC, on remet à zéro les infos NPC
+      // S'il n'y a pas de NPC, on remet à zéro les infos NPC
     } else {
       dispatch(setCurrentNPC('', '', ''));
       dispatch(setDialogueAndEffects('', ['', '']));
@@ -129,8 +129,6 @@ function GameLogChoices({
 
   // Cette route sera appelée si le compteur progress est en-dessous de notre limite
   const getEventRollFromAPI = (nextEventId) => {
-    console.log('fonction getEventRollFromAPI lancée');
-
     api.get(`/event/roll/${nextEventId}`)
       .then((response) => {
         currentEventManagement(response);

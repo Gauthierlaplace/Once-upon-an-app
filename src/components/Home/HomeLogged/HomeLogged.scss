@@ -14,9 +14,11 @@
 
   button {
     height: auto;
-    width: 250px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    width: 200px;
     border-radius: 5px;
-    border: transparent solid 1px;
+    border: transparent;
     background: linear-gradient(#9A6D51, #402A23);
     color: white;
     font-family: 'Advent Pro', sans-serif;
