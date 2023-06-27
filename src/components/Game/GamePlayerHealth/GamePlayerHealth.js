@@ -11,15 +11,14 @@ function GamePlayerHealth() {
 
   return (
     <div className="GamePlayerHealth">
+
+      <img
+        className="GamePlayerHealth-picture"
+        src={heroPicture}
+        alt="image du héro"
+      />
       <h1>
-        <img
-          className="GamePlayerHealth-picture"
-          src={heroPicture}
-          alt="image du héro"
-        />
-        <em className="GamePlayerHealth-name">
-          {heroName} :
-        </em>
+        {heroName} :
       </h1>
       <em>
         <GamePlayerHealthBar playerHealth={health} playerMaxHealth={maxHealth} />

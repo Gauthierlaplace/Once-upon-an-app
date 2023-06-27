@@ -30,7 +30,7 @@ function DeleteAccount() {
   };
 
   return (
-    <div className="DeleteAccount">
+    <div className="MyAccount-Show">
       <h1>Supprimer mon compte</h1>
       <p>Attention, en cliquant sur le bouton "supprimer mon compte" ci dessous,
         cela entrainement la supprésszion définitive de votre compte et vous perdrez
