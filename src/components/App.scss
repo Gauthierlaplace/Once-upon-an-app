@@ -4,6 +4,11 @@
   box-sizing: border-box;  
 }
 
+@font-face {
+    font-family: 'Quiska';
+    src: url('../assets/fonts/Quiska.ttf') format('truetype');
+}
+
 .App {
   text-align: center;
   display: flex;

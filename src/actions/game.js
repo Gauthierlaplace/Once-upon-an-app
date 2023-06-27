@@ -15,6 +15,7 @@ export const SET_PLAYER = 'SET_PLAYER';
 export const SET_ANSWER_AND_DESCRIPTION_IN_LOG = 'SET_ANSWER_AND_DESCRIPTION_IN_LOG';
 export const SET_VISIBLE_LOG_DIALOGUE = 'SET_VISIBLE_LOG_DIALOGUE';
 export const SET_LOADING = 'SET_LOADING';
+export const SET_TYPEWRITING = 'SET_TYPEWRITING';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
 export const setCurrentEvent = (currentEvent) => ({
@@ -121,3 +122,12 @@ export const setLoading = (boolean) => ({
   type: SET_LOADING,
   payload: boolean,
 });
+
+export const setTypewriting = (identifier, bool) => ({
+  type: SET_TYPEWRITING,
+  payload: {
+    identifier: identifier,
+    bool: bool,
+  },
+});
+

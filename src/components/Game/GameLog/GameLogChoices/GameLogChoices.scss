@@ -2,12 +2,13 @@
     width: 360px;
     // height: 35%;
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     // border-top: solid 2px #9A6D51;
 
     &-content {
         margin-top: 10px;
         margin-bottom: 10px;
+        font-family: 'Quiska';
     }
 
     &-last-event-ending {

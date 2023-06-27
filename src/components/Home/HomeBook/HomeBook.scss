@@ -65,7 +65,7 @@
 
   &-title {
     text-align: center;
-    // padding-bottom: 0;
+    padding-bottom: 0;
   }
 
   &-menu {
@@ -79,11 +79,17 @@
     cursor: grab;
   }
 
+  h3:hover {
+    text-decoration: underline ;
+    text-underline-offset: .5em;
+  }
+  
   p {
     padding: 10px;
   }
 
   h1 {
+    font-family: 'Quiska';
     font-size: 1.5em;
     margin-bottom: 10px;
   }
