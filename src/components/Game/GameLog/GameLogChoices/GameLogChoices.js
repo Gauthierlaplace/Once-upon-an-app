@@ -48,6 +48,9 @@ function GameLogChoices({
   // Fonction de gestion des éventuels NPC
   const npcManagement = (response) => {
     const npcAPI = response.data.npcCurrentEvent;
+    const path = `${process.env.REACT_APP_ASSETS_BASE}`;
+    const npcAPIpicture = `${path}${npcAPI.picture}`;
+
     // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
     // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
     // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
@@ -59,7 +62,7 @@ function GameLogChoices({
       dispatch(setCurrentNPC(
         npcAPI.npcName,
         npcAPI.npcDescription,
-        npcAPI.picture
+        npcAPIpicture,
       ));
 
       // Gestion des dialogues
@@ -77,7 +80,7 @@ function GameLogChoices({
 
       dispatch(setDialogueAndEffects(npcDialogueAPI.dialogue, [firstAnswer, secondAnswer]));
 
-    // S'il n'y a pas de NPC, on remet à zéro les infos NPC
+      // S'il n'y a pas de NPC, on remet à zéro les infos NPC
     } else {
       dispatch(setCurrentNPC('', '', ''));
       dispatch(setDialogueAndEffects('', ['', '']));
@@ -126,8 +129,6 @@ function GameLogChoices({
 
   // Cette route sera appelée si le compteur progress est en-dessous de notre limite
   const getEventRollFromAPI = (nextEventId) => {
-    console.log('fonction getEventRollFromAPI lancée');
-
     api.get(`/event/roll/${nextEventId}`)
       .then((response) => {
         currentEventManagement(response);
@@ -306,12 +307,12 @@ function GameLogChoices({
   return (
     <div className="GameLogChoices">
       <h2 className="GameLogChoices-last-event-ending">
-        {(lastEventEnding.length > 0)
+        {(eventProgressStatus !== 'death' && lastEventEnding.length > 0)
           ? lastEventEnding : ''}
       </h2>
 
       <h2 className="GameLogChoices-content">
-        À vous de jouer :
+        {(eventProgressStatus === 'death') ? 'Ce dernier coup vous est fatal...' : 'À vous de jouer :'}
       </h2>
 
       <div>

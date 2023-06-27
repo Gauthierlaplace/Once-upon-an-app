@@ -5,9 +5,9 @@ import { Icon } from 'react-icons-kit';
 import { ic_shopping_bag } from 'react-icons-kit/md/ic_shopping_bag';
 import { accessibility } from 'react-icons-kit/icomoon/accessibility';
 import { flag } from 'react-icons-kit/entypo/flag';
-import PlayerInventory from '../../Player/PlayerInventory';
-import PlayerStats from '../../Player/PlayerStats';
-import PlayerProgress from '../../Player/PlayerProgress';
+import PlayerInventory from './Player/PlayerInventory';
+import PlayerStats from './Player/PlayerStats';
+import PlayerProgress from './Player/PlayerProgress';
 
 function GameMenus() {
   const [displayInventory, setDisplayInventory] = useState(true);

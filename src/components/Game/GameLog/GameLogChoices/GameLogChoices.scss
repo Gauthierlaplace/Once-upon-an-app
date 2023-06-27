@@ -1,18 +1,17 @@
 .GameLogChoices {
     width: 360px;
-    // height: 35%;
     position: absolute;
     bottom: 5px;
-    // border-top: solid 2px #9A6D51;
 
     &-content {
         margin-top: 10px;
         margin-bottom: 10px;
-        font-family: 'Quiska';
+        font-family: 'Berkshire Swash', handwriting;
     }
 
     &-last-event-ending {
-        font-weight: bold;
+        font-size: 1.1em;
+        font-weight: 600;
         text-align: center;
     }
 
@@ -24,12 +23,7 @@
         color: white;
         margin-bottom: 10px;
         border: transparent;
-        /* glass effect */
         background: #9A6D51;
-        // background: rgba(255, 255, 255, 0.25);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
         border-radius: 5px;
     }
 

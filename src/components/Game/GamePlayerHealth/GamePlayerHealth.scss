@@ -12,10 +12,16 @@
     background-color: vars.$alt-dark-color;
 
     h1 {
-        width: 15%;
+        min-width: 5%;
+        max-width: 25%;
+        padding-left: 10px;
+        padding-right: 10px;
         display: flex;
         justify-content: space-around;
         align-items: center;
+        font-family: 'Advent Pro', sans-serif;
+        font-weight: 500;
+        font-size: 1.1em;
     }
 
     &-picture {

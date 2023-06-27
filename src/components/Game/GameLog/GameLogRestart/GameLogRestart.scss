@@ -1,0 +1,18 @@
+.GameLogRestart {
+  &-button {
+  height: 30px;
+  width: 180px;
+  margin-top: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: transparent;
+  background: linear-gradient( #9A6D51, #402A23);
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+&-button:hover {
+  background: linear-gradient(#402A23, #9a6d51);
+}
+}

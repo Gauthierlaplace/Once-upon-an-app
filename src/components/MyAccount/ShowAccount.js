@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import './MyAccount.scss';
 import { useSelector } from 'react-redux';
-import api from '../../../api/api';
+import api from '../../api/api';
 
 function ShowAccount() {
   const userId = useSelector((state) => state.user.currentUserId);
@@ -28,7 +28,7 @@ function ShowAccount() {
     });
 
   return (
-    <div className="Show">
+    <div className="MyAccount-Show">
       <h1>{heroName}</h1>
       <h2>{nickname}</h2>
       <h2>{emailLogin}</h2>
