@@ -43,11 +43,14 @@ function Header() {
               <ul>
                 <li>
                   <div className="Header-flexLi">
-                    <img
-                      className="Header-picture"
-                      src={heroPicture}
-                      alt="image du héro"
-                    />
+                    {(heroPicture !== '') && (
+                      <img
+                        className="Header-picture"
+                        src={heroPicture}
+                        alt="image du héro"
+                      />
+                    )}
+
                     <h1 className="Header-nickname">
                       Hello {nickname}
                     </h1>

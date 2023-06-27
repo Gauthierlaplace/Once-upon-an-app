@@ -48,6 +48,9 @@ function GameLogChoices({
   // Fonction de gestion des éventuels NPC
   const npcManagement = (response) => {
     const npcAPI = response.data.npcCurrentEvent;
+    const path = `${process.env.REACT_APP_ASSETS_BASE}`;
+    const npcAPIpicture = `${path}${npcAPI.picture}`;
+
     // Dans la partie ci-dessous, nous vérifions la data npcCurrentEvent
     // S'il n'y a pas de NPC, on reçoit un tableau vide (length != 0 donnera false)
     // S'il y a un NPC, on reçoit un tableau non-vide (length != 0 donnera true)
@@ -59,7 +62,7 @@ function GameLogChoices({
       dispatch(setCurrentNPC(
         npcAPI.npcName,
         npcAPI.npcDescription,
-        npcAPI.picture
+        npcAPIpicture,
       ));
 
       // Gestion des dialogues

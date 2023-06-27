@@ -31,11 +31,15 @@ function Game() {
       .then((response) => {
         const eventAPI = response.data.currentEvent;
         const playerAPI = response.data.player;
+
+        const path = `${process.env.REACT_APP_ASSETS_BASE}`;
+        const playerAPIpicture = `${path}${playerAPI.picture.path}`;
+
         dispatch(setCurrentEvent(eventAPI));
         dispatch(setPlayer(
           playerAPI.id,
           playerAPI.name,
-          playerAPI.picture,
+          playerAPIpicture,
           playerAPI.health,
           playerAPI.maxHealth
         ));
@@ -58,10 +62,13 @@ function Game() {
   // Une fois que les données de l'événement sont bien récupérées dans le state,
   // Je gère leur affichage ici :
   const eventTitle = useSelector((state) => state.game.currentEvent.title);
-  const eventPicture = useSelector((state) => state.game.currentEvent.picture);
+  const eventPictureSrc = useSelector((state) => state.game.currentEvent.picture);
   const eventDescription = useSelector((state) => state.game.currentEvent.description);
   const npcName = useSelector((state) => state.game.currentNPC.name);
   const npcDescription = useSelector((state) => state.game.currentNPC.description);
+
+  const path = `${process.env.REACT_APP_ASSETS_BASE}`;
+  const eventPicture = `${path}${eventPictureSrc}`;
 
   if (loading) {
     return <Loading />;
