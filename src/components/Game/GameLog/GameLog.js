@@ -83,16 +83,18 @@ function GameLog({
       {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
       {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
       {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
-      {(!hasNPC && visibleButtonFollowToShowChoices && (typewriting === false) && (eventProgressStatus !== 'gameEnd')) && (
+      {(!hasNPC
+        && visibleButtonFollowToShowChoices
+        && (typewriting === false)
+        && (eventProgressStatus !== 'gameEnd')
+        && (eventProgressStatus !== 'death')
+      ) && (
         <button
           type="button"
           className="GameLog-next-step-button"
           onClick={() => {
             dispatch(setVisibleChoices(true));
             setVisibleButtonFollowToShowChoices(false);
-            // TODO proposition pour que le NPC disparaisse après son intervention
-            // Pour l'instant, nous le retirons car sinon ça fait aussi disparaitre sa description
-            // dispatch(setVisibleNPC(false));
           }}
         >
           Suite
