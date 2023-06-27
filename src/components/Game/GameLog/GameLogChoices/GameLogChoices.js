@@ -311,7 +311,7 @@ function GameLogChoices({
       </h2>
 
       <h2 className="GameLogChoices-content">
-        À vous de jouer :
+        {(eventProgressStatus === 'death') ? 'Ce dernier coup vous est fatal...' : 'À vous de jouer :'}
       </h2>
 
       <div>
