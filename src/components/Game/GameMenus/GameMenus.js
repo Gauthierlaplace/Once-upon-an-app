@@ -4,7 +4,7 @@ import { Icon } from 'react-icons-kit';
 import { ic_shopping_bag } from 'react-icons-kit/md/ic_shopping_bag';
 import { accessibility } from 'react-icons-kit/icomoon/accessibility';
 import { flag } from 'react-icons-kit/entypo/flag';
-import { GameMenusInventory } from './GameMenusInventory';
+import { PlayerInventory } from '../../Player/PlayerInventory';
 
 function GameMenus() {
   return (
@@ -29,7 +29,7 @@ function GameMenus() {
       </div>
 
       <div className="GameMenus-showComponent">
-        <GameMenusInventory />
+        <PlayerInventory />
       </div>
     </div>
   );
