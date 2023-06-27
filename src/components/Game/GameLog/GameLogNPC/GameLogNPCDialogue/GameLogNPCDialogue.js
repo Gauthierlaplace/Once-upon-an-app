@@ -12,21 +12,27 @@ import {
   setVisibleLogDialogue,
   setChoices,
   setLoading,
-  setEventProgressStatus
+  setEventProgressStatus,
+  setTypewriting,
 } from '../../../../../actions/game';
+import Loading from '../../../../Loading/Loading';
 
 function GameLogNPCDialogue() {
   const dispatch = useDispatch();
   const sentence = useSelector((state) => state.game.dialogue.sentence);
   const answers = useSelector((state) => state.game.dialogue.answers);
+  const loading = useSelector((state) => state.game.loading);
   const [visibleDialogue, setVisibleDialogue] = useState(true);
 
   const handleClickOnEffect = (effectId) => {
+    dispatch(setLoading(true));
+
     api.get(`/event/effect/${effectId}`)
       .then((response) => {
         // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
         const playerAPI = response.data.player;
         dispatch(setHeroStatus(playerAPI.health));
+        // console.log(response.data);
 
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent
@@ -45,6 +51,10 @@ function GameLogNPCDialogue() {
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="GameLogNPCDialogue">

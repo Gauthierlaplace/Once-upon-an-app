@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import './Header.scss';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,7 +8,7 @@ import { logOut } from '../../actions/user';
 function Header() {
   const logged = useSelector((state) => state.user.logged);
   const nickname = useSelector((state) => state.user.nickname);
-
+  const heroPicture = useSelector((state) => state.game.player.picture);
   // La fonctionnalité logout (déconnexion) est accessible en header
   // Quand le joueur se déconnecte, ses données (token, nickname et id)
   // sont effacées à la fois dans le localStorage (instructions ci-dessous)
@@ -31,7 +32,7 @@ function Header() {
       <div className="Header-width">
 
         <NavLink to="/">
-          <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/2/1687256285-testlogo3.png" alt="Logo de l'application web : Once upon an app" />
+          <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/4/1687449010-illustration-sans-titre-4.png" alt="Logo de l'application web : Once upon an app" />
         </NavLink>
 
         {/* La div suivante ne s'affiche que quand logged vaut true */}
@@ -41,7 +42,16 @@ function Header() {
             <nav>
               <ul>
                 <li>
-                  Hello {nickname}
+                  <div className="Header-flexLi">
+                    <img
+                      className="Header-picture"
+                      src={heroPicture}
+                      alt="image du héro"
+                    />
+                    <h1 className="Header-nickname">
+                      Hello {nickname}
+                    </h1>
+                  </div>
                   <ul>
                     <li>
                       <NavLink to="/">
