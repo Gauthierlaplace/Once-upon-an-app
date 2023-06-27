@@ -28,7 +28,7 @@ function ShowAccount() {
     });
 
   return (
-    <div className="Show">
+    <div className="MyAccount-Show">
       <h1>{heroName}</h1>
       <h2>{nickname}</h2>
       <h2>{emailLogin}</h2>

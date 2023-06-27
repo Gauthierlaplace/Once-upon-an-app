@@ -4,10 +4,16 @@
   box-sizing: border-box;  
 }
 
-@font-face {
-    font-family: 'Quiska';
-    src: url('../assets/fonts/Quiska.ttf') format('truetype');
-}
+// FONT POUR TEXTE
+@import url(https://fonts.bunny.net/css?family=advent-pro:200,300,500,400,600,900);
+
+// FONT POUR TITRE
+@import url(https://fonts.bunny.net/css?family=berkshire-swash:400);
+
+// @font-face {
+//     font-family: 'Quiska';
+//     src: url('../assets/fonts/Quiska.ttf') format('truetype');
+// }
 
 .App {
   text-align: center;
@@ -16,7 +22,6 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  // background-color: vars.$darkest-color;
   margin: auto;
 }
 

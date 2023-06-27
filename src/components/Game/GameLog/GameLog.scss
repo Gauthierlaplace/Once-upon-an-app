@@ -5,7 +5,9 @@
     text-align: justify;
     overflow-y: auto;
     position: relative;
-
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 500;
+    font-size: 1.1em;
 
     &-Log {
         width: 100%;
@@ -36,6 +38,12 @@
     &-next-step-button:hover, &-next-step-npc-button:hover {
         background: linear-gradient(#402A23, #9a6d51);
     }
+
+    button {
+        font-family: 'Advent Pro', sans-serif;
+        font-weight: 500;
+        font-size: 1.05em;
+    }
 }
 
 .skipButton {
@@ -45,4 +53,7 @@
     background-color: #ddc29a;
     padding: 2px;
     color: #402A23;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 500;
+    font-size: 1em;
 }
