@@ -3,6 +3,7 @@ import './HomeBook.scss';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { NavLink } from 'react-router-dom';
 import api from '../../../api/api';
 import { checkInfoBeforeRegister } from '../../../functions/user';
 
@@ -174,7 +175,7 @@ function HomeBook() {
           <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3> . . . . . . . . . . . . . . . . . . . P.0</div>
           <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3> . . . . . . . . . . . . . . . . . . . P.1</div>
           <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
-          <div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div>
+          <NavLink to="/About"><div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div></NavLink>
           <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
           <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . P.5</div>
 
