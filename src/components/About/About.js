@@ -18,7 +18,7 @@ function About() {
           <img className="About-img" src="https://cdn.midjourney.com/d7ed9925-77a7-45f6-8a0e-695f742ad479/0_1.png" alt="avatar" />
         </li>
         <li>
-          <p>Sandra "Cookie" Aliès</p>
+          <p>Sandra "Cookie" Alliès</p>
           <img className="About-img" src="https://cdn.midjourney.com/12d73574-8e56-4eca-9e18-6584f21759a3/0_0.png" alt="avatar" />
         </li>
         <li>
