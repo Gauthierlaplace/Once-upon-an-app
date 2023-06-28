@@ -5,12 +5,20 @@ function HomeDescription() {
     <div className="HomeDescription">
       <h1 className="HomeBook-title">Description du site</h1>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the
-        1500s, when an unknown printer took a galley of type and scrambled it to
-        make a type specimen book. It has survived not only five centuries, but
-        also the leap into electronic typesetting, remaining essentially
-        unchanged.
+        Il était une fois...
+      </p>
+      <p>
+        Et si c'était à vous de décider finalement ?!
+        Un conte dont vous êtes le héros, des protagonistes à coté
+        de la plaque et des joutes verbales épique.
+      </p>
+      <p>
+        Once Upon an App, c'est un monde ou des minotaures végans
+        côtoient des licornes fans de black métal avec une cohérence scénaristique
+        (presque) sans faille...
+      </p>
+      <p>
+        A vous de jouer !
       </p>
     </div>
   );

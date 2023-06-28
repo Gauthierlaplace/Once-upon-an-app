@@ -1,12 +1,12 @@
 import './Footer.scss';
 
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Footer() {
   return (
     <div className="Footer">
       <ul className="Footer-all">
-        <li>About</li>
+        <NavLink to="/About"><li>About</li></NavLink>
         <li>Copyright</li>
         <li>Mentions légales</li>
       </ul>
