@@ -1,112 +1,120 @@
 @use './../../styles/vars';
 
 .Header {
-  position: absolute;
-  top: 0;
   width: 100%;
-  height: 43px;
-  z-index: 999;
-  /* glass effect */
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  // font for all nav
-  font-family: 'Advent Pro', sans-serif;
-  font-weight: 500;
-  font-size: 1.3rem;
-
-&-width {
-  width: 1200px;
-  height: 100%;
-  margin: auto;
-  position:relative;
-}
+  height: 5%;
+  background-color: blue;
 
   &-logo {
     width: 130px;
     height: 100px;
   }
-
-  &-Account {
-    height: 43px;
-    width: 230px;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  // ========================
-  // MENU MON COMPTE EN HOVER
-  // ========================
-
-  nav {
-    width: 100%;
-    height: 100%;
-  }
-
-  nav ul {
-    width: 100%;
-    height: 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  nav ul li {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: block;
-    margin: 0;
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    background: linear-gradient(#9A6D51, #402A23);
-    cursor: grab;
-  }
-
-  nav ul li:hover {
-    background: linear-gradient(#402A23, #9A6D51);
-  }
-
-  nav ul li:hover>ul {
-    display: block;
-    cursor: grab;
-  }
-
-  nav ul ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
-
-  nav ul ul li {
-    width: 230px;
-    float: none;
-    display: list-item;
-    position: relative;
-    background: #9A6D51;
-  }
-
-  nav ul ul li:hover {
-    background: #402A23;
-  }
-
-  &-flexLi {
-    margin-top: -10px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 43px;
-  }
-
-  &-picture {
-    width: 30px;
-    height: 30px;
-    // align-self: center;
-  }
-
 }
+
+// .Header {
+//   position: absolute;
+//   top: 0;
+//   width: 100%;
+//   height: 43px;
+//   z-index: 999;
+//   /* glass effect */
+//   background: rgba(255, 255, 255, 0.25);
+//   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+//   backdrop-filter: blur(1px);
+//   -webkit-backdrop-filter: blur(1px);
+//   // font for all nav
+//   font-family: 'Advent Pro', sans-serif;
+//   font-weight: 500;
+//   font-size: 1.3rem;
+
+// &-width {
+//   width: 1200px;
+//   height: 100%;
+//   margin: auto;
+//   position:relative;
+// }
+
+
+
+//   &-Account {
+//     height: 43px;
+//     width: 230px;
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//   }
+
+//   // ========================
+//   // MENU MON COMPTE EN HOVER
+//   // ========================
+
+//   nav {
+//     width: 100%;
+//     height: 100%;
+//   }
+
+//   nav ul {
+//     width: 100%;
+//     height: 100%;
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+//   }
+
+//   nav ul li {
+//     width: 100%;
+//     height: 100%;
+//     position: relative;
+//     display: block;
+//     margin: 0;
+//     padding: 10px;
+//     text-decoration: none;
+//     color: white;
+//     background: linear-gradient(#9A6D51, #402A23);
+//     cursor: grab;
+//   }
+
+//   nav ul li:hover {
+//     background: linear-gradient(#402A23, #9A6D51);
+//   }
+
+//   nav ul li:hover>ul {
+//     display: block;
+//     cursor: grab;
+//   }
+
+//   nav ul ul {
+//     display: none;
+//     position: absolute;
+//     top: 100%;
+//     left: 0;
+//   }
+
+//   nav ul ul li {
+//     width: 230px;
+//     float: none;
+//     display: list-item;
+//     position: relative;
+//     background: #9A6D51;
+//   }
+
+//   nav ul ul li:hover {
+//     background: #402A23;
+//   }
+
+//   &-flexLi {
+//     margin-top: -10px;
+//     display: flex;
+//     justify-content: space-evenly;
+//     align-items: center;
+//     width: 100%;
+//     height: 43px;
+//   }
+
+//   &-picture {
+//     width: 30px;
+//     height: 30px;
+//     // align-self: center;
+//   }
+
+// }
