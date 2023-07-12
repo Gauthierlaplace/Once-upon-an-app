@@ -168,49 +168,60 @@ function HomeBook() {
 
   return (
     <div className="HomeBook">
-      {/* PARTIE GAUCHE SOMMAIRE */}
-      <div className="HomeBook-GlassLeft">
-        <div className="HomeBook-left">
-          <h1 className="HomeBook-sommaire">Sommaire</h1>
-          <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3> . . . . . . . . . . . . . . . . . . . P.0</div>
-          <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3> . . . . . . . . . . . . . . . . . . . P.1</div>
-          <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
-          <NavLink to="/About"><div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div></NavLink>
-          <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
-          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . P.5</div>
 
+      {/* FOND (IMAGE LIVRE OUVERT) */}
+      <div className="HomeBook-background">
+
+        {/* DOUBLE-PAGE */}
+        <div className="HomeBook-double-page">
+
+          {/* PARTIE GAUCHE SOMMAIRE */}
+          <div className="HomeBook-GlassLeft">
+            <div className="HomeBook-left">
+              <h1 className="HomeBook-sommaire">Sommaire</h1>
+              <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3> . . . . . . . . . . . . . . . . . . . P.0</div>
+              <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3> . . . . . . . . . . . . . . . . . . . P.1</div>
+              <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
+              <NavLink to="/About"><div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div></NavLink>
+              <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
+              <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . P.5</div>
+
+            </div>
+          </div>
+          {/* PARTIE DROITE DESCRIPTION */}
+          <div className="HomeBook-GlassRight">
+            <div className="HomeBook-right">
+              {displayDescription && (
+                <HomeDescription />
+              )}
+
+              {displayRegister && (
+                <HomeBookRegister
+                  nickname={nicknameRegister}
+                  email={emailRegister}
+                  password={passwordRegister}
+                  passwordBis={passwordBisRegister}
+                  handleSubmit={handleSubmitRegister}
+                  changeField={changeField}
+                  isPasswordToastVisible={isPasswordToastVisible}
+                  setPasswordToastVisible={setPasswordToastVisible}
+                />
+              )}
+
+              {displayLogin && (
+                <HomeBookLogin
+                  email={emailLogin}
+                  password={passwordLogin}
+                  handleSubmit={handleSubmitLogin}
+                  changeField={changeField}
+                />
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-      {/* PARTIE DROITE DESCRIPTION */}
-      <div className="HomeBook-GlassRight">
-        <div className="HomeBook-right">
-          {displayDescription && (
-            <HomeDescription />
-          )}
 
-          {displayRegister && (
-            <HomeBookRegister
-              nickname={nicknameRegister}
-              email={emailRegister}
-              password={passwordRegister}
-              passwordBis={passwordBisRegister}
-              handleSubmit={handleSubmitRegister}
-              changeField={changeField}
-              isPasswordToastVisible={isPasswordToastVisible}
-              setPasswordToastVisible={setPasswordToastVisible}
-            />
-          )}
-
-          {displayLogin && (
-            <HomeBookLogin
-              email={emailLogin}
-              password={passwordLogin}
-              handleSubmit={handleSubmitLogin}
-              changeField={changeField}
-            />
-          )}
-        </div>
       </div>
+
     </div>
   );
 }
