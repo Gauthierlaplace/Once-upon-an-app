@@ -1,23 +1,23 @@
-# Projet Apothéose - Adventure RPG (front)
+# Projet - Once upon an App (front)
 
 ## Sommaire
 
-- [Projet Apothéose - Adventure RPG (front)](#projet-apothéose---adventure-rpg-front)
+- [Projet - Once upon an App (front)](#projet---once-upon-an-app-front)
   - [Sommaire](#sommaire)
-  - [Faire tourner le front EN LOCAL](#faire-tourner-le-front-en-local)
+  - [Pour faire tourner le front EN LOCAL](#pour-faire-tourner-le-front-en-local)
     - [Clonez le repository](#clonez-le-repository)
     - [Allez dans le dossier du projet](#allez-dans-le-dossier-du-projet)
     - [Installez les dépendances](#installez-les-dépendances)
     - [Paramètrez la connexion à l'API](#paramètrez-la-connexion-à-lapi)
     - [Pour accèder à votre App, lancez votre serveur](#pour-accèder-à-votre-app-lancez-votre-serveur)
     - [Informations supplémentaires sur Create React App](#informations-supplémentaires-sur-create-react-app)
-  - [Déployer avec Surge](#déployer-avec-surge)
+  - [Pour déployer avec Surge](#pour-déployer-avec-surge)
     - [Installez Surge](#installez-surge)
     - [Créez un compte (si c'est votre première utilisation de Surge)](#créez-un-compte-si-cest-votre-première-utilisation-de-surge)
     - [Créez le dossier build (optimisation React)](#créez-le-dossier-build-optimisation-react)
     - [Déploiement](#déploiement)
 
-## Faire tourner le front EN LOCAL
+## Pour faire tourner le front EN LOCAL
 
 ### Clonez le repository
 
@@ -62,7 +62,7 @@ Le front sera accessible sur : localhost:3000
 
 [Create React App](https://github.com/facebook/create-react-app).
 
-## Déployer avec Surge
+## Pour déployer avec Surge
 
 /!\ ATTENTION, le déploiement avec Surge ne concerne que le front
 
