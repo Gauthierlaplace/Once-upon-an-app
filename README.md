@@ -41,7 +41,7 @@ npm install
 
 ### Paramètrez la connexion à l'API
 
-Dans le fichier .env
+Dans le fichier .env (pensez à redémarrer le serveur après chaque modification du fichier .env)
 
 ```env
     REACT_APP_API_BASE={adresse-de-l-API}
@@ -60,7 +60,7 @@ Le front sera accessible sur : localhost:3000
 
 ### Informations supplémentaires sur Create React App
 
-[Create React App](https://github.com/facebook/create-react-app).
+[Create React App](https://github.com/facebook/create-react-app)
 
 ## Pour déployer avec Surge
 
@@ -68,7 +68,7 @@ Le front sera accessible sur : localhost:3000
 
 L'API doit être déployée par un autre moyen.
 
-Rappel déploiement avec Surge : <https://kourou.oclock.io/ressources/fiche-recap/mettre-en-production-sur-surge/#anchor-m%c3%a9ga-bonus>.
+[Rappel déploiement avec Surge](https://kourou.oclock.io/ressources/fiche-recap/mettre-en-production-sur-surge/#anchor-m%c3%a9ga-bonus)
 
 ### Installez Surge
 
