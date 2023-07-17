@@ -82,8 +82,18 @@
 
   &-menu {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 10px;
+  }
+
+  &-menu-dot-leader {
+    border-bottom: .15rem dotted black;
+
+    /* Take remaining width */
+    flex: 1;
+
+    /* Spacing */
+    margin: 0 0.25rem;
   }
 
   &-menu:hover {
