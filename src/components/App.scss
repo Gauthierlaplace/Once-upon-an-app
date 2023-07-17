@@ -17,3 +17,16 @@
   justify-content: center;
   align-items: center;
 }
+
+// Tests pour éviter le scroll horizontal montrant le défilement des nuages hors écran
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
