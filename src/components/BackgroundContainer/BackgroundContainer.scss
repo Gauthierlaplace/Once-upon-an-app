@@ -5,8 +5,8 @@
 // =====================
 
 .BackgroundContainer{
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
 
   &-sky {
@@ -33,21 +33,20 @@
    }
    
    &-clouds {
-     width: 800%;
-     height: 100%;
-     background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
-     background-size: 1000px 1000px;
-       position: absolute;
-       right: 0;
-       top: 0;
-       animation:move-background 50s linear infinite;
+    width: 800%;
+    height: 100%;
+    background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
+    background-size: 1000px 1000px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      animation:move-background 50s linear infinite;
    }
 
-   &-app-content {    
+   &-app-content {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
    }
-
 }
