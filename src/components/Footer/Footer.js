@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 function Footer() {
   return (
     <div className="Footer">
-      <ul className="Footer-all">
+      <ul className="Footer-ul">
         <NavLink to="/About"><li>About</li></NavLink>
         <li>Copyright</li>
         <li>Mentions légales</li>

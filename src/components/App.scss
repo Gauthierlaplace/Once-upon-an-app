@@ -10,45 +10,10 @@
 // FONT POUR TITRE
 @import url(https://fonts.bunny.net/css?family=berkshire-swash:400);
 
-// @font-face {
-//     font-family: 'Quiska';
-//     src: url('../assets/fonts/Quiska.ttf') format('truetype');
-// }
-
 .App {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: 100vh;
   width: 100vw;
-  margin: auto;
-}
-
-.message {
-  font-style: italic;
-  font-size: .8em;
-  padding: .3em;
-  margin-bottom: 1em;
-  border-radius: 5px;
-}
-
-.infoMessage {
-  background-color: vars.$info-background-color;
-  color: vars.$info-color;
-}
-
-.successMessage {
-  background-color: vars.$success-background-color;
-  color: vars.$success-color;
-}
-
-.warningMessage {
-  background-color: vars.$warning-background-color;
-  color: vars.$warning-color;
-}
-
-.errorMessage {
-  background-color: vars.$error-background-color;
-  color: vars.$error-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
