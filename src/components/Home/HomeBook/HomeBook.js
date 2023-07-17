@@ -172,12 +172,12 @@ function HomeBook() {
       <div className="HomeBook-GlassLeft">
         <div className="HomeBook-left">
           <h1 className="HomeBook-sommaire">Sommaire</h1>
-          <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3> . . . . . . . . . . . . . . . . . . . P.0</div>
-          <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3> . . . . . . . . . . . . . . . . . . . P.1</div>
-          <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3> . . . . . . . . . .  . . . . . . . . . P.2</div>
-          <NavLink to="/About"><div className="HomeBook-menu"><h3>About</h3> . . . . . . . . . . . . . . . . . . . P.3</div></NavLink>
-          <div className="HomeBook-menu"><h3>Copyright</h3> . . . . . . . . . . . . . . . . . . . P.4</div>
-          <div className="HomeBook-menu"><h3>Mentions légales</h3> . . . . . . . . . . . . . . . P.5</div>
+          <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3><div className="HomeBook-menu-leading-dots" /><span>P.0</span></div>
+          <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3><div className="HomeBook-menu-leading-dots" /><span>P.1</span></div>
+          <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3><div className="HomeBook-menu-leading-dots" /><span>P.2</span></div>
+          <NavLink to="/About"><div className="HomeBook-menu"><h3>About</h3><div className="HomeBook-menu-leading-dots" /><span>P.3</span></div></NavLink>
+          <div className="HomeBook-menu"><h3>Copyright</h3><div className="HomeBook-menu-leading-dots" /><span>P.4</span></div>
+          <div className="HomeBook-menu"><h3>Mentions légales</h3><div className="HomeBook-menu-leading-dots" /><span>P.5</span></div>
 
         </div>
       </div>
