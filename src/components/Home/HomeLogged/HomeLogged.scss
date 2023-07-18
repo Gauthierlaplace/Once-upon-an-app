@@ -7,13 +7,11 @@
   align-items: center;
   background: url(../../../assets/images/openbook.png);
   background-repeat: no-repeat;
-  background-size: 115%;
+  background-size: 50%;
   background-position: center;
-  position: absolute;
-  top: -10px;
+  position: relative;
 
   button {
-    height: auto;
     padding-top: 5px;
     padding-bottom: 10px;
     width: 200px;
@@ -24,8 +22,10 @@
     font-family: 'Advent Pro', sans-serif;
     font-weight: 600;
     font-size: 3rem;
+    position: absolute;
+    top: 40%;
+    right: 45%;
   }
-
 
   button:hover {
     background: linear-gradient(#402A23, #9A6D51);

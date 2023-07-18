@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
-import "./HomeBook.scss";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { NavLink } from "react-router-dom";
-import api from "../../../api/api";
-import { checkInfoBeforeRegister } from "../../../functions/user";
+import './HomeBook.scss';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { NavLink } from 'react-router-dom';
+import api from '../../../api/api';
+import { checkInfoBeforeRegister } from '../../../functions/user';
 
-import HomeDescription from "../HomeDescription/HomeDescription";
-import HomeBookLogin from "./HomeBookLogin/HomeBookLogin";
-import HomeBookRegister from "./HomeBookRegister/HomeBookRegister";
+import HomeDescription from '../HomeDescription/HomeDescription';
+import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
+import HomeBookRegister from './HomeBookRegister/HomeBookRegister';
 
 // Import des actions et fonctions nécessaires
 import {
@@ -17,7 +17,7 @@ import {
   saveLoginSuccessful,
   saveRegisterSuccessful,
   hasFailedAction,
-} from "../../../actions/user";
+} from '../../../actions/user';
 
 function HomeBook() {
   // A transmettre en props à la partie login
@@ -164,77 +164,73 @@ function HomeBook() {
   return (
     <div className="HomeBook">
 
-      {/* FOND (IMAGE LIVRE OUVERT) */}
-      {/* <div className="HomeBook-background"> */}
-
-        {/* PARTIE GAUCHE SOMMAIRE */}
-        <div className="HomeBook-GlassLeft">
-          <div className="HomeBook-left">
-            <h1 className="HomeBook-sommaire">Sommaire</h1>
+      {/* PARTIE GAUCHE SOMMAIRE */}
+      <div className="HomeBook-GlassLeft">
+        <div className="HomeBook-left">
+          <h1 className="HomeBook-sommaire">Sommaire</h1>
+          <div className="HomeBook-menu">
+            <h3 onClick={displayDescriptionFunction}>Accueil</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.0</span>
+          </div>
+          <div className="HomeBook-menu">
+            <h3 onClick={displayRegisterFunction}>Inscription</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.1</span>
+          </div>
+          <div className="HomeBook-menu">
+            <h3 onClick={displayLoginFunction}>Connexion</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.2</span>
+          </div>
+          <NavLink to="/About">
             <div className="HomeBook-menu">
-              <h3 onClick={displayDescriptionFunction}>Accueil</h3>
+              <h3>About</h3>
               <div className="HomeBook-menu-leading-dots" />
-              <span>P.0</span>
+              <span>P.3</span>
             </div>
-            <div className="HomeBook-menu">
-              <h3 onClick={displayRegisterFunction}>Inscription</h3>
-              <div className="HomeBook-menu-leading-dots" />
-              <span>P.1</span>
-            </div>
-            <div className="HomeBook-menu">
-              <h3 onClick={displayLoginFunction}>Connexion</h3>
-              <div className="HomeBook-menu-leading-dots" />
-              <span>P.2</span>
-            </div>
-            <NavLink to="/About">
-              <div className="HomeBook-menu">
-                <h3>About</h3>
-                <div className="HomeBook-menu-leading-dots" />
-                <span>P.3</span>
-              </div>
-            </NavLink>
-            <div className="HomeBook-menu">
-              <h3>Copyright</h3>
-              <div className="HomeBook-menu-leading-dots" />
-              <span>P.4</span>
-            </div>
-            <div className="HomeBook-menu">
-              <h3>Mentions légales</h3>
-              <div className="HomeBook-menu-leading-dots" />
-              <span>P.5</span>
-            </div>
+          </NavLink>
+          <div className="HomeBook-menu">
+            <h3>Copyright</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.4</span>
+          </div>
+          <div className="HomeBook-menu">
+            <h3>Mentions légales</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.5</span>
           </div>
         </div>
+      </div>
 
-        {/* PARTIE DROITE DESCRIPTION */}
-        <div className="HomeBook-GlassRight">
-          <div className="HomeBook-right">
-            {displayDescription && <HomeDescription />}
+      {/* PARTIE DROITE DESCRIPTION */}
+      <div className="HomeBook-GlassRight">
+        <div className="HomeBook-right">
+          {displayDescription && <HomeDescription />}
 
-            {displayRegister && (
-              <HomeBookRegister
-                nickname={nicknameRegister}
-                email={emailRegister}
-                password={passwordRegister}
-                passwordBis={passwordBisRegister}
-                handleSubmit={handleSubmitRegister}
-                changeField={changeField}
-                isPasswordToastVisible={isPasswordToastVisible}
-                setPasswordToastVisible={setPasswordToastVisible}
-              />
-            )}
+          {displayRegister && (
+            <HomeBookRegister
+              nickname={nicknameRegister}
+              email={emailRegister}
+              password={passwordRegister}
+              passwordBis={passwordBisRegister}
+              handleSubmit={handleSubmitRegister}
+              changeField={changeField}
+              isPasswordToastVisible={isPasswordToastVisible}
+              setPasswordToastVisible={setPasswordToastVisible}
+            />
+          )}
 
-            {displayLogin && (
-              <HomeBookLogin
-                email={emailLogin}
-                password={passwordLogin}
-                handleSubmit={handleSubmitLogin}
-                changeField={changeField}
-              />
-            )}
-          </div>
+          {displayLogin && (
+            <HomeBookLogin
+              email={emailLogin}
+              password={passwordLogin}
+              handleSubmit={handleSubmitLogin}
+              changeField={changeField}
+            />
+          )}
         </div>
-      {/* </div> */}
+      </div>
     </div>
   );
 }

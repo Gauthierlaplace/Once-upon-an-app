@@ -17,3 +17,24 @@
   justify-content: center;
   align-items: center;
 }
+
+// Tests pour éviter le scroll horizontal montrant le défilement des nuages hors écran
+// Solution 1 : la scrollbar apparait correctement mais ne scrolle pas
+body {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+// Solution 2 : le scroll est OK mais pas l'affichage
+// html {
+//   overflow-x: hidden;
+// }
+
+// body {
+//   overflow-y: scroll;
+// }
+
+// html::-webkit-scrollbar {
+//   display: none;
+// }

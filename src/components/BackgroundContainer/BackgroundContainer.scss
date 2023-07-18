@@ -5,8 +5,8 @@
 // =====================
 
 .BackgroundContainer{
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   text-align: center;
 
   &-sky {
@@ -31,13 +31,13 @@
     width: 100%;
     height: 100%;
    }
-   
+
    &-clouds {
     width: 800%;
     height: 100%;
     background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
     background-size: 1000px 1000px;
-      position: absolute;
+      position: fixed;
       right: 0;
       top: 0;
       animation:move-background 50s linear infinite;
