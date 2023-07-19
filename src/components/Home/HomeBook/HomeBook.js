@@ -190,7 +190,7 @@ function HomeBook() {
               <span>P.3</span>
             </div>
           </NavLink>
-          <div className="HomeBook-menu">
+          {/* <div className="HomeBook-menu">
             <h3>Copyright</h3>
             <div className="HomeBook-menu-leading-dots" />
             <span>P.4</span>
@@ -199,7 +199,7 @@ function HomeBook() {
             <h3>Mentions légales</h3>
             <div className="HomeBook-menu-leading-dots" />
             <span>P.5</span>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -23,8 +23,9 @@
     font-weight: 600;
     font-size: 3rem;
     position: absolute;
-    top: 40%;
-    right: 45%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -90%);
   }
 
   button:hover {
