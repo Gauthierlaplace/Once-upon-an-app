@@ -27,7 +27,9 @@ function HomeBook() {
   // A transmettre en props à la partie register
   const emailRegister = useSelector((state) => state.user.emailRegister);
   const passwordRegister = useSelector((state) => state.user.passwordRegister);
-  const passwordBisRegister = useSelector((state) => state.user.passwordBisRegister);
+  const passwordBisRegister = useSelector(
+    (state) => state.user.passwordBisRegister
+  );
   const nicknameRegister = useSelector((state) => state.user.nicknameRegister);
   // const REACT_APP_API_BASE = `${process.env.REACT_APP_API_BASE}`;
 
@@ -67,7 +69,7 @@ function HomeBook() {
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
     api
-      .post('/login_check', {
+      .post("/login_check", {
         username: emailLogin,
         password: passwordLogin,
       })
@@ -78,73 +80,64 @@ function HomeBook() {
             response.data.data.pseudo,
             response.data.data.id,
             response.data.token
-          ),
+          )
         );
         // Je les stocke aussi dans le local storage
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('nickname', response.data.data.pseudo);
-        localStorage.setItem('id', response.data.data.id);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("nickname", response.data.data.pseudo);
+        localStorage.setItem("id", response.data.data.id);
       })
       .catch((error) => {
         console.error(error);
-        dispatch(
-          hasFailedAction('login')
-        );
-        toast.error('La connexion a échoué', {
-          position: 'top-right',
+        dispatch(hasFailedAction("login"));
+        toast.error("La connexion a échoué", {
+          position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'colored',
+          theme: "colored",
         });
       });
   };
 
   const sendRegisterToApi = async () => {
     api
-      .post(
-        '/users',
-        {
-          email: emailRegister,
-          roles: ['ROLE_PLAYER'],
-          password: passwordRegister,
-          pseudo: nicknameRegister,
-          avatar: '',
-        }
-      )
+      .post("/users", {
+        email: emailRegister,
+        roles: ["ROLE_PLAYER"],
+        password: passwordRegister,
+        pseudo: nicknameRegister,
+        avatar: "",
+      })
       .then((response) => {
         setPasswordToastVisible(false);
-        dispatch(
-          saveRegisterSuccessful(response.data.email),
-        );
-        toast.success('Inscription validée', {
-          position: 'top-right',
+        dispatch(saveRegisterSuccessful(response.data.email));
+        toast.success("Inscription validée", {
+          position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'colored',
+          theme: "colored",
         });
       })
       .catch((error) => {
         console.error(error);
-        dispatch(
-          hasFailedAction('register')
-        );
-        toast.error('L\'inscription a échoué', {
-          position: 'top-right',
+        dispatch(hasFailedAction("register"));
+        toast.error("L'inscription a échoué", {
+          position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'colored',
+          theme: "colored",
         });
       });
   };
@@ -155,12 +148,14 @@ function HomeBook() {
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // Avant d'envoyer à l'API, je vérifie les inputs en front
     // Pas d'email, nickname ou password invalide !
-    if (checkInfoBeforeRegister(
-      nicknameRegister,
-      emailRegister,
-      passwordRegister,
-      passwordBisRegister
-    ) === true) {
+    if (
+      checkInfoBeforeRegister(
+        nicknameRegister,
+        emailRegister,
+        passwordRegister,
+        passwordBisRegister
+      ) === true
+    ) {
       sendRegisterToApi();
       displayLoginFunction();
     }
@@ -168,25 +163,50 @@ function HomeBook() {
 
   return (
     <div className="HomeBook">
+
       {/* PARTIE GAUCHE SOMMAIRE */}
       <div className="HomeBook-GlassLeft">
         <div className="HomeBook-left">
           <h1 className="HomeBook-sommaire">Sommaire</h1>
-          <div className="HomeBook-menu"><h3 onClick={displayDescriptionFunction}>Accueil</h3><div className="HomeBook-menu-leading-dots" /><span>P.0</span></div>
-          <div className="HomeBook-menu"><h3 onClick={displayRegisterFunction}>Inscription</h3><div className="HomeBook-menu-leading-dots" /><span>P.1</span></div>
-          <div className="HomeBook-menu"><h3 onClick={displayLoginFunction}>Connexion</h3><div className="HomeBook-menu-leading-dots" /><span>P.2</span></div>
-          <NavLink to="/About"><div className="HomeBook-menu"><h3>About</h3><div className="HomeBook-menu-leading-dots" /><span>P.3</span></div></NavLink>
-          <div className="HomeBook-menu"><h3>Copyright</h3><div className="HomeBook-menu-leading-dots" /><span>P.4</span></div>
-          <div className="HomeBook-menu"><h3>Mentions légales</h3><div className="HomeBook-menu-leading-dots" /><span>P.5</span></div>
-
+          <div className="HomeBook-menu">
+            <h3 onClick={displayDescriptionFunction}>Accueil</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.0</span>
+          </div>
+          <div className="HomeBook-menu">
+            <h3 onClick={displayRegisterFunction}>Inscription</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.1</span>
+          </div>
+          <div className="HomeBook-menu">
+            <h3 onClick={displayLoginFunction}>Connexion</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.2</span>
+          </div>
+          <NavLink to="/About">
+            <div className="HomeBook-menu">
+              <h3>About</h3>
+              <div className="HomeBook-menu-leading-dots" />
+              <span>P.3</span>
+            </div>
+          </NavLink>
+          {/* <div className="HomeBook-menu">
+            <h3>Copyright</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.4</span>
+          </div>
+          <div className="HomeBook-menu">
+            <h3>Mentions légales</h3>
+            <div className="HomeBook-menu-leading-dots" />
+            <span>P.5</span>
+          </div> */}
         </div>
       </div>
+
       {/* PARTIE DROITE DESCRIPTION */}
       <div className="HomeBook-GlassRight">
         <div className="HomeBook-right">
-          {displayDescription && (
-            <HomeDescription />
-          )}
+          {displayDescription && <HomeDescription />}
 
           {displayRegister && (
             <HomeBookRegister
