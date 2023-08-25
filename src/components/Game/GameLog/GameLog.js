@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './GameLog.scss';
 
 import {
@@ -35,6 +35,18 @@ function GameLog({
   const [visibleButtonFollowToShowDialogue, setVisibleButtonFollowToShowDialogue] = useState(true);
 
   const dispatch = useDispatch();
+
+  // // Scroller directement à la fin
+  // const endOfScrollableZoneRef = useRef(null);
+
+  // useEffect(() => {
+  //   console.log("test du useEffect");
+  //   endOfScrollableZoneRef.current.scrollIntoView();
+  // }, [
+  //   visibleButtonFollowToShowChoices,
+  //   visibleButtonFollowToShowDialogue,
+  //   visibleButtonFollowToShowNPC
+  // ]);
 
   return (
     <div className="GameLog">
@@ -86,27 +98,25 @@ function GameLog({
 
         {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
         {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
-        {/* Dans le cas où il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
+        {/* S'il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
         {(!hasNPC
           && visibleButtonFollowToShowChoices
           && (typewriting === false)
           && (eventProgressStatus !== 'gameEnd')
           && (eventProgressStatus !== 'death')
         ) && (
-            <button
-              type="button"
-              className="GameLog-next-step-button"
-              onClick={() => {
-                dispatch(setVisibleChoices(true));
-                setVisibleButtonFollowToShowChoices(false);
-              }}
-            >
-              Suite
-            </button>
-          )}
-      </div>
+          <button
+            type="button"
+            className="GameLog-next-step-button"
+            onClick={() => {
+              dispatch(setVisibleChoices(true));
+              setVisibleButtonFollowToShowChoices(false);
+            }}
+          >
+            Suite
+          </button>
+        )}
 
-      <div className="GameLog-noScroll">
         {visibleChoices && (
           <GameLogChoices
             setVisibleButtonFollowToShowNPC={setVisibleButtonFollowToShowNPC}
@@ -114,11 +124,15 @@ function GameLog({
             setVisibleButtonFollowToShowChoices={setVisibleButtonFollowToShowChoices}
           />
         )}
+
+        {/* <div ref={endOfScrollableZoneRef} className="end-of-scrollable-zone" /> */}
+
       </div>
 
       {!typewriting && (currentEventId === 14 || currentEventId === 18) && (
         <GameLogRestart />
       )}
+
     </div>
   );
 }

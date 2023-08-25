@@ -16,7 +16,7 @@ import Loading from '../Loading/Loading';
 import GamePlayerHealth from './GamePlayerHealth/GamePlayerHealth';
 import GameScene from './GameScene/GameScene';
 import GameLog from './GameLog/GameLog';
-import GameMenus from './GameMenus/GameMenus';
+// import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
   const dispatch = useDispatch();
@@ -82,7 +82,7 @@ function Game() {
 
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
           <GameScene picture={eventPicture} npcName={npcName} />
-          <GameMenus />
+          {/* <GameMenus /> */}
         </div>
 
         <div className="Game-right">

@@ -1,23 +1,22 @@
 .HomeBook {
   width: 100%;
   height: 100%;
-  margin: auto;
+
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+
   background: url(../../../assets/images/openbook.png);
+  background-size: 1100px, 100vw;
   background-repeat: no-repeat;
-  background-size: 115%;
-  background-position: center;
-  position: absolute;
-  top: -10px;
+  background-position: center 60%;
 
   &-GlassLeft {
-    width: 28%;
-    height: 400px;
+    height: 450px;
+    aspect-ratio: 5/6;
     position: relative;
-    top: 160px;
     left: -55px;
+    top: -40px;
     padding: 20px;
     /* glass effect */
     background: rgba(255, 255, 255, 0.25);
@@ -34,6 +33,7 @@
     justify-content: center;
     flex-direction: column;
   }
+
   &-menu, &-form, &-form button {
     font-family: 'Advent Pro', sans-serif;
     font-weight: 500;
@@ -46,11 +46,11 @@
   }
 
   &-GlassRight {
-    width: 30%;
-    height: 400px;
+    height: 450px;
+    aspect-ratio: 5/6;
     position: relative;
-    top: 160px;
-    right: -72px;
+    right: -65px;
+    top: -40px;
     padding: 15px;
     /* glass effect */
     background: rgba(255, 255, 255, 0.25);
@@ -149,4 +149,29 @@
 
 .password-input-icon {
   margin-left: 10px;
+}
+
+@media (max-width: 900px) {
+  .HomeBook {
+    background: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #F6DEBB;
+  }
+
+  .HomeBook-GlassLeft {
+    display: none;
+  }
+
+  .HomeBook-GlassRight {
+    top: 0;
+    left: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .special-sm-login-button {
+    display: none;
+  }
 }

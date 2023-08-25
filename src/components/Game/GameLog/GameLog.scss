@@ -1,16 +1,17 @@
 .GameLog {
     width: 100%;
-    height: 79vh;
+    min-height: 100vh;
     line-height: 1.3em;
     text-align: justify;
     position: relative;
     font-family: 'Advent Pro', sans-serif;
     font-weight: 500;
     font-size: 1.1em;
+    padding-bottom: 60px;
 
     &-Scroll {
         width: 100%;
-        max-height: 60%;
+        height: 95%;
         overflow-y: auto;
         padding-right: 10px;
         text-align: justify;
@@ -55,4 +56,23 @@
     font-family: 'Advent Pro', sans-serif;
     font-weight: 500;
     font-size: 1em;
+}
+
+.end-of-scrollable-zone {
+    width: 100%;
+    height: 1%;
+    background-color: blue;
+}
+
+@media (max-width: 900){
+    .GameLog {
+        &-Scroll {
+        width: 100%;
+        height: 95%;
+        overflow-y: auto;
+        padding: 1em;
+        text-align: justify;
+        line-height: 1.4em;
+        }
+    }
 }
