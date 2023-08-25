@@ -2,43 +2,82 @@
 
 .About {
   width: 100%;
-    height: 100%;
-    color: rgb(0, 0, 0);
-    background-image:
-        linear-gradient(rgba(236, 192, 130, 0.5),
-            rgba(238, 213, 175, 0.5)),
-        url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fimg.freepik.com%2Fpremium-photo%2Frecycled-white-paper-texture-background-vintage-wallpaper_118047-9300.jpg%3Fw%3D2000');
-    font-family: 'Advent Pro', sans-serif;
-    font-weight: 500;
-    overflow-y: auto;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
+  height: 100vh;
+  color: rgb(0, 0, 0);
+  background-image:
+      linear-gradient(rgba(236, 192, 130, 0.5),
+          rgba(238, 213, 175, 0.5)),
+      url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fimg.freepik.com%2Fpremium-photo%2Frecycled-white-paper-texture-background-vintage-wallpaper_118047-9300.jpg%3Fw%3D2000');
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 500;
+  overflow-y: auto;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
   &-bar {
     color: vars.$lightest-color;
     width: 100%;
-    height: 50px;
-    margin-top: -16px;
+    height: 55px;
     background-color: vars.$alt-dark-color;
   }
+
+  &-item {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-item:last-child {
+    margin-bottom: 4em;
+  }
+
+  &-subtitle {
+    margin: 1em auto;
+    text-align: center;
+  }
+
+  &-img {
+    width: 400px;
+    border-radius: 1em;
+    margin: .5em 1em;
+  }
+
+  @media (max-width: 900px) {
+    &-bar {
+      height: 200px;
+    }
+  }
+
   &-title {
-    margin-top: 1em;
+    margin-top: 1.5em;
     font-size: 2.5em;
   }
+
+  @media (max-width: 900px) {
+    &-title {
+      margin: 1.3em auto;
+    }
+  }
+
   &-subtitle {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   &-list {
     display:flex;
+    flex-wrap: wrap;
     justify-content: space-around;
   }
+
   &-img {
-    width: 150px;
+    width: 200px;
     border-radius: 1em;
+    margin-bottom: 1em;
   }
   p {
-    font-size: 1.5em;
-    margin-bottom: .5em;
+    font-size: 1em;
+    margin: .5em;
+    text-align: center;
   }
   
 }

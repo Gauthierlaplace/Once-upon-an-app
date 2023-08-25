@@ -55,7 +55,7 @@ export const checkInfoBeforeRegister = (nickname, email, password, passwordBis) 
   }
 
   if (checkPasswordBeforeRegister(password) === false) {
-    toast.error('Le mot-de-passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule et 1 caractère spécial', {
+    toast.error('Le mot de passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial', {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
@@ -69,7 +69,7 @@ export const checkInfoBeforeRegister = (nickname, email, password, passwordBis) 
   }
 
   if (checkPasswordBisBeforeRegister(password, passwordBis) === false) {
-    toast.error('La confirmation est différente du mot-de-passe', {
+    toast.error('La confirmation est différente du mot de passe', {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,

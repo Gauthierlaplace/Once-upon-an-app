@@ -1,112 +1,150 @@
 @use './../../styles/vars';
 
 .Header {
-  position: absolute;
-  top: 0;
   width: 100%;
-  height: 43px;
-  z-index: 999;
+  height: 60px;
   /* glass effect */
-  background: rgba(255, 255, 255, 0.25);
+  background: rgb(63, 63, 63);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  // backdrop-filter: blur(1px);
+  // -webkit-backdrop-filter: blur(1px);
+
   // font for all nav
   font-family: 'Advent Pro', sans-serif;
   font-weight: 500;
   font-size: 1.3rem;
+  position: relative;
 
-&-width {
-  width: 1200px;
-  height: 100%;
-  margin: auto;
-  position:relative;
-}
+
 
   &-logo {
-    width: 130px;
-    height: 100px;
+    max-width: 130px;
+    max-height: 100px;
+    position: absolute;
+    left: calc(50% - 65px);
+
   }
 
   &-Account {
-    height: 43px;
+    height: 30%;
     width: 230px;
     position: absolute;
     top: 0;
     right: 0;
   }
 
+  @media (max-width: 900px) {
+    &-logo {
+      width: 70px;
+      position: absolute;
+      left: calc(50% - 35px);
+    }
+
+    &-nickname {
+      display: none;
+    }
+
+    &-Account {
+      width: 30px;
+      right: 0;
+    }
+  }
+
   // ========================
   // MENU MON COMPTE EN HOVER
   // ========================
 
-  nav {
-    width: 100%;
-    height: 100%;
-  }
+//   nav {
+//     width: 100%;
+//     height: 60px;
+//     z-index: 1000;
+//   }
 
-  nav ul {
-    width: 100%;
-    height: 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+//   nav ul {
+//     width: 100%;
+//     height: 100%;
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+//   }
 
-  nav ul li {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: block;
-    margin: 0;
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    background: linear-gradient(#9A6D51, #402A23);
-    cursor: grab;
-  }
+//   nav ul li {
+//     width: 100%;
+//     height: 100%;
+//     position: relative;
+//     display: block;
+//     margin: 0;
+//     padding: 10px;
+//     text-decoration: none;
+//     color: white;
+//     background: linear-gradient(#9A6D51, #402A23);
+//     cursor: grab;
+//   }
 
-  nav ul li:hover {
-    background: linear-gradient(#402A23, #9A6D51);
-  }
+//   nav ul li:hover {
+//     background: linear-gradient(#402A23, #9A6D51);
+//   }
 
-  nav ul li:hover>ul {
-    display: block;
-    cursor: grab;
-  }
+//   nav ul li:hover>ul {
+//     display: block;
+//     cursor: grab;
+//   }
 
-  nav ul ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
+//   nav ul ul {
+//     display: none;
+//     position: absolute;
+//     top: 100%;
+//     left: 0;
+//   }
 
-  nav ul ul li {
-    width: 230px;
-    float: none;
-    display: list-item;
-    position: relative;
-    background: #9A6D51;
-  }
+//   nav ul ul li {
+//     width: 230px;
+//     float: none;
+//     display: list-item;
+//     position: relative;
+//     background: #9A6D51;
+//   }
 
-  nav ul ul li:hover {
-    background: #402A23;
-  }
+//   nav ul ul li:hover {
+//     background: #402A23;
+//   }
 
-  &-flexLi {
-    margin-top: -10px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 43px;
-  }
+//   &-flexLi {
+//     margin-top: -10px;
+//     display: flex;
+//     justify-content: space-evenly;
+//     align-items: center;
+//     width: 100%;
+//     height: 43px;
+//     z-index: 1000;
+//   }
 
-  &-picture {
-    width: 30px;
-    height: 30px;
-    // align-self: center;
-  }
+//   &-picture {
+//     width: 30px;
+//     height: 30px;
+//     z-index: 1001;
+//   }
 
+//   @media (max-width: 900px){
+//     &-flexLi {
+//       margin-top: -10px;
+//       display: flex;
+//       justify-content: space-evenly;
+//       align-items: center;
+//       width: 40px;
+//       height: 35px;
+//     }
+
+//     nav {
+//       width: fit-content;
+//       height: 60px;
+//       z-index: 1000;
+//       position: absolute;
+//       right: 0;
+//     }
+
+//     nav ul li {
+//       border-radius: 1em;
+//     }
+//   }
 }

@@ -1,8 +1,6 @@
 @use './../../styles/vars';
 
 .Game {
-    position: absolute;
-    top: 0;
     width: 100%;
     height: 100%;
     background-image: 
@@ -14,10 +12,11 @@
 
     &-flexSA {
         width: 100%;
-        height: 93%;
+        min-height: 11vh;
         display: flex;
         justify-content: space-around;
     }
+
     &-left {
         width: 65%;
     }
@@ -31,4 +30,47 @@
         padding-bottom: .5em;
         font-size: 1.4em;
         font-family: 'Berkshire Swash', handwriting;    }
+}
+
+@media (max-width: 900px) {
+    .Game {
+        width: 100%;
+        height: 100%;
+        background-image: 
+        linear-gradient(
+            rgba(236, 192, 130, 0.5), 
+            rgba(238, 213, 175, 0.5)
+          ),
+        url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fimg.freepik.com%2Fpremium-photo%2Frecycled-white-paper-texture-background-vintage-wallpaper_118047-9300.jpg%3Fw%3D2000');
+    
+        &-flexSA {
+            width: 100%;
+            min-height: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        &-left {
+            width: 100%;
+        }
+    
+        &-right {
+            width: 100%;
+            padding: 0em 1em;
+        }
+    
+        &-Eventtitle, &-Logtitle {
+            text-align: center;
+            padding-top: .5em;
+            padding-bottom: .5em;
+            font-size: 1.4em;
+            font-family: 'Berkshire Swash', handwriting;    }
+    }
+}
+
+@media (min-width:1400px) {
+    .Game {
+        width: 80%;
+    }
 }

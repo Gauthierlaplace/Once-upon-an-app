@@ -1,11 +1,12 @@
 @use './../../../../styles/vars';
 
 .GamePlayerHealthBar {
-    width: 10em;
+    width: 120px;
     height: 20px;
     border: 2px vars.$lightest-color solid;
     border-radius: 1em;
     position: relative;
+    margin-right: 1em;
   
     &-currentHealth {
       background-color: rgb(146, 34, 34);

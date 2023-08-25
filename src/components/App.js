@@ -6,14 +6,15 @@ import { saveLoginSuccessful } from '../actions/user';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import './App.scss';
-
 import Header from './Header/Header';
 import Main from './Main/Main';
 import Footer from './Footer/Footer';
 
+import './App.scss';
+
+import BackgroundContainer from './BackgroundContainer/BackgroundContainer';
+
 function App() {
-  const notify = () => toast('Wow so easy !');
   const dispatch = useDispatch();
 
   // La fonction ci-dessous est déclencée par le useEffect (démarrage de l'app)
@@ -40,7 +41,6 @@ function App() {
 
   return (
     <div className="App">
-      <button type="button" onClick={notify}>Notify !</button>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -53,9 +53,13 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      <Header />
-      <Main />
-      <Footer />
+      {/* Le BackgroundContainer correspond au fond étoilé */}
+      {/* <BackgroundContainer /> */}
+      <div className="App-global">
+        <Header />
+        <Main />
+        <Footer />
+      </div>
     </div>
   );
 }

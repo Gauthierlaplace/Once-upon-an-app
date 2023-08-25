@@ -19,7 +19,9 @@ api.interceptors.request.use((request) => {
 // Cas sans erreur : renvoie la response / cas avec erreur : renvoie vers 401
 api.interceptors.response.use((response) => response, (error) => {
   if (error.response.status === 401) {
-    window.location = '/';
+    setTimeout(() => {
+      window.location = '/';
+    }, 2000);
   }
 
   return Promise.reject(error);
