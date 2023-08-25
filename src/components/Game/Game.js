@@ -16,6 +16,7 @@ import Loading from '../Loading/Loading';
 import GamePlayerHealth from './GamePlayerHealth/GamePlayerHealth';
 import GameScene from './GameScene/GameScene';
 import GameLog from './GameLog/GameLog';
+import GameMenu from './GameMenu/GameMenu';
 // import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
@@ -29,6 +30,7 @@ function Game() {
     dispatch(setLoading(true));
     api.get('/play')
       .then((response) => {
+        console.log(response);
         const eventAPI = response.data.currentEvent;
         const playerAPI = response.data.player;
 
@@ -41,7 +43,8 @@ function Game() {
           playerAPI.name,
           playerAPIpicture,
           playerAPI.health,
-          playerAPI.maxHealth
+          playerAPI.maxHealth,
+          playerAPI.item
         ));
 
         const firstChoice = {
@@ -83,6 +86,7 @@ function Game() {
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
           <GameScene picture={eventPicture} npcName={npcName} />
           {/* <GameMenus /> */}
+          <GameMenu />
         </div>
 
         <div className="Game-right">

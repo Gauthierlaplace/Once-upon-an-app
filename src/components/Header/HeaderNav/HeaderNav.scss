@@ -1,3 +1,5 @@
+@use "./../../../styles/vars";
+
 .navbar {
   display:flex;
   align-items: center;
@@ -7,7 +9,7 @@
   padding: .5rem;
   padding-right: 2rem;
   background-color: transparent;
-  color: #FFDA87;
+  color: vars.$yellow-text-color;
   z-index:1000;
 
   &-logo {
@@ -34,12 +36,17 @@
     z-index: 1001;
   }
 
-  &-item{
+  &-item {
     display: block;
     padding: 1rem;
     padding-top: 0em;
     font-size: 1.2em;
     text-transform: uppercase;
+    transition: .5s ease-in;
+  }
+
+  &-item:hover {
+    color:vars.$lightest-color;    
   }
 
   &-item::after{
