@@ -1,3 +1,5 @@
+@use "./../../../styles/vars";
+
 .HomeLogged {
   width: 100%;
   height: 100%;
@@ -19,7 +21,7 @@
     border: transparent;
     background: linear-gradient(#9A6D51, #402A23);
     color: white;
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-weight: 600;
     font-size: 3rem;
     position: absolute;

@@ -1,3 +1,5 @@
+@use "./../../../styles/vars";
+
 .HomeBook {
   width: 100%;
   height: 100%;
@@ -35,7 +37,7 @@
   }
 
   &-menu, &-form, &-form button {
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-weight: 500;
     font-size: 1.2rem;
   }
@@ -101,7 +103,7 @@
   }
 
   h1 {
-    font-family: 'Berkshire Swash', handwriting;    
+    font-family: vars.$title-font;    
     font-size: 1.5em;
     margin-bottom: 10px;
   }
@@ -118,7 +120,7 @@
     border: transparent;
     margin-bottom: 7px;
     padding-left: 10px;
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-size: .8em;
   }
 

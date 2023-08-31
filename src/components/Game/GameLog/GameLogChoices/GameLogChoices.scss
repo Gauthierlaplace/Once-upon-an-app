@@ -1,9 +1,11 @@
+@use './../../../../styles/vars';
+
 .GameLogChoices {
     width: 100%;
     &-content {
         margin-top: 10px;
         margin-bottom: 10px;
-        font-family: 'Berkshire Swash', handwriting;
+        font-family: vars.$title-font;
     }
 
     &-last-event-ending {

@@ -17,12 +17,13 @@
     &-button {
         border-radius: .4em;
         background: 
-        radial-gradient(circle at 50% 150%,
-        vars.$darkest-color, 
-        vars.$alt-dark-color);
+        linear-gradient(
+            vars.$alt-dark-color,
+            vars.$darkest-color
+        );
         min-width: 30%;
         height: 3em;
-        font-family: 'Advent Pro', sans-serif;
+        font-family: vars.$main-font;
         font-size: 1.2em;
         color: vars.$yellow-text-color;
         border: 1px solid vars.$alt-dark-color;

@@ -1,10 +1,12 @@
+@use './../../../styles/vars';
+
 .GameLog {
     width: 100%;
     min-height: 100vh;
     line-height: 1.3em;
     text-align: justify;
     position: relative;
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-weight: 500;
     font-size: 1.1em;
     padding-bottom: 60px;
@@ -40,7 +42,7 @@
     }
 
     button {
-        font-family: 'Advent Pro', sans-serif;
+        font-family: vars.$main-font;
         font-weight: 500;
         font-size: 1.05em;
     }
@@ -53,7 +55,7 @@
     background-color: #ddc29a;
     padding: 2px;
     color: #402A23;
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-weight: 500;
     font-size: 1em;
 }
