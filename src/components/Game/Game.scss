@@ -33,7 +33,7 @@
         font-family: vars.$title-font;    }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .Game {
         
         &-flexSA {
@@ -57,7 +57,8 @@
             padding-top: .5em;
             padding-bottom: .5em;
             font-size: 1.4em;
-            font-family: vars.$title-font;    }
+            font-family: vars.$title-font;    
+        }
     }
 }
 

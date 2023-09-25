@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import GameMenuInventory from './GameMenuInventory/GameMenuInventory'
-import GameMenuStats from './GameMenuStats/GameMenuStats'
-import GameMenuProgress from './GameMenuProgress/GameMenuProgress'
+import GameMenuInventory from './GameMenuInventory/GameMenuInventory';
+import GameMenuStats from './GameMenuStats/GameMenuStats';
+import GameMenuProgress from './GameMenuProgress/GameMenuProgress';
 
-import "./GameMenu.scss";
+import './GameMenu.scss';
 
 function GameMenu() {
   const [displayInventory, setDisplayInventory] = useState(false);
@@ -11,21 +11,21 @@ function GameMenu() {
   const [displayProgress, setDisplayProgress] = useState(false);
 
   const displayInventoryFunction = () => {
-      setDisplayInventory(!displayInventory);
-      setDisplayStats(false);
-      setDisplayProgress(false);
+    setDisplayInventory(!displayInventory);
+    setDisplayStats(false);
+    setDisplayProgress(false);
   };
 
   const displayStatsFunction = () => {
-      setDisplayInventory(false);
-      setDisplayStats(!displayStats);
-      setDisplayProgress(false);
+    setDisplayInventory(false);
+    setDisplayStats(!displayStats);
+    setDisplayProgress(false);
   };
 
   const displayProgressFunction = () => {
-      setDisplayInventory(false);
-      setDisplayStats(false);
-      setDisplayProgress(!displayProgress);
+    setDisplayInventory(false);
+    setDisplayStats(false);
+    setDisplayProgress(!displayProgress);
   };
 
   return (
@@ -60,7 +60,7 @@ function GameMenu() {
         {displayInventory && (
           <GameMenuInventory />
         )}
-        
+
         {displayStats && (
           <GameMenuStats />
         )}
@@ -70,8 +70,7 @@ function GameMenu() {
         )}
       </div>
     </div>
-  )
+  );
 }
 
-
-export default GameMenu
+export default GameMenu;

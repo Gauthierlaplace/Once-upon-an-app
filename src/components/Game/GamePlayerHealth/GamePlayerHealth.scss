@@ -9,7 +9,7 @@
     justify-content: flex-start;
     align-items: center;
     padding-left: 10px;
-    background-color: vars.$alt-dark-color;
+    background: linear-gradient( vars.$alt-dark-color, vars.$darkest-color);
 
     h2 {
         font-family: vars.$main-font;

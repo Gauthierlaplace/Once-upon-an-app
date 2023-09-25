@@ -18,11 +18,14 @@
     padding-bottom: 10px;
     width: 200px;
     border-radius: 5px;
-    border: transparent;
-    background: linear-gradient(#9A6D51, #402A23);
-    color: white;
+    border: 1px solid vars.$yellow-text-color;
+    background: linear-gradient(
+      vars.$alt-dark-color,
+      vars.$darkest-color
+  );
+    color: vars.$yellow-text-color;
     font-family: vars.$main-font;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 3rem;
     position: absolute;
     top: 50%;
@@ -31,7 +34,12 @@
   }
 
   button:hover {
-    background: linear-gradient(#402A23, #9A6D51);
+    background: linear-gradient(
+      vars.$alt-dark-color,
+      vars.$darkest-color
+    );
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+    color: vars.$lightest-color;
   }
 
 }
