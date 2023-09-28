@@ -17,16 +17,25 @@
     button {
         padding: 5px 10px;
         text-align: justify;
-        font-size: 0.9em;
+        font-size: 1em;
         line-height: 1.3em;
         color: white;
         margin-bottom: 10px;
-        border: transparent;
-        background: #9A6D51;
         border-radius: 5px;
+        border-radius: .4em;
+        background: 
+        linear-gradient(
+            vars.$alt-dark-color,
+            vars.$darkest-color
+        );
+        font-family: vars.$main-font;
+        color: vars.$yellow-text-color;
+        border: 1px solid vars.$alt-dark-color;
     }
 
     button:hover {
-        background: #402A23;
+        background: vars.$alt-dark-color;
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+        color: vars.$alt-light-color;
     }
 }

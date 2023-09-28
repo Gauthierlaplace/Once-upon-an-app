@@ -86,7 +86,7 @@ function Game() {
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
           <GameScene picture={eventPicture} npcName={npcName} />
           {/* <GameMenus /> */}
-          <GameMenu />
+          {/* <GameMenu /> */}
         </div>
 
         <div className="Game-right">

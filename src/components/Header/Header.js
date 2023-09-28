@@ -1,18 +1,14 @@
 /* eslint-disable no-alert */
 import './Header.scss';
-import HeaderNav from './HeaderNav/HeaderNav';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logOut } from '../../actions/user';
 
+import HeaderNav from './HeaderNav/HeaderNav';
+
 function Header() {
   const logged = useSelector((state) => state.user.logged);
-  const heroPicture = useSelector((state) => state.game.player.picture);
-  // La fonctionnalité logout (déconnexion) est accessible en header
-  // Quand le joueur se déconnecte, ses données (token, nickname et id)
-  // sont effacées à la fois dans le localStorage (instructions ci-dessous)
-  // Et également dans le state (dispatch(logOut))
   const dispatch = useDispatch();
   const handleLogOut = () => {
     const confirmation = window.confirm('Votre progression dans le jeu sera perdue, êtes-vous sûr de vouloir vous déconnecter ?');
@@ -30,57 +26,15 @@ function Header() {
     <div className="Header">
       {/* Logo cliquable qui renvoi sur la page d'accueil */}
 
-        <NavLink to="/">
-          <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/4/1687449010-illustration-sans-titre-4.png" alt="Logo de l'application web : Once upon an app" />
-        </NavLink>
+      <NavLink to="/">
+        <img className="Header-logo" src="https://image.noelshack.com/fichiers/2023/25/4/1687449010-illustration-sans-titre-4.png" alt="Logo de l'application web : Once upon an app" />
+      </NavLink>
 
-        {/* La div suivante ne s'affiche que quand logged vaut true */}
-        {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
-        {logged && (
-          <HeaderNav logout={handleLogOut} />
-          // <div className="Header-Account">
-          //   <nav>
-          //     <ul>
-          //       <li>
-          //         <div className="Header-flexLi">
-          //           {(heroPicture !== '') && (
-          //             <img
-          //               className="Header-picture"
-          //               src={heroPicture}
-          //               alt="image du héro"
-          //             />
-          //           )}
-
-          //           <h1 className="Header-nickname">
-          //             Salut {nickname}
-          //           </h1>
-          //         </div>
-          //         <ul>
-          //           <li>
-          //             <NavLink to="/">
-          //               Accueil
-          //             </NavLink>
-          //           </li>
-
-          //           <li>
-          //             <NavLink to="/MyAccount">Mon Compte</NavLink>
-          //           </li>
-
-          //           <li>
-          //             <NavLink to="/game">
-          //               Jouer
-          //             </NavLink>
-          //           </li>
-
-          //           <li onClick={() => handleLogOut()}>
-          //             Déconnexion
-          //           </li>
-          //         </ul>
-          //       </li>
-          //     </ul>
-          //   </nav>
-          // </div>
-        )}
+      {/* La div suivante ne s'affiche que quand logged vaut true */}
+      {/* Le joueur peut cliquer pour se déconnecter (logged ==> false) */}
+      {logged && (
+        <HeaderNav logout={handleLogOut} />
+      )}
     </div>
   );
 }

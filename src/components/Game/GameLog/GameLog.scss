@@ -31,14 +31,16 @@
         font-size: 1em;
         border-radius: 5px;
         border:transparent;
-        background: linear-gradient( #9A6D51, #402A23);
+        background: linear-gradient( vars.$alt-dark-color, vars.$darkest-color);
         font-weight: bold;
-        color: white;
+        color: vars.$yellow-text-color;
         margin-bottom: 20px;
     }
   
     &-next-step-button:hover, &-next-step-npc-button:hover {
-        background: linear-gradient(#402A23, #9a6d51);
+        background: linear-gradient(vars.$alt-dark-color, vars.$darkest-color);
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+        color: vars.$alt-light-color;
     }
 
     button {
@@ -54,7 +56,7 @@
     border-radius: 5px;
     background-color: #ddc29a;
     padding: 2px;
-    color: #402A23;
+    color: vars.$darkest-color;
     font-family: vars.$main-font;
     font-weight: 500;
     font-size: 1em;
@@ -69,12 +71,7 @@
 @media (max-width: 900){
     .GameLog {
         &-Scroll {
-        width: 100%;
-        height: 95%;
-        overflow-y: auto;
         padding: 1em;
-        text-align: justify;
-        line-height: 1.4em;
         }
     }
 }
