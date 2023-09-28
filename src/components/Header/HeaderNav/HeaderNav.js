@@ -24,11 +24,11 @@ function HeaderNav({ logout }) {
               Jouer
             </NavLink>
           </li>
-          <li className="navbar-item">
+          {/* <li className="navbar-item">
             <NavLink to="/MyAccount" className="navbar-link" onClick={handleShowLinks}>
               Mon compte
             </NavLink>
-          </li>
+          </li> */}
           <li className="navbar-item" onClick={logout}>
             <NavLink to="#" className="navbar-link" onClick={handleShowLinks}>
               Déconnexion
