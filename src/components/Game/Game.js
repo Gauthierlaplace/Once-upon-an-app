@@ -87,6 +87,7 @@ function Game() {
           <GameScene picture={eventPicture} npcName={npcName} />
           {/* <GameMenus /> */}
           {/* <GameMenu /> */}
+
         </div>
 
         <div className="Game-right">
