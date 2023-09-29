@@ -9,22 +9,17 @@
     justify-content: flex-start;
     align-items: center;
     padding-left: 10px;
-    background-color: vars.$alt-dark-color;
+    background: linear-gradient( vars.$alt-dark-color, vars.$darkest-color);
 
-    h1 {
-        min-width: 5%;
-        max-width: 25%;
-        padding-left: 10px;
-        padding-right: 10px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        font-family: 'Advent Pro', sans-serif;
+    h2 {
+        font-family: vars.$main-font;
         font-weight: 500;
         font-size: 1.1em;
+        padding: .5em;
     }
 
     &-picture {
         width: 30px;
+        border-radius: 1em;
     }
 }

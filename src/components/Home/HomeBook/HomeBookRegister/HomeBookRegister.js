@@ -28,7 +28,7 @@ function HomeBookRegister({
   // Afin d'éviter que 10 toasts ne se lancent en meme temps
   const infoPasswordToast = () => {
     if (!isPasswordToastVisible) {
-      toast.info('Le mot-de-passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule et 1 caractère spécial', {
+      toast.info('Le mot de passe doit contenir minimum 4 caractères, dont 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial', {
         position: 'top-right',
         autoClose: false,
         hideProgressBar: false,

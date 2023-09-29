@@ -1,16 +1,19 @@
+@use './../../../styles/vars';
+
 .GameLog {
     width: 100%;
-    height: 79vh;
+    min-height: 100vh;
     line-height: 1.3em;
     text-align: justify;
     position: relative;
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-weight: 500;
     font-size: 1.1em;
+    padding-bottom: 60px;
 
     &-Scroll {
         width: 100%;
-        max-height: 60%;
+        height: 95%;
         overflow-y: auto;
         padding-right: 10px;
         text-align: justify;
@@ -28,18 +31,20 @@
         font-size: 1em;
         border-radius: 5px;
         border:transparent;
-        background: linear-gradient( #9A6D51, #402A23);
+        background: linear-gradient( vars.$alt-dark-color, vars.$darkest-color);
         font-weight: bold;
-        color: white;
+        color: vars.$yellow-text-color;
         margin-bottom: 20px;
     }
   
     &-next-step-button:hover, &-next-step-npc-button:hover {
-        background: linear-gradient(#402A23, #9a6d51);
+        background: linear-gradient(vars.$alt-dark-color, vars.$darkest-color);
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+        color: vars.$alt-light-color;
     }
 
     button {
-        font-family: 'Advent Pro', sans-serif;
+        font-family: vars.$main-font;
         font-weight: 500;
         font-size: 1.05em;
     }
@@ -51,8 +56,22 @@
     border-radius: 5px;
     background-color: #ddc29a;
     padding: 2px;
-    color: #402A23;
-    font-family: 'Advent Pro', sans-serif;
+    color: vars.$darkest-color;
+    font-family: vars.$main-font;
     font-weight: 500;
     font-size: 1em;
+}
+
+.end-of-scrollable-zone {
+    width: 100%;
+    height: 1%;
+    background-color: blue;
+}
+
+@media (max-width: 900){
+    .GameLog {
+        &-Scroll {
+        padding: 1em;
+        }
+    }
 }

@@ -1,23 +1,24 @@
+@use "./../../../styles/vars";
+
 .HomeBook {
   width: 100%;
   height: 100%;
-  margin: auto;
+
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+
   background: url(../../../assets/images/openbook.png);
+  background-size: 1100px, 100vw;
   background-repeat: no-repeat;
-  background-size: 115%;
-  background-position: center;
-  position: absolute;
-  top: -10px;
+  background-position: center 60%;
 
   &-GlassLeft {
-    width: 28%;
-    height: 400px;
+    height: 450px;
+    aspect-ratio: 5/6;
     position: relative;
-    top: 160px;
     left: -55px;
+    top: -40px;
     padding: 20px;
     /* glass effect */
     background: rgba(255, 255, 255, 0.25);
@@ -34,8 +35,9 @@
     justify-content: center;
     flex-direction: column;
   }
+
   &-menu, &-form, &-form button {
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-weight: 500;
     font-size: 1.2rem;
   }
@@ -46,11 +48,11 @@
   }
 
   &-GlassRight {
-    width: 30%;
-    height: 400px;
+    height: 450px;
+    aspect-ratio: 5/6;
     position: relative;
-    top: 160px;
-    right: -72px;
+    right: -65px;
+    top: -40px;
     padding: 15px;
     /* glass effect */
     background: rgba(255, 255, 255, 0.25);
@@ -77,6 +79,16 @@
     padding: 10px;
   }
 
+  &-menu-leading-dots {
+    border-bottom: .15rem dotted black;
+
+    /* Take remaining width */
+    flex: 1;
+
+    /* Spacing */
+    margin: 0 0.25rem;
+  }
+
   &-menu:hover {
     cursor: grab;
   }
@@ -91,7 +103,7 @@
   }
 
   h1 {
-    font-family: 'Berkshire Swash', handwriting;    
+    font-family: vars.$title-font;    
     font-size: 1.5em;
     margin-bottom: 10px;
   }
@@ -108,7 +120,7 @@
     border: transparent;
     margin-bottom: 7px;
     padding-left: 10px;
-    font-family: 'Advent Pro', sans-serif;
+    font-family: vars.$main-font;
     font-size: .8em;
   }
 
@@ -118,12 +130,13 @@
     margin-top: 10px;
     border-radius: 5px;
     border: transparent;
-    background: linear-gradient(#9A6D51, #402A23);
+    background: linear-gradient(vars.$alt-dark-color, vars.$darkest-color);
     color: white;
   }
 
   button:hover {
-    background: linear-gradient(#402A23, #9A6D51);
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+    color: vars.$alt-light-color;
   }
 
   &-form {
@@ -139,4 +152,30 @@
 
 .password-input-icon {
   margin-left: 10px;
+}
+
+@media (max-width: 900px) {
+  .HomeBook {
+    background: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #000;
+    color: #fff
+  }
+
+  .HomeBook-GlassLeft {
+    display: none;
+  }
+
+  .HomeBook-GlassRight {
+    top: 0;
+    left: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .special-sm-login-button {
+    display: none;
+  }
 }

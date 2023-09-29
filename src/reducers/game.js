@@ -28,6 +28,7 @@ export const initialState = {
     picture: '',
     health: 0,
     maxHealth: 0,
+    item: [],
   },
 
   progress: 0,
@@ -179,7 +180,8 @@ const reducer = (state = initialState, action = {}) => {
         name: action.payload.name,
         picture: action.payload.picture,
         health: action.payload.health,
-        maxHealth: action.payload.maxHealth
+        maxHealth: action.payload.maxHealth,
+        item: action.payload.item,
       }
     };
 

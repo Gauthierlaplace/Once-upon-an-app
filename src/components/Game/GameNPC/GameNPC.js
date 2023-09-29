@@ -7,7 +7,7 @@ function GameNPC() {
 
   return (
     <div className="GameNPC">
-      <h1 className="GameNPC-title">{npcName}</h1>
+      <h2 className="GameNPC-title">{npcName}</h2>
       <img className="GameNPC-img" src={npcPicture} alt="portrait de PNJ" />
     </div>
   );

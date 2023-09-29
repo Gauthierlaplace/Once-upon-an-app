@@ -1,0 +1,38 @@
+@use "./../../../styles/vars";
+
+.GameMenu {
+    width: 100%;
+    height: fit-content;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    background-color: vars.$darkest-color;
+    padding: .5em;
+    background-color: rgba(0,0,0,0.9);
+
+    &-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-button {
+        border-radius: .4em;
+        background: 
+        linear-gradient(
+            vars.$alt-dark-color,
+            vars.$darkest-color
+        );
+        min-width: 30%;
+        height: 2em;
+        font-family: vars.$main-font;
+        font-size: 1.2em;
+        color: vars.$yellow-text-color;
+        border: 1px solid vars.$alt-dark-color;
+        // border: none;
+    }
+
+    &-button:hover {
+        color: vars.$alt-light-color;
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+}

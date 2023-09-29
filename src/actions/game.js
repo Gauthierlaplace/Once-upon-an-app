@@ -91,7 +91,7 @@ export const setHeroStatus = (newhealth) => ({
   },
 });
 
-export const setPlayer = (id, name, picture, health, maxHealth) => ({
+export const setPlayer = (id, name, picture, health, maxHealth, item) => ({
   type: SET_PLAYER,
   payload:
   {
@@ -100,6 +100,7 @@ export const setPlayer = (id, name, picture, health, maxHealth) => ({
     picture: picture,
     health: health,
     maxHealth: maxHealth,
+    item: item,
   },
 });
 

@@ -1,8 +1,9 @@
-// SCSS DE HOMEBOOK UTILISE
+@use "./../../../styles/vars";
+
 .HomeDescription {
     p {
-        font-family: 'Advent Pro', sans-serif;
-        font-weight: 500;
-        font-size: 1.2rem;
+      font-family: vars.$main-font;
+      font-weight: 500;
+      font-size: 1.2rem;
     }
 }

@@ -1,3 +1,5 @@
+@use "./../../../styles/vars";
+
 .HomeLogged {
   width: 100%;
   height: 100%;
@@ -7,28 +9,37 @@
   align-items: center;
   background: url(../../../assets/images/openbook.png);
   background-repeat: no-repeat;
-  background-size: 115%;
+  background-size: 70%;
   background-position: center;
-  position: absolute;
-  top: -10px;
+  position: relative;
 
   button {
-    height: auto;
     padding-top: 5px;
     padding-bottom: 10px;
     width: 200px;
     border-radius: 5px;
-    border: transparent;
-    background: linear-gradient(#9A6D51, #402A23);
-    color: white;
-    font-family: 'Advent Pro', sans-serif;
-    font-weight: 600;
+    border: 1px solid vars.$yellow-text-color;
+    background: linear-gradient(
+      vars.$alt-dark-color,
+      vars.$darkest-color
+  );
+    color: vars.$yellow-text-color;
+    font-family: vars.$main-font;
+    font-weight: 400;
     font-size: 3rem;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -90%);
   }
 
-
   button:hover {
-    background: linear-gradient(#402A23, #9A6D51);
+    background: linear-gradient(
+      vars.$alt-dark-color,
+      vars.$darkest-color
+    );
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+    color: vars.$lightest-color;
   }
 
 }

@@ -1,26 +1,18 @@
-// Generic
+// Colors
 $primary-color: #a39e9c;
 $alt-light-color: #dde0dd;
 $alt-dark-color: #504a49;
 $darkest-color: black;
 $lightest-color: #fff;
+$yellow-text-color: #FFDA87;
 
-// Pour les messages d'info
-$info-color: #004084;
-$info-background-color: #e2e3e5;
-$success-color: #296434;
-$success-background-color: #d4edd9;
-$warning-color: #856305;
-$warning-background-color: #d1ecf1;
-$error-color: #721c23;
-$error-background-color: #f8d7d9;
+//Fonts
+$title-font: 'Berkshire Swash', handwriting;
+$main-font: 'Lato', sans-serif;
+// $title-font: 'Abril Fatface', cursive;
 
 
 $gutter: 2rem;
-
-// Global
-$global-font: 'Oswald', sans-serif;
-$global-font-weight: 300;
 
 // MEMO - Pour utiliser ces variables dans d'autres fichiers :
 // 1) En haut du fichier, importer :

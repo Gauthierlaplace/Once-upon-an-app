@@ -1,8 +1,6 @@
 @use './../../styles/vars';
 
 .Game {
-    position: absolute;
-    top: 0;
     width: 100%;
     height: 100%;
     background-image: 
@@ -14,10 +12,11 @@
 
     &-flexSA {
         width: 100%;
-        height: 93%;
+        min-height: 100vh;
         display: flex;
         justify-content: space-around;
     }
+
     &-left {
         width: 65%;
     }
@@ -27,8 +26,44 @@
     }
 
     &-Eventtitle, &-Logtitle {
+        text-align: center;
         padding-top: .5em;
         padding-bottom: .5em;
         font-size: 1.4em;
-        font-family: 'Berkshire Swash', handwriting;    }
+        font-family: vars.$title-font;    }
+}
+
+@media (max-width: 1200px) {
+    .Game {
+        
+        &-flexSA {
+            width: 100%;
+            min-height: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        &-left {
+            width: 100%;
+        }
+    
+        &-right {
+            width: 100%;
+            padding: 0em 1em;
+        }
+    
+        &-Eventtitle, &-Logtitle {
+            padding-top: .5em;
+            padding-bottom: .5em;
+            font-size: 1.4em;
+            font-family: vars.$title-font;    
+        }
+    }
+}
+
+@media (min-width:1400px) {
+    .Game {
+        width: 80%;
+    }
 }

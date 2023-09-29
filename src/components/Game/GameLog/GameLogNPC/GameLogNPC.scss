@@ -1,6 +1,8 @@
+@use './../../../../styles/vars';
+
 .GameLogNPC {
   &-intro {
-    font-family: 'Berkshire Swash', handwriting;    
+    font-family: vars.$title-font;    
     font-size: 1.1em;
     text-align: center;
     margin-top: 15px;
