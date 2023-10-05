@@ -54,6 +54,7 @@ export const initialState = {
     name: '',
     description: '',
     picture: '',
+    isHostile: '',
   },
 
   dialogue:
@@ -101,6 +102,7 @@ const reducer = (state = initialState, action = {}) => {
         name: action.payload.name,
         description: action.payload.description,
         picture: action.payload.picture,
+        // isHostile: action.payload
       }
     };
 

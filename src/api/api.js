@@ -1,4 +1,8 @@
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../actions/user';
+
+const dispatch = useDispatch;
 
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE}`
@@ -20,6 +24,7 @@ api.interceptors.request.use((request) => {
 api.interceptors.response.use((response) => response, (error) => {
   if (error.response.status === 401) {
     setTimeout(() => {
+      dispatch(logOut);
       window.location = '/';
     }, 2000);
   }

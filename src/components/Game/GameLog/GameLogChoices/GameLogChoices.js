@@ -48,6 +48,7 @@ function GameLogChoices({
   // Fonction de gestion des éventuels NPC
   const npcManagement = (response) => {
     const npcAPI = response.data.npcCurrentEvent;
+    console.log(npcAPI);
     const path = `${process.env.REACT_APP_ASSETS_BASE}`;
     const npcAPIpicture = `${path}${npcAPI.picture}`;
 
