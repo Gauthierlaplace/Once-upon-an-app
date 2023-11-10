@@ -1,7 +1,3 @@
-/* eslint-disable no-console */
-
-// TODO setCurrentEvent, envoyer l'event au lieu d'envoyer l'ID, le title etc
-
 import { useSelector, useDispatch } from 'react-redux';
 import './GameLogChoices.scss';
 import api from '../../../../api/api';
@@ -21,7 +17,8 @@ import {
   setEventProgressStatus,
   setVisibleLogDialogue,
   setAnswerAndDescriptionInLog,
-  setLoading
+  setLoading,
+  setBattleMode
 } from '../../../../actions/game';
 
 function GameLogChoices({
@@ -42,6 +39,7 @@ function GameLogChoices({
   // Fonction de gestion du currentEvent
   const currentEventManagement = (response) => {
     const eventAPI = response.data.currentEvent;
+    console.log(eventAPI);
     dispatch(setCurrentEvent(eventAPI));
   };
 
@@ -61,9 +59,11 @@ function GameLogChoices({
     // S'il y a un NPC, on dispatche ses infos
     if (hasNPC) {
       dispatch(setCurrentNPC(
+        npcAPI.npcId,
         npcAPI.npcName,
         npcAPI.npcDescription,
         npcAPIpicture,
+        npcAPI.hostility
       ));
 
       // Gestion des dialogues
@@ -83,7 +83,7 @@ function GameLogChoices({
 
       // S'il n'y a pas de NPC, on remet à zéro les infos NPC
     } else {
-      dispatch(setCurrentNPC('', '', ''));
+      dispatch(setCurrentNPC(0, '', '', '', false));
       dispatch(setDialogueAndEffects('', ['', '']));
     }
 
@@ -322,7 +322,10 @@ function GameLogChoices({
             type="button"
             className="GameLogChoices-button"
             key={choice.nextEventId}
-            onClick={() => handleClickOnNextEvent(choice.nextEventId)}
+            onClick={() => {
+              handleClickOnNextEvent(choice.nextEventId);
+              dispatch(setBattleMode(false));
+            }}
           >
             <p>
               {choice.content}

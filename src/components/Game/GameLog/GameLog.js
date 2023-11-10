@@ -13,6 +13,7 @@ import GameLogEventDescription from './GameLogEventDescription/GameLogEventDescr
 import GameLogNPC from './GameLogNPC/GameLogNPC';
 import GameLogDialogue from './GameLogDialogue/GameLogDialogue';
 import GameLogRestart from './GameLogRestart/GameLogRestart';
+import BattleMode from '../BattleMode/BattleMode';
 
 function GameLog({
   eventDescription,
@@ -26,6 +27,7 @@ function GameLog({
   const answerAndDescriptionInLog = useSelector((state) => state.game.eventDialogueToDisplay);
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
   const currentEventId = useSelector((state) => state.game.currentEvent.id);
+  const isBattleMode = useSelector((state) => state.game.battleMode);
 
   const typewriting = useSelector((state) => state.game.typewriting.eventDescription);
   const identifier = 'eventDescription';
@@ -35,18 +37,6 @@ function GameLog({
   const [visibleButtonFollowToShowDialogue, setVisibleButtonFollowToShowDialogue] = useState(true);
 
   const dispatch = useDispatch();
-
-  // // Scroller directement à la fin
-  // const endOfScrollableZoneRef = useRef(null);
-
-  // useEffect(() => {
-  //   console.log("test du useEffect");
-  //   endOfScrollableZoneRef.current.scrollIntoView();
-  // }, [
-  //   visibleButtonFollowToShowChoices,
-  //   visibleButtonFollowToShowDialogue,
-  //   visibleButtonFollowToShowNPC
-  // ]);
 
   return (
     <div className="GameLog">
@@ -88,6 +78,7 @@ function GameLog({
           />
         )}
 
+
         {(hasNPC && visibleLogDialogue) && (
           <GameLogDialogue
             sentence={answerAndDescriptionInLog.sentence}
@@ -99,6 +90,7 @@ function GameLog({
         {/* Le bouton "Suite-choix" ne s'affiche pas pareil avec ou sans NPC  */}
         {/* Dans le cas où il n'y a pas de NPC, on veut qu'il s'affiche dès le début */}
         {/* S'il y a un NPC, on veut qu'il s'affiche quand on a intéragi avec le NPC */}
+
         {(!hasNPC
           && visibleButtonFollowToShowChoices
           && (typewriting === false)
@@ -117,7 +109,7 @@ function GameLog({
           </button>
         )}
 
-        {visibleChoices && (
+        {(visibleChoices && !isBattleMode) && (
           <GameLogChoices
             setVisibleButtonFollowToShowNPC={setVisibleButtonFollowToShowNPC}
             setVisibleButtonFollowToShowDialogue={setVisibleButtonFollowToShowDialogue}

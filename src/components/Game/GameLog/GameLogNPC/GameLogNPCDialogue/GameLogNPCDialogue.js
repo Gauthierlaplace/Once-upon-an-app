@@ -11,9 +11,13 @@ import {
   setAnswerAndDescriptionInLog,
   setVisibleLogDialogue,
   setChoices,
+  setBattleMode,
   setLoading,
   setEventProgressStatus,
   setTypewriting,
+  setNPCStatus,
+  setAttacker,
+  setFightID,
 } from '../../../../../actions/game';
 import Loading from '../../../../Loading/Loading';
 
@@ -22,6 +26,8 @@ function GameLogNPCDialogue() {
   const sentence = useSelector((state) => state.game.dialogue.sentence);
   const answers = useSelector((state) => state.game.dialogue.answers);
   const loading = useSelector((state) => state.game.loading);
+  const isHostile = useSelector((state) => state.game.currentNPC.isHostile);
+  const npcId = useSelector((state) => state.game.currentNPC.id);
   const [visibleDialogue, setVisibleDialogue] = useState(true);
 
   const handleClickOnEffect = (effectId) => {
@@ -32,6 +38,39 @@ function GameLogNPCDialogue() {
         // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
         const playerAPI = response.data.player;
         dispatch(setHeroStatus(playerAPI.health));
+        // console.log(response.data);
+
+        // Si l'effet a tué le joueur
+        // On affiche un unique bouton de choix vers le deathEvent
+        if (response.data.GameOver) {
+          dispatch(setEventProgressStatus('death'));
+
+          const eventOpening = response.data.GameOver.opening;
+          const onlyChoice = {
+            nextEventId: 18,
+            content: `${eventOpening}`,
+          };
+
+          dispatch(setChoices([onlyChoice]));
+        }
+      })
+      .catch((error) => console.log(error))
+      .finally(() => dispatch(setLoading(false)));
+  };
+
+  const handleClickOnHostile = (idNpc, idEffect) => {
+    dispatch(setLoading(true));
+
+    api.get(`/event/fight/${idNpc}/attack/${idEffect}`)
+      .then((response) => {
+        console.log(response.data);
+        // On lance le composant combat en passant le Battlemode à true
+        // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
+        const API = response.data;
+        dispatch(setHeroStatus(API.player.health));
+        dispatch(setNPCStatus(API.npc.npcHealth, API.npc.npcMaxHealth));
+        dispatch(setAttacker(API.attacker));
+        dispatch(setFightID(API.attackerFightId));
         // console.log(response.data);
 
         // Si l'effet a tué le joueur
@@ -69,7 +108,12 @@ function GameLogNPCDialogue() {
               className="GameLogNPCDialogue-button"
               key={answer.effectId}
               onClick={() => {
-                handleClickOnEffect(answer.effectId);
+                if (isHostile) {
+                  handleClickOnHostile(npcId, answer.effectId);
+                  dispatch(setBattleMode(true));
+                } else {
+                  handleClickOnEffect(answer.effectId);
+                }
                 dispatch(setVisibleChoices(true));
                 dispatch(setAnswerAndDescriptionInLog(
                   sentence,
