@@ -1,8 +1,15 @@
 .GameScene {
    width: 100%;
    position: relative;
+   justify-content: center;
    display: flex;
    flex-direction: column;
+
+    &-battle {
+        position: relative;
+        width: 100%;
+        flex-direction: row;
+    }
    
     &-img {
         width: 100%;
