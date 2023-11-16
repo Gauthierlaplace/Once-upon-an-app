@@ -6,11 +6,8 @@ import Game from '../Game/Game';
 import MyAccount from '../MyAccount/MyAccount';
 import About from '../About/About';
 
-// TODO fix la gestion des Routes
-
 function Main() {
   return (
-    // TODO fix la gestion des Routes
     <div className="Main">
       <Routes>
         <Route

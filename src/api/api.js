@@ -20,7 +20,11 @@ api.interceptors.request.use((request) => {
 api.interceptors.response.use((response) => response, (error) => {
   if (error.response.status === 401) {
     setTimeout(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('nickname');
+      localStorage.removeItem('id');
       window.location = '/';
+      window.alert('Votre session a expiré. Veuillez vous reconnecter.');
     }, 2000);
   }
 

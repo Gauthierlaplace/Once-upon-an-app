@@ -17,11 +17,14 @@ import GamePlayerHealth from './GamePlayerHealth/GamePlayerHealth';
 import GameScene from './GameScene/GameScene';
 import GameLog from './GameLog/GameLog';
 import GameMenu from './GameMenu/GameMenu';
+import ScrollToTop from '../../functions/scrollToTop';
+import BattleMode from './BattleMode/BattleMode';
 // import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.game.loading);
+  const isBattleMode = useSelector((state) => state.game.battleMode);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
@@ -69,7 +72,6 @@ function Game() {
   const eventDescription = useSelector((state) => state.game.currentEvent.description);
   const npcName = useSelector((state) => state.game.currentNPC.name);
   const npcDescription = useSelector((state) => state.game.currentNPC.description);
-
   const path = `${process.env.REACT_APP_ASSETS_BASE}`;
   const eventPicture = `${path}${eventPictureSrc}`;
 
@@ -78,6 +80,7 @@ function Game() {
   }
   return (
     <div className="Game">
+      {/* <ScrollToTop trigger={eventTitle} /> */}
       <GamePlayerHealth />
       <div className="Game-flexSA">
         <div className="Game-left">

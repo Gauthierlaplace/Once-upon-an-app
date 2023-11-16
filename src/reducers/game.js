@@ -14,9 +14,14 @@ import {
   SET_EVENT_PROGRESS_STATUS,
   SET_PLAYER,
   SET_HERO_STATUS,
+  SET_NPC_STATUS,
   SET_ANSWER_AND_DESCRIPTION_IN_LOG,
   SET_VISIBLE_LOG_DIALOGUE,
   SET_LOADING,
+  SET_BATTLEMODE,
+  SET_ATTACKER,
+  SET_FIGHT_ID,
+  SET_BATTLE_TURN,
   SET_TYPEWRITING,
 } from '../actions/game';
 
@@ -51,9 +56,13 @@ export const initialState = {
 
   currentNPC:
   {
+    id: 0,
     name: '',
     description: '',
     picture: '',
+    isHostile: false,
+    npcHealth: 0,
+    npcMaxHealth: 0,
   },
 
   dialogue:
@@ -78,6 +87,18 @@ export const initialState = {
   visibleLogDialogue: false,
 
   loading: false,
+  battleMode: false,
+  attacker: '',
+  fightID: 0,
+
+  battle:
+  {
+    hit: null,
+    damage: 0,
+    damageDice1: 0,
+    damageDice2: 0
+  },
+
   typewriting:
   {
     eventDescription: false,
@@ -98,9 +119,11 @@ const reducer = (state = initialState, action = {}) => {
       ...state,
       currentNPC: {
         ...state.currentNPC,
+        id: action.payload.id,
         name: action.payload.name,
         description: action.payload.description,
         picture: action.payload.picture,
+        isHostile: action.payload.isHostile,
       }
     };
 
@@ -171,6 +194,16 @@ const reducer = (state = initialState, action = {}) => {
       }
     };
 
+  case SET_NPC_STATUS:
+    return {
+      ...state,
+      currentNPC: {
+        ...state.currentNPC,
+        npcHealth: action.payload.health,
+        npcMaxHealth: action.payload.maxHealth,
+      }
+    };
+
   case SET_PLAYER:
     return {
       ...state,
@@ -206,6 +239,36 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       loading: action.payload,
+    };
+
+  case SET_BATTLEMODE:
+    return {
+      ...state,
+      battleMode: action.payload,
+    };
+
+  case SET_ATTACKER:
+    return {
+      ...state,
+      attacker: action.payload,
+    };
+
+  case SET_FIGHT_ID:
+    return {
+      ...state,
+      fightID: action.payload,
+    };
+
+  case SET_BATTLE_TURN:
+    return {
+      ...state,
+      battle: {
+        ...state.battle,
+        hit: action.payload.hit,
+        damage: action.payload.damage,
+        damageDice1: action.payload.damageDice1,
+        damageDice2: action.payload.damageDice2,
+      }
     };
 
   case SET_TYPEWRITING:
