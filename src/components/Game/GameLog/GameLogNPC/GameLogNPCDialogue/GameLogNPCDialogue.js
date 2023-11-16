@@ -63,18 +63,6 @@ function GameLogNPCDialogue() {
 
     api.get(`/event/fight/${idNpc}/attack/${idEffect}`)
       .then((response) => {
-        console.log(response.data);
-        // On lance le composant combat en passant le Battlemode à true
-        // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
-        const API = response.data;
-        dispatch(setHeroStatus(API.player.health));
-        dispatch(setNPCStatus(API.npc.npcHealth, API.npc.npcMaxHealth));
-        dispatch(setAttacker(API.attacker));
-        dispatch(setFightID(API.attackerFightId));
-        // console.log(response.data);
-
-        // Si l'effet a tué le joueur
-        // On affiche un unique bouton de choix vers le deathEvent
         if (response.data.GameOver) {
           dispatch(setEventProgressStatus('death'));
 
@@ -86,6 +74,18 @@ function GameLogNPCDialogue() {
 
           dispatch(setChoices([onlyChoice]));
         }
+        // On lance le composant combat en passant le Battlemode à true
+        // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
+        const API = response.data;
+        dispatch(setHeroStatus(API.player.health));
+        dispatch(setNPCStatus(API.npc.npcHealth, API.npc.npcMaxHealth));
+        dispatch(setAttacker(API.attacker));
+        dispatch(setFightID(API.attackerFightId));
+        dispatch(setBattleMode(true));
+        // console.log(response.data);
+
+        // Si l'effet a tué le joueur
+        // On affiche un unique bouton de choix vers le deathEvent
       })
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));
@@ -110,7 +110,7 @@ function GameLogNPCDialogue() {
               onClick={() => {
                 if (isHostile) {
                   handleClickOnHostile(npcId, answer.effectId);
-                  dispatch(setBattleMode(true));
+                  // dispatch(setBattleMode(true));
                 } else {
                   handleClickOnEffect(answer.effectId);
                 }

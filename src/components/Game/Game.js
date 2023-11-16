@@ -80,7 +80,7 @@ function Game() {
   }
   return (
     <div className="Game">
-      <ScrollToTop trigger={eventTitle} />
+      {/* <ScrollToTop trigger={eventTitle} /> */}
       <GamePlayerHealth />
 
       <div className="Game-flexSA">

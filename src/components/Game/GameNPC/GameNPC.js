@@ -11,6 +11,7 @@ function GameNPC() {
 
   return (
     <div className="GameNPC">
+      <img className="GameNPC-img" src={npcPicture} alt={npcName} />
       <h2 className="GameNPC-title">{npcName}</h2>
       {isBattleMode && (
         <GameHealthBar
@@ -18,7 +19,6 @@ function GameNPC() {
           maxHealth={npcMaxHealth}
         />
       )}
-      <img className="GameNPC-img" src={npcPicture} alt={npcName} />
     </div>
   );
 }

@@ -93,7 +93,7 @@ export const initialState = {
 
   battle:
   {
-    hit: false,
+    hit: null,
     damage: 0,
     damageDice1: 0,
     damageDice2: 0

@@ -7,13 +7,17 @@
     border-radius: 1em;
     position: relative;
     margin: auto;
-  
+
+    &-flashing {
+      animation: flash 0.5s infinite;
+    }
+
     &-currentHealth {
       background-color: rgb(146, 34, 34);
       height: 100%;
       border-radius: 1em;
-      transition: width 1s ease-in-out;
       position: absolute;
+      transition: width 2s ease-in-out;
       top: 0;
       left: 0;
     }
@@ -33,4 +37,10 @@
       color: white;
       font-size: .8em;
     }
+
+  @keyframes flash {
+    50% {
+      opacity: 0;
+    }
   }
+}
