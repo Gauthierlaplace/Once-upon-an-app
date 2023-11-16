@@ -79,15 +79,11 @@ function Game() {
   return (
     <div className="Game">
       <GamePlayerHealth />
-
       <div className="Game-flexSA">
         <div className="Game-left">
-
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
           <GameScene picture={eventPicture} npcName={npcName} />
-          {/* <GameMenus /> */}
-          {/* <GameMenu /> */}
-
+          <GameMenu />
         </div>
 
         <div className="Game-right">

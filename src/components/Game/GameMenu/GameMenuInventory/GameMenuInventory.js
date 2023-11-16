@@ -1,7 +1,6 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
-import "./GameMenuInventory.scss";
+import './GameMenuInventory.scss';
 
 function GameMenuInventory() {
   const playerItems = useSelector((state) => state.game.player.item);
@@ -9,11 +8,11 @@ function GameMenuInventory() {
   return (
     <div className="GameMenuInventory">
       {playerItems.map((item) => (
-        <div 
+        <div
           className="GameMenuInventory-item"
           key={item.id}
         >
-          <img 
+          <img
             src={`${path}${item.picture.path}`}
             alt={item.picture.name}
             className="GameMenuInventory-itemImage" />
@@ -21,7 +20,7 @@ function GameMenuInventory() {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default GameMenuInventory
+export default GameMenuInventory;
