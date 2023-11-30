@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './BattleMode.scss';
 import { useEffect, useState } from 'react';
-import { setAttacker, setBattleMode, setBattleTurn, setChoices, setCurrentNPC, setEventProgressStatus, setHeroStatus, setLoading, setNPCStatus, setVisibleChoices, setVisibleNPC } from '../../../actions/game';
+import { setAttacker, setBattleMode, setBattleTurn, setChoices, setEventProgressStatus, setHeroStatus, setInventory, setLoading, setLoot, setLootName, setNPCStatus, setPlayerAfterBattle, setVisibleChoices, setVisibleNPC } from '../../../actions/game';
 import api from '../../../api/api';
 import GameHealthBar from '../GamePlayerHealth/GameHealthBar/GameHealthBar';
 
@@ -9,7 +9,7 @@ function BattleMode() {
   const dispatch = useDispatch();
   const [visibleStartButton, setVisibleStartButton] = useState(true);
   const enemyName = useSelector((state) => state.game.currentNPC.name);
-  const enemyPicture = useSelector((state) => state.game.currentNPC.picture)
+  const enemyPicture = useSelector((state) => state.game.currentNPC.picture);
   const attacker = useSelector((state) => state.game.attacker);
   const heroHealth = useSelector((state) => state.game.player.health);
   const ennemyHealth = useSelector((state) => state.game.currentNPC.npcHealth);
@@ -19,28 +19,12 @@ function BattleMode() {
   const damage = useSelector((state) => state.game.battle.damage);
   const damageDice1 = useSelector((state) => state.game.battle.damageDice1);
   const damageDice2 = useSelector((state) => state.game.battle.damageDice2);
+  const lootId = useSelector((state) => state.game.loot);
+  const lootName = useSelector((state) => state.game.lootName);
 
   useEffect(() => {
     setNPCStatus();
   }, []);
-
-  // const battleSequence = (fightId, initialAttacker) => {
-  //   api.get(`/event/fight/${fightId}/attacker/${initialAttacker}`)
-  //     .then((response) => {
-  //       const APIdices = response.data.dices;
-  //       dispatch(setBattleTurn(
-  //         APIdices.hit,
-  //         APIdices.damage,
-  //         APIdices.damageDice1,
-  //         APIdices.damageDice2
-  //       ));
-  //       dispatch(setHeroStatus(response.data.player.health));
-  //       dispatch(setNPCStatus(response.data.npc.npcHealth, response.data.npc.npcMaxHealth));
-  //       // console.log(response);
-  //     })
-  //     .catch((error) => console.log(error))
-  //     .finally(() => dispatch(setLoading(false)));
-  // }
 
   const battleSequence = (fightId, initialAttacker) => {
     if (attacker === 'hero' || attacker === 'npc') {
@@ -54,13 +38,13 @@ function BattleMode() {
               nextEventId: 18,
               content: `${eventOpening}`,
             };
-
             dispatch(setChoices([onlyChoice]));
             dispatch(setBattleMode(false));
             dispatch(setBattleTurn(null, 0, 0, 0));
             dispatch(setVisibleChoices(true));
           }
-
+          console.log(response.data);
+          console.log('Inside IF block (tour de combat)');
           const APIDices = response.data.dices;
           dispatch(setBattleTurn(
             APIDices.hit,
@@ -68,19 +52,47 @@ function BattleMode() {
             APIDices.damageDice1,
             APIDices.damageDice2
           ));
-          dispatch(setAttacker(response.data.attacker));
           dispatch(setHeroStatus(response.data.player.health));
-          dispatch(setNPCStatus(response.data.npc.npcHealth, response.data.npc.npcMaxHealth));
+          if (heroHealth > 0) {
+            dispatch(setLoot(response.data.npc.npcItem));
+            dispatch(setLootName(response.data.loot.name));
+            dispatch(setAttacker(response.data.attacker));
+            dispatch(setNPCStatus(response.data.npc.npcHealth, response.data.npc.npcMaxHealth));
+          }
+        })
+        .catch((error) => console.log(error))
+        .finally(() => dispatch(setLoading(false)));
+    } else if (lootId !== null) {
+      api.get(`/loot/${lootId}`)
+        .then((response) => {
+          console.log(response.data);
+          console.log('Inside ELSE IF block (loot)');
+          const playerAPI = response.data.player;
+
+          dispatch(setPlayerAfterBattle(
+            playerAPI.health,
+            playerAPI.maxHealth,
+            playerAPI.defense,
+            playerAPI.dexterity,
+            playerAPI.intelligence,
+            playerAPI.karma,
+            playerAPI.strength,
+            playerAPI.items
+          ));
+          dispatch(setBattleMode(false));
+          dispatch(setBattleTurn(null, 0, 0, 0));
+          // dispatch(setCurrentNPC('', '', '', '', ''));
+          dispatch(setVisibleChoices(true));
+          dispatch(setLoading(false));
         })
         .catch((error) => console.log(error))
         .finally(() => dispatch(setLoading(false)));
     } else {
+      console.log('Inside ELSE block (no loot)');
       dispatch(setBattleMode(false));
       dispatch(setBattleTurn(null, 0, 0, 0));
-      // dispatch(setCurrentNPC('', '', '', '', ''));
       dispatch(setVisibleChoices(true));
       dispatch(setLoading(false));
-      // console.log('fin de combat');
     }
   };
 
@@ -125,6 +137,10 @@ function BattleMode() {
             { ennemyHealth === 0 && (
               <div>
                 <div className="BattleMode-results-span">Bravo, vous avez vaincu { enemyName } ! </div>
+                { lootName !== null && (
+                  <div className="BattleMode-results-span">Vous récupérez le butin : { lootName } ! </div>
+                )}
+
               </div>
             )}
 

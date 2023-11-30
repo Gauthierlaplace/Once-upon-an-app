@@ -24,7 +24,6 @@ import BattleMode from './BattleMode/BattleMode';
 function Game() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.game.loading);
-  const isBattleMode = useSelector((state) => state.game.battleMode);
 
   // Au lancement de cette page, on lance l'API sur la route "play"
   // Cela va nous permettre de récupérer l'événement (événement de DEPART)
@@ -47,6 +46,12 @@ function Game() {
           playerAPIpicture,
           playerAPI.health,
           playerAPI.maxHealth,
+          playerAPI.defense,
+          playerAPI.dexterity,
+          playerAPI.intelligence,
+          playerAPI.karma,
+          playerAPI.strength,
+          //le item est sans s car il est issu directement du repository
           playerAPI.item
         ));
 

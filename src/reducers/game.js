@@ -13,6 +13,7 @@ import {
   RESET_PROGRESS,
   SET_EVENT_PROGRESS_STATUS,
   SET_PLAYER,
+  SET_PLAYER_AFTER_BATTLE,
   SET_HERO_STATUS,
   SET_NPC_STATUS,
   SET_ANSWER_AND_DESCRIPTION_IN_LOG,
@@ -21,6 +22,9 @@ import {
   SET_BATTLEMODE,
   SET_ATTACKER,
   SET_FIGHT_ID,
+  SET_LOOT,
+  SET_LOOT_NAME,
+  SET_INVENTORY,
   SET_BATTLE_TURN,
   SET_TYPEWRITING,
 } from '../actions/game';
@@ -33,10 +37,16 @@ export const initialState = {
     picture: '',
     health: 0,
     maxHealth: 0,
+    defense: 0,
+    dexterity: 0,
+    intelligence: 0,
+    karma: 0,
+    strength: 0,
     item: [],
   },
 
   progress: 0,
+  maxProgress: 10,
 
   // Peut prendre les valeurs 'normal', 'beforeLast',
   // 'beforeBoss', 'beforeBiomeEnd', 'beforeGameEnd'
@@ -90,6 +100,8 @@ export const initialState = {
   battleMode: false,
   attacker: '',
   fightID: 0,
+  loot: null,
+  lootName: null,
 
   battle:
   {
@@ -214,6 +226,27 @@ const reducer = (state = initialState, action = {}) => {
         picture: action.payload.picture,
         health: action.payload.health,
         maxHealth: action.payload.maxHealth,
+        defense: action.payload.defense,
+        dexterity: action.payload.dexterity,
+        intelligence: action.payload.intelligence,
+        karma: action.payload.karma,
+        strength: action.payload.strength,
+        item: action.payload.item,
+      }
+    };
+
+  case SET_PLAYER_AFTER_BATTLE:
+    return {
+      ...state,
+      player: {
+        ...state.player,
+        health: action.payload.health,
+        maxHealth: action.payload.maxHealth,
+        defense: action.payload.defense,
+        dexterity: action.payload.dexterity,
+        intelligence: action.payload.intelligence,
+        karma: action.payload.karma,
+        strength: action.payload.strength,
         item: action.payload.item,
       }
     };
@@ -257,6 +290,27 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       fightID: action.payload,
+    };
+
+  case SET_LOOT:
+    return {
+      ...state,
+      loot: action.payload,
+    };
+
+  case SET_LOOT_NAME:
+    return {
+      ...state,
+      lootName: action.payload,
+    };
+
+  case SET_INVENTORY:
+    return {
+      ...state,
+      player: {
+        ...state,
+        item: action.payload.item,
+      }
     };
 
   case SET_BATTLE_TURN:

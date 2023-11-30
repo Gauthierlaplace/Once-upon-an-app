@@ -7,6 +7,7 @@
     border-radius: 1em;
     position: relative;
     margin: auto;
+    font-family: vars.$main-font;
 
     &-flashing {
       animation: flash 0.5s infinite;

@@ -1,0 +1,15 @@
+@use "./../../../../styles/vars";
+
+.GameMenuProgress {
+    color: vars.$lightest-color;
+    font-family: vars.$main-font;
+    width: 100%;
+    text-align: center;
+    padding: .3em;
+
+    &-title {
+        color: vars.$main-font;
+        font-weight: 700;
+        margin-bottom: .3em;
+    }
+}

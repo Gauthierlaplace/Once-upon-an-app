@@ -238,7 +238,7 @@ function GameLogChoices({
       // S'il vaut 2, c'est juste avant last
       // S'il vaut <2 (0 ou 1) c'est normal.
 
-      const progressMax = 4;
+      const progressMax = 10;
 
       if (progress === progressMax) {
         dispatch(setEventProgressStatus('gameEnd'));
@@ -266,7 +266,6 @@ function GameLogChoices({
   // Le clic sur un des deux choix proposés renvoie vers l'événement suivant
   // (route api/event/roll/id-du-prochain-event)
   const handleClickOnNextEvent = (nextEventId) => {
-    // Todo réfléchir à déplacer l'incrémentation du progrès pour éviter le fast click (triche)
     dispatch(setLoading(true));
 
     dispatch(incrementProgress());

@@ -77,12 +77,12 @@ function GameLogNPCDialogue() {
         // On lance le composant combat en passant le Battlemode à true
         // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
         const API = response.data;
+        console.log(response.data);
         dispatch(setHeroStatus(API.player.health));
         dispatch(setNPCStatus(API.npc.npcHealth, API.npc.npcMaxHealth));
         dispatch(setAttacker(API.attacker));
         dispatch(setFightID(API.attackerFightId));
         dispatch(setBattleMode(true));
-        // console.log(response.data);
 
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent

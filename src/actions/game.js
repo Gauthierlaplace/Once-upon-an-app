@@ -13,12 +13,16 @@ export const SET_EVENT_PROGRESS_STATUS = 'SET_EVENT_PROGRESS_STATUS';
 export const SET_HERO_STATUS = 'SET_HERO_STATUS';
 export const SET_NPC_STATUS = 'SET_NPC_STATUS';
 export const SET_PLAYER = 'SET_PLAYER';
+export const SET_PLAYER_AFTER_BATTLE = 'SET_PLAYER_AFTER_BATTLE';
 export const SET_ANSWER_AND_DESCRIPTION_IN_LOG = 'SET_ANSWER_AND_DESCRIPTION_IN_LOG';
 export const SET_VISIBLE_LOG_DIALOGUE = 'SET_VISIBLE_LOG_DIALOGUE';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_BATTLEMODE = 'SET_BATTLEMODE';
 export const SET_ATTACKER = 'SET_ATTACKER';
 export const SET_FIGHT_ID = 'SET_FIGHT_ID';
+export const SET_LOOT = 'SET_LOOT';
+export const SET_LOOT_NAME = 'SET_LOOT_NAME';
+export const SET_INVENTORY = 'SET_INVENTORY';
 export const SET_BATTLE_TURN = 'SET_BATTLE_TURN';
 export const SET_TYPEWRITING = 'SET_TYPEWRITING';
 
@@ -107,7 +111,19 @@ export const setNPCStatus = (health, maxHealth) => ({
   },
 });
 
-export const setPlayer = (id, name, picture, health, maxHealth, item) => ({
+export const setPlayer = (
+  id,
+  name,
+  picture,
+  health,
+  maxHealth,
+  defense,
+  dexterity,
+  intelligence,
+  karma,
+  strength,
+  item
+) => ({
   type: SET_PLAYER,
   payload:
   {
@@ -116,6 +132,35 @@ export const setPlayer = (id, name, picture, health, maxHealth, item) => ({
     picture: picture,
     health: health,
     maxHealth: maxHealth,
+    defense: defense,
+    dexterity: dexterity,
+    intelligence: intelligence,
+    karma: karma,
+    strength: strength,
+    item: item,
+  },
+});
+
+export const setPlayerAfterBattle = (
+  health,
+  maxHealth,
+  defense,
+  dexterity,
+  intelligence,
+  karma,
+  strength,
+  item
+) => ({
+  type: SET_PLAYER_AFTER_BATTLE,
+  payload:
+  {
+    health: health,
+    maxHealth: maxHealth,
+    defense: defense,
+    dexterity: dexterity,
+    intelligence: intelligence,
+    karma: karma,
+    strength: strength,
     item: item,
   },
 });
@@ -153,6 +198,21 @@ export const setAttacker = (attacker) => ({
 export const setFightID = (fightID) => ({
   type: SET_FIGHT_ID,
   payload: fightID,
+});
+
+export const setLoot = (lootID) => ({
+  type: SET_LOOT,
+  payload: lootID,
+});
+
+export const setLootName = (lootName) => ({
+  type: SET_LOOT_NAME,
+  payload: lootName,
+});
+
+export const setInventory = (items) => ({
+  type: SET_INVENTORY,
+  payload: { items },
 });
 
 export const setBattleTurn = (hit, damage, damageDice1, damageDice2) => ({
