@@ -55,7 +55,9 @@ function BattleMode() {
           dispatch(setHeroStatus(response.data.player.health));
           if (heroHealth > 0) {
             dispatch(setLoot(response.data.npc.npcItem));
-            dispatch(setLootName(response.data.loot.name));
+            if (lootId !== null) {
+              dispatch(setLootName(response.data.loot.name));
+            }
             dispatch(setAttacker(response.data.attacker));
             dispatch(setNPCStatus(response.data.npc.npcHealth, response.data.npc.npcMaxHealth));
           }

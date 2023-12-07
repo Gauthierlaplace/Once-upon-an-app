@@ -8,6 +8,13 @@ import {
   setPlayer,
   setChoices,
   setLoading,
+  setCurrentNPC,
+  setHasNPC,
+  setVisibleChoices,
+  setBattleMode,
+  setVisibleNPC,
+  resetProgress,
+  setEventProgressStatus,
 } from '../../actions/game';
 
 import './Game.scss';
@@ -65,6 +72,13 @@ function Game() {
         };
 
         dispatch(setChoices([firstChoice, secondChoice]));
+        dispatch(setCurrentNPC(0, '', '', '', false));
+        dispatch(setHasNPC(false));
+        dispatch(setVisibleNPC(false));
+        dispatch(resetProgress());
+        dispatch(setVisibleChoices(false));
+        dispatch(setBattleMode(false));
+        dispatch(setEventProgressStatus('normal'));
         dispatch(setLoading(false));
       })
       .catch((error) => console.log(error));

@@ -22,7 +22,6 @@ function Header() {
   };
 
   return (
-    // Todo retirer les NavLinks quand nous n'en aurons plus besoin
     <div className="Header">
       {/* Logo cliquable qui renvoi sur la page d'accueil */}
 
