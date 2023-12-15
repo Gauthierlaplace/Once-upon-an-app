@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import styled, { keyframes } from 'styled-components';
 import './BattleMode.scss';
 import { useEffect, useState } from 'react';
 import { setAttacker, setBattleMode, setBattleTurn, setChoices, setEventProgressStatus, setHeroStatus, setInventory, setLoading, setLoot, setLootName, setNPCStatus, setPlayerAfterBattle, setVisibleChoices, setVisibleNPC } from '../../../actions/game';
@@ -138,9 +139,9 @@ function BattleMode() {
 
             { ennemyHealth === 0 && (
               <div>
-                <div className="BattleMode-results-span">Bravo, vous avez vaincu { enemyName } ! </div>
+                <AnimatedSpan>Bravo, vous avez vaincu { enemyName } ! </AnimatedSpan>
                 { lootName !== null && (
-                  <div className="BattleMode-results-span">Vous récupérez le butin : { lootName } ! </div>
+                  <AnimatedSpan>Vous récupérez le butin : { lootName } ! </AnimatedSpan>
                 )}
 
               </div>
@@ -163,7 +164,7 @@ function BattleMode() {
                     setVisibleStartButton(false);
                   }}
                 >
-                  Tour suivant
+                Tour suivant
                 </button> */}
                 <div
                   className="nextTurnButton"
@@ -207,3 +208,25 @@ function BattleMode() {
 }
 
 export default BattleMode;
+
+const spanAnimation = keyframes`
+0% {
+  color: #FFF;
+  opacity: 80%;
+}
+
+50% {
+  color: #FFDA87;
+  opacity: 100%;
+}
+
+
+100% {
+  color: #FFF;
+  opacity: 80%;
+}
+`;
+
+const AnimatedSpan = styled.div`
+  animation: ${spanAnimation} 6s infinite ease-in-out;
+`;

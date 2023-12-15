@@ -10,7 +10,7 @@ function GameMenuInventory() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleShowItemDescription = (itemId) => {
-    console.log('showItemDescription');
+    // console.log('showItemDescription');
     setSelectedItem(playerItems.find((item) => item.id === itemId)); // Sélectionnez l'objet cliqué
   };
 
