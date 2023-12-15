@@ -58,13 +58,19 @@ function GameMenuInventoryDescription({ item }) {
   } else if (item.usable === true && eventType === 'Death') {
     content = (
       <li className="GameMenuInventoryDescription-warning">
-        Les morts ne mangent pas, du moins pas en dehors des films de Romero...
+        Les morts ne mangent pas, du moins pas en dehors des films de série Z...
       </li>
     );
   } else if (item.usable === false && eventType === 'Death') {
     content = (
       <li className="GameMenuInventoryDescription-warning">
         Ceci ne vous sera plus d'aucune utilité.
+      </li>
+    );
+  } else if (item.usable === false) {
+    content = (
+      <li className="GameMenuInventoryDescription-warning">
+        Objet équipé
       </li>
     );
   } else {
