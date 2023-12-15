@@ -37,8 +37,22 @@
         padding-top: 0.5em;
 
         &-span {
-            color: vars.$yellow-text-color;
-        }
+            display: inline-block;
+            background: linear-gradient(90deg, #ff0000, #00ff00);
+            color: transparent;
+            background-clip: text;
+            animation: colorChange 5s infinite linear;
+          }
+          
+          @keyframes colorChange {
+            0% {
+              background-position: 100% 0%;
+            }
+            100% {
+              background-position: -100% 0%;
+            }
+          }
+        
     }
 
     &-summary {

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import './GameLog.scss';
 
 import {
@@ -13,7 +13,6 @@ import GameLogEventDescription from './GameLogEventDescription/GameLogEventDescr
 import GameLogNPC from './GameLogNPC/GameLogNPC';
 import GameLogDialogue from './GameLogDialogue/GameLogDialogue';
 import GameLogRestart from './GameLogRestart/GameLogRestart';
-import BattleMode from '../BattleMode/BattleMode';
 
 function GameLog({
   eventDescription,

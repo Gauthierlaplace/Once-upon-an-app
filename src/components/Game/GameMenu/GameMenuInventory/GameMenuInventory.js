@@ -1,42 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './GameMenuInventory.scss';
 import { useState } from 'react';
-import api from '../../../../api/api';
 import GameMenuInventoryDescription from './GameMenuInventoryDescription/GameMenuInventoryDescription';
-import { setLoading, setPlayerAfterBattle } from '../../../../actions/game';
 
 function GameMenuInventory() {
   const playerItems = useSelector((state) => state.game.player.item);
   const path = `${process.env.REACT_APP_ASSETS_BASE}`;
-  const dispatch = useDispatch();
 
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleShowItemDescription = (itemId) => {
     console.log('showItemDescription');
     setSelectedItem(playerItems.find((item) => item.id === itemId)); // Sélectionnez l'objet cliqué
-  };
-
-  const handleClickOnUsable = (itemId) => {
-    api.get(`/usable/${itemId}`)
-      .then((response) => {
-        dispatch(setLoading(true));
-
-        const playerAPI = response.data.player;
-        dispatch(setPlayerAfterBattle(
-          playerAPI.health,
-          playerAPI.maxHealth,
-          playerAPI.defense,
-          playerAPI.dexterity,
-          playerAPI.intelligence,
-          playerAPI.karma,
-          playerAPI.strength,
-          playerAPI.items
-        ));
-        console.log(playerAPI);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => dispatch(setLoading(false)));
   };
 
   // Nombre total d'emplacements d'inventaire souhaité

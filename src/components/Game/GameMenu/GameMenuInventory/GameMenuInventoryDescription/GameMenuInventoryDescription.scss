@@ -33,6 +33,12 @@
         margin: 0 1em;
     }
 
+    &-warning {
+        font-style: italic;
+        margin-top: .5em;
+        color: vars.$yellow-text-color;
+    }
+
     &-useButton {
         border-radius: .4em;
         background: 

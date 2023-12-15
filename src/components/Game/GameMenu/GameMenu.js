@@ -4,6 +4,7 @@ import GameMenuStats from './GameMenuStats/GameMenuStats';
 import GameMenuProgress from './GameMenuProgress/GameMenuProgress';
 
 import './GameMenu.scss';
+import { useSelector } from 'react-redux';
 
 function GameMenu() {
   const [displayInventory, setDisplayInventory] = useState(false);

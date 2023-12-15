@@ -4,6 +4,7 @@ import api from '../../../../../api/api';
 import { setLoading, setPlayerAfterBattle } from '../../../../../actions/game';
 
 function GameMenuInventoryDescription({ item }) {
+  const eventType = useSelector((state) => state.game.currentEvent.eventType);
   const dispatch = useDispatch();
   const path = `${process.env.REACT_APP_ASSETS_BASE}`;
   const handleClickOnUsable = (itemId) => {
@@ -27,6 +28,52 @@ function GameMenuInventoryDescription({ item }) {
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));
   };
+
+  let content;
+
+  if (item.usable === true && item.name !== 'Ration' && eventType !== 'Death') {
+    content = (
+      <button
+        type="button"
+        className="GameMenuInventoryDescription-useButton"
+        onClick={() => {
+          handleClickOnUsable(item.id);
+        }}
+      >
+        Utiliser
+      </button>
+    );
+  } else if (item.name === 'Ration' && eventType === 'Repos') {
+    content = (
+      <button
+        type="button"
+        className="GameMenuInventoryDescription-useButton"
+        onClick={() => {
+          handleClickOnUsable(item.id);
+        }}
+      >
+        Utiliser
+      </button>
+    );
+  } else if (item.usable === true && eventType === 'Death') {
+    content = (
+      <li className="GameMenuInventoryDescription-warning">
+        Les morts ne mangent pas, du moins pas en dehors des films de Romero...
+      </li>
+    );
+  } else if (item.usable === false && eventType === 'Death') {
+    content = (
+      <li className="GameMenuInventoryDescription-warning">
+        Ceci ne vous sera plus d'aucune utilité.
+      </li>
+    );
+  } else {
+    content = (
+      <li className="GameMenuInventoryDescription-warning">
+        Vous devez vous trouver en lieu sûr pour manger
+      </li>
+    );
+  }
 
   return (
     <div className="GameMenuInventoryDescription">
@@ -64,17 +111,7 @@ function GameMenuInventoryDescription({ item }) {
               Point de vie : {item.health}
             </li>
           )}
-          {item.usable === true && (
-            <button
-              type="button"
-              className="GameMenuInventoryDescription-useButton"
-              onClick={() => {
-                handleClickOnUsable(item.id);
-              }}
-            >
-              Utiliser
-            </button>
-          )}
+          {content}
         </ul>
       </div>
     </div>
