@@ -116,19 +116,25 @@
           padding: 0.4em 0.8em;
           text-decoration: none;
           font-family: vars.$title-font;
-          font-size: 2.5em;
+          font-size: 1.5em;
           color: white;
           background: vars.$darkest-color;
           transition: 1s;
           box-shadow: 6px 6px 0 vars.$alt-dark-color;
           transform: skewX(-15deg);
-      }
-      
-      .cta:focus {
-         outline: none; 
-      }
-      
-      .cta:hover {
+        }
+        
+        @media screen and (min-width: 400px) {
+            .cta {
+                font-size: 2.5em;
+            }
+        }
+
+        .cta:focus {
+            outline: none; 
+        }
+                
+        .cta:hover {
           transition: 0.5s;
           box-shadow: 10px 10px 0 #FBC638;
       }
