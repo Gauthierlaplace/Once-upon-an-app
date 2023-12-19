@@ -1,26 +1,16 @@
 import PropTypes from 'prop-types';
-
+import styled, { keyframes } from 'styled-components';
 import './GameHealthBar.scss';
 import { useEffect, useState } from 'react';
 
 function GameHealthBar({ health, maxHealth }) {
   const percentHealth = (health / maxHealth) * 100;
   const remainingHealth = 100 - percentHealth;
-  const [flashing, setFlashing] = useState(false);
-  useEffect(() => {
-    // Si la vie change, mettez à jour la barre de santé et activez le clignotement
-    if (percentHealth !== (health / maxHealth) * 100) {
-      setFlashing(true);
 
-      setTimeout(() => {
-        setFlashing(false);
-      }, 3000); // Ajoutez une pause de 50 ms (ajustez selon vos besoins)
-    }
-  }, [health, maxHealth, percentHealth]);
   return (
-    <div className={`GameHealthBar ${flashing ? 'flashing' : ''}`}>
-      <div className="GameHealthBar-currentHealth" style={{ width: `${percentHealth}%` }} />
-      <div className="GameHealthBar-remainingHealth" style={{ width: `${remainingHealth}%` }} />
+    <div className="GameHealthBar">
+      <CurrentHealth style={{ width: `${percentHealth}%` }} />
+      <RemainingHealth style={{ width: `${remainingHealth}%` }} />
       <div className="GameHealthBar-counter">{health} / {maxHealth}</div>
     </div>
   );
@@ -32,3 +22,29 @@ GameHealthBar.propTypes = {
 };
 
 export default GameHealthBar;
+
+const slideIn = keyframes`
+  from {
+    width: ${(props) => props.percent}%;
+  }
+  to {
+    width: ${(props) => props.percent}%;
+  }
+`;
+
+const CurrentHealth = styled.div`
+background-color: rgb(146, 34, 34);
+height: 100%;
+border-radius: 1em;
+position: absolute;
+animation: ${slideIn} 2s ease-in-out;
+top: 0;
+left: 0;
+`;
+
+const RemainingHealth = styled.div`
+height: 100%;
+position: absolute;
+top: 0;
+right: 0;
+`;

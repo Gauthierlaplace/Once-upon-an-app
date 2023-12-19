@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 import Game from '../Game/Game';
 import MyAccount from '../MyAccount/MyAccount';
 import About from '../About/About';
+import LegalMentions from '../LegalMentions/LegalMentions';
 
 function Main() {
   return (
@@ -29,6 +30,11 @@ function Main() {
         <Route
           path="/About"
           element={<About />}
+        />
+
+        <Route
+          path="/LegalMentions"
+          element={<LegalMentions />}
         />
 
       </Routes>

@@ -185,7 +185,7 @@ function HomeBook() {
           </div>
           <NavLink to="/About">
             <div className="HomeBook-menu">
-              <h3>About</h3>
+              <h3>A propos</h3>
               <div className="HomeBook-menu-leading-dots" />
               <span>P.3</span>
             </div>
@@ -209,13 +209,22 @@ function HomeBook() {
           {displayDescription && <HomeDescription />}
 
           {displayDescription && (
-            <button
-              type="button"
-              className="special-sm-login-button"
-              onClick={displayLoginFunction}
-            >
-              Se connecter
-            </button>
+            <div className="button-container">
+              <button
+                type="button"
+                className="special-sm-login-button"
+                onClick={displayLoginFunction}
+              >
+                Se connecter
+              </button>
+              <button
+                type="button"
+                className="special-sm-login-button"
+                onClick={displayRegisterFunction}
+              >
+                Créer un compte
+              </button>
+            </div>
           )}
 
           {displayRegister && (
