@@ -35,28 +35,24 @@ function MyAccount() {
       <div className="MyAccount-container">
 
         <div className="MyAccount-title">
-          <h1>Bienvenue sur votre compte</h1>
+          <h1>Gestion du compte</h1>
         </div>
 
         <div className="MyAccount-main">
 
-          <div className="MyAccount-left">
-            <nav>
-              <ul>
-                <li onClick={displayAccountFunction}>
-                  Mon compte
-                </li>
+          <nav className="MyAccount-nav">
+            <div className="MyAccount-nav-link" onClick={displayAccountFunction}>
+              Mon compte
+            </div>
 
-                <li onClick={displayEditFunction}>
-                  Modifier mon compte
-                </li>
+            {/* <div className="MyAccount-nav-link" onClick={displayEditFunction}>
+              Modifier mon compte
+            </div> */}
 
-                <li onClick={displayDeleteFunction}>
-                  Supprimer mon compte
-                </li>
-              </ul>
-            </nav>
-          </div>
+            <div className="MyAccount-nav-link" onClick={displayDeleteFunction}>
+              Supprimer mon compte
+            </div>
+          </nav>
 
           <div className="MyAccount-right">
             <div className="MyAccount-glasseffect">

@@ -11,10 +11,19 @@ export const INCREMENT_PROGRESS = 'INCREMENT_PROGRESS';
 export const RESET_PROGRESS = 'RESET_PROGRESS';
 export const SET_EVENT_PROGRESS_STATUS = 'SET_EVENT_PROGRESS_STATUS';
 export const SET_HERO_STATUS = 'SET_HERO_STATUS';
+export const SET_NPC_STATUS = 'SET_NPC_STATUS';
 export const SET_PLAYER = 'SET_PLAYER';
+export const SET_PLAYER_AFTER_BATTLE = 'SET_PLAYER_AFTER_BATTLE';
 export const SET_ANSWER_AND_DESCRIPTION_IN_LOG = 'SET_ANSWER_AND_DESCRIPTION_IN_LOG';
 export const SET_VISIBLE_LOG_DIALOGUE = 'SET_VISIBLE_LOG_DIALOGUE';
 export const SET_LOADING = 'SET_LOADING';
+export const SET_BATTLEMODE = 'SET_BATTLEMODE';
+export const SET_ATTACKER = 'SET_ATTACKER';
+export const SET_FIGHT_ID = 'SET_FIGHT_ID';
+export const SET_LOOT = 'SET_LOOT';
+export const SET_LOOT_NAME = 'SET_LOOT_NAME';
+export const SET_INVENTORY = 'SET_INVENTORY';
+export const SET_BATTLE_TURN = 'SET_BATTLE_TURN';
 export const SET_TYPEWRITING = 'SET_TYPEWRITING';
 
 // Pour afficher l'événement actuel, on a déjà besoin d'avoir ses infos (id, titre, image, etc)
@@ -23,12 +32,14 @@ export const setCurrentEvent = (currentEvent) => ({
   payload: currentEvent,
 });
 
-export const setCurrentNPC = (nameNPC, descriptionNPC, pictureNPC) => ({
+export const setCurrentNPC = (idNPC, nameNPC, descriptionNPC, pictureNPC, boolean) => ({
   type: SET_CURRENT_NPC,
   payload: {
+    id: idNPC,
     name: nameNPC,
     description: descriptionNPC,
     picture: pictureNPC,
+    isHostile: boolean
   },
 });
 
@@ -91,7 +102,28 @@ export const setHeroStatus = (newhealth) => ({
   },
 });
 
-export const setPlayer = (id, name, picture, health, maxHealth, item) => ({
+export const setNPCStatus = (health, maxHealth) => ({
+  type: SET_NPC_STATUS,
+  payload:
+  {
+    health: health,
+    maxHealth: maxHealth,
+  },
+});
+
+export const setPlayer = (
+  id,
+  name,
+  picture,
+  health,
+  maxHealth,
+  defense,
+  dexterity,
+  intelligence,
+  karma,
+  strength,
+  item
+) => ({
   type: SET_PLAYER,
   payload:
   {
@@ -100,6 +132,35 @@ export const setPlayer = (id, name, picture, health, maxHealth, item) => ({
     picture: picture,
     health: health,
     maxHealth: maxHealth,
+    defense: defense,
+    dexterity: dexterity,
+    intelligence: intelligence,
+    karma: karma,
+    strength: strength,
+    item: item,
+  },
+});
+
+export const setPlayerAfterBattle = (
+  health,
+  maxHealth,
+  defense,
+  dexterity,
+  intelligence,
+  karma,
+  strength,
+  item
+) => ({
+  type: SET_PLAYER_AFTER_BATTLE,
+  payload:
+  {
+    health: health,
+    maxHealth: maxHealth,
+    defense: defense,
+    dexterity: dexterity,
+    intelligence: intelligence,
+    karma: karma,
+    strength: strength,
     item: item,
   },
 });
@@ -124,6 +185,47 @@ export const setLoading = (boolean) => ({
   payload: boolean,
 });
 
+export const setBattleMode = (boolean) => ({
+  type: SET_BATTLEMODE,
+  payload: boolean,
+});
+
+export const setAttacker = (attacker) => ({
+  type: SET_ATTACKER,
+  payload: attacker,
+});
+
+export const setFightID = (fightID) => ({
+  type: SET_FIGHT_ID,
+  payload: fightID,
+});
+
+export const setLoot = (lootID) => ({
+  type: SET_LOOT,
+  payload: lootID,
+});
+
+export const setLootName = (lootName) => ({
+  type: SET_LOOT_NAME,
+  payload: lootName,
+});
+
+export const setInventory = (items) => ({
+  type: SET_INVENTORY,
+  payload: { items },
+});
+
+export const setBattleTurn = (hit, damage, damageDice1, damageDice2) => ({
+  type: SET_BATTLE_TURN,
+  payload:
+  {
+    hit: hit,
+    damage: damage,
+    damageDice1: damageDice1,
+    damageDice2: damageDice2
+  },
+});
+
 export const setTypewriting = (identifier, bool) => ({
   type: SET_TYPEWRITING,
   payload: {
@@ -131,4 +233,3 @@ export const setTypewriting = (identifier, bool) => ({
     bool: bool,
   },
 });
-

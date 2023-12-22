@@ -13,10 +13,19 @@ import {
   RESET_PROGRESS,
   SET_EVENT_PROGRESS_STATUS,
   SET_PLAYER,
+  SET_PLAYER_AFTER_BATTLE,
   SET_HERO_STATUS,
+  SET_NPC_STATUS,
   SET_ANSWER_AND_DESCRIPTION_IN_LOG,
   SET_VISIBLE_LOG_DIALOGUE,
   SET_LOADING,
+  SET_BATTLEMODE,
+  SET_ATTACKER,
+  SET_FIGHT_ID,
+  SET_LOOT,
+  SET_LOOT_NAME,
+  SET_INVENTORY,
+  SET_BATTLE_TURN,
   SET_TYPEWRITING,
 } from '../actions/game';
 
@@ -28,10 +37,16 @@ export const initialState = {
     picture: '',
     health: 0,
     maxHealth: 0,
+    defense: 0,
+    dexterity: 0,
+    intelligence: 0,
+    karma: 0,
+    strength: 0,
     item: [],
   },
 
   progress: 0,
+  maxProgress: 10,
 
   // Peut prendre les valeurs 'normal', 'beforeLast',
   // 'beforeBoss', 'beforeBiomeEnd', 'beforeGameEnd'
@@ -51,9 +66,13 @@ export const initialState = {
 
   currentNPC:
   {
+    id: 0,
     name: '',
     description: '',
     picture: '',
+    isHostile: false,
+    npcHealth: 0,
+    npcMaxHealth: 0,
   },
 
   dialogue:
@@ -78,6 +97,20 @@ export const initialState = {
   visibleLogDialogue: false,
 
   loading: false,
+  battleMode: false,
+  attacker: '',
+  fightID: 0,
+  loot: null,
+  lootName: null,
+
+  battle:
+  {
+    hit: null,
+    damage: 0,
+    damageDice1: 0,
+    damageDice2: 0
+  },
+
   typewriting:
   {
     eventDescription: false,
@@ -98,9 +131,11 @@ const reducer = (state = initialState, action = {}) => {
       ...state,
       currentNPC: {
         ...state.currentNPC,
+        id: action.payload.id,
         name: action.payload.name,
         description: action.payload.description,
         picture: action.payload.picture,
+        isHostile: action.payload.isHostile,
       }
     };
 
@@ -171,6 +206,16 @@ const reducer = (state = initialState, action = {}) => {
       }
     };
 
+  case SET_NPC_STATUS:
+    return {
+      ...state,
+      currentNPC: {
+        ...state.currentNPC,
+        npcHealth: action.payload.health,
+        npcMaxHealth: action.payload.maxHealth,
+      }
+    };
+
   case SET_PLAYER:
     return {
       ...state,
@@ -181,6 +226,27 @@ const reducer = (state = initialState, action = {}) => {
         picture: action.payload.picture,
         health: action.payload.health,
         maxHealth: action.payload.maxHealth,
+        defense: action.payload.defense,
+        dexterity: action.payload.dexterity,
+        intelligence: action.payload.intelligence,
+        karma: action.payload.karma,
+        strength: action.payload.strength,
+        item: action.payload.item,
+      }
+    };
+
+  case SET_PLAYER_AFTER_BATTLE:
+    return {
+      ...state,
+      player: {
+        ...state.player,
+        health: action.payload.health,
+        maxHealth: action.payload.maxHealth,
+        defense: action.payload.defense,
+        dexterity: action.payload.dexterity,
+        intelligence: action.payload.intelligence,
+        karma: action.payload.karma,
+        strength: action.payload.strength,
         item: action.payload.item,
       }
     };
@@ -206,6 +272,57 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       loading: action.payload,
+    };
+
+  case SET_BATTLEMODE:
+    return {
+      ...state,
+      battleMode: action.payload,
+    };
+
+  case SET_ATTACKER:
+    return {
+      ...state,
+      attacker: action.payload,
+    };
+
+  case SET_FIGHT_ID:
+    return {
+      ...state,
+      fightID: action.payload,
+    };
+
+  case SET_LOOT:
+    return {
+      ...state,
+      loot: action.payload,
+    };
+
+  case SET_LOOT_NAME:
+    return {
+      ...state,
+      lootName: action.payload,
+    };
+
+  case SET_INVENTORY:
+    return {
+      ...state,
+      player: {
+        ...state,
+        item: action.payload.item,
+      }
+    };
+
+  case SET_BATTLE_TURN:
+    return {
+      ...state,
+      battle: {
+        ...state.battle,
+        hit: action.payload.hit,
+        damage: action.payload.damage,
+        damageDice1: action.payload.damageDice1,
+        damageDice2: action.payload.damageDice2,
+      }
     };
 
   case SET_TYPEWRITING:

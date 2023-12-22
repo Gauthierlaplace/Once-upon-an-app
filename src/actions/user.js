@@ -9,6 +9,8 @@ export const HAS_FAILED_ACTION = 'HAS_FAILED_ACTION';
 export const LOG_OUT = 'LOG_OUT';
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 
+export const GET_ACCOUNT_INFOS = 'GET_ACCOUNT_INFOS';
+
 /* MEMO : quand on ne sait pas s'il y a besoin d'infos en payload, on ne met pas de payload.
 On verra si on est bloqué au niveau du case du reducer parce qu'il manque une/des infos */
 
@@ -49,4 +51,13 @@ export const logOut = () => ({
 
 export const deleteAccount = () => ({
   type: DELETE_ACCOUNT,
+});
+
+export const getAccountInfos = (userNickname, userEmail, userPicture) => ({
+  type: GET_ACCOUNT_INFOS,
+  payload: {
+    nickname: userNickname,
+    email: userEmail,
+    picture: userPicture
+  }
 });

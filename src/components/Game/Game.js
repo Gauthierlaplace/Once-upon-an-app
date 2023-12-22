@@ -8,6 +8,13 @@ import {
   setPlayer,
   setChoices,
   setLoading,
+  setCurrentNPC,
+  setHasNPC,
+  setVisibleChoices,
+  setBattleMode,
+  setVisibleNPC,
+  resetProgress,
+  setEventProgressStatus,
 } from '../../actions/game';
 
 import './Game.scss';
@@ -17,6 +24,8 @@ import GamePlayerHealth from './GamePlayerHealth/GamePlayerHealth';
 import GameScene from './GameScene/GameScene';
 import GameLog from './GameLog/GameLog';
 import GameMenu from './GameMenu/GameMenu';
+import ScrollToTop from '../../functions/scrollToTop';
+import BattleMode from './BattleMode/BattleMode';
 // import GameMenus from './GameMenus/GameMenus';
 
 function Game() {
@@ -30,7 +39,7 @@ function Game() {
     dispatch(setLoading(true));
     api.get('/play')
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const eventAPI = response.data.currentEvent;
         const playerAPI = response.data.player;
 
@@ -44,6 +53,11 @@ function Game() {
           playerAPIpicture,
           playerAPI.health,
           playerAPI.maxHealth,
+          playerAPI.defense,
+          playerAPI.dexterity,
+          playerAPI.intelligence,
+          playerAPI.karma,
+          playerAPI.strength,
           playerAPI.item
         ));
 
@@ -57,6 +71,13 @@ function Game() {
         };
 
         dispatch(setChoices([firstChoice, secondChoice]));
+        dispatch(setCurrentNPC(0, '', '', '', false));
+        dispatch(setHasNPC(false));
+        dispatch(setVisibleNPC(false));
+        dispatch(resetProgress());
+        dispatch(setVisibleChoices(false));
+        dispatch(setBattleMode(false));
+        dispatch(setEventProgressStatus('normal'));
         dispatch(setLoading(false));
       })
       .catch((error) => console.log(error));
@@ -69,7 +90,6 @@ function Game() {
   const eventDescription = useSelector((state) => state.game.currentEvent.description);
   const npcName = useSelector((state) => state.game.currentNPC.name);
   const npcDescription = useSelector((state) => state.game.currentNPC.description);
-
   const path = `${process.env.REACT_APP_ASSETS_BASE}`;
   const eventPicture = `${path}${eventPictureSrc}`;
 
@@ -78,16 +98,13 @@ function Game() {
   }
   return (
     <div className="Game">
+      <ScrollToTop trigger={eventTitle} />
       <GamePlayerHealth />
-
       <div className="Game-flexSA">
         <div className="Game-left">
-
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
           <GameScene picture={eventPicture} npcName={npcName} />
-          {/* <GameMenus /> */}
-          {/* <GameMenu /> */}
-
+          <GameMenu />
         </div>
 
         <div className="Game-right">

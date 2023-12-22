@@ -1,0 +1,19 @@
+@use "./../../../../styles/vars";
+
+.GameMenuStats {
+    color: vars.$lightest-color;
+    font-family: vars.$main-font;
+    padding-top: .3em;
+    width: 100%;
+    text-align: center;
+
+    &-title {
+        font-weight: 700;
+        padding: .3em;
+
+    }
+
+    &-values {
+        color: vars.$yellow-text-color;
+    }
+}

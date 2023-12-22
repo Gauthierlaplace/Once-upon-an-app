@@ -1,0 +1,58 @@
+@use './../../styles/vars';
+
+.LegalMentions {
+  width: 50%;
+  color: rgb(0, 0, 0);
+  font-size: .9em;
+  background-image:
+      linear-gradient(rgba(236, 192, 130, 0.5),
+          rgba(238, 213, 175, 0.5)),
+      url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fimg.freepik.com%2Fpremium-photo%2Frecycled-white-paper-texture-background-vintage-wallpaper_118047-9300.jpg%3Fw%3D2000');
+  font-family: vars.$main-font;
+  font-weight: 500;
+  padding: 2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  overflow-y: auto;
+  display:flex;
+  flex-direction: column;
+  align-items: left;
+
+  &-title {
+    font-size: 1.7em;
+    margin-bottom: .4em;
+  }
+
+  &-subtitle {
+    font-size: 1.5em;
+    margin-bottom: .4em;
+  }
+
+  &-h3 {
+    font-size: 1.2em;
+    margin-bottom: .4em;
+  }
+
+  &-list {
+    color: vars.$darkest-color;
+    margin: .5em 0;
+  }
+
+  a {
+    color: brown;
+  }
+
+  p {
+    font-size: 1em;
+    margin: .7em 0;
+    text-align: left;
+  }
+  
+}
+
+@media (max-width: 480px) {
+    .LegalMentions {
+        width: 100%;
+        margin-top: 0em;
+    }
+  }

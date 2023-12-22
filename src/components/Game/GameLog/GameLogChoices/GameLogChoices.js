@@ -1,7 +1,3 @@
-/* eslint-disable no-console */
-
-// TODO setCurrentEvent, envoyer l'event au lieu d'envoyer l'ID, le title etc
-
 import { useSelector, useDispatch } from 'react-redux';
 import './GameLogChoices.scss';
 import api from '../../../../api/api';
@@ -21,7 +17,8 @@ import {
   setEventProgressStatus,
   setVisibleLogDialogue,
   setAnswerAndDescriptionInLog,
-  setLoading
+  setLoading,
+  setBattleMode
 } from '../../../../actions/game';
 
 function GameLogChoices({
@@ -42,12 +39,14 @@ function GameLogChoices({
   // Fonction de gestion du currentEvent
   const currentEventManagement = (response) => {
     const eventAPI = response.data.currentEvent;
+    // console.log(eventAPI);
     dispatch(setCurrentEvent(eventAPI));
   };
 
   // Fonction de gestion des éventuels NPC
   const npcManagement = (response) => {
     const npcAPI = response.data.npcCurrentEvent;
+    // console.log(npcAPI);
     const path = `${process.env.REACT_APP_ASSETS_BASE}`;
     const npcAPIpicture = `${path}${npcAPI.picture}`;
 
@@ -60,9 +59,11 @@ function GameLogChoices({
     // S'il y a un NPC, on dispatche ses infos
     if (hasNPC) {
       dispatch(setCurrentNPC(
+        npcAPI.npcId,
         npcAPI.npcName,
         npcAPI.npcDescription,
         npcAPIpicture,
+        npcAPI.hostility
       ));
 
       // Gestion des dialogues
@@ -82,7 +83,7 @@ function GameLogChoices({
 
       // S'il n'y a pas de NPC, on remet à zéro les infos NPC
     } else {
-      dispatch(setCurrentNPC('', '', ''));
+      dispatch(setCurrentNPC(0, '', '', '', false));
       dispatch(setDialogueAndEffects('', ['', '']));
     }
 
@@ -141,7 +142,7 @@ function GameLogChoices({
 
   // Cette route sera appelée si le compteur progress est supérieur ou égal à notre limite
   const getLastEventFromAPI = (nextEventId) => {
-    console.log('fonction getLastEventFromAPI lancée');
+    // console.log('fonction getLastEventFromAPI lancée');
 
     api.get(`/event/last/${nextEventId}`)
       .then((response) => {
@@ -154,7 +155,7 @@ function GameLogChoices({
   };
 
   const getBossFromAPI = (nextEventId) => {
-    console.log('fonction getBossFromAPI lancée');
+    // console.log('fonction getBossFromAPI lancée');
 
     api.get(`/event/boss/${nextEventId}`)
       .then((response) => {
@@ -177,7 +178,7 @@ function GameLogChoices({
   };
 
   const getBiomeEndFromAPI = (nextEventId) => {
-    console.log('fonction biomeEndFromAPI lancée');
+    // console.log('fonction biomeEndFromAPI lancée');
 
     api.get(`/event/end/${nextEventId}`)
       .then((response) => {
@@ -213,7 +214,7 @@ function GameLogChoices({
   };
 
   const getGameEndFromAPI = (nextEventId) => {
-    console.log('fonction gameEndFromAPI lancée');
+    // console.log('fonction gameEndFromAPI lancée');
 
     api.get(`/event/victory/${nextEventId}`)
       .then((response) => {
@@ -237,7 +238,7 @@ function GameLogChoices({
       // S'il vaut 2, c'est juste avant last
       // S'il vaut <2 (0 ou 1) c'est normal.
 
-      const progressMax = 4;
+      const progressMax = 10;
 
       if (progress === progressMax) {
         dispatch(setEventProgressStatus('gameEnd'));
@@ -265,7 +266,6 @@ function GameLogChoices({
   // Le clic sur un des deux choix proposés renvoie vers l'événement suivant
   // (route api/event/roll/id-du-prochain-event)
   const handleClickOnNextEvent = (nextEventId) => {
-    // Todo réfléchir à déplacer l'incrémentation du progrès pour éviter le fast click (triche)
     dispatch(setLoading(true));
 
     dispatch(incrementProgress());
@@ -321,7 +321,10 @@ function GameLogChoices({
             type="button"
             className="GameLogChoices-button"
             key={choice.nextEventId}
-            onClick={() => handleClickOnNextEvent(choice.nextEventId)}
+            onClick={() => {
+              handleClickOnNextEvent(choice.nextEventId);
+              dispatch(setBattleMode(false));
+            }}
           >
             <p>
               {choice.content}

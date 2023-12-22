@@ -6,8 +6,6 @@ import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/feather/eye';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 
-import PropTypes from 'prop-types';
-
 import './HomeBookRegister.scss';
 
 function HomeBookRegister({
@@ -56,7 +54,6 @@ function HomeBookRegister({
           placeholder="Entrez votre pseudo"
           onChange={(event) => {
             dispatch(changeField(event.target.value, 'nicknameRegister'));
-            infoPasswordToast();
           }}
           value={nickname}
         />
@@ -68,7 +65,6 @@ function HomeBookRegister({
           placeholder="Entrez votre adresse mail"
           onChange={(event) => {
             dispatch(changeField(event.target.value, 'emailRegister'));
-            infoPasswordToast();
           }}
           value={email}
         />
@@ -81,6 +77,7 @@ function HomeBookRegister({
             placeholder="Entrez votre mot de passe"
             onChange={(event) => {
               dispatch(changeField(event.target.value, 'passwordRegister'));
+              infoPasswordToast();
             }}
             value={password}
           />

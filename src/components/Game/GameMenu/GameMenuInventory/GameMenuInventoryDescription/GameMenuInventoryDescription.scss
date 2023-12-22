@@ -1,0 +1,61 @@
+@use "./../../../../../styles/vars";
+
+
+.GameMenuInventoryDescription {
+    color: vars.$lightest-color;
+    font-family: vars.$main-font;
+    padding: 1em;
+    width: 100%;
+    margin: auto;
+    margin-top: 1em;
+    max-width: 650px;
+    background-color: rgb(54, 54, 54);
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5em;
+    border: 1px solid vars.$yellow-text-color;
+
+    &-container {
+        display: flex;
+    }
+
+    &-title {
+        color: vars.$yellow-text-color;
+        font-weight: 700;
+        font-size: 1.2em;
+        margin-bottom: .5em;
+    }
+
+    &-itemImage{
+        border-radius: 0.5em;
+    }
+
+    &-list {
+        margin: 0 1em;
+    }
+
+    &-warning {
+        font-style: italic;
+        margin-top: .5em;
+        color: vars.$yellow-text-color;
+    }
+
+    &-useButton {
+        border-radius: .4em;
+        background: 
+        linear-gradient(
+            vars.$alt-dark-color,
+            vars.$darkest-color
+        );
+        height: 2em;
+        margin-top: 1em;
+        font-family: vars.$main-font;
+        font-size: 1em;
+        color: vars.$yellow-text-color;
+        border: 1px solid vars.$alt-dark-color;
+    }
+
+    &-useButton:hover {
+        color: vars.$alt-light-color;
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+}

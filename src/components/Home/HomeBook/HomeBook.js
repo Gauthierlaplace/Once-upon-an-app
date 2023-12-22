@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './HomeBook.scss';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -69,7 +68,7 @@ function HomeBook() {
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
     api
-      .post("/login_check", {
+      .post('/login_check', {
         username: emailLogin,
         password: passwordLogin,
       })
@@ -83,61 +82,61 @@ function HomeBook() {
           )
         );
         // Je les stocke aussi dans le local storage
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("nickname", response.data.data.pseudo);
-        localStorage.setItem("id", response.data.data.id);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('nickname', response.data.data.pseudo);
+        localStorage.setItem('id', response.data.data.id);
       })
       .catch((error) => {
         console.error(error);
-        dispatch(hasFailedAction("login"));
-        toast.error("La connexion a échoué", {
-          position: "top-right",
+        dispatch(hasFailedAction('login'));
+        toast.error('La connexion a échoué', {
+          position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: 'colored',
         });
       });
   };
 
   const sendRegisterToApi = async () => {
     api
-      .post("/users", {
+      .post('/users', {
         email: emailRegister,
-        roles: ["ROLE_PLAYER"],
+        roles: ['ROLE_PLAYER'],
         password: passwordRegister,
         pseudo: nicknameRegister,
-        avatar: "",
+        avatar: '',
       })
       .then((response) => {
         setPasswordToastVisible(false);
         dispatch(saveRegisterSuccessful(response.data.email));
-        toast.success("Inscription validée", {
-          position: "top-right",
+        toast.success('Inscription validée', {
+          position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: 'colored',
         });
       })
       .catch((error) => {
         console.error(error);
-        dispatch(hasFailedAction("register"));
-        toast.error("L'inscription a échoué", {
-          position: "top-right",
+        dispatch(hasFailedAction('register'));
+        toast.error('L\'inscription a échoué', {
+          position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: 'colored',
         });
       });
   };
@@ -185,7 +184,7 @@ function HomeBook() {
           </div>
           <NavLink to="/About">
             <div className="HomeBook-menu">
-              <h3>About</h3>
+              <h3>A propos</h3>
               <div className="HomeBook-menu-leading-dots" />
               <span>P.3</span>
             </div>
@@ -209,13 +208,22 @@ function HomeBook() {
           {displayDescription && <HomeDescription />}
 
           {displayDescription && (
-            <button
-              type="button"
-              className="special-sm-login-button"
-              onClick={displayLoginFunction}
-            >
-              Se connecter
-            </button>
+            <div className="button-container">
+              <button
+                type="button"
+                className="special-sm-login-button"
+                onClick={displayLoginFunction}
+              >
+                Se connecter
+              </button>
+              <button
+                type="button"
+                className="special-sm-login-button"
+                onClick={displayRegisterFunction}
+              >
+                Créer un compte
+              </button>
+            </div>
           )}
 
           {displayRegister && (

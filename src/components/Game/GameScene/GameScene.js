@@ -3,11 +3,25 @@ import PropTypes from 'prop-types';
 import GameNPC from '../GameNPC/GameNPC';
 
 import './GameScene.scss';
+import BattleMode from '../BattleMode/BattleMode';
 
 function GameScene({ npcName, picture }) {
-  // Todo : conditionner apparition NPC selon le type d'événement (rencontre ou combat)
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
-  const visibleChoices = useSelector((state) => state.game.visibleChoices);
+  const isBattleMode = useSelector((state) => state.game.battleMode);
+
+  if (isBattleMode) {
+    return (
+      <div className="GameScene-battle">
+        <img
+          className="GameScene-img"
+          src={picture}
+          alt={npcName}
+        />
+        <BattleMode />
+      </div>
+    );
+  }
+
   return (
     <div className="GameScene">
       <img
@@ -15,7 +29,7 @@ function GameScene({ npcName, picture }) {
         src={picture}
         alt={npcName}
       />
-      {visibleNPC && !visibleChoices && (<GameNPC />)}
+      {visibleNPC && (<GameNPC />)}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 @use "./../../styles/vars";
 
 .MyAccount {
-    width: 100%;
+    width: 80%;
     height: 100%;
     color: white;
     background-image:
@@ -20,39 +20,23 @@
 
     &-container {
         width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
     }
 
     &-title {
         width: 100%;
-        height: 61px;
-        text-align: end;
-        padding: 20px;
-        background: #402A23;
+        height: 3em;
+        padding: 1.5em 0;
+        text-align: center;
+        background: linear-gradient( vars.$alt-dark-color, vars.$darkest-color);
+        color: vars.$yellow-text-color;
         font-size: 1.3em;
     }
 
     &-main {
         width: 100%;
-        height: 92%;
+        min-height: 60vh;
         display: flex;
-        justify-content: space-between;
-    }
-
-    &-glasseffect {
-        width: 80%;
-        height: 90%;
-        margin: auto;
-        margin-top: 1em;
-        padding: 1.5em;
-        /* glass effect */
-        background: rgba(255, 255, 255, 0.25);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
-        border-radius: 10px;
+        flex-direction: column;
     }
 
     &-left,
@@ -60,10 +44,37 @@
         padding-top: 10px;
     }
 
-    &-left {
-        width: 20%;
-        height: 100%;
-        background: #402A23;
+    &-nav {
+        width: 100%;
+        background: vars.$alt-dark-color;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    
+    &-nav-link {
+        height: auto;
+        padding: 20px;
+        text-align: left;
+        cursor: pointer;
+    }
+    
+    @media screen and (max-width: 480px) {
+        .MyAccount {
+            width: 100%;
+            
+            &-nav {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+
+            &-nav-link {
+                text-align: center;
+                border-bottom: solid vars.$darkest-color 1px;
+            }
+        }
     }
 
     &-Show,
@@ -71,67 +82,76 @@
         font-size: 1.2em;
     }
 
+    &-Show-info {
+        font-size: 1em;
+        margin: 1em;
+    }
+
+    &-Show-player-avatar {
+        width: 40%;
+        border: solid vars.$darkest-color 1px;
+        border-radius: 1em;
+
+    }
+
     &-Delete {
-        width: 100%;
+        width: 80%;
         height: 100%;
         display: flex;
         flex-direction: column;
+        font-size: 1.2em;
+        font-display: justify;
+        margin: 1em;
 
-        h1 {
+        h2 {
             margin-bottom: 10px;
         }
 
-        button {
-            margin-top: 10px;
-            width: auto;
-            height: auto;
-            padding: 10px;
+        &-warning {
+            color: brown;
+            margin-bottom: 1em;
         }
-    }
 
-    &-question {
-        margin: 10px;
-    }
-
-    &-red {
-        text-align: justify;
-        margin: 10px;
-        color: red;
-        font-weight: 600;
-    }
-
-    &-troll {
-        color: blueviolet;
-        font-style: italic;
+        &-button {
+            margin-top: 10px;
+            width: 80%;
+            padding: 10px;
+            border-radius: 1em;
+            background: linear-gradient( vars.$alt-dark-color, vars.$darkest-color);
+            color: vars.$yellow-text-color;
+        }
     }
 
     nav {
         width: 100%;
         height: 100%;
-        background: #402A23;
+        background: vars.$alt-dark-color;
     }
 
     li {
         height: auto;
         padding: 20px;
         text-align: left;
-        border-bottom: solid #9A6D51 1px;
+        border-bottom: solid vars.$darkest-color 1px;
     }
 
     li:nth-child(1) {
-        border-top: solid #9A6D51 1px;
+        border-top: solid vars.$darkest-color 1px;
     }
 
     li:hover {
-        background: #9A6D51;
+        background: vars.$darkest-color;
         cursor: grab;
     }
 
     &-right {
-        width: 80%;
-        height: 100%;
         padding-top: 20px;
         color: black;
     }
+}
 
+@media screen and (max-width: 480px) {
+    .MyAccount {
+        width: 100%;
+    }
 }
