@@ -39,14 +39,14 @@ function GameLogChoices({
   // Fonction de gestion du currentEvent
   const currentEventManagement = (response) => {
     const eventAPI = response.data.currentEvent;
-    console.log(eventAPI);
+    // console.log(eventAPI);
     dispatch(setCurrentEvent(eventAPI));
   };
 
   // Fonction de gestion des éventuels NPC
   const npcManagement = (response) => {
     const npcAPI = response.data.npcCurrentEvent;
-    console.log(npcAPI);
+    // console.log(npcAPI);
     const path = `${process.env.REACT_APP_ASSETS_BASE}`;
     const npcAPIpicture = `${path}${npcAPI.picture}`;
 
@@ -142,7 +142,7 @@ function GameLogChoices({
 
   // Cette route sera appelée si le compteur progress est supérieur ou égal à notre limite
   const getLastEventFromAPI = (nextEventId) => {
-    console.log('fonction getLastEventFromAPI lancée');
+    // console.log('fonction getLastEventFromAPI lancée');
 
     api.get(`/event/last/${nextEventId}`)
       .then((response) => {
@@ -155,7 +155,7 @@ function GameLogChoices({
   };
 
   const getBossFromAPI = (nextEventId) => {
-    console.log('fonction getBossFromAPI lancée');
+    // console.log('fonction getBossFromAPI lancée');
 
     api.get(`/event/boss/${nextEventId}`)
       .then((response) => {
@@ -178,7 +178,7 @@ function GameLogChoices({
   };
 
   const getBiomeEndFromAPI = (nextEventId) => {
-    console.log('fonction biomeEndFromAPI lancée');
+    // console.log('fonction biomeEndFromAPI lancée');
 
     api.get(`/event/end/${nextEventId}`)
       .then((response) => {
@@ -214,7 +214,7 @@ function GameLogChoices({
   };
 
   const getGameEndFromAPI = (nextEventId) => {
-    console.log('fonction gameEndFromAPI lancée');
+    // console.log('fonction gameEndFromAPI lancée');
 
     api.get(`/event/victory/${nextEventId}`)
       .then((response) => {

@@ -23,7 +23,7 @@ function GameMenuInventoryDescription({ item }) {
           playerAPI.strength,
           playerAPI.items
         ));
-        console.log(playerAPI);
+        // console.log(playerAPI);
       })
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));

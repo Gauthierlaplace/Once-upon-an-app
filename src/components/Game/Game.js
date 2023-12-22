@@ -39,7 +39,7 @@ function Game() {
     dispatch(setLoading(true));
     api.get('/play')
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const eventAPI = response.data.currentEvent;
         const playerAPI = response.data.player;
 
@@ -58,7 +58,6 @@ function Game() {
           playerAPI.intelligence,
           playerAPI.karma,
           playerAPI.strength,
-          //le item est sans s car il est issu directement du repository
           playerAPI.item
         ));
 
@@ -99,7 +98,7 @@ function Game() {
   }
   return (
     <div className="Game">
-      {/* <ScrollToTop trigger={eventTitle} /> */}
+      <ScrollToTop trigger={eventTitle} />
       <GamePlayerHealth />
       <div className="Game-flexSA">
         <div className="Game-left">

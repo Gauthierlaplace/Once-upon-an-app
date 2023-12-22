@@ -5,6 +5,7 @@
     font-family: vars.$main-font;
     background-color: vars.$darkest-color;
     width: 100%;
+    font-size: 1em;
     align-self: center;
     border: 2px solid vars.$yellow-text-color;
     border-radius: 1em;
@@ -38,6 +39,7 @@
 
         &-span {
             color: vars.$yellow-text-color;
+            margin-bottom: .5em;
           }
         
     }
@@ -199,4 +201,10 @@
               fill: white;
           }
       }
+}
+
+@media screen and (max-width: 550px) {
+    .BattleMode {
+        font-size: .9em;
+    }
 }
