@@ -6,7 +6,7 @@ export default function ScrollToTop({ trigger }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log('le useEffect se déclenche');
+    // console.log('le useEffect se déclenche');
   }, [trigger]);
 
   return null;
