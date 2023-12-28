@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './BattleMode.scss';
 import { useEffect, useState } from 'react';
-import { setAttacker, setBattleMode, setBattleTurn, setChoices, setEventProgressStatus, setHeroStatus, setInventory, setLoading, setLoot, setLootName, setNPCStatus, setPlayerAfterBattle, setVisibleChoices, setVisibleNPC } from '../../../actions/game';
+import { setAttacker, setBattleMode, setBattleTurn, setChoices, setEventProgressStatus, setHeroStatus, setLoading, setLoot, setLootName, setNPCStatus, setPlayerAfterBattle, setVisibleChoices, setVisibleNPC } from '../../../actions/game';
 import api from '../../../api/api';
 import GameHealthBar from '../GamePlayerHealth/GameHealthBar/GameHealthBar';
 

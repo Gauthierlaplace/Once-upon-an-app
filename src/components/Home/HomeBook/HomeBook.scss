@@ -48,8 +48,10 @@
   }
 
   &-GlassRight {
-    height: 450px;
-    aspect-ratio: 5/6;
+    // height: 450px;
+    width: 100%;
+    max-width: 450px;
+    // aspect-ratio: 5/6;
     position: relative;
     right: -65px;
     top: -40px;
@@ -161,6 +163,7 @@
 
 @media (max-width: 900px) {
   .HomeBook {
+    width: 100%;
     background: none;
     display: flex;
     justify-content: center;
