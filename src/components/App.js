@@ -12,8 +12,6 @@ import Footer from './Footer/Footer';
 
 import './App.scss';
 
-import BackgroundContainer from './BackgroundContainer/BackgroundContainer';
-
 function App() {
   const dispatch = useDispatch();
 
