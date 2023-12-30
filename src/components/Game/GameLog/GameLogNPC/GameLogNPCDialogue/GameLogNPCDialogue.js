@@ -18,6 +18,7 @@ import {
   setNPCStatus,
   setAttacker,
   setFightID,
+  setPlayer,
 } from '../../../../../actions/game';
 import Loading from '../../../../Loading/Loading';
 
@@ -37,8 +38,24 @@ function GameLogNPCDialogue() {
       .then((response) => {
         // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
         const playerAPI = response.data.player;
+        const path = `${process.env.REACT_APP_ASSETS_BASE}`;
+        const playerAPIpicture = `${path}${playerAPI.picture.path}`;
+
         dispatch(setHeroStatus(playerAPI.health));
-        // console.log(response.data);
+        dispatch(setPlayer(
+          playerAPI.id,
+          playerAPI.name,
+          playerAPIpicture,
+          playerAPI.health,
+          playerAPI.maxHealth,
+          playerAPI.defense,
+          playerAPI.dexterity,
+          playerAPI.intelligence,
+          playerAPI.karma,
+          playerAPI.strength,
+          playerAPI.item
+        ));
+        console.log(response.data);
 
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent
