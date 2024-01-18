@@ -55,7 +55,7 @@ function GameLogNPCDialogue() {
           playerAPI.strength,
           playerAPI.item
         ));
-        console.log(response.data);
+        // console.log(response.data);
 
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent
