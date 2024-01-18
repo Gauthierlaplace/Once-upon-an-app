@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
-import api from '../../../api/api';
+import apiInstance from '../../../api/apiInstance';
 import { checkInfoBeforeRegister } from '../../../functions/user';
 
 import HomeDescription from '../HomeDescription/HomeDescription';
@@ -67,7 +67,7 @@ function HomeBook() {
     event.preventDefault();
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
-    api
+    apiInstance
       .post('/login_check', {
         username: emailLogin,
         password: passwordLogin,
@@ -103,7 +103,7 @@ function HomeBook() {
   };
 
   const sendRegisterToApi = async () => {
-    api
+    apiInstance
       .post('/users', {
         email: emailRegister,
         roles: ['ROLE_PLAYER'],
