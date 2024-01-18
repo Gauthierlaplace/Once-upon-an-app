@@ -14,7 +14,6 @@ import {
   setBattleMode,
   setLoading,
   setEventProgressStatus,
-  setTypewriting,
   setNPCStatus,
   setAttacker,
   setFightID,
@@ -55,7 +54,8 @@ function GameLogNPCDialogue() {
           playerAPI.strength,
           playerAPI.item
         ));
-        console.log(response.data);
+        // console.log(response.data);
+        // Commentaire de tous les console.log
 
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent
