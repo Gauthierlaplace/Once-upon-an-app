@@ -11,7 +11,7 @@ apiInstance.interceptors.request.use(
     if (token) {
       request.headers.Authorization = `Bearer ${token}`;
     } else {
-      request.headers['X-Default-Header'] = 'Header sans token';
+      // request.headers['X-Default-Header'] = 'Header sans token';
     }
 
     return request;

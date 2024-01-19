@@ -11,7 +11,7 @@ api.interceptors.request.use((request) => {
   if (token) {
     request.headers.Authorization = `Bearer ${token}`;
   } else {
-    request.headers['X-Default-Header'] = 'Header sans token';
+    // request.headers['X-Default-Header'] = 'Header sans token';
   }
 
   return request;
@@ -20,7 +20,7 @@ api.interceptors.request.use((request) => {
 // intercepter les réponses, et si 401 rediriger sur login
 // Cas sans erreur : renvoie la response / cas avec erreur : renvoie vers 401
 api.interceptors.response.use((response) => response, (error) => {
-  if (error.response.status === 401) {
+  if (error && error.response && error.response.status === 401) {
     setTimeout(() => {
       localStorage.removeItem('token');
       localStorage.removeItem('nickname');
