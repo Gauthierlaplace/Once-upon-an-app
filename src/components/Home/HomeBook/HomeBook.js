@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
-import apiInstance from '../../../api/apiInstance';
+import api from '../../../api/api';
 import { checkInfoBeforeRegister } from '../../../functions/user';
 
 import HomeDescription from '../HomeDescription/HomeDescription';
@@ -67,7 +67,7 @@ function HomeBook() {
     event.preventDefault();
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
-    apiInstance
+    api
       .post('/login_check', {
         username: emailLogin,
         password: passwordLogin,
@@ -99,11 +99,21 @@ function HomeBook() {
           progress: undefined,
           theme: 'colored',
         });
+        if (error.response) {
+          // La requête a été effectuée, mais le serveur a répondu avec un code d'erreur
+          console.error('Erreur de réponse du serveur:', error.response.data);
+        } else if (error.request) {
+          // La requête a été effectuée, mais aucune réponse n'a été reçue
+          console.error('Aucune réponse reçue du serveur.');
+        } else {
+          // Une erreur s'est produite lors de la configuration de la req, pendant la transmission
+          console.error('Erreur lors de la configuration de la requête ou de la transmission:', error.message);
+        }
       });
   };
 
   const sendRegisterToApi = async () => {
-    apiInstance
+    api
       .post('/users', {
         email: emailRegister,
         roles: ['ROLE_PLAYER'],
