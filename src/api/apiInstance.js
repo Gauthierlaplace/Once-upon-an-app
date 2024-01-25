@@ -8,7 +8,7 @@ const apiInstance = axios.create({
 // Ajouter un intercepteur avant l'envoi de la requête
 apiInstance.interceptors.request.use((request) => {
   // Exclure les informations d'authentification pour les requêtes preflight CORS
-  if (request.method === 'options') {
+  if (request.method === 'OPTIONS') {
     request.headers = {
       ...request.headers,
       'X-Skip-Auth': 'true', // Ajoutez un en-tête personnalisé pour indiquer au serveur de sauter l'authentification
