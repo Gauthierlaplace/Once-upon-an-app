@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const apiInstance = axios.create({
-  baseURL: `${process.env.REACT_APP_API_BASE}`
+  baseURL: `${process.env.REACT_APP_API_BASE}`,
+  withCredentials: true, // Cette option exclut les informations d'authentification de la requête
 });
 
 // Ajouter un intercepteur avant l'envoi de la requête
@@ -11,6 +12,7 @@ apiInstance.interceptors.request.use((request) => {
     request.headers = {
       ...request.headers,
       'X-Skip-Auth': 'true', // Ajoutez un en-tête personnalisé pour indiquer au serveur de sauter l'authentification
+      'Access-Control-Request-Headers': 'X-Requested-With, Content-Type, Authorization'
     };
   }
 
