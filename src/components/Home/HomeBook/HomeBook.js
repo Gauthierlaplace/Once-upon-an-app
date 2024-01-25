@@ -17,6 +17,7 @@ import {
   saveRegisterSuccessful,
   hasFailedAction,
 } from '../../../actions/user';
+import apiInstance from '../../../api/apiInstance';
 
 function HomeBook() {
   // A transmettre en props à la partie login
@@ -67,7 +68,7 @@ function HomeBook() {
     event.preventDefault();
     toast.dismiss(); // masque tous les toasts actuellement visibles
     // on valide les infos auprès du back-end
-    api
+    apiInstance
       .post('/login_check', {
         username: emailLogin,
         password: passwordLogin,
@@ -113,7 +114,7 @@ function HomeBook() {
   };
 
   const sendRegisterToApi = async () => {
-    api
+    apiInstance
       .post('/users', {
         email: emailRegister,
         roles: ['ROLE_PLAYER'],
