@@ -13,17 +13,12 @@ function DeleteAccount() {
   // FONCTION POUR LA SUPPRESSION DU COMPTE
   // ======================================
 
-  // La fonction va à l'intérieur du composant, avant le return
   const deleteUserAccount = () => {
-    api
-      .delete(`/users/${userId}`)
-      .then((response) => {
-        // console.log(response);
-        localStorage.setItem('token', '');
-        localStorage.setItem('nickname', '');
-        localStorage.setItem('id', '');
-        const confirmation = window.confirm('Confirmez-vous la suppression du compte ?');
-        if (confirmation) {
+    const confirmation = window.confirm('Confirmez-vous la suppression du compte ?');
+    if (confirmation) {
+      api
+        .delete(`/users/${userId}`)
+        .then((response) => {
           localStorage.setItem('token', '');
           localStorage.setItem('nickname', '');
           localStorage.setItem('id', '');
@@ -38,25 +33,24 @@ function DeleteAccount() {
             progress: undefined,
             theme: 'colored',
           });
-          // Différer la redirection de 3.5 secondes (3500 millisecondes)
           setTimeout(() => {
             window.location.href = '/';
           }, 3500);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error('Echec de la suppression', {
-          position: 'top-right',
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error('Echec de la suppression', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          });
         });
-      });
+    }
   };
 
   return (
