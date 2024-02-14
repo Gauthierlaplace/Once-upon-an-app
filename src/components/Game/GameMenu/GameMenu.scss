@@ -7,7 +7,12 @@
     border-bottom-right-radius: 1em;
     background-color: vars.$darkest-color;
     padding: .5em;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0,0,0,0.9
+    );
+    background-image: url('./../../../assets/images/header.webp');
+    background-size: contain;
+    background-repeat: repeat;
+    background-blend-mode: overlay;
 
     &-buttons {
         display: flex;
@@ -16,11 +21,16 @@
 
     &-button {
         border-radius: .4em;
-        background: 
-        linear-gradient(
-            vars.$alt-dark-color,
-            vars.$darkest-color
-        );
+        // background: 
+        // linear-gradient(
+        //     rgba(255, 255, 255, 0.2),
+        //     rgba(0,0,0,0.5)
+        // );
+        background-color: rgba(0,0,0,0.5);
+    background-image: url('./../../../assets/images/header.webp');
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-blend-mode: overlay;
         min-width: 30%;
         height: 2em;
         font-family: vars.$main-font;

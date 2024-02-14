@@ -208,3 +208,9 @@
         font-size: .9em;
     }
 }
+
+@media screen and (min-width: 768px) {
+    .BattleMode {
+        width: 80%;
+    }
+}

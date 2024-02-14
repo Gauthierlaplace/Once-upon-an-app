@@ -2,10 +2,12 @@
 
 .Header {
   width: 100%;
-  height: 60px;
+  height: 90px;
   /* glass effect */
-  background-color: rgba(0, 0, 0, .8);
-  background-image: url('./../../../public/stone-background.jpg');
+  background-color: rgba(0, 0, 0, .4);
+  background-image: url('./../../assets/images/header2.png');
+  background-size:contain;
+  background-repeat:repeat-x;
   background-blend-mode: overlay;
   // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   // backdrop-filter: blur(1px);
@@ -36,6 +38,7 @@
   }
 
   @media (max-width: 900px) {
+
     &-logo {
       width: 70px;
       position: absolute;
@@ -50,5 +53,12 @@
       width: 30px;
       right: 0;
     }
+  }
+}
+
+@media (max-width: 900px) {
+  .Header {
+    height: 60px;
+    background-size: cover;
   }
 }

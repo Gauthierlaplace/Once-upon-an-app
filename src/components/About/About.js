@@ -5,7 +5,7 @@ import '../../styles/index.scss';
 function About() {
   return (
     <div className="About">
-      <div className="About-bar" />
+      {/* <div className="About-bar" /> */}
       <h1 className="About-title">A propos du projet</h1>
       <p>
         Cette application a été réalisée avec amour et dérision par :

@@ -27,7 +27,12 @@
         height: 3em;
         padding: 1.5em 0;
         text-align: center;
-        background: linear-gradient( vars.$alt-dark-color, vars.$darkest-color);
+        background-color: rgba(0, 0, 0, .5);
+        background-image: url('./../../assets/images/header.webp');
+        background-size: contain;
+        background-repeat: repeat-x;
+        background-blend-mode: overlay;
+
         color: vars.$yellow-text-color;
         font-size: 1.3em;
     }
@@ -153,5 +158,13 @@
 @media screen and (max-width: 480px) {
     .MyAccount {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .MyAccount {
+        &-title {
+            background-size: cover;
+        }
     }
 }

@@ -1,0 +1,46 @@
+@use "./../../../../styles/vars";
+
+.HomeBookPlay {
+    width: 45%;
+    background-color: black;
+    background-image: url('./../../../../assets/images/openbook4.webp');
+    background-size:cover;
+    background-position: center;
+    background-repeat:no-repeat;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-title {
+        color: white;
+        font-weight: 700;
+        text-decoration:double;
+        background-color: vars.$darkest-color;
+        border: 2px solid vars.$yellow-text-color;
+        border-radius: 1em;
+        padding: .4em;
+        font-size: xx-large;
+        color: vars.$yellow-text-color;
+    }
+}
+
+@media (max-width: 768px) {
+    .HomeBookPlay {
+        width: 80%;
+        min-height: 200px;
+        margin-bottom: 4em;
+    
+        &-title {
+            color: white;
+            font-weight: 700;
+            text-decoration:double;
+            background-color: vars.$darkest-color;
+            border: 2px solid vars.$yellow-text-color;
+            border-radius: 1em;
+            padding: .4em;
+            font-size: xx-large;
+            color: vars.$yellow-text-color;
+        }
+    }
+}

@@ -4,7 +4,7 @@ import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/feather/eye';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 
-import './HomeBookLogin.scss';
+import './../HomeBook.scss';
 
 // Composant et réception des props
 function HomeBookLogin({
@@ -17,9 +17,9 @@ function HomeBookLogin({
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
-    <div className="HomeBookLogin-glass">
+    <div className="HomeBook-Login">
 
-      <h1 className="HomeBook-title">Connectez-vous</h1>
+      <h3 className="HomeBook-title">Connectez-vous</h3>
       <form className="HomeBook-form" onSubmit={handleSubmit}>
         <label htmlFor="mail">E-mail :</label>
         <input
@@ -52,6 +52,7 @@ function HomeBookLogin({
 
         <button type="submit">Connexion</button>
       </form>
+      {/* <span className="span-account-creation">Créer un compte ?</span> */}
     </div>
   );
 }
