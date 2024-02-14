@@ -1,65 +1,127 @@
 @use "./../../../styles/vars";
 
+.text-right {
+  text-align: end;
+}
+
 .HomeBook {
   width: 100%;
   height: 100%;
-
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 
-  background: url(../../../assets/images/openbook.png);
-  background-size: 1100px, 100vw;
-  background-repeat: no-repeat;
-  background-position: center 60%;
+  // background: url(../../../assets/images/openbook.webp);
+  // background-size: 1900px;
+  // background-repeat: no-repeat;
+  // background-position: center;
 
-  &-GlassLeft {
-    height: 450px;
-    aspect-ratio: 5/6;
-    position: relative;
-    left: -55px;
-    top: -40px;
-    padding: 20px;
+  &-top {
+    color: white;
+    width: 80%;
+    margin: 1em auto;
+    display: flex;
+    justify-content:space-evenly;
+    min-height: 200px;
+    padding: 1em;
     /* glass effect */
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
+    background: rgba(0, 0, 0, 0.80);
+    // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    // backdrop-filter: blur(1px);
+    // -webkit-backdrop-filter: blur(1px);
     border-radius: 5px;
+
   }
 
-  &-left {
-    width: 100%;
-    text-align: start;
+  &-header-container {
+    height: 600px;
+    background: url(../../../assets/images/home_header_bg.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: end;
+    align-items: center;
+  }
+
+  &-header-container-CTA {
+    font-size: xx-large;
+    color: vars.$lightest-color;
+    padding: .5em;
+    font-weight: 700;
+    margin-bottom: 5em;
+    border-radius: 1em;
+    border: transparent;
+    background-color: vars.$yellow-text-color;
+  }
+
+  &-main-title {
+    color: white;
+    text-align: center;
+    margin-top: 1.5em;
+  }
+
+  &-subtitle {
+    color: white;
+    text-align: center;
+    margin-bottom: 10rem;
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  &-Login {
+    width: 33%;
+  }
+
+  &-Register {
+    width: 100%;
+  }
+
+  &-p {
+    padding: .5em 0;
+    text-align: end;
+  }
+
+
+  &-Glass {
+    width: 40%;
+    color: white;
+    min-height: 450px;
+    // aspect-ratio: 5/6;
+    // position: relative;
+    // left: -55px;
+    // top: -40px;
+    padding: 20px;
+    margin: 0em auto;
+    // /* glass effect */
+    background: rgba(0, 0, 0, 0.80);
+    // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    // backdrop-filter: blur(1px);
+    // -webkit-backdrop-filter: blur(1px);
+    border-radius: 5px;
   }
 
   &-menu, &-form, &-form button {
     font-family: vars.$main-font;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   &-sommaire {
     text-align: center;
     padding-bottom: 10px;
-  }
-
-  &-GlassRight {
-    height: 450px;
-    aspect-ratio: 5/6;
-    position: relative;
-    right: -65px;
-    top: -40px;
-    padding: 1em;
-    /* glass effect */
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-    border-radius: 5px;
   }
 
   &-right {
@@ -69,44 +131,46 @@
   }
 
   &-title {
-    text-align: center;
+    text-align: left;
     padding-bottom: 0;
+    padding-left: 0em;
   }
 
   &-menu {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 10px;
-  }
-
-  &-menu-leading-dots {
-    border-bottom: .15rem dotted black;
-
-    /* Take remaining width */
-    flex: 1;
-
-    /* Spacing */
-    margin: 0 0.25rem;
   }
 
   &-menu:hover {
     cursor: grab;
   }
 
-  h3:hover {
+  span:hover {
     text-decoration: underline ;
-    text-underline-offset: .5em;
-  }
-  
-  p {
-    padding: 10px;
+    text-underline-offset: .3em;
+    cursor: pointer;
   }
 
   h1 {
     font-family: vars.$title-font;    
-    font-size: 1.5em;
+    font-size: 4em;
     margin-bottom: 10px;
   }
+
+  h2 {
+    font-family: vars.$main-font;    
+    font-size: 1em;
+    margin-bottom: 3em;
+  }
+
+  h3 {
+    font-family: vars.$main-font;  
+    color: vars.$yellow-text-color;  
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+
 
   label {
     margin-top: 5px;
@@ -118,8 +182,8 @@
     width: 200px;
     border-radius: 5px;
     border: transparent;
-    margin-bottom: 7px;
-    padding-left: 10px;
+    // margin-bottom: 7px;
+    // padding-left: 10px;
     font-family: vars.$main-font;
     font-size: .8em;
   }
@@ -140,13 +204,40 @@
   }
 
   &-form {
-    width: 100%;
     margin: auto;
-    padding: 10px;
-    padding-left: 2em;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    text-align: left;
+    align-items: start;
+  }
+
+  &-form-label {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  &-form-input {
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border: transparent;
+    font-family: vars.$main-font;
+    font-size: .8em;
+  }
+
+  &-form-button {
+    height: 30px;
+    width: 160px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: transparent;
+    background: linear-gradient(vars.$alt-dark-color, vars.$darkest-color);
+    color: white;
+  }
+
+  &-form-button:hover {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+    color: vars.$alt-light-color;
   }
 }
 
@@ -159,14 +250,81 @@
   margin-left: 10px;
 }
 
-@media (max-width: 900px) {
+.span-account-creation {
+  color: vars.$yellow-text-color;
+  display: block;
+  margin-top: .8em;
+}
+
+.HomeDescription {
+  width: 33%;
+  max-width: 400px;
+}
+
+@media (max-width: 768px) {
+  .text-right {
+    text-align: center;
+  }
+  
   .HomeBook {
-    background: none;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: #000;
-    color: #fff
+
+    &-header-container {
+      height: 300px;
+    }
+
+    &-top {
+      width: 100%;
+      margin: 1em auto;
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content:center;
+      align-items: center;
+    }
+
+    &-Login {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 4em;
+    }
+
+    &-title {
+      text-align: center;
+    }
+
+    &-p {
+      text-align: center;
+    }
+
+    &-form {
+      align-items: center;
+    }
+
+    h1 {
+      font-family: vars.$title-font;    
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-family: vars.$main-font;  
+      color: vars.$yellow-text-color;  
+      font-size: 1.5em;
+      margin-bottom: 1em;
+    }
+
+
+  }
+
+  .span-account-creation {
+    text-align: center;
+  }
+
+  .HomeDescription {
+    width: 100%;
   }
 
   .HomeBook-GlassLeft {

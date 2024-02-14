@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { logOut } from '../../actions/user';
 
 import HeaderNav from './HeaderNav/HeaderNav';
+import HeaderNavSuscribe from './HeaderNavSuscribe/HeaderNavSuscribe';
 
 function Header() {
   const logged = useSelector((state) => state.user.logged);
@@ -34,6 +35,11 @@ function Header() {
       {logged && (
         <HeaderNav logout={handleLogOut} />
       )}
+
+      {!logged && (
+        <HeaderNavSuscribe onClick={handleLogOut} />
+      )}
+
     </div>
   );
 }

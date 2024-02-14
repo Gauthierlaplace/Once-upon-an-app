@@ -12,7 +12,7 @@ function ShowAccount() {
   api
     .get('/users/details')
     .then((response) => {
-      // console.log(response);
+      console.log(response);
       const path = `${process.env.REACT_APP_ASSETS_BASE}`;
       const userAPIpicture = `${path}${response.data.avatarPath}`;
       dispatch(getAccountInfos(

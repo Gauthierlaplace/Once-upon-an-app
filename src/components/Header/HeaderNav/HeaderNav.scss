@@ -6,7 +6,7 @@
   justify-content: end;
   width: 100%;
   min-height: 60px;
-  padding: .5rem;
+  padding: 1rem;
   padding-right: 2rem;
   background-color: transparent;
   color: vars.$yellow-text-color;
@@ -68,6 +68,10 @@
     font-size: 0.8em;
   }
 
+  &-register {
+    z-index: 2000;
+  }
+  
   &-burger {
     width: 40px;
     height: 40px;

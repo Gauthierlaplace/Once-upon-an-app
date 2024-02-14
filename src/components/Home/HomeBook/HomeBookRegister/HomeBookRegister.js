@@ -6,9 +6,10 @@ import { Icon } from 'react-icons-kit';
 import { eye } from 'react-icons-kit/feather/eye';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 
-import './HomeBookRegister.scss';
+import './../HomeBook.scss';
 
 function HomeBookRegister({
+  className,
   nickname,
   email,
   password,
@@ -21,7 +22,6 @@ function HomeBookRegister({
   const dispatch = useDispatch();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordBisVisible, setPasswordBisVisible] = useState(false);
-
   // Je conditionne l'affichage du toast "password info"
   // Afin d'éviter que 10 toasts ne se lancent en meme temps
   const infoPasswordToast = () => {
@@ -39,16 +39,16 @@ function HomeBookRegister({
       setPasswordToastVisible(true);
     }
   };
-
   return (
-    <div className="HomeBookRegister-glass">
-      <h1 className="HomeBook-title">Inscrivez-vous</h1>
+    <div className={className}>
+      <span>Nous ne serons pas trop intrusifs, promis !</span>
       <form
         className="HomeBook-form"
         onSubmit={handleSubmit}
       >
-        <label htmlFor="nickname">Pseudo</label>
+        <label className="HomeBook-form-label" htmlFor="nickname">Pseudo</label>
         <input
+          className="HomeBook-form-input"
           type="text"
           name="nickname"
           placeholder="Entrez votre pseudo"
@@ -58,8 +58,9 @@ function HomeBookRegister({
           value={nickname}
         />
 
-        <label htmlFor="mail">E-mail :</label>
+        <label className="HomeBook-form-label" htmlFor="mail">E-mail :</label>
         <input
+          className="HomeBook-form-input"
           type="text"
           name="email"
           placeholder="Entrez votre adresse mail"
@@ -69,15 +70,16 @@ function HomeBookRegister({
           value={email}
         />
 
-        <label htmlFor="password">Mot de passe :</label>
+        <label className="HomeBook-form-label" htmlFor="password">Mot de passe :</label>
         <div className="password-input">
           <input
+            className="HomeBook-form-input"
             type={passwordVisible ? 'text' : 'password'}
             name="passwordRegister"
             placeholder="Entrez votre mot de passe"
+            onFocus={infoPasswordToast}
             onChange={(event) => {
               dispatch(changeField(event.target.value, 'passwordRegister'));
-              infoPasswordToast();
             }}
             value={password}
           />
@@ -88,9 +90,10 @@ function HomeBookRegister({
           />
         </div>
 
-        <label htmlFor="passwordBis">Confirmation :</label>
+        <label className="HomeBook-form-label" htmlFor="passwordBis">Confirmation :</label>
         <div className="passwordBis-input">
           <input
+            className="HomeBook-form-input"
             type={passwordBisVisible ? 'text' : 'password'}
             name="passwordBisRegister"
             placeholder="Confirmez le mot de passe"
@@ -106,7 +109,12 @@ function HomeBookRegister({
           />
         </div>
 
-        <button type="submit">Inscription</button>
+        <button
+          className="HomeBook-form-button"
+          type="submit"
+        >
+          Inscription
+        </button>
       </form>
     </div>
   );
