@@ -111,7 +111,7 @@ export default function HeaderNavSuscribe() {
           isPasswordToastVisible={isPasswordToastVisible}
           setPasswordToastVisible={setPasswordToastVisible}
         />
-        <span className="navbar-register">S'inscrire</span>
+        <span className="navbar-register" onClick={handleShowLinks}>S'inscrire</span>
         <button type="button" className="navbar-burger" onClick={handleShowLinks}>
           <span className="navbar-burgerBar" />
         </button>

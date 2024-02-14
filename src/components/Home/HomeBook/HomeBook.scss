@@ -285,7 +285,7 @@
     }
 
     &-Login {
-      width: 100%;
+      width: 70%;
       justify-content: center;
       align-items: center;
       margin-bottom: 4em;
@@ -300,7 +300,8 @@
     }
 
     &-form {
-      align-items: center;
+      align-items: left;
+      margin: 0 auto;
     }
 
     h1 {

@@ -52,7 +52,7 @@ function HomeBookLogin({
 
         <button type="submit">Connexion</button>
       </form>
-      <span className="span-account-creation">Créer un compte ?</span>
+      {/* <span className="span-account-creation">Créer un compte ?</span> */}
     </div>
   );
 }
