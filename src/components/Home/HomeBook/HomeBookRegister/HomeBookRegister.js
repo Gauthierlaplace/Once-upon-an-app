@@ -41,7 +41,7 @@ function HomeBookRegister({
   };
   return (
     <div className={className}>
-      <span>Nous ne serons pas trop intrusifs, promis !</span>
+      <span className="HomeBook-not-intruders">Nous ne serons pas trop intrusifs, promis !</span>
       <form
         className="HomeBook-form"
         onSubmit={handleSubmit}
