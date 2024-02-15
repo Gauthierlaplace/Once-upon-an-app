@@ -1,9 +1,19 @@
 @use "./../../../styles/vars";
 
 .HomeDescription {
+  p {
+    font-family: vars.$main-font;
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .HomeDescription {
     p {
       font-family: vars.$main-font;
       font-weight: 500;
-      font-size: 1.2rem;
+      font-size: 1em;
     }
+  }
 }

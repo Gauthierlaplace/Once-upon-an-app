@@ -153,14 +153,16 @@
   }
 
   h1 {
-    font-family: vars.$title-font;    
+    font-family: vars.$title-font;
+    color: vars.$yellow-text-color;
+    text-transform:capitalize;
     font-size: 4em;
     margin-bottom: 10px;
   }
 
   h2 {
     font-family: vars.$main-font;    
-    font-size: 1em;
+    font-size: 1.2em;
     margin-bottom: 3em;
   }
 
@@ -304,9 +306,14 @@
       margin: 0 auto;
     }
 
+    &-not-intruders {
+      margin: 2em 0;
+    }
+
     h1 {
-      font-family: vars.$title-font;    
-      font-size: 2em;
+      font-family: vars.$title-font;
+      color: vars.$yellow-text-color;    
+      font-size: 2.5em;
       margin-bottom: 10px;
     }
 
