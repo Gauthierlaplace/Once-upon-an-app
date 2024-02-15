@@ -2,6 +2,7 @@ import './HomeBook.scss';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 
 import HomeDescription from '../HomeDescription/HomeDescription';
 import HomeBookLogin from './HomeBookLogin/HomeBookLogin';
@@ -85,8 +86,34 @@ function HomeBook() {
         {/* {!logged && (<h4 className="HomeBook-header-container-CTA" onClick={handleShowLinks}>Commencer l'aventure</h4>)} */}
       </div>
       <div>
-        <h1 className="HomeBook-main-title">Once upon an app</h1>
-        <h2 className="HomeBook-subtitle">"Un site dont VOUS êtes le... protagoniste"</h2>
+        <motion.h1
+          className="HomeBook-main-title"
+          initial={{
+            opacity: 0
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 3
+          }}
+        >
+          Once upon an app
+        </motion.h1>
+        <motion.h2
+          className="HomeBook-subtitle"
+          initial={{
+            opacity: 0
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 5,
+            delay: 1
+          }}
+        >
+          "Un site dont VOUS êtes le... protagoniste"</motion.h2>
       </div>
       <div className="HomeBook-top">
         <HomeDescription />
