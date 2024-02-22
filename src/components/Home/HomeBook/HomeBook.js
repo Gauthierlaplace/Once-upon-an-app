@@ -75,11 +75,6 @@ function HomeBook() {
       });
   };
 
-  const [showLinks, setShowLinks] = useState(false);
-  const handleShowLinks = () => {
-    setShowLinks(!showLinks);
-  };
-
   return (
     <div className="HomeBook">
       <div className="HomeBook-header-container">
@@ -110,10 +105,11 @@ function HomeBook() {
           }}
           transition={{
             duration: 5,
-            delay: 1
+            delay: 0.5
           }}
         >
-          "Un site dont VOUS êtes le... protagoniste"</motion.h2>
+          "Un site dont VOUS êtes le... protagoniste"
+        </motion.h2>
       </div>
       <div className="HomeBook-top">
         <HomeDescription />

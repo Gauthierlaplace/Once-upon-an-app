@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import {motion} from 'framer-motion';
 import './GameMenuStats.scss';
 
 function GameMenuStats() {
@@ -8,7 +9,12 @@ function GameMenuStats() {
   const def = useSelector((state) => state.game.player.defense);
   const karma = useSelector((state) => state.game.player.karma);
   return (
-    <div className="GameMenuStats">
+    <motion.div
+      className="GameMenuStats"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <h2 className="GameMenuStats-title">Statistiques :</h2>
       <ul>
         <li className="GameMenuStats-title">Force : <span className="GameMenuStats-values">{strength}</span></li>
@@ -17,8 +23,8 @@ function GameMenuStats() {
         <li className="GameMenuStats-title">Défense : <span className="GameMenuStats-values">{def}</span></li>
         <li className="GameMenuStats-title">Karma : <span className="GameMenuStats-values">{karma}</span></li>
       </ul>
-    </div>
-  )
+    </motion.div>
+  );
 }
 
 export default GameMenuStats;

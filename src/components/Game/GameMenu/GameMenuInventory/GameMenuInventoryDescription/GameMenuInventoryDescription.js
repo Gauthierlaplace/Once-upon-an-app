@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './GameMenuInventoryDescription.scss';
+import {motion} from 'framer-motion';
 import api from '../../../../../api/api';
 import { setLoading, setPlayerAfterBattle } from '../../../../../actions/game';
 
@@ -82,7 +83,18 @@ function GameMenuInventoryDescription({ item }) {
   }
 
   return (
-    <div className="GameMenuInventoryDescription">
+    <motion.div
+      className="GameMenuInventoryDescription"
+      initial={{
+        opacity: 0
+      }}
+      animate={{
+        opacity: 1
+      }}
+      transition={{
+        duration: 0.7
+      }}
+    >
       <h2 className="GameMenuInventoryDescription-title">{item.name}</h2>
       <div className="GameMenuInventoryDescription-container">
         <img src={`${path}${item.picture.path}`} alt={item.name} className="GameMenuInventoryDescription-itemImage" />
@@ -120,7 +132,7 @@ function GameMenuInventoryDescription({ item }) {
           {content}
         </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

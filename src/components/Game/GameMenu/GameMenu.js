@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
 import GameMenuInventory from './GameMenuInventory/GameMenuInventory';
 import GameMenuStats from './GameMenuStats/GameMenuStats';
 import GameMenuProgress from './GameMenuProgress/GameMenuProgress';
 
 import './GameMenu.scss';
-import { useSelector } from 'react-redux';
 
 function GameMenu() {
   const [displayInventory, setDisplayInventory] = useState(false);
@@ -32,29 +33,38 @@ function GameMenu() {
   return (
     <div className="GameMenu">
       <div className="GameMenu-buttons">
-        <button
+        <motion.button
+          initial={{ scale: 1 }}
+          whileTap={{ scale: 0.99 }}
+          transition={{ duration: 0.1 }}
           className="GameMenu-button"
           type="button"
           onClick={displayInventoryFunction}
         >
           Inventaire
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          initial={{ scale: 1 }}
+          whileTap={{ scale: 0.99 }}
+          transition={{ duration: 0.1 }}
           className="GameMenu-button"
           type="button"
           onClick={displayStatsFunction}
         >
           Stats
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          initial={{ scale: 1 }}
+          whileTap={{ scale: 0.99 }}
+          transition={{ duration: 0.1 }}
           className="GameMenu-button"
           type="button"
           onClick={displayProgressFunction}
         >
           Progression
-        </button>
+        </motion.button>
       </div>
 
       <div className="GameMenu-content">

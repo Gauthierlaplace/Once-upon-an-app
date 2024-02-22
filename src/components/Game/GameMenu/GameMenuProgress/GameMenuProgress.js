@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import {motion} from 'framer-motion';
 import GameHealthBar from '../../GamePlayerHealth/GameHealthBar/GameHealthBar';
 import './GameMenuProgress.scss';
 
@@ -7,13 +8,18 @@ function GameMenuProgress() {
   const maxProgress = useSelector((state) => state.game.maxProgress);
 
   return (
-    <div className="GameMenuProgress">
+    <motion.div
+      className="GameMenuProgress"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <h2 className="GameMenuProgress-title">Progression dans le biome</h2>
       <GameHealthBar
         health={progress}
         maxHealth={maxProgress}
       />
-    </div>
+    </motion.div>
   );
 }
 

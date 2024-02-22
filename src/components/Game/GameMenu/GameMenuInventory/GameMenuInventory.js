@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './GameMenuInventory.scss';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import GameMenuInventoryDescription from './GameMenuInventoryDescription/GameMenuInventoryDescription';
 
 function GameMenuInventory() {
@@ -23,8 +24,21 @@ function GameMenuInventory() {
       className="GameMenuInventory-item"
       key={item.id}
     >
-      {/* <span className="GameMenuInventory-itemName">{item.name}</span> */}
-      <img
+      <span className="GameMenuInventory-itemNameToolBox">{item.name}</span>
+      <motion.img
+        initial={{
+          scale: 1
+        }}
+        transition={{
+          duration: 0.2
+        }}
+        animate={{}}
+        whileHover={{
+          scale: 1.1
+        }}
+        whileTap={{
+          scale: 0.95
+        }}
         src={`${path}${item.picture.path}`}
         alt={item.picture.name}
         className="GameMenuInventory-itemImage"
@@ -43,14 +57,18 @@ function GameMenuInventory() {
   ));
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <div>
         {selectedItem && <GameMenuInventoryDescription item={selectedItem} />}
       </div>
       <div className="GameMenuInventory">
         {filledInventorySlots.concat(emptyInventorySlots)}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
