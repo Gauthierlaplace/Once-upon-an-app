@@ -7,7 +7,7 @@ export const SET_DIALOGUE_AND_EFFECTS = 'SET_DIALOGUE_AND_EFFECTS';
 export const SET_EFFECT = 'SET_EFFECT';
 export const SET_VISIBLE_NPC = 'SET_VISIBLE_NPC';
 export const SET_VISIBLE_CHOICES = 'SET_VISIBLE_CHOICES';
-export const INCREMENT_PROGRESS = 'INCREMENT_PROGRESS';
+export const SET_PROGRESS = 'SET_PROGRESS';
 export const RESET_PROGRESS = 'RESET_PROGRESS';
 export const SET_EVENT_PROGRESS_STATUS = 'SET_EVENT_PROGRESS_STATUS';
 export const SET_HERO_STATUS = 'SET_HERO_STATUS';
@@ -81,8 +81,9 @@ export const setVisibleChoices = (boolean) => ({
   payload: boolean,
 });
 
-export const incrementProgress = () => ({
-  type: INCREMENT_PROGRESS,
+export const setProgress = (progress) => ({
+  type: SET_PROGRESS,
+  payload: progress,
 });
 
 export const resetProgress = () => ({
@@ -122,7 +123,8 @@ export const setPlayer = (
   intelligence,
   karma,
   strength,
-  item
+  item,
+  progress,
 ) => ({
   type: SET_PLAYER,
   payload:
@@ -138,6 +140,7 @@ export const setPlayer = (
     karma: karma,
     strength: strength,
     item: item,
+    progress: progress,
   },
 });
 

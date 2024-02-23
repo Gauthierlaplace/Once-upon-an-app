@@ -27,6 +27,7 @@ function GameLog({
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
   const currentEventId = useSelector((state) => state.game.currentEvent.id);
   const isBattleMode = useSelector((state) => state.game.battleMode);
+  const eventType = useSelector((state) => state.game.currentEvent.eventType);
 
   const typewriting = useSelector((state) => state.game.typewriting.eventDescription);
   const identifier = 'eventDescription';
@@ -120,7 +121,7 @@ function GameLog({
 
       </div>
 
-      {!typewriting && (currentEventId === 14 || currentEventId === 18) && (
+      {!typewriting && (eventType === 'Endgame' || eventType === 'Death') && (
         <GameLogRestart />
       )}
 
