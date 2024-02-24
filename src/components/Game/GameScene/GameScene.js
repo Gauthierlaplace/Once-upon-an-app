@@ -5,7 +5,7 @@ import GameNPC from '../GameNPC/GameNPC';
 import './GameScene.scss';
 import BattleMode from '../BattleMode/BattleMode';
 
-function GameScene({ npcName, picture }) {
+function GameScene({ eventName, picture }) {
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
   const isBattleMode = useSelector((state) => state.game.battleMode);
 
@@ -15,7 +15,7 @@ function GameScene({ npcName, picture }) {
         <img
           className="GameScene-img"
           src={picture}
-          alt={npcName}
+          alt={eventName}
         />
         <BattleMode />
       </div>
@@ -27,7 +27,7 @@ function GameScene({ npcName, picture }) {
       <img
         className="GameScene-img"
         src={picture}
-        alt={npcName}
+        alt={eventName}
       />
       {visibleNPC && (<GameNPC />)}
     </div>
@@ -35,7 +35,7 @@ function GameScene({ npcName, picture }) {
 }
 
 GameScene.propTypes = {
-  npcName: PropTypes.string.isRequired,
+  eventName: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
 };
 

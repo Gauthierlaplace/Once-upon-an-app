@@ -27,6 +27,8 @@ function GameLog({
   const eventProgressStatus = useSelector((state) => state.game.eventProgressStatus);
   const currentEventId = useSelector((state) => state.game.currentEvent.id);
   const isBattleMode = useSelector((state) => state.game.battleMode);
+  const eventType = useSelector((state) => state.game.currentEvent.eventType);
+  const progress = useSelector((state) => state.game.progress);
 
   const typewriting = useSelector((state) => state.game.typewriting.eventDescription);
   const identifier = 'eventDescription';
@@ -93,7 +95,7 @@ function GameLog({
         {(!hasNPC
           && visibleButtonFollowToShowChoices
           && (typewriting === false)
-          && (eventProgressStatus !== 'gameEnd')
+          && (progress !== 11)
           && (eventProgressStatus !== 'death')
         ) && (
           <button
@@ -120,7 +122,7 @@ function GameLog({
 
       </div>
 
-      {!typewriting && (currentEventId === 14 || currentEventId === 18) && (
+      {!typewriting && (eventType === 'Endgame' || eventType === 'Death') && (
         <GameLogRestart />
       )}
 

@@ -9,7 +9,7 @@ import {
   SET_DIALOGUE_AND_EFFECTS,
   SET_VISIBLE_CHOICES,
   SET_CURRENT_NPC,
-  INCREMENT_PROGRESS,
+  SET_PROGRESS,
   RESET_PROGRESS,
   SET_EVENT_PROGRESS_STATUS,
   SET_PLAYER,
@@ -43,6 +43,7 @@ export const initialState = {
     karma: 0,
     strength: 0,
     item: [],
+    progress: 0,
   },
 
   progress: 0,
@@ -169,10 +170,10 @@ const reducer = (state = initialState, action = {}) => {
       visibleChoices: action.payload,
     };
 
-  case INCREMENT_PROGRESS:
+  case SET_PROGRESS:
     return {
       ...state,
-      progress: state.progress + 1,
+      progress: action.payload,
     };
 
   case RESET_PROGRESS:
@@ -232,6 +233,7 @@ const reducer = (state = initialState, action = {}) => {
         karma: action.payload.karma,
         strength: action.payload.strength,
         item: action.payload.item,
+        progress: action.payload.progress
       }
     };
 

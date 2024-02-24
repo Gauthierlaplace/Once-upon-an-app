@@ -39,12 +39,24 @@ function Game() {
     dispatch(setLoading(true));
     api.get('/play')
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         const eventAPI = response.data.currentEvent;
         const playerAPI = response.data.player;
 
-        const path = `${process.env.REACT_APP_ASSETS_BASE}`;
-        const playerAPIpicture = `${path}${playerAPI.picture.path}`;
+        // ! A SUPPRIMER POUR LA PROD (fixtures)
+        let path = `${process.env.REACT_APP_ASSETS_BASE}`;
+        let playerAPIpicture = ''; // Initialisation avec une chaîne vide par défaut
+
+        if (playerAPI && playerAPI.picture && playerAPI.picture.path) {
+          playerAPIpicture = `${path}${playerAPI.picture.path}`;
+        } else {
+          path = '';
+          playerAPIpicture = 'https://picsum.photos/200/200';
+        }
+
+        // ! A REPRENDRE POUR LA PROD (données réelles)
+        // const path = `${process.env.REACT_APP_ASSETS_BASE}`;
+        // const playerAPIpicture = `${path}${playerAPI.picture.path}`;
 
         dispatch(setCurrentEvent(eventAPI));
         dispatch(setPlayer(
@@ -58,7 +70,8 @@ function Game() {
           playerAPI.intelligence,
           playerAPI.karma,
           playerAPI.strength,
-          playerAPI.item
+          playerAPI.item,
+          playerAPI.progress
         ));
 
         const firstChoice = {
@@ -103,7 +116,7 @@ function Game() {
       <div className="Game-flexSA">
         <div className="Game-left">
           <h1 className="Game-Eventtitle">{eventTitle}</h1>
-          <GameScene picture={eventPicture} npcName={npcName} />
+          <GameScene picture={eventPicture} eventName={eventTitle} />
           <GameMenu />
         </div>
 

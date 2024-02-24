@@ -13,7 +13,7 @@ import {
   setDialogueAndEffects,
   setVisibleNPC,
   setVisibleChoices,
-  incrementProgress,
+  setProgress,
   setEventProgressStatus,
   setVisibleLogDialogue,
   setAnswerAndDescriptionInLog,
@@ -41,6 +41,7 @@ function GameLogChoices({
     const eventAPI = response.data.currentEvent;
     // console.log(eventAPI);
     dispatch(setCurrentEvent(eventAPI));
+    dispatch(setProgress(response.data.progress));
   };
 
   // Fonction de gestion des éventuels NPC
@@ -130,8 +131,9 @@ function GameLogChoices({
 
   // Cette route sera appelée si le compteur progress est en-dessous de notre limite
   const getEventRollFromAPI = (nextEventId) => {
-    api.get(`/event/roll/${nextEventId}`)
+    api.get(`/event/${nextEventId}`)
       .then((response) => {
+        console.log(response);
         currentEventManagement(response);
         npcManagement(response);
         choicesManagementRoll(response);
@@ -144,8 +146,9 @@ function GameLogChoices({
   const getLastEventFromAPI = (nextEventId) => {
     // console.log('fonction getLastEventFromAPI lancée');
 
-    api.get(`/event/last/${nextEventId}`)
+    api.get(`/event/${nextEventId}`)
       .then((response) => {
+        console.log(response);
         currentEventManagement(response);
         npcManagement(response);
         choicesManagementLast(response);
@@ -157,8 +160,9 @@ function GameLogChoices({
   const getBossFromAPI = (nextEventId) => {
     // console.log('fonction getBossFromAPI lancée');
 
-    api.get(`/event/boss/${nextEventId}`)
+    api.get(`/event/${nextEventId}`)
       .then((response) => {
+        console.log(response);
         currentEventManagement(response);
         npcManagement(response);
 
@@ -177,23 +181,37 @@ function GameLogChoices({
       .finally(() => dispatch(setLoading(false)));
   };
 
-  const getBiomeEndFromAPI = (nextEventId) => {
-    // console.log('fonction biomeEndFromAPI lancée');
+  const getNextBiomeFromAPI = (nextEventId) => {
+    console.log('fonction getNextBiomeFromAPI lancée');
 
-    api.get(`/event/end/${nextEventId}`)
+    api.get(`/event/${nextEventId}`)
       .then((response) => {
+        console.log(response);
         currentEventManagement(response);
         npcManagement(response);
 
-        const eventEnding = response.data.currentEventEnding;
-        const onlyChoice = {
-          nextEventId: response.data.EndGame.Id,
-          content: `${eventEnding} ${response.data.EndGame.Opening}`,
-        };
+        // Si EndGame est présent, gérer la fin du jeu
+        if (response.data.EndGame) {
+          const eventEnding = response.data.currentEventEnding;
+          const onlyChoice = {
+            nextEventId: response.data.EndGame.Id,
+            content: `${eventEnding} ${response.data.EndGame.Opening}`,
+          };
 
-        dispatch(setChoices([onlyChoice]));
-        dispatch(setVisibleNPC(false));
-        dispatch(setVisibleChoices(false));
+          dispatch(setChoices([onlyChoice]));
+          dispatch(setVisibleNPC(false));
+          dispatch(setVisibleChoices(false));
+        } else {
+          const eventEnding = response.data.currentEventEnding;
+          const onlyChoice = {
+            nextEventId: response.data.nextBiomeStarterEvent.id,
+            content: `${eventEnding} ${response.data.nextBiomeStarterEvent.opening}`,
+          };
+
+          dispatch(setChoices([onlyChoice]));
+          dispatch(setVisibleNPC(false));
+          dispatch(setVisibleChoices(false));
+        }
       })
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));
@@ -202,6 +220,7 @@ function GameLogChoices({
   const getGameOverFromAPI = (nextEventId) => {
     api.get(`/event/death/${nextEventId}`)
       .then((response) => {
+        console.log(response);
         currentEventManagement(response);
         npcManagement(response);
 
@@ -213,49 +232,43 @@ function GameLogChoices({
       .finally(() => dispatch(setLoading(false)));
   };
 
-  const getGameEndFromAPI = (nextEventId) => {
-    // console.log('fonction gameEndFromAPI lancée');
+  // const getGameEndFromAPI = (nextEventId) => {
+  //   // console.log('fonction gameEndFromAPI lancée');
 
-    api.get(`/event/victory/${nextEventId}`)
-      .then((response) => {
-        currentEventManagement(response);
-        npcManagement(response);
+  //   api.get(`/event/${nextEventId}`)
+  //     .then((response) => {
+  //       currentEventManagement(response);
+  //       npcManagement(response);
 
-        dispatch(setChoices([]));
-        dispatch(setVisibleNPC(false));
-        dispatch(setVisibleChoices(false));
-      })
-      .catch((error) => console.log(error))
-      .finally(() => dispatch(setLoading(false)));
-  };
+  //       dispatch(setChoices([]));
+  //       dispatch(setVisibleNPC(false));
+  //       dispatch(setVisibleChoices(false));
+  //     })
+  //     .catch((error) => console.log(error))
+  //     .finally(() => dispatch(setLoading(false)));
+  // };
 
   const manageEventProgressStatus = () => {
     if (playerHealth > 0) {
-      // le progressMax est l'étape ultime (fin du jeu)
-      // Dans notre exemple (max=6), si progress vaut 6 c'est gagné
-      // S'il vaut 4, c'est juste avant la fin du biome
-      // S'il vaut 3, c'est juste avant le boss
-      // S'il vaut 2, c'est juste avant last
-      // S'il vaut <2 (0 ou 1) c'est normal.
+      // Afin d'ajuster les actions à réaliser suivant le progress transmis par l'API,
+      // on se sert du eventProgressStatus
 
-      const progressMax = 10;
-
-      if (progress === progressMax) {
+      if (progress === 11) {
         dispatch(setEventProgressStatus('gameEnd'));
       }
-      if (progress === progressMax - 1) {
-        dispatch(setEventProgressStatus('beforeGameEnd'));
+      if (progress === 9) {
+        dispatch(setEventProgressStatus('beforeNextBiome'));
       }
-      if (progress === progressMax - 2) {
+      if (progress === 8) {
         dispatch(setEventProgressStatus('beforeBiomeEnd'));
       }
-      if (progress === progressMax - 3) {
+      if (progress === 7) {
         dispatch(setEventProgressStatus('beforeBoss'));
       }
-      if (progress === progressMax - 4) {
+      if (progress === 6) {
         dispatch(setEventProgressStatus('beforeLast'));
       }
-      if (progress < progressMax - 4) {
+      if (progress < 6) {
         dispatch(setEventProgressStatus('normal'));
       }
     } else {
@@ -267,8 +280,6 @@ function GameLogChoices({
   // (route api/event/roll/id-du-prochain-event)
   const handleClickOnNextEvent = (nextEventId) => {
     dispatch(setLoading(true));
-
-    dispatch(incrementProgress());
 
     manageEventProgressStatus();
     if (eventProgressStatus === 'normal') {
@@ -284,11 +295,11 @@ function GameLogChoices({
     }
 
     if (eventProgressStatus === 'beforeBiomeEnd') {
-      getBiomeEndFromAPI(nextEventId);
+      getNextBiomeFromAPI(nextEventId);
     }
 
-    if (eventProgressStatus === 'beforeGameEnd') {
-      getGameEndFromAPI(nextEventId);
+    if (eventProgressStatus === 'beforeNextBiome') {
+      getEventRollFromAPI(nextEventId);
     }
 
     if (eventProgressStatus === 'death') {
@@ -312,26 +323,38 @@ function GameLogChoices({
       </h2>
 
       <h2 className="GameLogChoices-content">
-        {(eventProgressStatus === 'death') ? 'Ce dernier coup vous est fatal...' : 'À vous de jouer :'}
-      </h2>
+        { eventProgressStatus === 'death' && (
+          'Ce dernier coup vous est fatal...'
+        )}
 
-      <div>
-        {choices.map((choice) => (
-          <button
-            type="button"
-            className="GameLogChoices-button"
-            key={choice.nextEventId}
-            onClick={() => {
-              handleClickOnNextEvent(choice.nextEventId);
-              dispatch(setBattleMode(false));
-            }}
-          >
-            <p>
-              {choice.content}
-            </p>
-          </button>
-        ))}
-      </div>
+        {progress === 11 && (
+          'Bravo aventurier !'
+        )}
+
+        { eventProgressStatus !== 'death' && progress !== 11 && (
+          'À vous de jouer :'
+        )}
+
+      </h2>
+      {progress !== 11 && (
+        <div>
+          {choices.map((choice) => (
+            <button
+              type="button"
+              className="GameLogChoices-button"
+              key={choice.nextEventId}
+              onClick={() => {
+                handleClickOnNextEvent(choice.nextEventId);
+                dispatch(setBattleMode(false));
+              }}
+            >
+              <p>
+                {choice.content}
+              </p>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
