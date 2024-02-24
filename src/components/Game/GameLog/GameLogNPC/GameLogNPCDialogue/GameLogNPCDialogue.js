@@ -64,7 +64,7 @@ function GameLogNPCDialogue() {
 
           const eventOpening = response.data.GameOver.opening;
           const onlyChoice = {
-            nextEventId: 18,
+            nextEventId: response.data.GameOver.id,
             content: `${eventOpening}`,
           };
 
@@ -85,7 +85,7 @@ function GameLogNPCDialogue() {
 
           const eventOpening = response.data.GameOver.opening;
           const onlyChoice = {
-            nextEventId: 18,
+            nextEventId: response.data.GameOver.id,
             content: `${eventOpening}`,
           };
 

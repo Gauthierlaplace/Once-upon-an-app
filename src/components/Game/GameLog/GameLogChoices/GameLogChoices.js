@@ -181,29 +181,6 @@ function GameLogChoices({
       .finally(() => dispatch(setLoading(false)));
   };
 
-  // const getBiomeEndFromAPI = (nextEventId) => {
-  //   // console.log('fonction biomeEndFromAPI lancée');
-
-  //   api.get(`/event/${nextEventId}`)
-  //     .then((response) => {
-  //       console.log(response);
-  //       currentEventManagement(response);
-  //       npcManagement(response);
-
-  //       const eventEnding = response.data.currentEventEnding;
-  //       const onlyChoice = {
-  //         nextEventId: response.data.EndGame.Id,
-  //         content: `${eventEnding} ${response.data.EndGame.Opening}`,
-  //       };
-
-  //       dispatch(setChoices([onlyChoice]));
-  //       dispatch(setVisibleNPC(false));
-  //       dispatch(setVisibleChoices(false));
-  //     })
-  //     .catch((error) => console.log(error))
-  //     .finally(() => dispatch(setLoading(false)));
-  // };
-
   const getNextBiomeFromAPI = (nextEventId) => {
     console.log('fonction getNextBiomeFromAPI lancée');
 
@@ -239,20 +216,6 @@ function GameLogChoices({
       .catch((error) => console.log(error))
       .finally(() => dispatch(setLoading(false)));
   };
-
-  // const getBackToRollFromAPI = (nextEventId) => {
-  //   api.get(`/event/${nextEventId}`)
-  //     .then((response) => {
-  //       console.log('fonction getBackToRollFromAPI lancée');
-  //       console.log(response);
-  //       currentEventManagement(response);
-  //       npcManagement(response);
-  //       choicesManagementRoll(response);
-  //       dispatch(setVisibleChoices(false));
-  //     })
-  //     .catch((error) => console.log(error))
-  //     .finally(() => dispatch(setLoading(false)));
-  // };
 
   const getGameOverFromAPI = (nextEventId) => {
     api.get(`/event/death/${nextEventId}`)
@@ -360,7 +323,18 @@ function GameLogChoices({
       </h2>
 
       <h2 className="GameLogChoices-content">
-        {(eventProgressStatus === 'death') ? 'Ce dernier coup vous est fatal...' : 'À vous de jouer :'}
+        { eventProgressStatus === 'death' && (
+          'Ce dernier coup vous est fatal...'
+        )}
+
+        {progress === 11 && (
+          'Bravo aventurier !'
+        )}
+
+        { eventProgressStatus !== 'death' && progress !== 11 && (
+          'À vous de jouer :'
+        )}
+
       </h2>
       {progress !== 11 && (
         <div>
