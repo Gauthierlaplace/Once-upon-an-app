@@ -133,7 +133,7 @@ function GameLogChoices({
   const getEventRollFromAPI = (nextEventId) => {
     api.get(`/event/${nextEventId}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         currentEventManagement(response);
         npcManagement(response);
         choicesManagementRoll(response);
@@ -148,7 +148,7 @@ function GameLogChoices({
 
     api.get(`/event/${nextEventId}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         currentEventManagement(response);
         npcManagement(response);
         choicesManagementLast(response);
@@ -162,7 +162,7 @@ function GameLogChoices({
 
     api.get(`/event/${nextEventId}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         currentEventManagement(response);
         npcManagement(response);
 
@@ -186,7 +186,7 @@ function GameLogChoices({
 
     api.get(`/event/${nextEventId}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         currentEventManagement(response);
         npcManagement(response);
 
@@ -220,7 +220,7 @@ function GameLogChoices({
   const getGameOverFromAPI = (nextEventId) => {
     api.get(`/event/death/${nextEventId}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         currentEventManagement(response);
         npcManagement(response);
 
