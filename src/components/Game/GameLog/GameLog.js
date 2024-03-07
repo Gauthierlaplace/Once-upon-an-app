@@ -112,7 +112,7 @@ function GameLog({
         )}
 
         {/* Conditions pour afficher les choix de fin d'évènements */}
-        {((visibleChoices && eventType === 'Combat' && effectReadByPlayer) || (visibleChoices && eventType === 'Départ') || (visibleChoices && eventType === 'Rencontre') || (visibleChoices && eventType === 'Fin de Biome') || (visibleChoices && eventType === 'Repos') || (visibleChoices && eventType === 'Endgame') || (visibleChoices && eventType === 'Death')) && (
+        {((visibleChoices && !isBattleMode && effectReadByPlayer) || (visibleChoices && eventType === 'Départ') || (visibleChoices && eventType === 'Rencontre') || (visibleChoices && eventType === 'Fin de Biome') || (visibleChoices && eventType === 'Repos') || (visibleChoices && eventType === 'Endgame') || (visibleChoices && eventType === 'Death') || (visibleChoices && eventType === 'combat')) && (
           <GameLogChoices
             setVisibleButtonFollowToShowNPC={setVisibleButtonFollowToShowNPC}
             setVisibleButtonFollowToShowDialogue={setVisibleButtonFollowToShowDialogue}
