@@ -18,6 +18,7 @@ import {
   setAttacker,
   setFightID,
   setPlayer,
+  setEffectReadByPlayer,
 } from '../../../../../actions/game';
 import Loading from '../../../../Loading/Loading';
 
@@ -28,6 +29,7 @@ function GameLogNPCDialogue() {
   const loading = useSelector((state) => state.game.loading);
   const isHostile = useSelector((state) => state.game.currentNPC.isHostile);
   const npcId = useSelector((state) => state.game.currentNPC.id);
+  const playerHealth = useSelector((state) => state.game.player.health);
   const [visibleDialogue, setVisibleDialogue] = useState(true);
 
   const handleClickOnEffect = (effectId) => {
@@ -54,8 +56,7 @@ function GameLogNPCDialogue() {
           playerAPI.strength,
           playerAPI.item
         ));
-        // console.log(response.data);
-        // Commentaire de tous les console.log
+        dispatch(setEffectReadByPlayer(true));
 
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent
@@ -80,7 +81,14 @@ function GameLogNPCDialogue() {
 
     api.get(`/event/fight/${idNpc}/attack/${idEffect}`)
       .then((response) => {
-        if (response.data.GameOver) {
+        // On lance le composant combat en passant le Battlemode à true
+        // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
+        const API = response.data;
+        console.log(response.data);
+        dispatch(setHeroStatus(API.player.health));
+
+        if (API.player.health === 0) {
+          console.log('enter prefight gameover situation');
           dispatch(setEventProgressStatus('death'));
 
           const eventOpening = response.data.GameOver.opening;
@@ -88,19 +96,14 @@ function GameLogNPCDialogue() {
             nextEventId: response.data.GameOver.id,
             content: `${eventOpening}`,
           };
-
+          dispatch(setEffectReadByPlayer(true));
           dispatch(setChoices([onlyChoice]));
+          dispatch(setVisibleChoices(true));
+        } else {
+          dispatch(setNPCStatus(API.npc.npcHealth, API.npc.npcMaxHealth));
+          dispatch(setAttacker(API.attacker));
+          dispatch(setFightID(API.attackerFightId));
         }
-        // On lance le composant combat en passant le Battlemode à true
-        // Quoi qu'il arrive, on actualise la vie du héros (tombe à zéro si gameOver)
-        const API = response.data;
-        // console.log(response.data);
-        dispatch(setHeroStatus(API.player.health));
-        dispatch(setNPCStatus(API.npc.npcHealth, API.npc.npcMaxHealth));
-        dispatch(setAttacker(API.attacker));
-        dispatch(setFightID(API.attackerFightId));
-        dispatch(setBattleMode(true));
-
         // Si l'effet a tué le joueur
         // On affiche un unique bouton de choix vers le deathEvent
       })

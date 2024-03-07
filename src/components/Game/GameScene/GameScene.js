@@ -8,8 +8,9 @@ import BattleMode from '../BattleMode/BattleMode';
 function GameScene({ eventName, picture }) {
   const visibleNPC = useSelector((state) => state.game.visibleNPC);
   const isBattleMode = useSelector((state) => state.game.battleMode);
+  const playerHealth = useSelector((state) => state.game.player.health);
 
-  if (isBattleMode) {
+  if (isBattleMode && playerHealth !== 0) {
     return (
       <div className="GameScene-battle">
         <img

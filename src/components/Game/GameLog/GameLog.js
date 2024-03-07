@@ -29,6 +29,7 @@ function GameLog({
   const isBattleMode = useSelector((state) => state.game.battleMode);
   const eventType = useSelector((state) => state.game.currentEvent.eventType);
   const progress = useSelector((state) => state.game.progress);
+  const effectReadByPlayer = useSelector((state) => state.game.effectReadByPlayer);
 
   const typewriting = useSelector((state) => state.game.typewriting.eventDescription);
   const identifier = 'eventDescription';
@@ -110,7 +111,8 @@ function GameLog({
           </button>
         )}
 
-        {(visibleChoices && !isBattleMode) && (
+        {/* Conditions pour afficher les choix de fin d'évènements */}
+        {((visibleChoices && eventType === 'Combat' && effectReadByPlayer) || (visibleChoices && eventType === 'Départ') || (visibleChoices && eventType === 'Rencontre') || (visibleChoices && eventType === 'Fin de Biome') || (visibleChoices && eventType === 'Repos') || (visibleChoices && eventType === 'Endgame') || (visibleChoices && eventType === 'Death')) && (
           <GameLogChoices
             setVisibleButtonFollowToShowNPC={setVisibleButtonFollowToShowNPC}
             setVisibleButtonFollowToShowDialogue={setVisibleButtonFollowToShowDialogue}
