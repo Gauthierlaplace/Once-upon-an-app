@@ -16,6 +16,7 @@ export const SET_PLAYER = 'SET_PLAYER';
 export const SET_PLAYER_AFTER_BATTLE = 'SET_PLAYER_AFTER_BATTLE';
 export const SET_ANSWER_AND_DESCRIPTION_IN_LOG = 'SET_ANSWER_AND_DESCRIPTION_IN_LOG';
 export const SET_VISIBLE_LOG_DIALOGUE = 'SET_VISIBLE_LOG_DIALOGUE';
+export const SET_EFFECT_READ_BY_PLAYER = 'SET_EFFECT_READ_BY_PLAYER';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_BATTLEMODE = 'SET_BATTLEMODE';
 export const SET_ATTACKER = 'SET_ATTACKER';
@@ -180,6 +181,11 @@ export const setAnswerAndDescriptionInLog = (sentence, answer, effectDescription
 
 export const setVisibleLogDialogue = (boolean) => ({
   type: SET_VISIBLE_LOG_DIALOGUE,
+  payload: boolean,
+});
+
+export const setEffectReadByPlayer = (boolean) => ({
+  type: SET_EFFECT_READ_BY_PLAYER,
   payload: boolean,
 });
 

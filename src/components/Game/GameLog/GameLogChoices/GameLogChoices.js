@@ -18,7 +18,8 @@ import {
   setVisibleLogDialogue,
   setAnswerAndDescriptionInLog,
   setLoading,
-  setBattleMode
+  setBattleMode,
+  setEffectReadByPlayer
 } from '../../../../actions/game';
 
 function GameLogChoices({
@@ -346,6 +347,7 @@ function GameLogChoices({
               onClick={() => {
                 handleClickOnNextEvent(choice.nextEventId);
                 dispatch(setBattleMode(false));
+                dispatch(setEffectReadByPlayer(false));
               }}
             >
               <p>

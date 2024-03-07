@@ -18,6 +18,7 @@ import {
   SET_NPC_STATUS,
   SET_ANSWER_AND_DESCRIPTION_IN_LOG,
   SET_VISIBLE_LOG_DIALOGUE,
+  SET_EFFECT_READ_BY_PLAYER,
   SET_LOADING,
   SET_BATTLEMODE,
   SET_ATTACKER,
@@ -96,6 +97,7 @@ export const initialState = {
   visibleNPC: false,
   visibleChoices: false,
   visibleLogDialogue: false,
+  effectReadByPlayer: false,
 
   loading: false,
   battleMode: false,
@@ -268,6 +270,12 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       visibleLogDialogue: action.payload,
+    };
+
+  case SET_EFFECT_READ_BY_PLAYER:
+    return {
+      ...state,
+      effectReadByPlayer: action.payload,
     };
 
   case SET_LOADING:
